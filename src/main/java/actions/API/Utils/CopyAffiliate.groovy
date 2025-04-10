@@ -5,7 +5,21 @@ import actions.API.Utils.BIAdminLogin
 import utils.Settings
 
 class CopyAffiliate{
-    public String run(def params){
+    public static String run(String licensingModel = null,
+                             String unlimitedBA = null,
+                             String baLicenseCount = null,
+                             String unlimitedIdeaBox = null,
+                             String ideaBoxLicenseCount = null) {
+        def params = [
+            "Licensing Model"                              : licensingModel,
+            "Unlimited Brightidea Administrator License Type": unlimitedBA,
+            "Brightidea Administrator License Type Purchased Count": baLicenseCount,
+            "Unlimited Idea Box Manager License Type"      : unlimitedIdeaBox,
+            "Idea Box Manager License Type Purchased Count": ideaBoxLicenseCount
+        ]
+        return run(params)
+    }
+    public static String run(def params){
         //RETURNS: Name of the affiliate created
         //Login
         BIAdminLogin.run()
