@@ -1,4 +1,6 @@
 package actions.selenium
+
+import actions.general.Wait
 import org.openqa.selenium.WebDriver
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.chrome.ChromeDriver
@@ -43,6 +45,7 @@ class Browser {
     }
     public static void run(String URL) {
         Driver.get(URL)
+        new Wait().run("5")
     }
     public static void quit(def params) {
         Driver.quit();

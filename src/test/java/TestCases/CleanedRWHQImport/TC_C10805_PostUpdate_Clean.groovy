@@ -40,7 +40,6 @@ class TC_C10805_PostUpdate_Clean extends TestBase{
 
         // Login
         browser.run("URL":affiliateURL)
-        new Wait().run("5")
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/${params."Password"}/.toString())
 
         //Set to Lab Environment

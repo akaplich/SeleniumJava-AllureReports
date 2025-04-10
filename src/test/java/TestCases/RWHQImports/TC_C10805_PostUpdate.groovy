@@ -24,18 +24,11 @@ import org.testng.annotations.Test
 class TC_C10805_PostUpdate extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C10805_PostUpdate.class);
     private static Browser browser = Browser.getInstance()
-
-    //private static def variables = [:]
     private static def params = [:]
 
     @BeforeSuite
     public void beforeState() {
         params."Username Email" = "bi.adminuser1@brightidea.com"
-        params."Licensing Model" = null
-        params."Unlimited Brightidea Administrator License Type" = null
-        params."Brightidea Administrator License Type Purchased Count" = null
-        params."Unlimited Idea Box Manager License Type" = null
-        params."Idea Box Manager License Type Purchased Count" = null
         params."Run Browser in Incognito" = null
     }
 
@@ -68,7 +61,7 @@ class TC_C10805_PostUpdate extends TestBase{
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
                 "Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
         */
-        String affiliateURL = new CopyAffiliate().run()
+        String affiliateURL = new CopyAffiliate().run(null, null, null, null, null)
         //Open Browser
         /*
         new Browser().run(
@@ -77,7 +70,7 @@ class TC_C10805_PostUpdate extends TestBase{
                 "Browser Type":/${variables."Browser"}/.toString())
          */
         browser.run("URL":affiliateURL)
-        new Wait().run("5")
+
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
 

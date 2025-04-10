@@ -8,6 +8,7 @@ import actions.Webstorm.VerifyWebstormHome
 import actions.WebstormCreation.CreateAppWebstorm
 import actions.general.Login
 import actions.general.Navigate
+import actions.general.Wait
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.slf4j.Logger
@@ -20,9 +21,12 @@ import org.testng.annotations.Test
 class TC_C84_CreatePitchApp extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C84_CreatePitchApp.class);
     private static Browser browser = Browser.getInstance()
+    private static def params = [:]
 
     @BeforeSuite
     public void beforeState(){
+        params."Username Email" = "bi.adminuser1@brightidea.com"
+        params."Run Browser in Incognito" = null
     }
 
     @Test
@@ -31,12 +35,12 @@ class TC_C84_CreatePitchApp extends TestBase{
         // Need to write a replacement for https://rwhq2.brightidea.cloud/index.html?action=58123c20fa4ee77809f468f6&project=Brightidea
         // This Basestate action Description:
         // General basestate: Copy Master Affiliate and login as bi.adminuser1@brightidea.com by default unless otherwise specified for 'Username Email' field
-        Map baseStateDefault = getBaseStateParams("legacy")
-        Action58123c20fa4ee77809f468f6(baseStateDefault)
+        Action58123c20fa4ee77809f468f6(params)
 
         //Navigate
         new Navigate().run("Area to Navigate to":/Apps/.toString())
         //Create App Webstorm
+        // This action is currently broken
         new CreateAppWebstorm().run("App Name":/Pitch/.toString(),
                 "Sponsor Name":/NonBI System Admin/.toString(),
                 "Sponsor Add or Remove":/Add/.toString(),
@@ -73,6 +77,7 @@ class TC_C84_CreatePitchApp extends TestBase{
          */
         //Browser.getInstance()
         browser.run(affiliateURL)
+
 
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),

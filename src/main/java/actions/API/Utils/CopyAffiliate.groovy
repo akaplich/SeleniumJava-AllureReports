@@ -19,6 +19,7 @@ class CopyAffiliate{
         ]
         return run(params)
     }
+
     public static String run(def params){
         //RETURNS: Name of the affiliate created
         //Login
