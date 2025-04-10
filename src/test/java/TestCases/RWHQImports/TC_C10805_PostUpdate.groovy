@@ -2,6 +2,7 @@ package TestCases.RWHQImports
 
 import BaseClasses.TestBase
 import actions.API.Utils.CopyAffiliate
+import actions.API.Utils.DeleteAffiliate
 import actions.Utils.SettoLabEnvironment
 import actions.Widgets.SetWidget
 import actions.Widgets.SetWidgetController
@@ -12,6 +13,7 @@ import actions.general.Login
 import actions.general.NavigateWebStormAdminBar
 import actions.general.Wait
 import actions.selenium.Browser
+import actions.selenium.CloseWindow
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.testng.annotations.BeforeSuite
@@ -25,8 +27,10 @@ class TC_C10805_PostUpdate extends TestBase{
 
     //private static def variables = [:]
     private static def params = [:]
+
     @BeforeSuite
     public void beforeState() {
+        params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Licensing Model" = null
         params."Unlimited Brightidea Administrator License Type" = null
         params."Brightidea Administrator License Type Purchased Count" = null
@@ -38,8 +42,7 @@ class TC_C10805_PostUpdate extends TestBase{
     @Test
     public void testcase(){
         //Basestate
-        Map baseStateDefault = getBaseStateParams("legacy")
-        Action58123c20fa4ee77809f468f6(baseStateDefault)
+        Action58123c20fa4ee77809f468f6(params)
         //Navigate WebStorm or MTS
         new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
         //Set Widget Controller
@@ -86,11 +89,11 @@ class TC_C10805_PostUpdate extends TestBase{
     public static def Action581259c8fa4ee77809f46905(def params){
         try{
             //Close Current Window
-            new actions.selenium.CloseWindow().run([:])
+            new CloseWindow().run([:])
         }
         catch(all){}catch(Error err){}
         //Delete Affiliate
-        new actions.API.Utils.DeleteAffiliate().run([:])
+        new DeleteAffiliate().run([:])
 
     }
     @AfterMethod
