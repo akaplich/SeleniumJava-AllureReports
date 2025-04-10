@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Automation Suite">
+    <test name="Smoke Test">
+        <classes>
+            <class name="TestCases.RWHQImports.TC_C63_VerifyIdeaExistsInPipeline"/>
+            <class name="TestCases.RWHQImports.TC_C79_PipelineCreation_CreateDiscussApp"/>
+        </classes>
+
+    </test>
+</suite>
