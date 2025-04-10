@@ -1,4 +1,4 @@
-package TestCases
+package TestCases.RWHQImports
 
 import BaseClasses.TestBase
 import actions.API.Utils.CopyAffiliate
