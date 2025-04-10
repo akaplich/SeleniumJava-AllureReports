@@ -4,7 +4,7 @@ import actions.selenium.Browser
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 
-class TestBase {
+public class TestBase {
 
     @BeforeSuite
     public void beforeState(){

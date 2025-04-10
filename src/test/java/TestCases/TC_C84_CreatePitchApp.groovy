@@ -54,12 +54,16 @@ class TC_C84_CreatePitchApp extends TestBase{
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
+        /*
         String affiliateURL = new CopyAffiliate().run(
                 "Licensing Model":/${params."Licensing Model"}/.toString(),
                 "Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),
                 "Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
                 "Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        */
+        String affiliateURL = new CopyAffiliate().run()
+
         //Open Browser
         /*
         new Browser().run(

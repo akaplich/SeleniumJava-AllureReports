@@ -47,6 +47,9 @@ class Browser {
     public static void quit(def params) {
         Driver.quit();
     }
+    public static void quit() {
+        Driver.quit();
+    }
 
 
 }

@@ -10,6 +10,7 @@ import actions.Widgets.VerifyWidgetExists
 import actions.Widgets.VerifyWidgetUpdates
 import actions.general.Login
 import actions.general.NavigateWebStormAdminBar
+import actions.general.Wait
 import actions.selenium.Browser
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -73,7 +74,7 @@ class TC_C10805_PostUpdate extends TestBase{
                 "Browser Type":/${variables."Browser"}/.toString())
          */
         browser.run("URL":affiliateURL)
-
+        new Wait().run("5")
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
 

@@ -1,13 +1,12 @@
 package TestCases
 
-import BaseClasses.TestBase
-import actions.selenium.Browser
+import BaseClasses.TestBaseJava
 import org.junit.Assert
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.testng.annotations.Test
 
-class TestNG_TestCases extends TestBase {
+class TestNG_TestCases extends TestBaseJava {
     private static final Logger logger = LoggerFactory.getLogger(TestNG_TestCases.class);
 
     @Test
