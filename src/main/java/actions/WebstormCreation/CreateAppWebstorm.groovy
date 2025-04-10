@@ -40,7 +40,11 @@ class CreateAppWebstorm{
         }else if(Exists.run(ID:"//DIV[contains(@class,'f-apps-cards')]/A/P[contains(@class,'f-apps-card-name') and starts-with(.,'${params."App Name"}')]")>0){
             Click.run(ID:"//DIV[contains(@class,'f-apps-cards')]/A/P[contains(@class,'f-apps-card-name') and starts-with(.,'${params."App Name"}')]")
         }*/
-        if(params."Sponsor Name"){AppsCommon.UserPickerAddRemove("Field Name":"Sponsor",User:params."Sponsor Name","Add or Remove":params."Sponsor Add or Remove")}
+        if(params."Sponsor Name"){
+            AppsCommon.UserPickerAddRemove("Field Name":"Sponsor",
+                    User:params."Sponsor Name",
+                    "Add or Remove":params."Sponsor Add or Remove")
+        }
         if(params."Webstorm Title"){SetText.run(Text:params."Webstorm Title",ID:"//*[@id='name']")}
         if(params."Description") {SetText.run(Text:params."Description",ID:"//*[@id='description']")}
         if(params."Action on General Information Tab"== null || params."Action on General Information Tab" == "Continue"){

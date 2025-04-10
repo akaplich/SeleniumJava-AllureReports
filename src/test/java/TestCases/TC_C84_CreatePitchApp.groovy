@@ -10,31 +10,29 @@ import actions.general.Login
 import actions.general.Navigate
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C84 - Pipeline Creation - Create Pitch App
 class TC_C84_CreatePitchApp extends TestBase{
-    //private static def variables = [:]
-    //private static def basestateDefault = [:]
+    private static final Logger logger = LoggerFactory.getLogger(TC_C84_CreatePitchApp.class);
+    private static Browser browser = Browser.getInstance()
 
     @BeforeSuite
     public void beforeState(){
-        variables."URL" = /https:\/\/test.brightideatest.com/
-        variables."Browser" = /Chrome/
-        variables."TestRail_RunName" = null
-        variables."TestRail_ExecutionName" = null
-        variables."CodeEnvironment" = /Default/
-        variables."Database" = null
     }
+
     @Test
     public void testcase(){
         //Basestate
         // Need to write a replacement for https://rwhq2.brightidea.cloud/index.html?action=58123c20fa4ee77809f468f6&project=Brightidea
         // This Basestate action Description:
         // General basestate: Copy Master Affiliate and login as bi.adminuser1@brightidea.com by default unless otherwise specified for 'Username Email' field
-        Action58123c20fa4ee77809f468f6(basestateDefault)
+        Map baseStateDefault = getBaseStateParams("legacy")
+        Action58123c20fa4ee77809f468f6(baseStateDefault)
 
         //Navigate
         new Navigate().run("Area to Navigate to":/Apps/.toString())
@@ -56,13 +54,12 @@ class TC_C84_CreatePitchApp extends TestBase{
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new CopyAffiliate().run(
+        String affiliateURL = new CopyAffiliate().run(
                 "Licensing Model":/${params."Licensing Model"}/.toString(),
                 "Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),
                 "Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
                 "Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
-        println("Affiliate URL: ${variables."affiliateURL"}")
         //Open Browser
         /*
         new Browser().run(
@@ -70,11 +67,12 @@ class TC_C84_CreatePitchApp extends TestBase{
                 "URL":/${variables."affiliateURL"}/.toString(),
                 "Browser Type":/${variables."Browser"}/.toString())
          */
-        Browser.getInstance()
-        new Browser().run(variables."affiliateURL")
+        //Browser.getInstance()
+        browser.run(affiliateURL)
 
         //Login
-        new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
+        new Login().run("Email":/${params."Username Email"}/.toString(),
+                "Password":/brightidea1/.toString())
         //Set to Lab Environment
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 

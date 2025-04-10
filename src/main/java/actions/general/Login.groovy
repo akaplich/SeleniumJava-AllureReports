@@ -39,10 +39,10 @@ class Login{
 			//A workaround to a bug for login
             if(params."Verify if Logged In On Enterprise homepage"==null || params."Verify if Logged In On Enterprise homepage"==true){
                 if(!Exists.run(ID:"//*[@id='navbar']",Timeout:10)){
-           		println("LOGGING IN AGAIN")
-                SetText.run(Text:params.Email,ID:"//*[@id='emailAddress']")
-                SetText.run(Text:params.Password,ID:"//*[@id='password']")
-                Click.run(ID:"//*[@id='login-button']")
+                    println("LOGGING IN AGAIN")
+                    SetText.run(Text:params.Email,ID:"//*[@id='emailAddress']")
+                    SetText.run(Text:params.Password,ID:"//*[@id='password']")
+                    Click.run(ID:"//*[@id='login-button']")
                 }
             } else {
                 sleep(4000)

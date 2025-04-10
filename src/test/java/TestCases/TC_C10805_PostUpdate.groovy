@@ -11,34 +11,34 @@ import actions.Widgets.VerifyWidgetUpdates
 import actions.general.Login
 import actions.general.NavigateWebStormAdminBar
 import actions.selenium.Browser
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C10805 - Post Update
 class TC_C10805_PostUpdate extends TestBase{
+    private static final Logger logger = LoggerFactory.getLogger(TC_C10805_PostUpdate.class);
+    private static Browser browser = Browser.getInstance()
+
     //private static def variables = [:]
     private static def params = [:]
     @BeforeSuite
     public void beforeState() {
-        variables."URL" = /https:\/\/test.brightideatest.com/
-        variables."Browser" = /Chrome/
-        variables."TestRail_RunName" = null
-        variables."TestRail_ExecutionName" = null
-        variables."CodeEnvironment" = /Default/
-        variables."Database" = null
         params."Licensing Model" = null
         params."Unlimited Brightidea Administrator License Type" = null
         params."Brightidea Administrator License Type Purchased Count" = null
         params."Unlimited Idea Box Manager License Type" = null
         params."Idea Box Manager License Type Purchased Count" = null
         params."Run Browser in Incognito" = null
-
     }
+
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
+        Map baseStateDefault = getBaseStateParams("legacy")
+        Action58123c20fa4ee77809f468f6(baseStateDefault)
         //Navigate WebStorm or MTS
         new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
         //Set Widget Controller
@@ -57,7 +57,7 @@ class TC_C10805_PostUpdate extends TestBase{
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),
+        String affiliateURL = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),
                 "Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),
                 "Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
@@ -69,8 +69,7 @@ class TC_C10805_PostUpdate extends TestBase{
                 "URL":/${variables."affiliateURL"}/.toString())
                 "Browser Type":/${variables."Browser"}/.toString())
          */
-        Browser.getInstance()
-        new Browser().run("URL":variables."affiliateURL")
+        browser.run("URL":affiliateURL)
 
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())

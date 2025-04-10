@@ -25,7 +25,8 @@ class SetWidgetController{
         	}
             if(params."Add Widget from Selection"){
             	SelectItem.run(ID:"//*[@id='widget-admin-approved-select']","Visible Text":params."Add Widget from Selection")
-            	Click.run(ID:"//*[@id='widget-admin-add-approved-widget-btn']")
+            	sleep(500)
+				Click.run(ID:"//*[@id='widget-admin-add-approved-widget-btn']")
             	sleep(1500)
         	}
             if(params."Add Widget from Unapproved Selection"){

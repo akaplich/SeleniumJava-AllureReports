@@ -37,13 +37,12 @@ class Browser {
         }
         return instance
     }
-    public static void run(def params) {
-        Driver.get(params.URL);
+    public static void run(Map params) {
+        String URL = params.URL.toString()
+        Driver.get(URL)
     }
     public static void run(String URL) {
-        def params = [:]
-        params.URL = URL
-        run(params)
+        Driver.get(URL)
     }
     public static void quit(def params) {
         Driver.quit();
