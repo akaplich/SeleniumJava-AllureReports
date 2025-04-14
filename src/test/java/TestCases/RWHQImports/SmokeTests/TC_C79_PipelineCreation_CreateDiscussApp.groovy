@@ -17,6 +17,7 @@ import org.testng.annotations.Test
 
 //C79 - Pipeline Creation - Create Discuss App
 class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
+    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite
@@ -29,7 +30,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
         variables."Database" = null
     }
 
-    @Test(groups = ["smoke", "active"])
+    @Test
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6("Licensing Model":/Standard Licensing Model/.toString(),"Unlimited Brightidea Administrator License Type":/1/.toString())

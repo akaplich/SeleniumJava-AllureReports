@@ -24,8 +24,8 @@ class SetClickOnAppTileInAppsPillarPage{
         println("appName is ${appName}")
         println("appCardTitle is ${appCardTitle}")
         
-        if(Exists.run(ID:"//*[contains(@class,'backbone-link app-link')]/*[not(contains(@class,'app-disabled'))]/..//*[@class='app-card' and contains(@id,'${appName.toLowerCase()}')]/DIV[@class='app-card-text']/SPAN[@class='app-card-name' and contains(text(),'${appCardTitle}')]")>0){
-            Click.run(ID:"//*[@class='app-card' and contains(@id,'${appName.toLowerCase()}')]/DIV[@class='app-card-text']/SPAN[@class='app-card-name' and contains(text(),'${appCardTitle}')]")
+        if(Exists.run(ID:"//*[contains(@class,'backbone-link app-link')]/*[not(contains(@class,'app-disabled'))]/..//*[contains(@class,'app-card') and contains(@id,'${appName.toLowerCase()}')]/DIV[@class='app-card-text']/SPAN[@class='app-card-name' and contains(text(),'${appCardTitle}')]")>0){
+            Click.run(ID:"//*[contains(@class,'app-card') and contains(@id,'${appName.toLowerCase()}')]/DIV[@class='app-card-text']/SPAN[@class='app-card-name' and contains(text(),'${appCardTitle}')]")
             if(params."Click on Setup button"==null || params."Click on Setup button"==true){
                 Click.run(ID:"//*[@id='phase-app-detail']//BUTTON[@class='btn btn-primary navigate']")                
             }

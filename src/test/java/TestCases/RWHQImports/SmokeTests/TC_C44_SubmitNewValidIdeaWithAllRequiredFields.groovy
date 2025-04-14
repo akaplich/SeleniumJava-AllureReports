@@ -19,6 +19,7 @@ import org.testng.annotations.Test
 
 //C44 - Submit new valid Idea with all Required fields
 class TC_C44_SubmitNewValidIdeaWithAllRequiredFields  extends TestBase {
+    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite

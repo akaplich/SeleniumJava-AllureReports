@@ -15,6 +15,7 @@ import org.testng.annotations.Test
 
 class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
 //C63 - Verify idea exists in Pipeline
+    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite
@@ -26,7 +27,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test(groups = ["smoke", "active"])
+    @Test
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])

@@ -20,6 +20,7 @@ import org.testng.annotations.Test
 
 //C128776 - Comment Component - Edit Comment
 class TC_C128776_CommentComponent_EditComment extends TestBase {
+    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite

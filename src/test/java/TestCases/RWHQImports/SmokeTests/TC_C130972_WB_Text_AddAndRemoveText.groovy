@@ -24,6 +24,7 @@ import org.testng.annotations.Test
 
 //C130972 - WB - Text - Add & Remove Text
 class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
+    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite
