@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Automation Smoke Test Suite">
+    <test name="Smoke Tests">
+        <classes>
+            <class name="TestCases.RWHQImports.SmokeTests.TC_C63_VerifyIdeaExistsInPipeline"/>
+            <class name="TestCases.RWHQImports.SmokeTests.TC_C79_PipelineCreation_CreateDiscussApp"/>
+
+        </classes>
+        <groups>
+            <run>
+                <include name="smoke"/>
+                <include name="active"/>
+                <exclude name="disabled"/>
+            </run>
+        </groups>
+
+    </test>
+</suite>
