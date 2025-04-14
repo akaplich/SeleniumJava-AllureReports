@@ -46,7 +46,7 @@ class NavigateWebStormAdminBar{
             	break
             case "Pipeline Steps":
             	Navigate.run("Area to Navigate to":"Command Center")
-            	Click.run(ID:"//*[@id='pipeline-list']//DIV[text()='${params."WebStorm Name"}']")
+            	Click.run(ID:"//*[@id='pipeline-list']//DIV[text()='${params."WebStorm Name"}']/..")
             	sleep(2000)
             	break
             case "Pipeline List":
@@ -65,7 +65,7 @@ class NavigateWebStormAdminBar{
             	break
             case "Setup":
             	Navigate.run("Area to Navigate to":"Command Center")
-            	Click.run(ID:"//*[@id='pipeline-list']//DIV[text()='${params."WebStorm Name"}']")
+            	Click.run(ID:"//*[@id='pipeline-list']//DIV[text()='${params."WebStorm Name"}']/..")
             	Click.run(ID:"//*[@id='fractal-adminNav-selected-btn']")
             	sleep(2000)
             	Click.run(ID:"//*[contains(@class,'fractal-dropdownPopout-popout-container')]//UL/LI[contains(@class,'nav-item')]/A/*[text()='Site Setup']")
