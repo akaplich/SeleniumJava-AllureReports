@@ -34,7 +34,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields  extends TestBase {
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
+        Action58123c20fa4ee77809f468f6(variables)
         //Navigate WebStorm or MTS
         new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
         //Set Custom and Other App Post Idea

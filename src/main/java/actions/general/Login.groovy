@@ -6,8 +6,20 @@ import actions.selenium.Click
 import actions.selenium.Exists
 
 class Login{
+    public static void run(String email, String password, Boolean loggedInOnEnterprise = false ){
+        def params = [:]
+        params.Email = email
+        params.Password = password
+        params."Verify if Logged In On Enterprise homepage" = loggedInOnEnterprise
+
+        run(params)
+    }
     public static void run(def params){
         if(!params.Email){
+            params.Email="bi.adminuser1@brightidea.com"
+        }else if (params.Email == null){
+            params.Email="bi.adminuser1@brightidea.com"
+        }else if (params.Email == "null"){
             params.Email="bi.adminuser1@brightidea.com"
         }
         if(!params.Password){params.Password = "brightidea1"}
@@ -27,10 +39,10 @@ class Login{
 			//A workaround to a bug for login
             if(params."Verify if Logged In On Enterprise homepage"==null || params."Verify if Logged In On Enterprise homepage"==true){
                 if(!Exists.run(ID:"//*[@id='navbar']",Timeout:10)){
-           		println("LOGGING IN AGAIN")
-                SetText.run(Text:params.Email,ID:"//*[@id='emailAddress']")
-                SetText.run(Text:params.Password,ID:"//*[@id='password']")
-                Click.run(ID:"//*[@id='login-button']")
+                    println("LOGGING IN AGAIN")
+                    SetText.run(Text:params.Email,ID:"//*[@id='emailAddress']")
+                    SetText.run(Text:params.Password,ID:"//*[@id='password']")
+                    Click.run(ID:"//*[@id='login-button']")
                 }
             } else {
                 sleep(4000)

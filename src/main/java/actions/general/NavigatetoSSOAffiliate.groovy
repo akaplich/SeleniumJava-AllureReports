@@ -1,11 +1,13 @@
 package actions.general;
 
 import actions.selenium.Browser
+import utils.Settings
 
 class NavigatetoSSOAffiliate{
     public static void run(def params){
-        
-        if((redwood.launcher.Launcher.variables.URL).contains("sandbox")){
+        def CodeEnvironment  = Settings.getProperty("environment.CodeEnvironment");
+        String URLPath = Settings.getProperty("environment.url");
+        if(URLPath.contains("sandbox")){
             if (params."DomainName".contains("sso")){
             	Browser.Driver.get("https://${params."DomainName"}1.brightideasandbox.com") //added "1", had to create a new affiliate in SB    
             } else if(params."DomainName".contains("licenseManager")){
@@ -13,7 +15,7 @@ class NavigatetoSSOAffiliate{
             } else {
                 Browser.Driver.get("https://${params."DomainName"}.brightideasandbox.com")
             }
-        } else if((redwood.launcher.Launcher.variables.URL).contains("test")) {
+        } else if(URLPath.contains("test")) {
              if(params."DomainName".contains("licenseManager")){
                 Browser.Driver.get("https://www.brightideatest.com/licenseManager")
              } else {

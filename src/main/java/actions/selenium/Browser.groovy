@@ -42,6 +42,7 @@ class Browser {
     public static void run(Map params) {
         String URL = params.URL.toString()
         Driver.get(URL)
+        new Wait().run("5")
     }
     public static void run(String URL) {
         Driver.get(URL)
