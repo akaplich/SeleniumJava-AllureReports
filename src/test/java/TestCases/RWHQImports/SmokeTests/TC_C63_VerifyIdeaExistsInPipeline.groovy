@@ -15,7 +15,6 @@ import org.testng.annotations.Test
 
 class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
 //C63 - Verify idea exists in Pipeline
-    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite
@@ -42,8 +41,8 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
 
         //Open Browser
-        //new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
-        browser.run(variables."affiliateURL".toString())
+        new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
+        //browser.run(variables."affiliateURL".toString())
 
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())

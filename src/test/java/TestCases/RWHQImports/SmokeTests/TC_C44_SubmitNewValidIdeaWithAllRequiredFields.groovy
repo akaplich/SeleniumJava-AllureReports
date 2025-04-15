@@ -19,7 +19,6 @@ import org.testng.annotations.Test
 
 //C44 - Submit new valid Idea with all Required fields
 class TC_C44_SubmitNewValidIdeaWithAllRequiredFields  extends TestBase {
-    private static Browser browser = Browser.getInstance()
     private static def variables = [:]
 
     @BeforeSuite
@@ -53,9 +52,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields  extends TestBase {
         //Create Affiliate based on Master Affiliate
         variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
         //Open Browser
-        //new actions.selenium.Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
-        browser.run(variables."affiliateURL".toString())
-
+        new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment

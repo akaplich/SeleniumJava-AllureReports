@@ -20,13 +20,13 @@ import org.testng.annotations.Test
 //C84 - Pipeline Creation - Create Pitch App
 class TC_C84_CreatePitchApp extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C84_CreatePitchApp.class);
-    private static Browser browser = Browser.getInstance()
     private static def params = [:]
 
     @BeforeSuite
     public void beforeState(){
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Run Browser in Incognito" = null
+        params."affiliateURL" = null
     }
 
     @Test
@@ -66,17 +66,14 @@ class TC_C84_CreatePitchApp extends TestBase{
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
                 "Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
         */
-        String affiliateURL = new CopyAffiliate().run()
-
+        // This sets all params to their default value which is null
+        params."affiliateURL" = new CopyAffiliate().run()
         //Open Browser
-        /*
         new Browser().run(
                 "Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),
                 "URL":/${variables."affiliateURL"}/.toString(),
                 "Browser Type":/${variables."Browser"}/.toString())
-         */
-        //Browser.getInstance()
-        browser.run(affiliateURL)
+
 
 
         //Login

@@ -23,13 +23,14 @@ import org.testng.annotations.Test
 //C10805 - Post Update
 class TC_C10805_PostUpdate extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C10805_PostUpdate.class);
-    private static Browser browser = Browser.getInstance()
     private static def params = [:]
 
     @BeforeSuite
     public void beforeState() {
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Run Browser in Incognito" = null
+        params."Browser" = /Chrome/
+        params."affiliateURL" = null
     }
 
     @Test
@@ -61,15 +62,13 @@ class TC_C10805_PostUpdate extends TestBase{
                 "Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),
                 "Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
         */
-        String affiliateURL = new CopyAffiliate().run(null, null, null, null, null)
+        params."affiliateURL" = new CopyAffiliate().run(null, null, null, null, null)
         //Open Browser
-        /*
+
         new Browser().run(
                 "Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),
-                "URL":/${variables."affiliateURL"}/.toString())
-                "Browser Type":/${variables."Browser"}/.toString())
-         */
-        browser.run("URL":affiliateURL)
+                "URL":/${params."affiliateURL"}/.toString(),
+                "Browser Type":/${params."Browser"}/.toString())
 
         //Login
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
