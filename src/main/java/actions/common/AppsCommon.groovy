@@ -1,6 +1,6 @@
-package actions.common
+package actions.common;
 
-
+import actions.selenium.SetText
 import actions.selenium.Click
 import actions.selenium.SetCheckBox
 import actions.selenium.SetText
@@ -8,6 +8,10 @@ import actions.selenium.SetFocus
 import actions.selenium.Exists
 import java.nio.file.Paths
 import actions.selenium.SendKeys
+import org.openqa.selenium.interactions.Actions
+import actions.selenium.Browser
+import org.openqa.selenium.WebElement
+import actions.selenium.utils.Elements
 import org.openqa.selenium.StaleElementReferenceException;
 import actions.selenium.SetReactTags
 
@@ -77,7 +81,17 @@ class AppsCommon{
                 break
             }
         }
-        sleep(2000)
+        if(params."Project Room"){
+            if(params."Project Room"=="General, Stage Gate Process (system default)"){
+                Click.run(ID:"//*[@id='project_room_template_id']")
+                Click.run(ID:"//*[@class='component-typeahead-list-element']/*[text()='General, Stage Gate Process (system default)']")
+            } else {
+                SetText.run(ID:"//*[@id='project_room_template_id']",Text:params."Project Room", "Type of Clear":"Cut")
+        		sleep(2000)
+                Click.run(ID:"//*[@class='component-typeahead-list-element']/*[text()='${params."Project Room"}']")
+            }        	    
+        }     
+        sleep(2000)        
         if(params."Action on Design Tab"== null || params."Action on Design Tab"=="Continue"){
             Click.run(ID:"//*[@class='bi-button-success-md']")
         } else if(params."Action on Design Tab"=="Cancel"){
@@ -160,52 +174,18 @@ class AppsCommon{
         // also used in System Setup - users - administrators, pipeline setup
 
         if(params."User"){
-            //SetReactTags.setMemberTagsWithAddRemove("User":params."User", "Add or Remove":params."Add or Remove", "Field Name":params."Field Name")
             SetReactTags.setMemberTagsWithAddRemoveWithMultipleInputFieldsLabelsAbove(params)
-            /*params."User".split(",").eachWithIndex{ name, x ->
-                if(params."Add or Remove".split(",")[x]=="Add"){
-                    SetFocus.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']")
-                    SetText.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
-                    sleep(3000)
-                    Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..") 
-                } else {
-                    SetFocus.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]")
-                    sleep(1000)
-                    Click.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[text()='${name}']/..//*[@class='f-tag-remove']")
-                }
-            }*/
+            
         }
     }
     
-    public static void MemoUserPickerAddWithPermissions(def params){  //ANNA TEST THIS!
+    public static void MemoUserPickerAddWithPermissions(def params){
         // FOR MEMO: on collab editor, on userhome memo card; only add user with permission
         //"Field Name" (string)
         //"User" (string)
         //"Permission" (string) = can edit, can view, can comment
         //"Send Invite" (string) = TRUE, FALSE
-        
 		SetReactTags.setMemberTagsWithoutAddRemove(params)
-        /*params.User.split(",").eachWithIndex{ name, x ->
-            
-            SetFocus.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']")
-            SetText.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
-            sleep(3000)
-            try {
-            	Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
-			}catch (StaleElementReferenceException e){
-				System.out.println("Stale element encountered. Retrying...")
-				sleep(1000)
-            	Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
-			}
-            if(params."Permission".split(",")[x]){
-                Click.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]/following-sibling::*[contains(@class,'fractal-clickoutside')]")
-                Click.run(ID:"//UL[contains(@class,'f-dropdown-options')]/LI/*[contains(.,'${params."Permission".split(",")[x]}')]")
-            }
-            if(params."Send Invite".split(",")[x]=="TRUE"){
-            	Click.run(ID:"//*[contains(@class,'f-send-invite') and .='Send Invite']")
-            }
-       }*/
-        
     }
     
     public static void MemoUserPickerRemoveUpdatePermissions(def params){
@@ -236,56 +216,32 @@ class AppsCommon{
         else if(params."Action".contains("Cancel")){Click.run(ID:"//*[contains(@class,'f-import-btn-container')]//BUTTON/SPAN[.='Cancel']")}
     }
     
-    public static void NewUserPickerAddRemoveInSetupWizard(def params){ //Anna test this!
+    public static void NewUserPickerAddRemoveInSetupWizard(def params){
         //"Field Name" (string)
         //"User" (string)
         //"Add or Remove" (string) = Add, Remove
-
-        //if(params."User"){
-            SetReactTags.setMemberTagsWithAddRemove(params)
-            /*params."User".split(",").eachWithIndex{ name, x ->
-                if(params."Add or Remove".split(",")[x]=="Add"){
-        			SetFocus.run(ID:"//*[contains(text(),'${fieldName}')]/../../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']")
-
-                    SetFocus.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']")
-                    SetText.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
-                    sleep(3000)
-                    if(Exists.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']")){ 
-                        Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
-                    } else {
-                        Click.run(ID:"//DIV[@class='f-modal-body']//DIV[contains(@class,'react-tags__combobox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
-                    }//request review on memo
-                }
-                else{
-                    if(Exists.run(ID:"//*[contains(@class,'f-member-list')]//*[@class='f-member']/SPAN[contains(.,'${name}')]")>0){ //whiteboard... i dont think its needed
-                        Click.run(ID:"//*[@class='f-member']/SPAN[starts-with(.,'${name}')]/../..//button")
-                    }else{
-                        Click.run(ID:"//*[contains(text(),'${params."Field Name"}')]/../..//*[contains(@class,'f-member-typeahead')][1]/../../..//*[text()='${name}']/..//I")
-                    }
-            	}
-        	}*/
-        //}
+        SetReactTags.setMemberTagsWithAddRemove(params)
     }
     
-     public static void NewUserPickerAddRemoveInDuplicateNewModal(def params){// Anna Test this!
+     public static void NewUserPickerAddRemoveInDuplicateNewModal(def params){
         //"Field Name" (string)
         //"User" (string)
         //"Add or Remove" (string) = Add, Remove
 
         if(params."User"){
-            //SetReactTags.setMemberTagsWithAddRemove(params)
             SetReactTags.setMemberTagsWithAddRemoveWithMultipleInputFieldsLabelsSidebySide(params)
-            /*params."User".split(",").eachWithIndex{ name, x ->
-                if(params."Add or Remove".split(",")[x]=="Add"){
-                    SetFocus.run(ID:"//*[starts-with(text(),'${params."Field Name"}')]/../..//*[@class='react-tags__combobox-input']")
-                    SetText.run(ID:"//*[starts-with(text(),'${params."Field Name"}')]/../..//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
-                    sleep(5000)
-                    Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..") 
-                }
-                else{
-                     Click.run(ID:"//*[starts-with(text(),'${params."Field Name"}')]/../..//*[text()='${name}']/..//I")
-                }
-            }*/
         }
     }
+    public static void setEnableSiteSchedulerforInitiative(def params){
+        Click.run(ID:"//*[contains(@class,'bi-toggle')]/..")      
+    }
+    
+    public static void SetDepartmentalIdeaboxSubpipelines(def params) {
+         if (params."SubPipeline Name" && params."SubPipeline Field Name") {
+              params."SubPipeline Name".split(",").eachWithIndex { name, x ->
+                  def fieldNames = params."SubPipeline Field Name".split(",")
+            	  SetText.run(ID:"//*[contains(@class,'form-group') or contains (@class,'fractal-input')]/LABEL[text()='${fieldNames[x]}']/..//INPUT", Text: name, "Type of Clear": "None")
+              }
+        }
+    } 
 }

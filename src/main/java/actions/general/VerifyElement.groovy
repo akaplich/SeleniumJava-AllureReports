@@ -7,14 +7,16 @@ class VerifyElement{
                 
         if(params."Number of Matches" ){
             println(params."Number of Matches".toInteger())
-            def elements = Exists.run(ID:params.ID)
+            def elements = Exists.run(params)
             if(params."Should Element Exist"==true){
-                assert elements>0, "Error - Element does not exists"
+                assert elements>0, "Error - Element does not exist"
                 if(params."Number of Matches"){
                     assert elements == params."Number of Matches".toInteger(), "Error - Number of matches ${elements} is not expected ${params."Number of Matches".toInteger()}"
                 }
             }else if(params."Should Element Exist"==false){
                 assert elements==0, "Error - Element exists"
+            }else{
+            	assert elements == params."Number of Matches".toInteger(), "Error - Number of matches ${elements} is not expected ${params."Number of Matches".toInteger()}"                
             }
         }
     }

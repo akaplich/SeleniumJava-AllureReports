@@ -6,12 +6,13 @@ import actions.selenium.Click
 import actions.selenium.Exists
 import actions.selenium.SelectItem
 import actions.selenium.ExecuteJavascript
+import actions.selenium.SetReactTags
 
 class CreateSolveWebstorm{
     public void run(def params){
 
         if(Exists.run(ID:"//*[@data-action='cancel']")==0){ 
-            Click.run(ID:"//*[@class='app-card' and contains(@id,'${params."App Name".toLowerCase()}')]")
+            Click.run(ID:"//*[contains(@class,'app-card') and contains(@id,'${params."App Name".toLowerCase()}')]")
             Click.run(ID:"//*[@id='phase-app-detail']//BUTTON[@class='btn btn-primary navigate']")
         }  
 
@@ -34,8 +35,14 @@ class CreateSolveWebstorm{
         // Participants Tab
         AppsCommon.UserPickerAddRemove("Field Name":"Early Access",User:params."Early Access","Add or Remove":params."Early Access Add or Remove")
         AppsCommon.UserPickerAddRemove("Field Name":"General Access",User:params."General Access","Add or Remove":params."General Access Add or Remove")
-        AppsCommon.UserPickerAddRemove("Field Name":"Pipeline Administrators",User:params."Pipeline Administrators","Add or Remove":params."Administrators Add or Remove")
-        AppsCommon.UserPickerAddRemove("Field Name":"Moderators",User:params."Moderators","Add or Remove":params."Moderators Add or Remove")
+        if(params."Type of Licensing Model" == "Standard Licensing Model"){
+            if(params."Idea Box Managers") SetReactTags.setMemberTagsWithAddRemoveNewSetupWizard("Field Name":"Idea Box Managers",User:params."Idea Box Managers","Add or Remove":params."Idea Box Managers Add or Remove")      
+			if(params."Pipeline Administrators") SetReactTags.setMemberTagsWithAddRemoveNewSetupWizard("Field Name":params."Admin Field Name",User:params."Pipeline Administrators","Add or Remove":params."Administrators Add or Remove")
+            if(params."Moderators") SetReactTags.setMemberTagsWithAddRemoveNewSetupWizard("Field Name":"Pipeline Moderators",User:params."Moderators","Add or Remove":params."Moderators Add or Remove")
+         } else {
+             AppsCommon.UserPickerAddRemove("Field Name":"Pipeline Administrators",User:params."Pipeline Administrators","Add or Remove":params."Administrators Add or Remove")
+             AppsCommon.UserPickerAddRemove("Field Name":"Moderators",User:params."Moderators","Add or Remove":params."Moderators Add or Remove")
+        }
         AppsCommon.ImportUserGroup("Import User Group As":params."Import Group as","Import Group File":params."Import File","Add or Remove User Group":params."Add or Remove Group","Import User Group Action":params."Import Group Action","Check Complete Modal Action":params."Check Modal Action","Group Name":params."Group Name")
         if(params."Action on Participants Tab"){
             sleep(4000)
@@ -50,12 +57,15 @@ class CreateSolveWebstorm{
         }
 
         // Site Schedule Tab
-        if(params."End Date"){SetText.run(Text:params."End Date",ID:"//*[@id='end-date']","Type of Clear":"Cut")
-                              Click.run(ID:"//*[@id='setup-header-title']")}
-        if(params."End Time"){SelectItem.run(ID:"//*[@id='end-date-timepicker']","Visible Text":params."End Time")}
+        if(params."Enable Site Scheduler for initiative"){
+          AppsCommon.setEnableSiteSchedulerforInitiative(params."Enable Site Scheduler for initiative")  
+        }
         if(params."Launch Date"){SetText.run(Text:params."Launch Date",ID:"//*[@id='start-date']","Type of Clear":"Cut")
                                  Click.run(ID:"//*[@id='setup-header-title']")}
         if(params."Launch Time"){SelectItem.run(ID:"//*[@id='start-date-timepicker']","Visible Text":params."Launch Time")}
+        if(params."End Date"){SetText.run(Text:params."End Date",ID:"//*[@id='end-date']","Type of Clear":"Cut")
+                              Click.run(ID:"//*[@id='setup-header-title']")}
+        if(params."End Time"){SelectItem.run(ID:"//*[@id='end-date-timepicker']","Visible Text":params."End Time")}
         if(params."Action on Site Schedule Tab"){
             sleep(4000)
             if (params."Action on Site Schedule Tab"=="Continue"){

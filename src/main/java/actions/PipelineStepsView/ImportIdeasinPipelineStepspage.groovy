@@ -27,7 +27,7 @@ class ImportIdeasinPipelineStepspage{
                 	Click.run(ID:"//*[@id='bi-modal-button']/span[text()='${params."Action"}']")
             	} else {Click.run(ID:"//*[@class='bimodal-secondary']")}
         	}
-        	Click.run(ID:"//*[@id='bi-modal-button']/span[@class='green_btn_center']")
+        	//Click.run(ID:"//*[@id='bi-modal-button']/span[@class='green_btn_center']")
         	sleep(7000)
         }
     }

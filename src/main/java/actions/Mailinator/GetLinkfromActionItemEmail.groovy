@@ -4,11 +4,10 @@ import actions.Mailinator.GetMailinatorEmail
 
 class GetLinkfromActionItemEmail{
    public static run(def params){
-        def body = GetMailinatorEmail.run(params).body
-        //Parse for the Reset password
-        def link
-        link = body.substring(body.indexOf("href=\'") + 6, body.indexOf("\'>https:"))
-        println(link)
-        return link
+        def email = GetMailinatorEmail.run(params)
+       def links = [] 
+       links = GetURLFromEmail.run(email:email) 
+       	println("Link for Action Item: ${links[0]}")
+        return links[0]
     }
 } 

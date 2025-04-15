@@ -4,6 +4,7 @@ import actions.PipelineStepsView.SetStepDropdown
 import actions.common.AppsCommon
 import actions.common.ConfigureStepModalCommon
 import actions.selenium.Click
+import actions.selenium.Exists
 
 class ConfigureReviewStepinNewModalinPipelineStepspage{
     public void run(def params){
@@ -23,6 +24,9 @@ class ConfigureReviewStepinNewModalinPipelineStepspage{
             }
         }
         ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Each Idea will be assigned to evaluators":params."Each Idea will be assigned to evaluators","Switch to static date":params."Switch to static date","Due Date":params."Due Date")
+        if(params."Idea Editing"){
+            assert Exists.run(ID:"//*[@class='f-idea-editing']//*[text()='${params."Idea Editing"}']")==1, "Idea Editing text not displayed"
+        }
         ConfigureStepModalCommon.ConfigureNotificationItemsInStepModal("Email Alert":params."Email Alert","Send Alerts":params."Send Alerts","Subject":params."Subject","Email":params."Email")
         ConfigureStepModalCommon.ConfigureResultsAndRulesItemsInStepModal("Cancel Open Action Item":params."Cancel open action items when submission moves out of Step")
         ConfigureStepModalCommon.ConfigureActionsInStepModal("Action":params."Action")

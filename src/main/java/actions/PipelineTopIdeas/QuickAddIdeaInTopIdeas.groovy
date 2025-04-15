@@ -3,12 +3,20 @@ package actions.PipelineTopIdeas;
 import actions.selenium.Click
 import actions.selenium.Exists
 import actions.selenium.SetText
+import actions.selenium.Refresh
 import actions.selenium.SetCombobox
 
 class QuickAddIdeaInTopIdeas{
     public void run(def params){
         if(params."Click Quick Add to Trigger Dialog"==true){
         	Click.run(ID:"//*[contains(@class,'f-quick-add-wrapper')]//BUTTON", "Type of Click":"Javascript")
+            sleep(2000)
+            if (Exists.run(ID:"//*[@id='f-quick-add-memoidea']")==0){
+                Refresh.run()
+                Click.run(ID:"//*[contains(@class,'f-quick-add-wrapper')]//BUTTON", "Type of Click":"Javascript")
+                sleep(2000)
+                assert Exists.run(ID:"//*[@id='f-quick-add-memoidea']")>0, "Error - Quick Add Button Failed to show the Project Title Textbox"
+            }
         }
         if(params."Quick Add Button Should Be Active After Click"==true){
                 assert Exists.run(ID:"//*[contains(@class,'f-quick-add-wrapper')]//BUTTON[contains(@class,'f-btn-active')]")>0, "Error - Quick Add Button Not Active"     
@@ -36,7 +44,6 @@ class QuickAddIdeaInTopIdeas{
         }
         else if(params.Action == "Click Outside of Container to Close it"){
             Click.run(ID:"//SPAN[@class='f-best-idea-set-name']")
-        	
         }
         if(params."Quick Add Button Should Be Inactive At The End"==true){
             sleep(3000)

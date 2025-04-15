@@ -14,6 +14,8 @@ class SetBusinessImpactForViewIdeaPage{
         if(params."Access Business Impact From"){
             if(params."Access Business Impact From"=="Team Workspace"){
                 TeamWorkspaceCommon.NavigateTab(Tab:"Business Impact")
+            }else if(params."Access Business Impact From"=="View Idea 3") {
+                Click.run(ID:"//*[contains(@class,'f-tab-business_impact')]")
             } else {
                 ViewIdeaCommon.NavigateTab(Tab:"Business Impact")  
                 sleep(2000)

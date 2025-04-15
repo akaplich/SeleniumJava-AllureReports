@@ -5,7 +5,7 @@ import java.nio.file.Paths
 import actions.selenium.SendKeys
 
 class SetRedactorToolbarOptions{
-    public void run(def params){
+    public static void run(def params){
         
         def xpath
         switch(params."Field"){
@@ -21,6 +21,12 @@ class SetRedactorToolbarOptions{
             case "Rick Text Widget 2.0":
                 xpath = "//*[contains(@id,'rich-text-html-redactor-widget')]"
             	break
+            case "User Homepage Message":
+            	xpath = "//div[@id='user_homepage_message']"
+            	break	
+            case "New Rules UI":
+            	xpath = "//*[contains(@class,'f-rules-content')]"
+            	break	
             case "Challenge Brief Widget":
                 xpath = "//*[contains(@id,'homepage')]"
             	if(Exists.run(ID:"//*[@id='homepage-htmlpreview-brief']")>0){
@@ -58,6 +64,9 @@ class SetRedactorToolbarOptions{
         }
         if(params."Font Color"){
             Click.run(ID:"//div[contains(@class,'re-dropdown-box-')]//span[@rel='${params."Font Color"}']")              	        
+        }
+        if(params."Set HTML"){
+			SetText.run(ID:xpath+"//textarea[@ID='CB_MESSAGE_ON_HIGHLIGHTS_PAGE']",Text:params."Set HTML")
         }
     }
 }

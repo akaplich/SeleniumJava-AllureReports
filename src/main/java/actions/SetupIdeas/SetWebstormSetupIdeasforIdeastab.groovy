@@ -10,6 +10,7 @@ import actions.selenium.ExecuteJavascript
 class SetWebstormSetupIdeasforIdeastab{
     public void run(def params){
         SetupCommon.NavigateTab(Tab:"Ideas",Section:"Ideas")
+        SetCheckBox.run(ID:"//*[@id='CB_WS_VIDEO_ATTACHMENTS_IN_DESCRIPTION_TAB']",Check:params."Video Attachments In Description")
 
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_IDEA_BOARDS']",Check:params."Idea Boards")
         SetCheckBox.run(ID:"//*[@id='CB_DISABLE_IDEA_SUBMISSION_WS']",Check:params."Idea Submission")
@@ -49,6 +50,7 @@ class SetWebstormSetupIdeasforIdeastab{
         if(params."Custom Idea Code Prefix"){SetText.run(ID:"//*[@id='custom_idea_code']", Text:params."Custom Idea Code Prefix")}//also verifies the warning modal in the end
         SetText.run(ID:"//*[@id='submission_name_singular']", Text:params."Submission Name - Singular")
         SetText.run(ID:"//*[@id='submission_name_plural']", Text:params."Submission Name - Plural")
+        SetCheckBox.run(ID:"//*[@id='CB_SUBMITTERS_CAN_CHANGE_STATUS']",Check:params."Submitter can change status")
         if(params."Business impact timeframe"){
             if(params."Business impact timeframe" == "Quarterly"){
                 Click.run(ID:"//*[@id='CB_WS_QUARTERLY_BUSINESS_IMPACT_QUARTERLY']")
@@ -80,6 +82,9 @@ class SetWebstormSetupIdeasforIdeastab{
 
         //SetCheckBox.run(ID:"//*[@id='CB_ENABLE_FEATURE_FIND_TEAMMATES']",Check:params."Enable Find Teammates", "Type of Click":"Javascript")
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_FEATURE_FIND_TEAMMATES']",Check:params."Enable Find Teammates")
+
+        SetCheckBox.run(ID:"//*[@id='CB_WS_ALLOW_IDEA_EDITING']",Check:params."Allow Idea Editing for submitters")
+        SetCheckBox.run(ID:"//*[@id='CB_SUBMITTERS_CAN_CHANGE_STATUS']",Check:params."Submitter can change status ")
 
         if(params."Submit on Behalf"){
             if(params."Submit on Behalf"=="Group"){

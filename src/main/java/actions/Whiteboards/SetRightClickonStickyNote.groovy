@@ -1,7 +1,11 @@
 package actions.Whiteboards;
 
 import actions.selenium.*
+import actions.selenium.Browser
 import org.openqa.selenium.interactions.Actions
+import actions.selenium.Exists
+import actions.selenium.SetFocus
+import actions.selenium.SetCombobox
 import screens.WhiteboardLocators
 
 
@@ -31,13 +35,9 @@ class SetRightClickonStickyNote{
             	Click.run(ID:"//*[@id='f-combobox-list']//*[text()='${params."Select Pipeline Category"}']")
             	sleep(1000)
             }
-            //Click.run(ID:"//*[contains(@id,'f-canvas-select-initiative')]")
-        	//sleep(3000)
-            //Click.run(ID:"//*[@id='f-combobox-list']//*[text()='${params."Add to pipeline"}']")
-            //sleep(4000)
-            
             if(params."Add to pipeline Action"=="Add"){
                 Click.run(ID:"//*[@data-test='modal-footer-submit']")
+                sleep(3000)
             } else {
                  Click.run(ID:"//*[@data-test='modal-footer-cancel']")
              }
@@ -84,7 +84,6 @@ class SetRightClickonStickyNote{
         }
         if(params."Export as CSV"==true){
             SetFocus.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Export')]")
-            Click.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Export')]")
             Click.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Export')]//UL[contains(@class,'sub-menu')]//LI//*[starts-with(.,'Export as CSV')]", "Type of Click":"Move to Element")
 		}
         if(params."Break into Stacks"==true){
@@ -109,6 +108,34 @@ class SetRightClickonStickyNote{
             //SetFocus.run(ID:"//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Paste']")
             //Click.run(ID:"//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Paste']")
         }
+        if(params."Delete"==true){
+            SetFocus.run("ID Type":"By",By:WhiteboardLocators.rightClick_Delete)
+            Click.run("ID Type":"By",By:WhiteboardLocators.rightClick_Delete)
+            //SetFocus.run(ID:"//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Delete']")
+            //Click.run(ID:"//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Delete']")
+        }
+        if(params."Brightidea AI Menu Option"){
+            SetFocus.run("ID Type":"By", By:WhiteboardLocators.rightClick_BrightideaAI)
+            if(params."Brightidea AI Menu Option"=="Cluster"|params."Brightidea AI Menu Option"=="Update tone"){
+                SetFocus.run("ID Type":"By", By:WhiteboardLocators.rightClick_BrightideaAI_menuOption(params."Brightidea AI Menu Option"))
+                sleep(2000)
+                SetFocus.run("ID Type":"By", By:WhiteboardLocators.rightClick_BrightideaAI_subMenuOption(params."Brightidea AI Menu Option", params."Brightidea AI Submenu Option"))
+            	Click.run("ID Type":"By", By:WhiteboardLocators.rightClick_BrightideaAI_subMenuOption(params."Brightidea AI Menu Option", params."Brightidea AI Submenu Option"))
+                sleep(2000)
+            }else{
+                Click.run("ID Type":"By", By:WhiteboardLocators.rightClick_BrightideaAI_menuOption("${params."Brightidea AI Menu Option"}"))
+            }
+        }
+        
+        /*if(params."Brightidea AI"=="Update tone"|params."Brightidea AI"=="Cluster"){
+            def subMenu = params."Brightidea AI"
+            
+            
+            //SetFocus.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Brightidea AI')]")
+            
+            SetFocus.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Brightidea AI')]//UL[contains(@class,'sub-menu')]//LI//*[starts-with(.,'Update tone')]")
+            Click.run(ID:"//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Brightidea AI')]//UL[contains(@class,'sub-menu')]//LI//*[starts-with(.,'Update tone')]//UL[contains(@class,'dropdown-options')]//*[contains(.,'${params."Brightidea AI - Update tone"}')]", "Type of Click":"Move to Element")
+        }*/
     }
 }
 

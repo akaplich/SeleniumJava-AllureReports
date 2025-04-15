@@ -17,7 +17,7 @@ class SetManagersinShareDialog{
         
        if(params."Send Invite"){
            Click.run(ID:"//*[contains(@class,'f-send-invite') and .='${params."Send Invite"}']")
-            //sleep(2000)
+           sleep(2000)
        }
         
        if(params."Managers to Remove"){

@@ -7,9 +7,37 @@ import actions.selenium.utils.Elements
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.By;
+//import actions.ViewIdea30.VerifyIdeaonViewIdea3
 
 class VerifyIdeainViewIdeapage{
     public def run(def params){
+        /*if(Exists.run(ID:"${path}//*[contains(@class,'f-idea-inner-row')]//*[@class='f-static-title']/*[@class='link']/A[contains(.,'${params."Idea Code"}')]")>0){
+            println("We are on View Idea 3")
+            VerifyIdeaonViewIdea3.run(	"Template":"Medium Header",
+                                     	"Idea Name":params."Idea Name",
+										"Idea Code":null,
+                                        "Description":params."Description",
+                                        "Idea Image":params."Idea Image",
+                                        "Submitter Name":params."Creator username",
+                                        "Does it have team submission name":
+                                        "Submitter Image":null,
+                                        "Vote Count":params."Votes",
+                                      	"Tag":params."Tag",
+										"Tag Should Exist":params."Tag Should Exist",
+                                        "Admin Tag":params."Admin Tag",
+                                        "Admin Tag Should Exist":params."Admin Tag Should Exist",
+                                        "Category":params."Category",
+                                        "View As":"Admin",						//might need to add a parameter to the testcases
+                                        "Status":params."Status",
+                                        "Owner":params."Owner",
+                                        "Submitted":null,
+                                        "Stats Points":
+                                        "Stats Votes":params."Votes",
+                                        "Stats Rank":params."Rank",
+                                        "Stats Comments":params."Comments"
+                                     )
+        }*/
+
 
         if(params."Idea Name"){sleep(5000)}
         VerifyText.run(ID:"//*[@id='idea-title']",Text:params."Idea Name")

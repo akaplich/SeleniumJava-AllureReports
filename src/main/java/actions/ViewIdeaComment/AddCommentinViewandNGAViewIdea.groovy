@@ -9,6 +9,8 @@ import actions.selenium.SetFocus
 import actions.selenium.ExplicitWait
 import java.util.NoSuchElementException
 import actions.selenium.Refresh
+import actions.general.SetEmojiDialog
+
 
 class AddCommentinViewandNGAViewIdea{
     public void run(def params){
@@ -30,6 +32,7 @@ class AddCommentinViewandNGAViewIdea{
         }
         //SetFocus.run(ID:"//*[starts-with(@id,'fractal-commenting-input')]")
         SetText.run(ID:"//*[starts-with(@id,'fractal-commenting-input')]",Text:params.Comment,"Type of Clear":"None")
+                
         if(params."Comment Type"){
             Click.run(ID:"//*[@data-test='f-test-comment-permission-dropdown']", "Type of Click": "Javascript")
             Click.run(ID:"//*[contains(@class,'f-status-indicator-solid') and text()='${params."Comment Type"}']", "Type of Click": "Javascript")
@@ -61,6 +64,10 @@ class AddCommentinViewandNGAViewIdea{
                     sleep(2000)
                 }
             }
+        }
+        if(params."Add Emoji"!=null){
+            SetEmojiDialog.run(Comment: params.Comment,"Emoji Name": params."Add Emoji","New Comment": true )
+            sleep(3000)
         }
         if(params."Post Comment"){
             if(params."Post Comment"== true){

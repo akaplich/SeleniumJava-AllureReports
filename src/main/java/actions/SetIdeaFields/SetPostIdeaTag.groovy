@@ -26,7 +26,7 @@ class SetPostIdeaTag{
                         if(params."Field Name".toLowerCase().contains("submissions") || params."Field Name".toLowerCase().contains("ideas")){
                             Click.run(ID:xpath+"//*[contains(@class,'tt-menu tt-open')]//*[contains(text(),'${name}')]","Type of Click":"Javascript")
                         }else{
-                            Click.run(ID:xpath+"//*[contains(@class,'tt-menu tt-open')]//*[starts-with(text(),'${name}')]","Type of Click":"Javascript")
+                            Click.run(ID:xpath+"//*[contains(@class,'tt-menu tt-open')]//*[starts-with(text(),'${name}')]","Type of Click":"Javascript")                            
                         }
                     }
                     else{

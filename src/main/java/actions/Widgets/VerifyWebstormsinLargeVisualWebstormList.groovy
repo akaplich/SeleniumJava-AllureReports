@@ -19,7 +19,10 @@ class VerifyWebstormsinLargeVisualWebstormList{
             verify.IDChildren << "./parent::DIV/parent::DIV${img}"
         }
 
-        if(params."Webstorm Description"){verify.IDChildren << "./parent::DIV//DIV[@class='vwl-webstorm-description' and text()='${params."Webstorm Description"}']"}        
+        if(params."Webstorm Description"){verify.IDChildren << "./parent::DIV//DIV[@class='vwl-webstorm-description' and text()='${params."Webstorm Description"}']"}       
+        if(params."Launches in days"){verify.IDChildren << "./parent::DIV//DIV[contains(@id,'pre-launch-countdown-holder')]/SPAN[@id='vwl-days-left']/following-sibling::SPAN[1][text()='${params."Launches in days"}']"}
+        if(params."Launches in hours"){verify.IDChildren << "./parent::DIV//DIV[contains(@id,'pre-launch-countdown-holder')]/SPAN[@id='vwl-hours-left']/following-sibling::SPAN[1][text()='${params."Launches in hours"}']"}
+        if(params."Launches in minutes"){verify.IDChildren << "./parent::DIV//DIV[contains(@id,'pre-launch-countdown-holder')]/SPAN[@id='vwl-minutes-left']/following-sibling::SPAN[1][text()='${params."Launches in minutes"}']"}
         if(params."Idea Count"){verify.IDChildren << "./parent::DIV//DIV[@class='vwl-idea-count count-item' and text()='${params."Idea Count"}']"}
         if(params."Comment Count"){verify.IDChildren << "./parent::DIV//DIV[@class='vwl-comment-count count-item' and text()='${params."Comment Count"}']"}
         if(params."User Count"){verify.IDChildren << "./parent::DIV//DIV[@class='vwl-user-count count-item' and text()='${params."User Count"}']"}

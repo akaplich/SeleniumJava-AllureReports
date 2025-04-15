@@ -1,6 +1,8 @@
-package actions.selenium
+package actions.selenium;
 
-
+import actions.selenium.utils.Elements
+import actions.selenium.Browser
+import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.Keys
 
@@ -19,6 +21,8 @@ class SendKeyboardAction{
             action.sendKeys(Keys.PAGE_DOWN).build().perform()
         } else if(params."Button"=="PAGE UP"){
             action.sendKeys(Keys.PAGE_UP).build().perform()
+        } else if (params."Button"=="DOWN"){
+            action.sendKeys(Keys.DOWN).build().perform()
         } else {
             action.sendKeys(Keys.chord("${params."Button"}")).build().perform()
         }      

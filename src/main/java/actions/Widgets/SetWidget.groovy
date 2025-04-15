@@ -4,6 +4,13 @@ import actions.selenium.*
     
 class SetWidget{
     public void run(def params){
+        if(params."Verify Edit Widget Visibility"==true){
+            MouseOver.run(ID:"//*[@class='widget_title']//*[text()='${params."Name of Widget to Modify"}']")
+            assert Exists.run(ID:"//*[@class='widget_title']//*[text()='${params."Name of Widget to Modify"}']/../..//A[@class='widget_edit_icon']")==1, "Error - 'widget_edit_icon' did not exist"
+        }
+        if(params."Edit the Widget"==true){
+         Click.run(ID:"//*[@class='widget_title']//*[text()='${params."Name of Widget to Modify"}']/../..//A[@class='widget_edit_icon']","Type of Click":"Javascript")   
+        }
         if(params."New Title name"){
             Click.run(ID:"//*[@class='widget_title']//*[text()='${params."Name of Widget to Modify"}']/../..//A[@class='widget_edit_icon']","Type of Click":"Javascript")
             SetText.run(ID:"//INPUT[contains(@id,'title_edit') and @value='${params."Name of Widget to Modify"}']",Text:params."New Title name")
@@ -21,7 +28,7 @@ class SetWidget{
         if(params."Remove"){
             Click.run(ID:"//*[@class='widget_title']//*[text()='${params."Name of Widget to Modify"}']/../..//I[contains(@title,'Remove')]","Type of Click":"Javascript")
             //Click.run(ID:"//DIV[@class='widget_title_container']/DIV[@class='widget_title']/DIV[contains(@id,'title_text') and text()='${params."Name of Widget to Modify"}']/../../DIV[contains(@class,'widget_tools')]")
-            println(">>>>>>>>Sucess!!")
+            println(">>>>>>>>Success!!")
             sleep(2000)
             Click.run(ID:"//*[@id='dialogbox_content']/DIV[1]/BUTTON[1]")
         }

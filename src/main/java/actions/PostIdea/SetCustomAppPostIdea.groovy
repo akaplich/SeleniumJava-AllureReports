@@ -20,7 +20,7 @@ class SetCustomAppPostIdea{
         }
         if(params."Only upload attachment"==null || params."Only upload attachment"==false){
             SetPostIdeaTextField.run("Field Name":"Title","Field Value":params."Title")
-            SetPostIdeaTextField.run("Field Name":"Title With Emoji","Field Value":params."Title With Emoji")
+            SetPostIdeaTextField.run("Field Name":"Title","Field Value":params."Title With Emoji")
         	SetPostIdeaImage.run("Field Name":"Image","Image File":params."Image File","Crop or Cancel":params."Image Crop or Cancel")
         	SetPostIdeaDropdown.run("Field Name":"Submitter","Field Value":params."Submitter")
         	SetPostIdeaTag.run("Field Name":"Submitter","Tag or User Name":params."Submitter Team User","Add or Remove":params."Submitter Team User Add or Remove")

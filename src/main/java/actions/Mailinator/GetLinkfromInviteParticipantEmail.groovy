@@ -11,16 +11,17 @@ class GetLinkfromInviteParticipantEmail{
         email = GetMailinatorEmail.run(params)
         body = email.body
         if(params."Inbox Email Count"=="1" || params."Inbox Email Count"==null){
-            link << body.substring(body.indexOf("href=\"") + 6, body.indexOf("\" style"))
+            link << GetURLFromEmail.run(email:email)[0]
         } else {
             if((email.subject).contains(params."Subject of New Administrator Added Email")){
-                link << body.substring(body.indexOf("href=\"") + 6, body.indexOf("\" style"))
-                bodyofAnotherEmail = GetMailinatorEmail.run(params).body
-                link << bodyofAnotherEmail.substring(bodyofAnotherEmail.indexOf("title=\"Join Now!\" href=\"") + 24, bodyofAnotherEmail.indexOf("\" target"))
+                assert email.subject.toString().toLowerCase().contains(params."Subject of New Administrator Added Email".toLowerCase()) : "Error in the Email Subject"
+                link << GetURLFromEmail.run(email:email)[0]		// will use already received above
+                link << GetURLFromEmail.run(params)[0] 			//will get a new email
+                
             } else {
-                bodyofAnotherEmail  = GetMailinatorEmail.run(params).body
-                link << bodyofAnotherEmail.substring(bodyofAnotherEmail.indexOf("href=\"") + 6, bodyofAnotherEmail.indexOf("\" style"))
-                link << body.substring(body.indexOf("title=\"Join Now!\" href=\"") + 24, body.indexOf("\" target"))
+                link << GetURLFromEmail.run(params)[0] 			//will get a new email
+                link << GetURLFromEmail.run(email:email)[0] 	// will use already received above
+                
             }
             println(link[1])
             println(link[0])

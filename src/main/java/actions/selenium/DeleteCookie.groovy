@@ -1,5 +1,7 @@
 package actions.selenium
 
+import actions.selenium.Browser
+
 class DeleteCookie{
   public void run(def params){
     if(params."Cookie Name" == "ALL"){

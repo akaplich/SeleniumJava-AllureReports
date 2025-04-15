@@ -1,13 +1,15 @@
-package actions.WebstormHomepage
+package actions.WebstormHomepage;
 
-
+import actions.selenium.Browser
 import org.openqa.selenium.JavascriptExecutor
 import actions.selenium.utils.Elements
 import org.openqa.selenium.WebElement
+import actions.WebstormHomepage.SetActionOnChangeBackgroundModal
+import actions.selenium.Click
 import actions.selenium.*
 
 class SetPresetBackgroundImageintheHeader{
-    public void run(def params){
+    public static void run(def params){
        
         WebElement image
         if(params."Preset Image Name"){

@@ -9,8 +9,8 @@ class EditorDeleteRiskCommentsinTeamWorkspace{
             Click.run(ID:"//*[contains(@id,'table-body-row') and @value='${params."Risk"}']") 
         }
         if(params."Edit or Delete"=="Edit"){
-            Click.run(ID:"//DIV[.='${params."Comment or reply to be modified"}']/../..//*[contains(@data-tooltip-id,'comment-edit')]/I", "Type of Click":"Javascript")   
-            SetText.run(ID:"//*[text()='${params."Comment or reply to be modified"}']/..//*[contains(@class,'redactor-styles redactor-in redactor-in')]",Text:params."New comment or reply", "Type of Clear":"Cut")
+            Click.run(ID:"//DIV[contains(@class,'fractal-htmlpreview') and contains(.,'${params."Comment or reply to be modified"}')]/../..//*[contains(@data-tooltip-id,'comment-edit')]/I", "Type of Click":"Javascript")   
+            SetText.run(ID:"//*[contains(text(),'${params."Comment or reply to be modified"}')]/..//*[contains(@class,'redactor-styles redactor-in redactor-in')]",Text:params."New comment or reply", "Type of Clear":"Cut")
             if(params."Attachment File"){
                 params."Attachment File".split(",").eachWithIndex{ name, x ->
                     def fileName = Paths.get(".").toAbsolutePath().normalize().toString()+"\\TestCaseResourceFiles\\${name}"
@@ -19,7 +19,7 @@ class EditorDeleteRiskCommentsinTeamWorkspace{
             }
             sleep(2000)   
         } else {
-            Click.run(ID:"//DIV[.='${params."Comment or reply to be modified"}']/../..//*[contains(@data-tooltip-id,'comment-delete')]/I", "Type of Click":"Javascript")      
+            Click.run(ID:"//DIV[contains(.,'${params."Comment or reply to be modified"}')]/../..//*[contains(@data-tooltip-id,'comment-delete')]/I", "Type of Click":"Javascript")      
         }
         if(params.Action){
             if(params.Action=="Save"){

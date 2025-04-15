@@ -22,13 +22,6 @@ class ConfigureDevelopmentinNewModalinPipelineStepspage{
             SetStepDropdown.setDropdownOption("Step Name":params."Step Name to Configure (optional)","Step Dropdown Option":"Configure Development")
         }
         sleep(5000)
-        
-        /*List <WebElement> elems = Elements.findAll(ID:"//*[@id='f-action-assignment']/DIV[contains(@class,'f-dropdown-btn')]",Browser.Driver)
-        println("Found ${elems.size()}")
-        elems.each{ elem ->
-            println("Dropdown text: ${elem.getText()}")
-            println("Dropdown class: ${elem.getAttribute('class')}")
-        }*/
         WaitForElement.run(ID:"//*[@id='f-action-assignment']/DIV[contains(@class,'f-dropdown-btn')]", "Timeout In Seconds":"15")
         if(Exists.run(ID:"//*[@id='f-action-assignment']/DIV[contains(@class,'f-dropdown-btn') and not(contains(@class,'f-dropdown-disabled'))]")>0){
            println("In dev step config. dropdown is not disabled")
@@ -73,15 +66,19 @@ class ConfigureDevelopmentinNewModalinPipelineStepspage{
             //set Dev Team
             if(params."Development Team"){
                 params."Development Team Add or Remove".split(",").eachWithIndex{name, x->
-                	SetReactTags.setMemberTagsWithAddRemoveWithCustomxPath("User":params."Development Team".split(",")[x], "Add or Remove":params."Development Team Add or Remove".split(",")[x], "Custom xpath":parentXpath) 
+                	SetReactTags.setMemberTagsWithAddRemoveWithCustomxPath("User":params."Development Team".split(",")[x], "Add or Remove":params."Development Team Add or Remove".split(",")[x], "Custom xpath":"${parentXpath}//*[contains(@class,'f-dev-team')]") 
                 }
             } 
 		}
         Click.run(ID:"//*[contains(@class,'f-settings-btn')]")
-        ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Allow Assignees to Edit Idea Attributes":params."Idea Editing","Switch to static date":params."Switch to static date","Due Date":params."Due Date")
-        if(params."Allow action item assignees to view Private Comments" == false){
-        	Click.run(ID:"//*[@id='f-private-comments']/..")  //is selected is not recognized, cant use SetCheckbox action
-        }
+		ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Allow Assignees to Edit Idea Attributes":params."Allow Assignees to Edit Idea Attributes",
+                                                                             "Switch to static date":params."Switch to static date",
+                                                                             "Due Date":params."Due Date",
+                                                                             "Due at Time":params."Due at Time",
+                                                                             "Confirm Set Time":params."Confirm Set Time",
+                                                                             "Confirm Time Zone":params."Confirm Time Zone",
+                                                                             "Allow action item assignees to view Private Comments":params."Allow action item assignees to view Private Comments"
+                                                                            )        
          if(params."Development Field"){
             params."Development Field".split(",").eachWithIndex{ name, x ->
                 if(params."Development Field Included or Required".split(",")[x]=="Included"){

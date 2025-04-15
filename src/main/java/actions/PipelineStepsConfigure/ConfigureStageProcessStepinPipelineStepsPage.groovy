@@ -67,7 +67,7 @@ class ConfigureStageProcessStepinPipelineStepsPage{
             } 
 		}
         Click.run(ID:"//*[contains(@class,'f-settings-btn')]")
-        ConfigureStepModalCommon.ConfigureProjectRoomTemplateAndFolderMapping("Project Room Template":params."Project Room Template","Folder mapping":params."Folder mapping","Folder Mapping Placement Number":params."Folder Mapping Placement Number")       
+        ConfigureStepModalCommon.ConfigureProjectRoomTemplateAndFolderMapping("Project Room Template":params."Project Room Template","Click on Refresh":params."Click on Refresh","Folder mapping":params."Folder mapping","Folder Mapping Placement Number":params."Folder Mapping Placement Number")       
         ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Allow Assignees to Edit Idea Attributes":params."Idea Editing","Switch to static date":params."Switch to static date","Due Date":params."Due Date")       
         ConfigureStepModalCommon.ConfigureNotificationItemsInStepModal("Email Alert":params."Email Alert","Send Alerts":params."Send Alerts","Subject":params."Subject","Email":params."Email")
         ConfigureStepModalCommon.ConfigureResultsAndRulesItemsInStepModal("Cancel Open Action Item":params."Cancel Open Action Item")

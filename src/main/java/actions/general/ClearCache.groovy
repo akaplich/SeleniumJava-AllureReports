@@ -2,10 +2,13 @@ package actions.general;
 
 import actions.selenium.Browser
 import actions.selenium.NavigateToURL
+import org.openqa.selenium.JavascriptExecutor
+import actions.selenium.ExecuteJavascript
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.SearchContext
+import actions.selenium.Click
 
 class ClearCache{
     public void run(def params){
@@ -40,7 +43,8 @@ class ClearCache{
         WebElement root7 = shadowRoot6.findElement(By.cssSelector("cr-dialog"))
         
         //Clear Data button 
-        WebElement button = root7.findElement(By.cssSelector("cr-button[id='clearBrowsingDataConfirm']"))
+        //WebElement button = root7.findElement(By.cssSelector("cr-button[id='clearBrowsingDataConfirm']"))
+        WebElement button = root7.findElement(By.cssSelector("cr-button[id='clearButton']"))
         if (button !=null){println("OK found button")}
         return button
 	}

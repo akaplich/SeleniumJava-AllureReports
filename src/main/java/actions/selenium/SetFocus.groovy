@@ -1,6 +1,7 @@
 package actions.selenium
 
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Actions
 
@@ -12,7 +13,6 @@ class SetFocus{
             element.sendKeys("");
         } 
         else{
-            println("not input")
             new Actions(Browser.Driver).moveToElement(element).perform();
         }
         sleep(500)

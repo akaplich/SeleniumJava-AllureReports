@@ -21,19 +21,14 @@ class GetMemoNewCommentLinkFromNonMailinatorEmail{
         Folder inbox = store.getFolder(params.Folder);
         inbox.open(Folder.READ_WRITE);
         Message message = RetrieveMessage.run(params, session, inbox)
-        
-        def content = message.getContent()
-        //extract whats in between 'https'
-        def startIndex = content.indexOf("https://")
-        def endIndex = content.indexOf("https://", content.indexOf("https://")+1)-2
-        //println("First Index: ${startIndex}")
-        //println("End Index: ${endIndex}")
-        def link = content.substring(startIndex, endIndex)
-        println("link: ${link}")
+
+        String emailBody = EmailBodyExtractor.run(message)
+        println("emailbody extracted: ${emailBody}")
+        def links = ExtractURL.run(Content: emailBody)
         
         DeleteMessage.run(message, true)
         inbox.close(true) //if true, all marked 'Deleted' emails will get deleted from server
        	store.close()
-        return link
+        return links[0]
     }
 }

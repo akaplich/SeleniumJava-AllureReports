@@ -66,7 +66,7 @@ class ConfigureGateApprovalStepinPipelineStepsPage{
             } 
 		}
         Click.run(ID:"//*[contains(@class,'f-settings-btn')]")
-        ConfigureStepModalCommon.ConfigureProjectRoomTemplateAndFolderMapping("Project Room Template":params."Project Room Template","Folder mapping":params."Gate Mapping","Folder Mapping Placement Number":params."Gate Mapping Placement Number","Scorecard Template":params."Scorecard Template")
+        ConfigureStepModalCommon.ConfigureProjectRoomTemplateAndFolderMapping("Project Room Template":params."Project Room Template","Click on Refresh":params."Click on Refresh","Folder mapping":params."Gate Mapping","Folder Mapping Placement Number":params."Gate Mapping Placement Number","Scorecard Template":params."Scorecard Template")
         ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Allow Assignees to Edit Idea Attributes":params."Idea Editing","Switch to static date":params."Switch to static date","Due Date":params."Due Date")       
         ConfigureStepModalCommon.ConfigureNotificationItemsInStepModal("Email Alert":params."Email Alert","Send Alerts":params."Send Alerts","Subject":params."Subject","Email":params."Email")
         ConfigureStepModalCommon.ConfigureResultsAndRulesItemsInStepModal("Cancel Open Action Item":params."Cancel Open Action Item")

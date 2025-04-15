@@ -1,8 +1,9 @@
-package actions.WebstormHomepage
+package actions.WebstormHomepage;
 
-
+import actions.selenium.Exists
 import actions.selenium.*
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 
 class VerifyHomepageHeader2{
@@ -59,6 +60,12 @@ class VerifyHomepageHeader2{
                 assert Exists.run(ID:"//*[contains(@class,'f-join-event-btn')]") == 0, "Error- Registration button displayed"
             }
         }
-        
+        if(params."Get Started" !=null){
+            if(params."Get Started"==true){
+                assert Exists.run(ID:"//button[normalize-space()='Get Started']") == 1, "Error - Get Started button not displayed"
+            } else {
+                assert Exists.run(ID:"//button[normalize-space()='Get Started']") == 0, "Error - Get Started button displayed"
+            }
+        }
     }
 }

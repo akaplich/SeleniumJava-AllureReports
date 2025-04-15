@@ -8,5 +8,6 @@ class SetMemoTemplateTile{
         
         Click.run(ID:"//*[contains(@class,'f-template-title') and text()='${params."Template"}']/../..")
         SetActionOnChangeBackgroundModal.setAction(Action:params."Action")
+        sleep(3)
     }
 }

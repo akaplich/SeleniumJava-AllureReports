@@ -15,7 +15,7 @@ class SetSubmitterinViewIdea3UsingDropdown{
             }
             
             //sleep(1000)
-            Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${params."User"}']/../../..","Type of Click":"Move to Element")
+            Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${params."User"}']/../../..","Type of Click":"Move to Element")
             //sleep(2000)
         }
         if(params."Clear owner"){

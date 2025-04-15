@@ -5,6 +5,9 @@ import actions.common.*
 
 class VerifyNGAViewIdeaDescriptionTabFieldValue{
     public static void run(def params){
+        if(params."Field Name"=="Attachment Video"){
+            assert Exists.run(ID:"//*[@id='description-video-container']/video","Timeout":20)>0,"Video from attachment was not found"
+        }
         if(params."Field Value"){
             sleep(500)
         	if(Exists.run(ID:"//*[@id='desc' and contains(@class,'unselected')]")>0){

@@ -1,5 +1,8 @@
 package actions.selenium
 
+import actions.selenium.Browser
+import actions.selenium.Click
+
 class VerifyPageTitle{
   
   public void run(def params){

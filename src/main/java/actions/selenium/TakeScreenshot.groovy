@@ -1,9 +1,15 @@
 package actions.selenium;
 
-import ru.yandex.qatools.ashot.AShot
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies
+import ru.yandex.qatools.ashot.AShot;
+import ru.yandex.qatools.ashot.Screenshot;
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import ru.yandex.qatools.ashot.coordinates.CoordsProvider
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
-import org.openqa.selenium.By
+import ru.yandex.qatools.ashot.comparison.ImageDiff;
+import ru.yandex.qatools.ashot.comparison.ImageDiffer;
+import ru.yandex.qatools.ashot.comparison.PointsMarkupPolicy
+import org.openqa.selenium.By;
+import actions.selenium.utils.Elements
 import org.openqa.selenium.WebElement
 
 class TakeScreenshot{

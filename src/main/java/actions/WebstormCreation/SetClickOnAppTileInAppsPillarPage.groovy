@@ -3,6 +3,8 @@ package actions.WebstormCreation;
 import actions.selenium.Click
 import actions.selenium.Exists
 import actions.selenium.ExecuteJavascript
+//import screens.Apps.AppsPillarLocators
+//import screens.Apps.AppsDetailsLocator
 
 class SetClickOnAppTileInAppsPillarPage{
     public void run(def params){
@@ -32,5 +34,7 @@ class SetClickOnAppTileInAppsPillarPage{
         }else if(Exists.run(ID:"//DIV[contains(@class,'f-apps-cards')]/A/P[contains(@class,'f-apps-card-name') and starts-with(.,'${params."App Name"}')]")>0){
             Click.run(ID:"//DIV[contains(@class,'f-apps-cards')]/A/P[contains(@class,'f-apps-card-name') and starts-with(.,'${params."App Name"}')]")
         }
+        //Click.run("ID Type":"By", By:AppsPillarLocators.appNameForTileClick(params."App Name"))
+        //Click.run("ID Type":"By", By:AppsDetailsLocator.createButton)
     }
 }

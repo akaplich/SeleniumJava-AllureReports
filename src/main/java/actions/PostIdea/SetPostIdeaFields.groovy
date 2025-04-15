@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
 import actions.selenium.Browser
 import actions.selenium.ExecuteJavascript
-
+ 
 class SetPostIdeaFields{
     public void run(def params){
         if(params."Wait for Page to Load" == true){
@@ -54,19 +54,7 @@ class SetPostIdeaFields{
         SetPostIdeaTag.run("Field Name":params."Linked Submissions - Title","Tag or User Name":params."Linked Submissions - Value","Add or Remove":params."Linked Submissions Add or Remove")
         sleep(2000)
         SetPostIdeaAction.run("Action":params."Action")
-        if(params."Title With Emoji"){
-            println("Start Setting TextForEmoji")
-            def text = params.'Title With Emoji'//"🌎 🌊 " + u'\u2764' //
-            def code = """
-                var elm = arguments[0];
-				elm.innerHTML = ${text};
-                elm.dispatchEvent(new Event('change'));
-                """
-
-            WebElement element = Elements.find(ID:"//*[@id='idea-form-title-input']",Browser.Driver)
-            println("Code: ${code}")
-            ExecuteJavascript.run(Code:code, Arguments: element);
-            println("Finished Setting TextForEmoji")
-        }
+		
+        
     }
 }

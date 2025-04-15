@@ -14,6 +14,7 @@ class ClickonElementandVerifyElementexistsinotherTab{
         ArrayList tabs = new ArrayList (Browser.Driver.getWindowHandles())
         println("We have ${tabs.size()} tabs open")
         Browser.Driver.switchTo().window(tabs.get(params."Tab (optional)".toInteger()))
+        sleep(2000)
         assert Exists.run(ID:params."XPATH of element to verify")>0,"Error - Element in a new tab NOT found"
         Browser.Driver.switchTo().window(tabs.get(0))
     }

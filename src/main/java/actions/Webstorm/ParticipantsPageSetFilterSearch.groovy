@@ -16,7 +16,7 @@ class ParticipantsPageSetFilterSearch{
             sleep(3000)
         }
         if(params."Clear Search"){
-            Click.run(ID:"//*[@data-for='fractal-input-clear']/I")
+            Click.run(ID:"//*[@data-tooltip-id='fractal-input-clear']/I")
             sleep(500)
         }
         if(params."Search Expertise"){
@@ -24,7 +24,7 @@ class ParticipantsPageSetFilterSearch{
             sleep(500)
         }
         if(params."Clear Search Expertise"){
-            Click.run(ID:"//*[@data-for='filter-search-clear']/I")
+            Click.run(ID:"//*[contains(@class,'tab-filter-clear')]")
             sleep(500)
         }
         if(params."Tick Expertise"){

@@ -4,6 +4,8 @@ import actions.selenium.Click
 import actions.selenium.Exists
 import actions.selenium.ExplicitWait
 import actions.common.SetProfileDropdown
+import screens.ViewIdea30Locators
+import actions.ViewIdea30.AccessIdeafromViewIdea3Modal
 
 class LogOut{
     public static void run(def params){
@@ -26,6 +28,9 @@ class LogOut{
             Click.run(ID:"//DIV[@id='profile-dropdown-content']//A[.='Log Out']")
         }
         sleep(2000) */
+        
+        
+        
         SetProfileDropdown.SetProfileDropdownOption(Tab:"Logout")
     }
 }

@@ -25,7 +25,7 @@ class ConfigureScorecardStepinNewModalinPipelineStepspage{
             }
         }
         ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Each Idea will be assigned to evaluators":params."Each Idea will be assigned to evaluators","Allow Assignees to Edit Idea Attributes":params."Allow Assignees to Edit Idea Attributes","Switch to static date":params."Switch to static date","Due Date":params."Due Date")
-
+		ConfigureStepModalCommon.VerifyEvaluatorsCount("Evaluators Count":params."Evaluators Count")
         ConfigureStepModalCommon.ConfigureProjectRoomTemplateAndFolderMapping("Scorecard Template":params."Scorecard Template")
         ConfigureStepModalCommon.ConfigureNotificationItemsInStepModal("Email Alert":params."Email Alert","Send Alerts":params."Send Alerts","Subject":params."Subject","Email":params."Email")
         ConfigureStepModalCommon.ConfigureResultsAndRulesItemsInStepModal("Cancel Open Action Item":params."Cancel Open Action Item","Evaluation Results":params."Evaluation Results","Display on Submission's Evaluation tab when:":params."Display on Submission's Evaluation tab when:","Results are visible to":params."Results are visible to","Evaluators":params."Evaluators","Submitters":params."Submitters","Send submitters notifications when evaluator results are ready":params."Send submitters notifications when evaluator results are ready","Make evaluators anonymous":params."Make evaluators anonymous","Resend action items when submissions return to Step":params."Resend action items when submissions return to Step")

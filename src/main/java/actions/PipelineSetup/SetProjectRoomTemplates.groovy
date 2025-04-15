@@ -23,7 +23,12 @@ class SetProjectRoomTemplates{
               
         sleep(3000)
         if(params."Template Name"){
-            SetReactModal.setModalRadioButtonWithInput("Section xPath":"//*[@class='f-pipeline-pr-template']/../..", "Title":params."Template Name")
+            if(params."Template Name"=="General, Stage Gate Process (system default)"){
+                Click.run(ID:"//*[@id='f-template-select']")
+                Click.run(ID:"//*[@id='f-combobox-list' and contains(@style, 'flex')]/DIV[contains(@class,'f-combobox-list-item') and starts-with(.,'General, Stage Gate Process (system default)')]", "Type of Click":"Move to Element")
+            } else {
+                SetReactModal.setModalRadioButtonWithInput("Section xPath":"//*[@class='f-pipeline-pr-template']/../..", "Title":params."Template Name")
+            }            
         }
         if(params."Action"){
             SetReactModal.setModalActionButton("Modal xPath":"//*[@class='f-pipeline-pr-template']/../..", "Action":params.Action)  

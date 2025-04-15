@@ -1,6 +1,7 @@
 package actions.Webstorm;
 
 import actions.selenium.Exists
+import actions.selenium.MouseOver
 import actions.selenium.SetFocus
 import actions.selenium.utils.Elements
 import actions.selenium.utils.VerifyUniqueItems
@@ -17,6 +18,7 @@ class VerifyVisualParticipantWidgetonHomepage{
 		WaitForElement.run(ID:"//*[@class='fractal-visual-participants']//*[@class='visual-stats-wrapper']/SPAN", "Timeout In Seconds":"60")
         if(params."Topic Views"){
             assert Exists.run(ID:"//*[@class='fractal-visual-participants-loaded']/*[@class='visual-stats-wrapper']/SPAN[contains(.,'${params."Topic Views"}')]")==1,"Incorrect Topic View Count"
+        	//assert Exists.run(ID:"//*[@class='fractal-visual-participants-loaded']/*[@class='visual-stats-wrapper']/SPAN/*[contains(.,'${params."Topic Views"}')]")==1,"Incorrect Topic View Count"
         }
         if(params."Submitted Solutions"){
             assert Exists.run(ID:"//*[@class='fractal-visual-participants-loaded']//A[@data-tooltip-id='visual-participants-submissions' and contains(.,'${params."Submitted Solutions"}')]")==1,"Incorrect Submitted Solutions Count"

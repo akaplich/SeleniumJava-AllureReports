@@ -4,7 +4,12 @@ import actions.Mailinator.GetMailinatorEmail
 
 class GetLinkFromProjectRoomEmail{
     public static run(def params){
-        def body = GetMailinatorEmail.run(params).body
+        def email = GetMailinatorEmail.run(params)
+        def links = []
+        links = GetURLFromEmail.run(email:email)
+        return links[0]
+        
+        /*
         //Parse for the Reset password
         def link
         def startIndex = body.indexOf(">https:")
@@ -13,6 +18,6 @@ class GetLinkFromProjectRoomEmail{
         println("Searching for substring at index ${startIndex} to ${endIndex}")
         link = body.substring(startIndex + 1, endIndex)
         println("Link From Project Room Email: ${link}")
-        return link
+        return link*/
     }
 } 

@@ -79,7 +79,7 @@ class SetGlobalIdeaFilterBIW{
             params."Clear Individual Filters".each{Click.run(ID:"//*[@class='tab-header-title' and text()='${it}']/following-sibling::DIV/SPAN")}
         }
         if(params.Action=="Save"){
-            Click.run(ID:"//*[@class='f-footer f-justified-footer']/BUTTON[contains(@data-test,'submit')]")
+            Click.run(ID:"//*[@class='f-footer f-justified-footer']/BUTTON[contains(@data-test,'submit')] | //*[@class='f-filters-done']/BUTTON[contains(@class,'f-btn-primary f-btn-sm')]")
             sleep(2000)
         }
         else if(params.Action=="Cancel"){

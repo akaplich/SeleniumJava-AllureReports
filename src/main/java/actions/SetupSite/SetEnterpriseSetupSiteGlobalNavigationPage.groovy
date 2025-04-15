@@ -24,6 +24,11 @@ class SetEnterpriseSetupSiteGlobalNavigationPage{
             }
         }
 
+        //Enabled Initiatives 
+        if (params."Enabled Initiatives - Select All"){
+            Click.run(ID:"//*[@id='global-navigation-grid']//DIV[@class='x-grid3-header-inner']//DIV[contains(@class,'hd-checker')]")
+            Click.run(ID:"//*[@id='global-navigation-grid']//DIV[@class='x-grid3-header-inner']//DIV[contains(@class,'hd-checker')]")
+        }
         //MastHead
         SetCheckBox.run(ID:"//*[@id='global-navigation-hide-masthead-checkbox']",Check:params."Hide Masthead")
 

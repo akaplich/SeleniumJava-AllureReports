@@ -1,20 +1,26 @@
 package actions.selenium;
 
-import java.awt.image.BufferedImage
-
+import java.awt.image.BufferedImage;
+import java.awt.Image;
+import actions.selenium.utils.Elements
 import org.openqa.selenium.WebElement
-
-import javax.imageio.ImageIO
+import actions.selenium.Browser
+import org.openqa.selenium.Point;
+import javax.imageio.ImageIO;
+import java.io.File;
 import java.nio.file.Paths
 import ru.yandex.qatools.ashot.AShot;
 import ru.yandex.qatools.ashot.Screenshot;
-import ru.yandex.qatools.ashot.shooting.ShootingStrategies
+import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
+import ru.yandex.qatools.ashot.coordinates.CoordsProvider
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.comparison.ImageDiff;
 import ru.yandex.qatools.ashot.comparison.ImageDiffer;
 import ru.yandex.qatools.ashot.comparison.PointsMarkupPolicy
-import org.openqa.selenium.By
+import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import actions.Email.EmailAttachment
+import org.openqa.selenium.JavascriptExecutor
 
 class CompareImages{
     public void run(def params){
@@ -59,7 +65,7 @@ class CompareImages{
            		screenshot = new AShot().takeScreenshot(Browser.Driver);
            }else{
                println("Do Not Scroll not set")
-               screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 1000)).takeScreenshot(Browser.Driver);
+               screenshot = new AShot().shootingStrategy(ShootingStrategies.viewportPasting(ShootingStrategies.scaling(1.25f), 1000)).takeScreenshot(Browser.Driver);       
           	}
         }     
         //read the image from screenshot
@@ -96,7 +102,7 @@ class CompareImages{
             ImageIO.write(diff.getMarkedImage(),"PNG", new File(pathToActualFile+"difference.png"));
             diffImage = null;
         }
-        //params."Temporary Pause Verification; Email Screenshot to" = ""
+       //params."Temporary Pause Verification; Email Screenshot to" = ""
         if(params."Temporary Pause Verification; Email Screenshot to"!=null){ //used when updating screenshots
             EmailAttachment.run(
                 "Sender's Email":"annabrightidea1@yahoo.com",

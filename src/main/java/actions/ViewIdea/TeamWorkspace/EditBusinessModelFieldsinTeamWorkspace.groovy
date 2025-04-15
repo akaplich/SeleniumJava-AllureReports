@@ -26,6 +26,8 @@ class EditBusinessModelFieldsinTeamWorkspace{
             MouseOver.run(ID:"//DIV[@class='question-name' and text()='${params."Field to Edit"}']")
             Click.run(ID:"(//*[@id='edit-button'])[${i}]", "Type of Click":"Javascript")
             WebElement element = Elements.find(ID:"//DIV[@class='question-name' and text()='${params."Field to Edit"}']/../..//DIV[contains(@class,'redactor-styles redactor-placeholder redactor-in redactor-in')]", Browser.Driver)
+            element.click()
+			sleep(1000)
             element.sendKeys("${params."Text to Set"}")
             sleep(2000)
             

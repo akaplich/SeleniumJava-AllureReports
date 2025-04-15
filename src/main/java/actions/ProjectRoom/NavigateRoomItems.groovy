@@ -12,5 +12,6 @@ class NavigateRoomItems{
             }
         }
         if(params."Top Link"){Click.run(ID:"//*[contains(@class,'f-rooms-sidebar-nav')]//UL[contains(@class,'f-rooms-top-links')]//SPAN[starts-with(.,'${params."Top Link"}')]")}
+        sleep(5000)
     }
 }

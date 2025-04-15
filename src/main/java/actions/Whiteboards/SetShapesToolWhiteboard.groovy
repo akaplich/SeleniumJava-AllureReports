@@ -5,11 +5,15 @@ import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
 import org.openqa.selenium.interactions.Actions
-
-import java.awt.Robot
-
 import org.openqa.selenium.Point
-import java.awt.event.InputEvent
+import actions.selenium.DragAndDrop
+
+import java.awt.Robot;	
+import java.awt.event.KeyEvent;	
+import org.openqa.selenium.Point
+import java.awt.event.InputEvent;	
+import java.awt.event.KeyEvent;
+
 
 class SetShapesToolWhiteboard{
     public void run(def params){

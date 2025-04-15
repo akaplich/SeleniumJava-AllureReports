@@ -23,9 +23,12 @@ class VerifyIdeainIdeaBoardpage30{
         //Map all values that will be used for verification for that instance
         def verify = [:]
         if(params."View Type"=="List"){
-         verify.ID = "//*[contains(@class,'fractal-secondary-ideas-view-list')]//*[@class='f-card-title' and text()='${params."Idea Name"}']"
+         	verify.ID = "//*[contains(@class,'fractal-secondary-ideas-view-list')]//*[@class='f-card-title' and text()='${params."Idea Name"}']"
         } else {
-        verify.ID = "//*[contains(@class,'fractal-secondary-ideas-view-grid')]//*[@class='f-card-title' and text()='${params."Idea Name"}']"       
+        	verify.ID = "//*[contains(@class,'fractal-secondary-ideas-view-grid')]//*[@class='f-card-title' and text()='${params."Idea Name"}']"
+            if (params."Winners Widget Name") {
+            verify.ID = "//*[@class='widget_title_text' and text()='${params."Winners Widget Name"}']/../../../..//*[@id='hackathon-winner-widget']" + verify.ID
+            }
         }
         verify.IDChildren = []
         if(params."Image" !=null){
@@ -63,6 +66,9 @@ class VerifyIdeainIdeaBoardpage30{
         if(params."Vote Count on Voting UI"){verify.IDChildren << "./../../..//*[@class='f-vote-count' and text()='${params."Vote Count on Voting UI"}']"}
         if(params."Placement Number") {
             verify.ID="(//*[contains(@class,'ideaboard-card')])[${params."Placement Number"}]//*[@class='f-card-title' and text()='${params."Idea Name"}']"
+            if (params."Winners Widget Name") {
+                verify.ID = "//*[@class='widget_title_text' and text()='${params."Winners Widget Name"}']/../../../..//*[@id='hackathon-winner-widget']" + verify.ID
+            }
             VerifyNumberOfMatches.run(verify)
         }
         else{

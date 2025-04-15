@@ -15,6 +15,9 @@ class SetSiteSetupforBIBetatab{
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_VOTING_ON_IDEA_BOARDS']",Check:params."Voting on Idea Boards")
         SetCheckBox.run(ID:"//*[@id='CB_NEW_IDEA_BOX_SUB_PIPELINE']",Check:params."This pipeline is an Idea Box Sub-pipeline")
         SetCheckBox.run(ID:"//*[@id='CB_WS_ENABLE_STAGE_GATE_WORKFLOW']",Check:params."Stage Gate Workflow")
+        SetCheckBox.run(ID:"//*[@id='CB_SITE_HACK_DASHBOARD']",Check:params."Hackathon Analytics Dashboard")
+        SetCheckBox.run(ID:"//*[@id='CB_WS_SCHEDULER_UPDATES_SPRING_25']",Check:params."Hackathon Scheduler v3")
+        SetCheckBox.run(ID:"//*[@id='CB_ENABLE_SYNC_PHASE_WIDGET_AND_SCHEDULER']",Check:params."Enable scheduler to control phase widget")
         if(params."My Open Evaluations"){
             System.out.println("TRUEEEEE")
             SetCheckBox.run(ID:"//*[@id='CB_FILTER_MY_OPEN_EVALUATIONS']", Check:params."My Open Evaluations")

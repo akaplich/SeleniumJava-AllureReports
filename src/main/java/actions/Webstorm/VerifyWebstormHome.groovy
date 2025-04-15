@@ -4,16 +4,7 @@ import actions.selenium.VerifyText
 import actions.selenium.Exists
 
 class VerifyWebstormHome{
-    public static void run(Boolean isIdeaBox, String initiativeTitle, String initiativeDescription){
-        def params = [:]
-        params."Is it Idea Box?" = isIdeaBox
-        params."Initiative Title" = initiativeTitle
-        params."Initiative Description" = initiativeDescription
-
-        run(params)
-    }
-
-    public static void run(def params){
+    public void run(def params){
         
         if(params."Is it Idea Box?" == true){
             VerifyText.run(ID:"//*[@id='homepage-hero-render']//DIV[contains(@id,'name')]/DIV",Text:params."Initiative Title")

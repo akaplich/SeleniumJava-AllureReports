@@ -1,6 +1,6 @@
-package actions.Whiteboards
+package actions.Whiteboards;
 
-
+import actions.selenium.Click
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
@@ -15,7 +15,12 @@ class MoveCursorWhiteboard{
         int yCoordinate2 = params."Y coordinate2".toInteger()
         
         Actions builder = new Actions(Browser.Driver)
-        builder.moveByOffset(xCoordinate1, yCoordinate1).click().moveByOffset(xCoordinate2, yCoordinate2).contextClick().perform(); 
+        if(params."Do Not Click"==true){
+            println("Do not click!")
+           builder.moveByOffset(xCoordinate1, yCoordinate1).moveByOffset(xCoordinate2, yCoordinate2).perform(); 
+        }else {
+        	builder.moveByOffset(xCoordinate1, yCoordinate1).click().moveByOffset(xCoordinate2, yCoordinate2).contextClick().perform(); 
+        }
        
     }
 }

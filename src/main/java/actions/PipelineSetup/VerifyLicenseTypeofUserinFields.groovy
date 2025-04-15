@@ -23,6 +23,9 @@ class VerifyLicenseTypeofUserinFields{
                 case "Ideabox Manager":
         		    verify.IDChildren << "./${path}//*[contains(@class,'f-idea-box-bg-color')]//*[text()='${params."User"}']"
                     break
+                case "Hackathon Manager":
+        		    verify.IDChildren << "./${path}//*[contains(@class,'f-hack-manager')]//*[text()='${params."User"}']"
+                    break
                 case "No License":
         		    verify.IDChildren << "./${path}//*[normalize-space(@class)='react-tags__tag f-tag-wrapper']//*[contains(text(),'${params."User"}')]"
                     break

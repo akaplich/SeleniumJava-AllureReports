@@ -22,5 +22,9 @@ class SetNewRuleEventthattriggersthisrule{
             }
             else{SetText.run(ID:"//*[not(contains(@class,'f-combobox-list')) and contains(@id,'f-rule-trigger-')]",Text:params."Event Value")}
         }
+        if(params."Additional Event Value (Time)"){
+        	Click.run(ID:"//*[contains(@id,'f-rule-trigger-time')]/DIV")
+            Click.run(ID:"//*[contains(@id,'f-rule-trigger-time')]//UL[contains(@class,'f-dropdown-options')]/LI[contains(.,'${params."Additional Event Value (Time)"}')]")   
+        }
     }
 }

@@ -16,7 +16,7 @@ class SortorFilterActionItemsManagertable{
         if(params."Sort Or Filter"=="Sort"){
             SortGridColumn.run("Column Name":params."Column","Sort":params."Sort Ascending or Descending")}
         else {
-            FilterGridColumn.run("Column Name":params."Column","Filter Search":params."Keyword to Search","Action":params."Action","Clear Keywords":params."Clear Keywords")  
+            FilterGridColumn.run("Column Name":params."Column","Filter Search":params."Keyword to Search","Action":params."Action","Clear Keywords":params."Clear Keywords","Value Check":params."Value Check", "Value":params."Check Values", "Filter Select All or Clear":params."Select All or Clear")  
         }    
     }
 }

@@ -22,7 +22,7 @@ class VerifyRiskCommentRepliesinTeamWorkspace{
         }
         if(params."Placement Number"){
             params."Number of Matches"=1
-            verify.ID = "//*[contains(text(),'${params."Comment"}')]/../../..//*[contains(@class,'comment-animation-placeholder')]/DIV[${params."Placement Number"}]//*[contains(@class,'fractal-htmlpreview')]/DIV/P[contains(text(),'${params."Reply"}')]"
+            verify.ID = "//*[contains(text(),'${params."Comment"}')]/../../../..//*[contains(@class,'comment-animation-placeholder')]/DIV[${params."Placement Number"}]//*[contains(@class,'fractal-htmlpreview')]/DIV/P[contains(text(),'${params."Reply"}')]"
 			VerifyNumberOfMatches.run(verify)
         }
         else{

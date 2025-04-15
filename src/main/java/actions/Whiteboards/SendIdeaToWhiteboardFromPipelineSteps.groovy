@@ -46,6 +46,9 @@ class SendIdeaToWhiteboardFromPipelineSteps{
         if(params."Assign card to Submitter"){
             Click.run(ID:"//DIV[@class='f-send-to-whiteboard-modal-container']//P[.='Assign card to Submitter']/..//*[contains(@class,'checkbox-inner')]")
         }
+        if(params."Link to Pipeline"){
+        	Click.run(ID:"//DIV[@class='f-send-to-whiteboard-modal-container']//P[.='Link to Pipeline']/..//*[contains(@class,'checkbox-inner')]")
+        }
         if(params."Add Assignee information"){
             Click.run(ID:"//DIV[@class='f-send-to-whiteboard-modal-container']//P[.='Add Assignee Information']/..//*[contains(@class,'checkbox-inner')]")
         }

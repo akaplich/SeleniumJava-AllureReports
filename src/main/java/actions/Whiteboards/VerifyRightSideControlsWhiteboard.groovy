@@ -1,10 +1,14 @@
 package actions.Whiteboards;
 
 import actions.selenium.Exists
+import actions.selenium.Click
 import actions.selenium.VerifyText
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.By
+import java.text.DecimalFormat
+import java.lang.*
+import java.math.RoundingMode
 import screens.WhiteboardLocators
 
 class VerifyRightSideControlsWhiteboard{
@@ -44,11 +48,30 @@ class VerifyRightSideControlsWhiteboard{
         if(params."Line Width"){
             assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@id,'f-canvas-line-width') and @value = '${params."Line Width"}']")==1), "Error - Line Width is wrong"
         }
+        if(params."View Border"==true){
+            if(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Add Border')]" )){
+            	Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Add Border')]")
+            	sleep(2000)                
+            }
+        }else if(params."View Border"==false){
+            if(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Remove Border')]" )){
+            	Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Remove Border')]")
+            }
+        }  
+        if(params."Border Collapsed"==true){
+            assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Remove Border')]")==0), "Error - Border section was not collapsed as expected"
+        }else if(params."View Border"==false){
+            assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Remove Border')]")==1), "Error - Border section was unexpectedly collapsed"            
+        }
         if(params."Border Color"){
             assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-color') and @value = '${params."Border Color"}']")==1), "Error - Border Color is wrong"
         }
+
+        if(params."Border Opacity"){
+            assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')][.='Border']/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-opacity') and @value = '${params."Border Opacity"}']")==1), "Error - Border Opacity is wrong"
+        }        
         if(params."Border Width"){
-            assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-border-width') and @value = '${params."Border Width"}']")==1), "Error - Border Width is wrong"
+            assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')][.='Border']/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-border-width') and @value = '${params."Border Width"}']")==1), "Error - Border Width is wrong"
         }
         if(params."Text Font"){
             assert(Exists.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@id,'f-canvas-font-select') and @value ='${params."Text Font"}']")==1), "Error - Text Font is wrong"

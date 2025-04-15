@@ -21,6 +21,6 @@ class SetEnterpriseSetupAccessSAMLProperties{
         //Now send a file to the 'attachment-uploader' element
         SendKeys.run(ID:"//INPUT[@type='file']",Text:fileName)
         SwitchToDefaultContent.run()
-        sleep(5000)       
+//        sleep(5000)       
     }
 }

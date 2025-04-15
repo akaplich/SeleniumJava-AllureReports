@@ -2,6 +2,8 @@ package actions.selenium;
 
 
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
+import actions.selenium.Click
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.Select
 
@@ -12,7 +14,6 @@ class SelectItem{
             WebElement element = Elements.find(params,Browser.Driver)
             
             if(params."Visible Text"){
-                println("In SelectItem, will select ${params."Visible Text"}")
                 new Select(element).selectByVisibleText(params."Visible Text")
                 /*//If failed to select an item (Firefox caused this issue), then try to select by clicks
                 def option = new Select(element).getFirstSelectedOption()

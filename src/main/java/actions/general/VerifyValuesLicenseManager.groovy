@@ -48,5 +48,22 @@ class VerifyValuesLicenseManager{
         if(params."Brightidea Moderator Licenses - Purchased"){
            assert Exists.run(ID:"//DIV[@class='f-standard-license']/DIV[contains(@class,'f-moderator-license-area')]//DIV[contains(@class,'f-license-input-wrapper')]//INPUT[@class='f-license-input' and @value='${params."Brightidea Moderator Licenses - Purchased"}']")==1, "Error in \'Brightidea Moderator Licenses - Purchased - Purchased\'."
         }
+        if(params."Hackathon Licenses - Unlimited"){
+            WebElement moderatorSection = Elements.find(ID:"//*[contains(@class,'f-standard-type f-hm')]//INPUT[@id='f-standard-hack-model']",Browser.Driver)
+        	ExecuteJavascript.run(Code:"arguments[0].scrollIntoView(true);", "Arguments":moderatorSection)
+        	
+            assert Exists.run(ID:"//DIV[contains(@class,'f-standard-type f-hm')]//INPUT[@id='f-standard-hack-model' and @checked]/.."), "Error - Hackathon licenses not enabled."
+            assert Exists.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][2]//DIV[contains(@class,'f-checkbox-checked')]//INPUT[@id='f-idea-box-unlimited' and @checked]/..")==1, "Error \'Hackathon - Unlimited\' not enabled." 
+        }
+        if(params."Hackathon Licenses - Purchased"){
+           assert Exists.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][2]//INPUT[@class='f-license-input' and @value='${params."Hackathon Licenses - Purchased"}']")==1, "Error in \'Hackathon Licenses - Purchased - Purchased\'."
+        }
+        if(params."Hackathon Licenses - In Use"){
+          	assert Exists.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][6]//../../following-sibling::DIV/*[text()='${params."Hackathon Licenses - In Use"}']")==1, "Error - Incorrect in use count for ideabox manager"  
+        }
+         if(params."Hackathon Licenses - Overage"){
+            assert Exists.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][3]//DIV[contains(@class,'f-overage-wrapper')]//INPUT[@id='f-standard-idea-box-overage' and @checked]/..")==1, "Error \'Hackathon Licenses - Overage\' is not enabled." 
+        	assert Exists.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][3]//INPUT[contains(@class,'f-license-input') and @value='${params."Hackathon Licenses - Overage"}']']")==1, "Error in \'Hackathon Licenses - Overage\'." 
+        }
     }
 }

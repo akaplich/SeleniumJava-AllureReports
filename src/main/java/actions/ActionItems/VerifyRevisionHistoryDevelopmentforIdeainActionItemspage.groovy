@@ -21,7 +21,7 @@ class VerifyRevisionHistoryDevelopmentforIdeainActionItemspage{
             params."Development User Select Question".split(",").eachWithIndex{ name, x ->
                 assert Exists.run(ID:"//*[@id='proposal-content-sheet']//DIV[contains(text(),'Development User Select Question')]/..//A[contains(text(),'${name}')]")>0, "Error - ${name} not displayed"}
         }              
-        if(params."Development Parent Dropdown Question"){assert Exists.run(ID:"//*[@id='proposal-content-sheet']//DIV[contains(text(),'Development Parent Dropdown Question')]/..//DIV[@class='scores-question-answer' and text()='${params."Development Parent Dropdown Question"}']")>0, "Error - Incorrect Value for Development Parent Dropdown Question"}
+        if(params."Development Parent Dropdown Question"){assert Exists.run(ID:"//*[@id='proposal-content-sheet']//DIV[contains(text(),'Development Parent Dropdown Question')]/..//DIV[@class='scores-question-answer' and .='${params."Development Parent Dropdown Question"}']")>0, "Error - Incorrect Value for Development Parent Dropdown Question"}
         if(params."Development Child Checkbox Question"){assert Exists.run(ID:"//*[@id='proposal-content-sheet']//DIV[contains(text(),'Development Child Checkbox Question')]/..//DIV[@class='scores-question-answer' and text()='${params."Development Child Checkbox Question"}']")>0, "Error - Incorrect Value for Development Child Checkbox Question"}
         if(params."Development Attachment Question"){assert Exists.run(ID:"//*[@id='proposal-content-sheet']//DIV[contains(text(),'Development Attachment Question')]/..//A[text()='${params."Development Attachment Question"}']")>0, "Error - Incorrect attachment"}    
         

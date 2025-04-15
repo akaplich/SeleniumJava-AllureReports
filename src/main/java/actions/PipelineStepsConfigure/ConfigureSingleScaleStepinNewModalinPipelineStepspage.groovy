@@ -27,7 +27,12 @@ class ConfigureSingleScaleStepinNewModalinPipelineStepspage{
             }
             sleep(3000)
         }
-        ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Each Idea will be assigned to evaluators":params."Each Idea will be assigned to evaluators","Allow Assignees to Edit Idea Attributes":params."Idea Editing","Switch to static date":params."Switch to static date","Due Date":params."Due Date")
+        ConfigureStepModalCommon.ConfigureAdditionalActionItemItemsStepModal("Each Idea will be assigned to evaluators":params."Each Idea will be assigned to evaluators",
+                                                                             "Allow Assignees to Edit Idea Attributes":params."Idea Editing",
+                                                                             "Switch to static date":params."Switch to static date",
+                                                                             "Due Date":params."Due Date", "Due at Time":params."Due at Time", 
+                                                                             "Confirm Set Time":params."Confirm Set Time")
+        ConfigureStepModalCommon.VerifyEvaluatorsCount("Evaluators Count":params."Evaluators Count")
         SetText.run(ID:"//*[@id='f-question-text-area']",Text:params."Question Text","Type Of Clear":"Cut")
         if(params."Rating Scale"){
             Click.run(ID:"//*[@id='f-ratings-drop']/DIV")

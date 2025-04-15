@@ -2,13 +2,24 @@ package actions.WebstormHomepage;
 
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.Keys
+import actions.selenium.Click
+import actions.selenium.SetText
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
 import org.openqa.selenium.JavascriptExecutor
+import actions.WebstormHomepage.SetActionOnChangeBackgroundModal
+import actions.selenium.SetFocus
+import actions.selenium.Browser
 import actions.selenium.*
     
 class SetGenerateAIImage{
-    public void run(def params){
+    public static void run(def params){
+        
+        if(Exists.run(ID:"//*[contains(@class,'f-tab')]//*[text()='Generate Image']")==0){
+            println("Failed to find 'Generate Image' Tab")
+            return
+        }
+
         
         WebElement image
         SetText.run(ID:"//*[@id='f-dalle-input']", Text:params."Text to Search","Type of Clear":"Cut")

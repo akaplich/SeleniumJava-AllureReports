@@ -6,10 +6,12 @@ import java.nio.file.Paths
 class EditYourProfile{
     public void run(def params){
 		def os = System.getProperty("os.name").toLowerCase();
-        if (Exists.run(ID:"//*[@id='admin_user_save_profile_button']")==0) {
-            Click.run(ID:"//*[@id='profile_edit_profile_link']")
-        }
         sleep(2000)
+        if (Exists.run(ID:"//*[@id='admin_user_save_profile_button']")==0) {
+            println("Clicked on Edit Your Profile")
+            Click.run(ID:"//*[@id='profile_edit_profile_link']")
+            sleep(2000)
+        }
         if(params."Display Picture"){
             if(params."Display Picture Change or Remove" == "Change"){
                 Click.run(ID:"//*[@id='edit_profilephoto']","Type of Click":"Javascript")   
@@ -31,7 +33,13 @@ class EditYourProfile{
         SetText.run(ID:"//*[@field-type='Job Title']//INPUT",Text:params."Job Title")
         SelectItem.run(ID:"//*[text()='Department']/../..//select","Visible Text":params."Department")
         SelectItem.run(ID:"//*[text()='Location']/../..//select","Visible Text":params."Location")
-        SetText.run(ID:"//*[@field-type='Custom Field']//INPUT",Text:params."Custom Field")
+        
+        // If Custom Field Name is passed in, use it to find the custom field
+        if(params."Custom Field Name" != null){
+            SetText.run(ID:"//*[@field-type='Custom Field']//*[text()='${params."Custom Field Name"}']/../..//INPUT",Text:params."Custom Field")
+        }else{
+        	SetText.run(ID:"//*[@field-type='Custom Field']//INPUT",Text:params."Custom Field")            
+        }
         
         //Anna: update to include a small pause while typing in the expertise value
          if(params."Expertise"){
@@ -52,6 +60,7 @@ class EditYourProfile{
             }
         }
         SetCheckBox.run(ID:"//*[@id='user_comment_notification']",Check:params."Receive e-mail notification when a comment is made to my idea")
+        SetCheckBox.run(ID:"//*[@id='disable_mass_email_notifications']",Check:params."Receive event updates via e-mail")
         if(params."Email notices are sent immediately") {Click.run(ID:"//*[@id='user_emails_digest_daily']")}
         if(params."Send me daily digests of all email") {Click.run(ID:"//*[@id='user_emails_immediate']")}
         SelectItem.run(ID:"//*[@id='user_emails_digest_daily_period']","Visible Text":params."Send me daily digests of all email Times")

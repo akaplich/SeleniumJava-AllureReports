@@ -37,6 +37,8 @@ class PeopleCommon{
             license = "idea-box-manager"
         } else if (params.License =="Brightidea Moderator Licenses"){
 			license = "moderator"
+        } else if (params.License =="Hackathon Manager Licenses"){
+			license = "hackathon"
         }else {
             license = "whiteboard"
         }

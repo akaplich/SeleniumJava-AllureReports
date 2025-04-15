@@ -4,6 +4,7 @@ import actions.selenium.ExecuteJavascript
 import actions.selenium.utils.Elements
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
+import org.openqa.selenium.JavascriptExecutor
 
 class ScrollingThroughElementOnPage{
     public void run(def params){

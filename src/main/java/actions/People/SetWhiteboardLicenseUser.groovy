@@ -3,6 +3,7 @@ package actions.People;
 import actions.common.PeopleCommon
 import actions.common.AppsCommon
 import actions.selenium.Click
+import screens.People.HackathonLicense
 
 class SetWhiteboardLicenseUser{
     public void run(def params){
@@ -11,6 +12,14 @@ class SetWhiteboardLicenseUser{
             PeopleCommon.ExpandLicenseBreakdown(License:"Whiteboard License Type")
         } 
        
+        if(params."Assign or Buy License"){
+            if(params."Assign or Buy License"=="Assign License"){
+                Click.run("ID Type":"By",By:HackathonLicense.getAssignLicense(params."Assign or Buy License"))
+            } else {
+                Click.run("ID Type":"By",By:HackathonLicense.getBuyLicense(params."Assign or Buy License"))
+            }            
+        }
+        
         if(params."Click on Add License"==true){
             Click.run(ID:"//*[contains(@class,'f-wb-license-btn')]")
         }

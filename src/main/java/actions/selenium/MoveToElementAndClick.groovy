@@ -1,6 +1,7 @@
 package actions.selenium;
 
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Actions
 
@@ -13,11 +14,8 @@ class MoveToElementAndClick{
         def size = element.getSize();
         int halfWidth = size.width/2
         int halfHeight = (size.height/2)*(-1)
-        println("In move to element")
-         println("halfHeight: ${halfHeight}")
-         //println("width: ${width}")
-         //println("height: ${height}")
+        //println("In move to element")
+        //println("halfHeight: ${halfHeight}")
         new Actions(Browser.Driver).moveToElement(element, halfWidth, halfHeight).click().perform()
-         //moveByOffset((width/2)-2, 0)
     }
 }

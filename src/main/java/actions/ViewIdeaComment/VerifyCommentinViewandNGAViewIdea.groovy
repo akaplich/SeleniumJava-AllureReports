@@ -60,25 +60,25 @@ class VerifyCommentinViewandNGAViewIdea{
             else{editedPath = "/*[@data-tooltip-id='comment-long-date']//*[@data-class='f-rnw-web-text' and not(contains(.,'(Edited)'))]"}
             verify.IDChildren << "./${editedPath}"
         }
-        //if(params."Promote Score"){verify.IDChildren << }
-        //if(params."Demote Score"){verify.IDChildren << }
         if(params."Promoted Vote Users"){
             if(params."MouseHover Voting"==true){
             	SetFocus.run(ID:"${path}")
-            	SetFocus.run(ID:"${path}/..//*[contains(@data-tooltip-id,'-promote-tooltip')]/DIV[@data-test='f-test-comment-promote-button']/..")
-                ExplicitWait.run(ID:"//*[contains(@id,'promote-tooltip')]")
-            }
-            verify.IDChildren << "./../../..//*[contains(@class,'react-tooltip__show') and .='${params."Promoted Vote Users"}']"
+                SetFocus.run(ID:"${path}/..//span[contains(@data-tooltip-id,'-\uD83D\uDC4D-tooltip')]")
+				ExplicitWait.run(ID:"//div[contains(@id,'-\uD83D\uDC4D-tooltip')]") 
+            }					  
+            verify.IDChildren << "//*[contains(@class,'react-tooltip__show') and .='${params."Promoted Vote Users"}']"
         }
         if(params."Demoted Vote Users"){
             if(params."MouseHover Voting"==true){
             	SetFocus.run(ID:"${path}")
-            	SetFocus.run(ID:"${path}/..//*[contains(@data-tooltip-id,'-demote-tooltip')]/DIV[@data-test='f-test-comment-demote-button']/..")
-            	ExplicitWait.run(ID:"//*[contains(@id,'demote-tooltip')]")
+				SetFocus.run(ID:"${path}/..//span[contains(@data-tooltip-id,'-\uD83D\uDC4E-tooltip')]")            	
+                ExplicitWait.run(ID:"//div[contains(@id,'-\uD83D\uDC4E-tooltip')]")
             }
-            verify.IDChildren << "./../../..//*[contains(@class,'react-tooltip__show') and .='${params."Demoted Vote Users"}']"
+            verify.IDChildren << "//*[contains(@class,'react-tooltip__show') and .='${params."Demoted Vote Users"}']"
         }
-        
+        if(params."Expected Emoji Reaction"!=null && params."Expected Emoji Reaction Count"!=null){   
+            verify.ID="//*[@data-test='f-test-comment-wrapper']//*[text()='${params."Parent Comment"}']/..//button[contains(@class,'f-emoji-reaction-button')]//*[@class='f-emoji-reaction'][text()='${params."Expected Emoji Reaction"}']/..//*[@class='f-reaction-count'][text()='${params."Expected Emoji Reaction Count"}']"
+        }
         if(params."Number of Matches"){verify."Number of Matches" = params."Number of Matches".toInteger()}
         if(params."Placement Number") {
             if(params."Comment section"=="Parent Comment"){

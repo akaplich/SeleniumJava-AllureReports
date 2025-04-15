@@ -1,7 +1,10 @@
 package actions.selenium;
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
+import actions.selenium.ExecuteJavascript
 import org.openqa.selenium.JavascriptExecutor
+import actions.selenium.SetText
 /*
 Inputs
 ID: Xpath to element
@@ -9,9 +12,10 @@ ID Type:
 Text: Text to input
 Attribute: innerHTML or value
 */
+import actions.selenium.SendKeyboardAction
 
 class SetTextWithJavascript{
-    public void run(def params){
+    public static void run(def params){
         println("Running SetTextWithJavascript")
         
         //Javascript Code
@@ -21,10 +25,15 @@ class SetTextWithJavascript{
             var elm = arguments[0];
 			elm.innerHTML = arguments[1];
             elm.dispatchEvent(new Event('change'));'''
-        }else{
+        }else if(params."Attribute"=="value"){
             code = '''
             var elm = arguments[0];
 			elm.value = arguments[1];
+            elm.dispatchEvent(new Event('change'));'''
+        }else if(params."Attribute"=="defaultValue"){
+            code = '''
+            var elm = arguments[0];
+			elm.defaultValue = arguments[1];
             elm.dispatchEvent(new Event('change'));'''
         }
 
@@ -39,6 +48,8 @@ class SetTextWithJavascript{
         println("Attribute: ${params."Attribute"}")
         println("Text: ${params."Text"}")
         js.executeScript(code, element, params."Text")
+        //SendKeyboardAction.run("Button": "ENTER")
+        SetText.run(Text:"JS-",ID:params."ID", "Type of Clear":"None" )
         println("Execution of SetTextWithJavascript() is complete")
 
     }

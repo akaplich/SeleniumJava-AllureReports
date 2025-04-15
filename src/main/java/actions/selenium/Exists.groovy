@@ -1,7 +1,11 @@
 package actions.selenium
 
 import actions.selenium.utils.Elements
-import org.openqa.selenium.StaleElementReferenceException
+import actions.selenium.Browser
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.By
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 class Exists{
     public static def run (def params){

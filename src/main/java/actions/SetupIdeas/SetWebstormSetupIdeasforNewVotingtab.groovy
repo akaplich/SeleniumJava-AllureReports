@@ -77,6 +77,11 @@ class SetWebstormSetupIdeasforNewVotingtab{
         } else if(params."New Voting Buttons"==false) {
                 Click.run(ID:"//*[@id='f-new_voting_btn']/../../../../DIV[contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper')]/..//SPAN[text()='New Voting Buttons']/..", "Type of Click":"Move to Element")
         }
+        if(params."Display Vote Count"==true){
+            Click.run(ID:"//*[@id='f-voting-hide-count']/../../../../DIV[not(contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper'))]/..//SPAN[text()='Display Vote Count']/..", "Type of Click":"Move to Element")
+        } else if(params."Display Vote Count"==false) {
+            Click.run(ID:"//*[@id='f-voting-hide-count']/../../../../DIV[contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper')]/..//SPAN[text()='Display Vote Count']/..", "Type of Click":"Move to Element")
+        }
 
         if(params."Reset All Votes"==true){
             Click.run(ID:"//*[contains(@class,'f-reset-votes-btn')]")

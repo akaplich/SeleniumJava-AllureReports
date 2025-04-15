@@ -28,14 +28,24 @@ class NewMoveIdeasinPipelineStepspage{
             SetCombobox.run(ID:"//*[@class='f-move-idea-status-dropdown-container']//*[@id='select-category-combobox']", Option:params."Status", "Type of Clear":"Cut")  
             
         }
-        SetCheckBox.run(ID:"//*[@id='checkbox-appendExtraSubmissionQuestions']", Check:params."Append extra submission questions to description")
-        SetCheckBox.run(ID:"//*[@id='checkbox-notifySubmitter']", Check:params."Notify submitter(s)")
+        if(params."Append extra submission questions to description"==true){
+            Click.run(ID:"//*[text()='Append extra submission questions to description']/../../DIV[not(contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper'))]//*[@class='f-checkbox-inner']", "Type of Click":"Move to Element")
+        } else if(params."Append extra submission questions to description"==false){
+            Click.run(ID:"//*[text()='Append extra submission questions to description']/../../DIV[contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper')]//*[@class='f-checkbox-inner']", "Type of Click":"Move to Element")
+        }
+        if(params."Notify submitter(s)"==true){
+            Click.run(ID:"//*[text()='Notify submitter(s)']/../../DIV[not(contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper'))]//*[@class='f-checkbox-inner']", "Type of Click":"Move to Element")
+        } else if(params."Notify submitter(s)"==false){
+            Click.run(ID:"//*[text()='Notify submitter(s)']/../../DIV[contains(@class,'f-checkbox-checked') and contains(@class,'f-checkbox-wrapper')]//*[@class='f-checkbox-inner']", "Type of Click":"Move to Element")
+        }
+//        SetCheckBox.run(ID:"//*[@id='checkbox-appendExtraSubmissionQuestions']", Check:params."Append extra submission questions to description")
+//        SetCheckBox.run(ID:"//*[@id='checkbox-notifySubmitter']", Check:params."Notify submitter(s)")
         sleep(2000)
         
         if(params."Missing Development Question Field"){
          assert Exists.run(ID:"//*[@class='f-missing-dev-question-warning-message-wrapper' and .='${params."Missing Development Question Field"} Development fields from this initiative are missing in the destination initiative. The data for these fields will not be moved. Learn more about Development Fields.']")==1, "Error - Development Field count is wrong"  
         }
-        
+        if(params."Confirmation Checkbox"==true || params."Confirmation Checkbox"==null){Click.run(ID:"//*[contains(@class,'f-move-idea-modal-checkbox-container')][3]/DIV/DIV[not(contains(@class,'f-checkbox-checked'))]//*[@class='f-checkbox-inner']")}
         if(params.Action=="Move Idea"){Click.run(ID:"//*[@data-test='modal-footer-submit']")}
         else{Click.run(ID:"//*[@data-test='modal-footer-cancel']")}              
     }

@@ -2,13 +2,19 @@ package actions.common;
 
 import actions.selenium.SetText
 import actions.selenium.Click
+import actions.selenium.SetNewCheckBox
 import actions.selenium.SetCheckBox
+import actions.selenium.SelectItem
 import actions.selenium.SetFocus
+import actions.PipelineStepsView.SetStepDropdown
+import actions.common.AppsCommon
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.Keys
 import actions.selenium.Browser
 import actions.selenium.Exists
 import actions.selenium.SetCombobox
+import org.openqa.selenium.WebElement
+import actions.selenium.utils.Elements
 
 class ConfigureStepModalCommon{
    public static void ConfigureAssignmentMethodInStepModal(def params){
@@ -20,8 +26,20 @@ class ConfigureStepModalCommon{
     
      public static void ConfigureProjectRoomTemplateAndFolderMapping(def params){
          if(params."Project Room Template"){
-             SetCombobox.run(ID:"//INPUT[@id='f-project-room-template']", Option:params."Project Room Template")
-         }       
+             if(Exists.run(ID:"//*[contains(@class,'f-project-room-no-template-container')]/A")==1){
+                 Click.run(ID:"//*[contains(@class,'f-project-room-no-template-container')]/A")
+             } else {
+                SetCombobox.run(ID:"//INPUT[@id='f-project-room-template']", Option:params."Project Room Template") 
+             }
+         }
+         
+        if(params."Click on Refresh"){
+            if(params."Click on Refresh"==true){
+                Click.run(ID:"//*[contains(@data-tooltip-id,'refresh-pr-tooltip')]/..")
+                sleep(2000)
+            }
+        }
+         
         if(params."Folder mapping"){
             Click.run(ID:"//*[@id='f-stage-process-folder']/*[contains(@data-test,'f-test-dropdown')]")
             if(params."Folder Mapping Placement Number"){
@@ -45,7 +63,9 @@ class ConfigureStepModalCommon{
             Click.run(ID:"//*[contains(@id,'f-load-balance-number')]/DIV")
             Click.run(ID:"//*[@id='f-load-balance-number']//LI[.='${params."Each Idea will be assigned to evaluators"}']")
         }
-        SetCheckBox.run(ID:"//*[@id='f-idea-editing']/..",Check:params."Allow Assignees to Edit Idea Attributes")
+        //SetCheckBox.run(ID:"//*[@id='f-idea-editing']/..",Check:params."AllowSetNewCheckBox Assignees to Edit Idea Attributes")
+        SetNewCheckBox.run(ID:"//*[@id='f-idea-editing']",Check:params."Allow Assignees to Edit Idea Attributes")
+        SetNewCheckBox.run(ID:"//*[@id='f-private-comments']", Check:params."Allow action item assignees to view Private Comments")
 		if(params."Switch to static date"==true){
                 Click.run(ID:"//*[@id='f-action-item-dd']//BUTTON")
                 SetFocus.run(ID:"//*[@id='f-idea-editing']/..")
@@ -53,6 +73,23 @@ class ConfigureStepModalCommon{
         } else {
             SetText.run(ID:"//*[@id='f-action-item-dd']//input",Text:params."Due Date")        
         }
+        if(params."Due at Time"){
+            Click.run(ID:"//*[contains(@id,'f-action-item-time')]/DIV")
+            Click.run(ID:"//*[contains(@id,'f-action-item-time')]//UL[contains(@class,'f-dropdown-options')]/LI[starts-with(.,'${params."Due at Time"}')]")
+        }
+        if(params."Confirm Set Time"){
+            WebElement setTime = Elements.find(ID:"//*[@id='f-action-item-time']/DIV[@data-test='f-test-dropdown']", Browser.Driver)
+            assert setTime.getText().equals(params.get("Confirm Set Time")), "Error - Incorrect Default Due Time"
+        }
+        if(params."Confirm Time Zone"){
+            assert Exists.run(ID:"//DIV[contains(@class,'f-action-item-time')]//*[contains(.,'${params."Confirm Time Zone"}')]")==1, "Error - Invalid Time Zone"
+        }
+    }
+    
+    public static void VerifyEvaluatorsCount(def params){
+        if(params."Evaluators Count"){
+             assert Exists.run(ID:"//*[contains(@class,'f-add-evals')]/*[contains(.,'You can still add: ${params."Evaluators Count"}')]")==1, "Error - 'Incorrect count"
+        }            
     }
     
     public static void ConfigureNotificationItemsInStepModal(def params){

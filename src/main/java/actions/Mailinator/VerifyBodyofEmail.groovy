@@ -4,6 +4,7 @@ class VerifyBodyofEmail{
     public void run(def params){
         def expected
         def bodyWithHtml = GetMailinatorEmail.run(params).body.toString()
+        //def bodyWithHtml = GetMailinatorEmail.run("RequestContentType":"application/json").body
         def body = bodyWithHtml.replaceAll("\\<.*?>","").trim().replaceAll("\\s","").replaceAll("<br\\s*/?>","")
         println("Body of the email with HTML: ${bodyWithHtml}")
         println("Body of the email text only: ${body}")

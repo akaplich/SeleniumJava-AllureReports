@@ -22,6 +22,12 @@ class NavigateTabUserHomepage{
             case "Submissions":
             	Click.run(ID:"//UL[contains(@class,'f-tabs')]/LI/A/SPAN[text()='Submissions']/../..")
             	break
+            case "My Submissions":
+            	Click.run(ID:"//UL[contains(@class,'f-tabs')]/LI/A/SPAN[contains(.,'My')][contains(.,'Submissions')]/../..")
+            	break
+            case "All Submissions":
+            	Click.run(ID:"//UL[contains(@class,'f-tabs')]/LI/A/SPAN[contains(.,'All')][contains(.,'Submissions')]/../..")
+            	break          
             case "Projects":
             	Click.run(ID:"//UL[contains(@class,'f-tabs')]/LI/A/SPAN[text()='Projects']/../..")
             	break

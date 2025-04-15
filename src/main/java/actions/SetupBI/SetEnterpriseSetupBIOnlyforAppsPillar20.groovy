@@ -9,7 +9,10 @@ import java.io.*
 
 class SetEnterpriseSetupBIOnlyforAppsPillar20{
     public void run(def params){
-        SetupCommon.NavigateTab(Tab:"BI Only",Section:"Apps Pillar")
+        
+        if(params."Navigate to Tab"==null || params."Navigate to Tab"==true){
+            SetupCommon.NavigateTab(Tab:"BI Only",Section:"Apps Pillar")
+        }       
         if(params.Apps){
             if(params.Visibility){
                 params.Apps.eachWithIndex{app, i->

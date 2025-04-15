@@ -15,7 +15,7 @@ class SetWebStormSetupSiteTermsPage{
                     'Field Value': params."Terms and Conditions"
                 ]
             ReactFormDifferentFieldLocators.run(fieldParams)
-            if (params."Terms and Conditions" in ["System Terms and Conditions", "Initative Terms and Conditions"]) {
+            if (params."Terms and Conditions" in ["System Terms and Conditions", "Initiative Terms and Conditions"]) {
                 Click.run("ID Type": "By", By: ReactFormDifferentFieldLocators.radioButtonWithoutFieldName);
             }
         }
@@ -23,7 +23,9 @@ class SetWebStormSetupSiteTermsPage{
             if(params."Click on Initiative Terms and Conditions Description Field"==true){
                 SetFocus.run(ID:"//*[@id='f-f-terms-conditions']/../DIV[2]")
             }            
-            SetText.run(ID:"//*[@id='f-f-terms-conditions']/../DIV[2]",Text:params."Initiative Terms and Conditions Description Field","Type of Clear":"None")
+            //SetText.run(ID:"//*[@id='f-f-terms-conditions']/../DIV[2]",Text:params."Initiative Terms and Conditions Description Field")
+            Click.run(ID:"//*[@id='f-f-terms-conditions']/../DIV[2]")
+            SetText.run(ID:"//*[@id='f-f-terms-conditions']/../DIV[2]/P",Text:params."Initiative Terms and Conditions Description Field")
             sleep(3000)
         }
         

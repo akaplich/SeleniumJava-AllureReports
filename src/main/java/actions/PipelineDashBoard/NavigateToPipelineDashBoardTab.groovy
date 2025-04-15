@@ -11,6 +11,9 @@ class NavigateToPipelineDashBoardTab{
         } else if(params."Tab"=="Engagement"){
             Click.run(ID:"//*[@id='dashboards-top-tabs']/A[@tab='engagement']")
             sleep(5000)
+        } else if(params."Tab"=="Event Overview"){
+            Click.run(ID:"//*[@id='dashboards-top-tabs']/A[@tab='overall']")
+            sleep(5000)            
         } else{Click.run(ID:"//*[@id='dashboards-top-tabs']/A[@tab='overall']")}
     }
 }

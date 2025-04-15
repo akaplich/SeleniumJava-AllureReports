@@ -14,6 +14,6 @@ class SetPostIdeaAction{
                 Click.run(ID:"//*[@class='nav-item-label' and starts-with(text(),'${params."Action"}')]")
             }
         }
-        sleep(3000)
+        sleep(6000)
     }
 }

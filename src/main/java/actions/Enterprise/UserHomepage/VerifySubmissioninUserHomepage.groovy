@@ -20,7 +20,7 @@ class VerifySubmissioninUserHomepage{
             verify.IDChildren << ".//*[@class='f-card-image' and contains(@style,'/ct/getfile.php')]"
         }
         if(params."Description"){
-            verify.IDChildren << ".//*[contains(@class,'f-card-description')]//*[text()='${params."Description"}']"
+            verify.IDChildren << ".//*[contains(@class,'f-card-description') or contains(@class,'f-card-short-description')]//*[text()='${params."Description"}']"
         }
         if(params."Status"){
             verify.IDChildren << ".//*[contains(@class,'f-status-indicator') and text()='${params."Status"}']"

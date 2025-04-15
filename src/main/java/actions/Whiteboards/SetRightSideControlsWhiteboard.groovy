@@ -4,10 +4,14 @@ import actions.selenium.SetText
 import actions.selenium.SendKeyboardAction
 import actions.selenium.SetFocus
 import actions.selenium.Click
+import actions.common.AppsCommon
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
 import actions.selenium.MouseOver
 import actions.selenium.Browser
+import org.openqa.selenium.Keys
+import screens.Whiteboard.WhiteboardRightSidePanelLocators
+
 
 class SetRightSideControlsWhiteboard{
     public void run(def params){
@@ -54,21 +58,41 @@ class SetRightSideControlsWhiteboard{
             SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[.='Fill' or .='Sticky Fill' or .='Background Color' or .='Card Color' or .='Opacity']/../..//*[contains(@id,'f-canvas-opacity')]", "Text":params."Fill Color Opacity", "Type of Clear":"Backspace")
         	SendKeyboardAction.run("Button":"ENTER")
         }
+        if(params."Crop"){
+        	Click.run(ID:"//*[contains(@class,'f-image-crop')]//BUTTON[contains(@class,'f-image-crop-btn')]")
+            println("Crop Button clicked")
+        }
+        
         if(params."Line Width"){
             SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@id,'f-canvas-line-width')]", "Text":params."Line Width")
             SendKeyboardAction.run("Button":"ENTER")
         }
         if(params."Add Border"==true){
             Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Add Border')]")
+            sleep(2000)
         }else if(params."Add Border"==false){
             Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]//*[contains(@data-tooltip-content,'Remove Border')]")
         }
-        if(params."Border Color"){
-            SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-color')]", "Type of Clear":"Backspace", "Text":params."Border Color")  
-        }
+        
+        if(params."Border Color"=="TRANSPARENT"){
+            Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-canvas-control-section')]//*[.='Border']/..//*[contains(@class,'f-color-picker-group')]")
+            SetFocus.run(ID:"//DIV[@class='fractal-color-picker ']")
+            Click.run(ID:"//DIV[@class='fractal-color-picker ']//DIV[contains(@title,'transparent')]")
+        }else if(params."Border Color"){
+            SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-canvas-control-section')]//*[.='Border']/../..//input[contains(@id,'f-canvas-color')]", "Type of Clear":"Backspace", "Text":params."Border Color")
+       		SendKeyboardAction.run("Button":"ENTER")
+        }   
+
+        if(params."Border Opacity"){
+            SetFocus.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[.='Border']/..//*[contains(@id,'f-canvas-opacity')]")
+            def numOnly = params."Fill Color Opacity".replaceAll("%","")
+            SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[.='Border']/..//*[contains(@id,'f-canvas-opacity')]", "Text":params."Fill Color Opacity", "Type of Clear":"Backspace")
+        	SendKeyboardAction.run("Button":"ENTER")
+        }        
         if(params."Border Width"){
-            SetFocus.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-border-width')]")
-            SetText.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-border-heading-container')]/following-sibling::DIV[@class='f-canvas-control-content']//*[contains(@id,'f-canvas-border-width')]", "Text":params."Line Width")   
+            //SetFocus.run(ID:"//input[contains(@id,'f-canvas-border-width')]")
+            SetText.run(ID:"//input[contains(@id,'f-canvas-border-width')]", "Text":params."Border Width")   
+            SendKeyboardAction.run("Button":"ENTER")
         }
         if(params."Text Font"){
             SetFocus.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@id,'f-canvas-font-select')]")
@@ -87,13 +111,11 @@ class SetRightSideControlsWhiteboard{
         if(params."Font Size"){
             Click.run(ID:"//DIV[contains(@class,'f-slate-font-size-input')]//BUTTON[contains(@class,'f-combobox-dropdown-button')]/I[contains(@class,'f-combobox-caret')]")
             List <WebElement> listElem = Elements.findAll(ID:"//*[@id='f-combobox-list' and contains(@style, 'flex')]/*[contains(@class,'f-combobox-list-item')]",Browser.Driver)
-            //println("List items size: ${listElem.size()}")
             List<String> strings = new ArrayList<String>();
 			for(WebElement e : listElem){
     			strings.add(e.getText());
 			}
             if(!strings.contains(params."Font Size")){
-                //println("Value is not in the dropdown")
                 SetText.run(ID:"//*[@id='f-slate-font-size-input']", Text:params."Font Size", "Type of Clear":"Backspace")
                 SendKeyboardAction.run("Button":"ENTER")
             }else{
@@ -106,6 +128,9 @@ class SetRightSideControlsWhiteboard{
         }
         if(params."Bullets: ordered list"){
             Click.run(ID:"//*[contains(@class,'f-button-group')]/BUTTON[@data-tooltip-content ='Bullets: ordered list']")
+        }
+        if(params."Horizontal Alignment"){
+            Click.run(ID:"//*[@class='f-canvas-text-alignments']/*[@class='f-canvas-text-horizontal']//BUTTON[@data-tooltip-content='${params."Horizontal Alignment"}']")
         }
         if(params."Arrow Section Left"){
             Click.run(ID:"//*[contains(@class,'f-canvas-arrow-section')]//*[contains(@class,'f-arrow-dropdown-left')]/*[contains(@class,'f-dropdown-btn')]")
@@ -169,6 +194,9 @@ class SetRightSideControlsWhiteboard{
         }
         if(params."Add Column Right"){
             Click.run(ID:"//DIV[contains(@class,'f-canvas-control-content')]/DIV[@class='f-add-btns']/BUTTON/SPAN[starts-with(.,'Add Column Right')]")
+        }
+        if(params."Brightidea AI"==true){
+            Click.run("ID Type":"By", By:WhiteboardRightSidePanelLocators.brightideaAIButton)
         }
         /*if(params."Links - Add"==true){ // this is not working
             Click.run(ID:"//*[contains(@class,'f-canvas-controls-container')]//*[contains(@class,'f-link-heading-container')]//BUTTON")

@@ -20,7 +20,7 @@ class SetQuestionScorecardTemplate{
         }
         if(params.Points){
             params.Points.split(",").eachWithIndex{value, x ->
-                SetText.run(ID:"(//*[contains(@class,'setup-scorecard-question')][${params."Added Question Order Number"}]//INPUT[contains(@name,'point')])[${x+1}]", Text:value) 
+                SetText.run(ID:"(//*[contains(@class,'setup-scorecard-question')][${params."Added Question Order Number"}]//INPUT[contains(@name,'point')])[${x+2}]", Text:value) 
             }
         }
         if(params.Action=='Save'){

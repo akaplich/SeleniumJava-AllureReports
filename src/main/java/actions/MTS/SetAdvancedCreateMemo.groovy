@@ -39,6 +39,6 @@ class SetAdvancedCreateMemo{
                 Click.run(ID:"//*[text()='Create a New Memo']/../..//*[@data-test='modal-footer-submit']")
             }
         }
-        sleep(3000)
+        sleep(10000)
     }
 }

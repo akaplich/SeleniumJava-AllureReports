@@ -6,7 +6,7 @@ import actions.WebstormHomepage.SetActionOnChangeBackgroundModal
 import actions.selenium.ExplicitWait
 
 class SetUploadyourOwnBackground{
-    public void run(def params){
+    public static void run(def params){
         
         if(params."Choose File"!=null){
             def fileName

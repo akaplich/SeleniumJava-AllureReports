@@ -1,0 +1,19 @@
+package actions.PipelineDashBoard;
+
+import actions.selenium.VerifyText
+
+class VerifyCurrentIdeasPerStepInOverallTabInPipelineDashboard{
+    public void run(def params){
+        
+        //*[@id="ideas-in-step-chart"]//*[contains(@class,"highcharts-data-labels")]//*[contains(@class,"highcharts-data-label")][1]//*[name()="text"][text()="2"]
+        if(params."First Column Value"){
+            VerifyText.run(ID:"//*[@id='ideas-in-step-chart']//*[contains(@class,'highcharts-data-labels)]//*[contains(@class,'highcharts-data-label')][1]//*[name()='text']", params."First Column Value")
+        }  
+        if(params."Second Column Value"){
+            VerifyText.run(ID:"//*[@id='ideas-in-step-chart']//*[contains(@class,'highcharts-data-labels)]//*[contains(@class,'highcharts-data-label')][2]//*[name()='text']", params."Second Column Value")
+        } 
+        if(params."Third Column Value"){
+            VerifyText.run(ID:"//*[@id='ideas-in-step-chart']//*[contains(@class,'highcharts-data-labels)]//*[contains(@class,'highcharts-data-label')][3]//*[name()='text']", params."Third Column Value")
+        } 
+    }
+}

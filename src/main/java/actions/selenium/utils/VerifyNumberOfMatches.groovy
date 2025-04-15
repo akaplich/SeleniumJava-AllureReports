@@ -14,6 +14,7 @@ class VerifyNumberOfMatches{
         if(params."Is Displayed"){params."Is Displayed"=true}
         else{params."Is Displayed"=false}
         def instancesFound = Exists.run(params)
+        println("InstancesFound: ${instancesFound}")
         //If number matches is not null, this means we expect specific number of matches found
         if(params."Number of Matches"!=null){
             assert instancesFound==params."Number of Matches","Error - Expected number of matches ${params."Number of Matches"} not found, actual amount found is ${instancesFound}"

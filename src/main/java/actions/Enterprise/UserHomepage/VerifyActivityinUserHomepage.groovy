@@ -35,8 +35,17 @@ class VerifyActivityinUserHomepage{
         if(params."Pre-Launch"==true){
             verify.IDChildren << "./../*[@class='f-card-description']/../..//*[@class='f-card-pre-launch' and contains(.,'Activity will begin in:')]"
         }
-        if(params."Countdown"){
-            verify.IDChildren << "./../*[@class='f-card-description']/../..//*[@class='f-card-pre-launch' and contains(.,'${params.Countdown}')]"
+        if(params."Phase Starts"){
+            verify.IDChildren << "./../*[@class='f-card-description']/../..//*[@class='f-card-pre-launch' and contains(.,'${params."Phase Starts"}')]"
+        }
+        if(params."Phase Starts Countdown"){
+            verify.IDChildren << "./../*[@class='f-card-description']/../..//*[@class='f-card-pre-launch' and contains(.,'${params."Phase Starts Countdown"}')]"
+        }
+        if(params."Phase Ends"){
+            verify.IDChildren << "./../*[@class='f-card-description']/../..//*[contains(@class,'f-card-sub-end-text') and contains(.,'${params."Phase Ends"}')]"
+        }
+        if(params."Phase Ends Countdown"){
+            verify.IDChildren << "./../*[@class='f-card-description']/../..//*[contains(@class,'f-card-sub-end') and contains(text(),'${params."Phase Ends Countdown"}')]"
         }
         if(params.Comments){
             verify.IDChildren << "./../*[@class='f-card-extra']//*[@data-test='comment-count' and text()='${params."Comments"}']"

@@ -1,5 +1,7 @@
 package actions.selenium
 
+import actions.selenium.Browser
+
 class SwitchWindow{
     
   public static run(def params){

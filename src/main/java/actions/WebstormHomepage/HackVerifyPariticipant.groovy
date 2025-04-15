@@ -30,7 +30,9 @@ class HackVerifyPariticipant{
         if(params."Expertise"){ 
             if(params."Number of Matches"!="0"){
                 WebElement expertiseText = Elements.find(ID:xpath+"//DIV[contains(@class,'f-participant-expertise-container')]//DIV[contains(@class,'f-participant-expertise')]/P",Browser.Driver)
-                assert (expertiseText.getText().replaceAll('\\s+',"").equals(params."Expertise".replaceAll("\\s+",""))), "Error - Unexpected Exprtise: ${expertiseText.getText().replaceAll('\\s+',"")}"
+                println("Actual Expertise Text: ${expertiseText.getText().replaceAll('\\s+',"")}")
+                println("Expected Expertise Text: ${params."Expertise".replaceAll("\\s+","")}")
+                assert (expertiseText.getText().replaceAll('\\s+',"").equals(params."Expertise".replaceAll("\\s+",""))), "Error - Unexpected Expertise: ${expertiseText.getText().replaceAll('\\s+',"")}"
             }
             //verify.IDChildren << ".//DIV[contains(@class,'f-participant-expertise-container')]//DIV[contains(@class,'f-participant-expertise')]/*[contains(normalize-space(text()),'${expertise}')]"                
         }

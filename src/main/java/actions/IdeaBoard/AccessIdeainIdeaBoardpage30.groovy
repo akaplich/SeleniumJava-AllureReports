@@ -1,6 +1,8 @@
 package actions.IdeaBoard;
 
 import actions.selenium.Click
+import actions.selenium.WaitForElement
+import screens.ViewIdea30Locators
 
 class AccessIdeainIdeaBoardpage30{
     public void run(def params){
@@ -38,5 +40,9 @@ class AccessIdeainIdeaBoardpage30{
         if(params."Instance"){set."Instance"=params."Instance".toInteger()}
         set."Type of Click"="Javascript"
         Click.run(set)
+        
+        if(params."Wait For Modal"){
+            WaitForElement.run("ID Type":"By",By:ViewIdea30Locators.header_FavoriteSelector, "Timeout In Seconds":"10")
+        }
     }
 }

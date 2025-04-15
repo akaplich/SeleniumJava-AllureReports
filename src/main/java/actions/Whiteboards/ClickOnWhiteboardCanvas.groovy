@@ -2,6 +2,8 @@ package actions.Whiteboards;
 
 import org.openqa.selenium.interactions.Actions
 import actions.selenium.Browser
+import org.openqa.selenium.WebElement
+import actions.selenium.utils.Elements
 
 class ClickOnWhiteboardCanvas{
     public void run(def params){

@@ -1,6 +1,7 @@
 package actions.common;
 
 import actions.selenium.Click
+import actions.selenium.SetText
 import actions.selenium.MouseOver
 import actions.selenium.SetFocus
 import actions.selenium.ExecuteJavascript
@@ -70,4 +71,22 @@ class ViewIdeaCommon{
             else{Click.run(ID:idCancel)}
         }
     }
+    public static void SetAddModal(String objectsToAdd, String addOrRemove){
+        //if(params."Add or Remove"){
+            objectsToAdd.split(",").eachWithIndex{ name, x ->
+                if(addOrRemove.split(",")[x]=="Add"){
+                    Click.run(ID:"//INPUT[contains(@id,'search') and contains(@id,'input')]")
+                	SetText.run(ID:"//INPUT[contains(@id,'search') and contains(@id,'input')]", Text:name)
+                    Click.run(ID:"//INPUT[contains(@id,'search') and contains(@id,'input')]/..//DIV[contains(@class,'search') and contains(@class,'button')]")
+                    sleep(500)
+                    Click.run(ID:"//*[starts-with(text(),'${name}')]/..//A[text()='>>']")
+                }
+                else if (params."Add or Remove".split(",")[x]=="Remove"){
+                    Click.run(ID:"//*[@class='name' and contains(text(),'${name}')]/..//SPAN[contains(@id,'delete')]")
+                }
+            }
+            Click.run(ID:"//*[@id='bi-modal-button']") //click Save Changes
+        //}
+    }
+    
 }

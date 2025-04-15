@@ -1,16 +1,14 @@
 package actions.selenium
 
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
+import org.openqa.selenium.WebElement
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.JavascriptExecutor
-import org.openqa.selenium.StaleElementReferenceException
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory;
+import org.openqa.selenium.StaleElementReferenceException;
 
 class Click{  
     public static void run(def params){
-        final Logger logger = LoggerFactory.getLogger(Click.class);
-
         if(params."Handle Stale Element"==true){
             clickWithStaleElementHandling(params)
         }else{
@@ -37,20 +35,18 @@ class Click{
                 //If its a type of click which is Javascript, then no need to go through isDisplayed process since it might be hidden
                 if(params."Type of Click"=="Javascript"){
                     println("Javascript Click Recognized")
-                    JavascriptExecutor executor = (JavascriptExecutor) Browser.Driver
+                    JavascriptExecutor executor = (JavascriptExecutor) Browser.Driver 
                     executor.executeScript("arguments[0].click();", element)
                     return
                 }
                 else if(element.isDisplayed()){
                     try{
-                        logger.debug("Element is displayed: ${params.ID}")
                         println("Element is displayed: ${params.ID}")
                         if(params."Type of Click"=="Move to Element"){
                             Actions action = new Actions(Browser.Driver)
                             action.moveToElement(element).click().perform()
                         }
                         if(params."Type of Click"=="Regular"){
-                            logger.debug("Trying to click: ${params.ID}")
                             println("Trying to click: ${params.ID}")
                             element.click()
                         }
@@ -72,7 +68,7 @@ class Click{
                     sleep(2000)        
                 }
                 println("Click Failed, going to try again: ${iTimeout}")
-                element = Elements.find(params,Browser.Driver)
+                element = Elements.find(params,Browser.Driver)          
             }
         }    
         }

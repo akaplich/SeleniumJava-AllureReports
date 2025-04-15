@@ -2,7 +2,12 @@ package actions.Whiteboards;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
-import actions.selenium.Browser
+import actions.selenium.Browser;
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.By;
+import java.awt.Robot;	
+import java.awt.event.KeyEvent;
+import org.openqa.selenium.JavascriptExecutor
 
 class SendKeysToWhiteboard {
     public static void run(def params) {
@@ -41,8 +46,15 @@ class SendKeysToWhiteboard {
             case "Space":
                 builder.sendKeys(Keys.SPACE);
                 break;
+            case "Show or Hide Toolbar":
+            	builder.keyDown(Keys.LEFT_CONTROL).sendKeys(Character.toString((char)92)).keyUp(Keys.LEFT_CONTROL);
+//                builder.sendKeys(Keys.chord(Keys.CONTROL, "\\"));
+                break;
             case "Control + Z":
                 builder.keyDown(Keys.LEFT_CONTROL).sendKeys("z").keyUp(Keys.LEFT_CONTROL);
+                break;
+            case "Control + I":
+                builder.keyDown(Keys.LEFT_CONTROL).sendKeys("i").keyUp(Keys.LEFT_CONTROL);
                 break;
             case "Control + F":
                 builder.keyDown(Keys.LEFT_CONTROL).sendKeys("f").keyUp(Keys.LEFT_CONTROL);
@@ -88,6 +100,9 @@ class SendKeysToWhiteboard {
                 break;
             case "Control + Shift + X": // for strikethrough
                 builder.keyDown(Keys.LEFT_CONTROL).keyDown(Keys.SHIFT).sendKeys('x').keyUp(Keys.LEFT_CONTROL).keyUp(Keys.SHIFT);
+                break;
+            case "Shift + Enter":
+                builder.keyDown(Keys.SHIFT).sendKeys(Keys.ENTER).keyUp(Keys.SHIFT);
                 break;
             case "Hold Shift":
                 builder.keyDown(Keys.SHIFT);

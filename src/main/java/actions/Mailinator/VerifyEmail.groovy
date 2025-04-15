@@ -27,14 +27,14 @@ class VerifyEmail{
         }else{
             assert email.size()>0, "Error - Email was not received by ${params."Email Address"}@mailinator.com"
             println("Email Should Be Received")
-        	if(params.Subject){
-          		assert email.subject.contains(params.Subject),"Error - Email Subject '${email.subject}' does not contain searched for value"
+        	if(params.Subject){                
+          		assert email.subject.contains(params.Subject),"Error - Email Subject '${email.subject}' does not contain '${params.Subject}'"
         	}
         	if(params.From){
-           		assert email.from.contains(params.From),"Error - Email From '${email.from}' does not contain searched for value"
+           		assert email.from.contains(params.From),"Error - Email From '${email.from}' does not contain '${params.From}'"
         	}
         	if(params."Full From"){
-            	assert email.origfrom.contains(params."Full From"),"Error - Email Origfrom '${email.origfrom}' does not contain searched for value"
+            	assert email.origfrom.contains(params."Full From"),"Error - Email Origfrom '${email.origfrom}' does not contain '${params."Full From"}'"
         	}
         }
     }

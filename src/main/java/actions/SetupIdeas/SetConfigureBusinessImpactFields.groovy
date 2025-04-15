@@ -38,7 +38,7 @@ class SetConfigureBusinessImpactFields{
                 SetText.run(ID:"//*[@id='${type}-config']//*[contains(@class,'impact-input') and @value='${benefitTitle[x]}']",Text:editedBenefitTitle[x],"Type of Clear":"Cut") 
             }
             Click.run(ID:"//*[contains(@class,'f-btn-primary f-btn-sm')]", "Type of Click": "Javascript") 
-            sleep(3000)
+            sleep(1000)
         }
     }
 }

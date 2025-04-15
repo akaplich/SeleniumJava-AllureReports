@@ -7,9 +7,11 @@ import actions.selenium.SetCheckBox
 
 class SetEnterpriseSetupBIOnlyDeprecated{
     public void run(def params){
-        SetupCommon.NavigateTab(Tab:"BI Only",Section:"Deprecated")
         
-        
+        if(params."Navigate to Tab"==null || params."Navigate to Tab"==true){
+            SetupCommon.NavigateTab(Tab:"BI Only",Section:"Deprecated")
+        } 
+                
         SetCheckBox.run(ID:"//*[@id='CB_RULES_ENGINE_IMPROVEMENTS']", Check:params."Rules Engine Updated UI")
         
         

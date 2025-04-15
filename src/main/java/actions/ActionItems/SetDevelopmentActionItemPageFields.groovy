@@ -22,7 +22,7 @@ class SetDevelopmentActionItemPageFields{
         if(params."Date Question - Title"){SetDevTextField.shortTextField("Field Title":params."Date Question - Title", "Field Value":params."Date Question - Answer")}
         if(params."Number Question - Title"){SetDevTextField.shortTextField("Field Title":params."Number Question - Title", "Field Value":params."Number Question - Answer")}
         if(params."Multiple Choice - Title"){SetDevMultiChoice.run("Field Title":params."Multiple Choice - Title", "Field Value":params."Multiple Choice - Answer")}
-        if(params."Dropdown - Title"){SetDevDropdown.run("Field Title":params."Dropdown - Title", "Field Value":params."Dropdown - Value")}
+        if(params."Dropdown - Title"){SetDevDropdown.run("Field Title":params."Dropdown - Title", "Field Value":params."Dropdown - Answer")}
         if(params."Short Answer - Title"){SetDevTextField.shortTextField("Field Title":params."Short Answer - Title", "Field Value":params."Short Answer - Answer")}
         if(params."Long Answer - Title"){SetDevTextField.longTextField("Field Title":params."Long Answer - Title", "Field Value":params."Long Answer - Answer")}
         if(params."User Selection - Title"){AppsCommon.UserPickerAddRemove("Field Name":params."User Selection - Title",User:params."User Selection - Answer","Add or Remove":params."User Selection - Add or Remove")}

@@ -20,17 +20,13 @@ class VerifyViewIdea3DescriptionTabFieldValue{
         } else if(params."Template"=="Large Header"){
             path = "//*[@class='f-idea-page-main']/*[contains(@class,'f-modern-large')]"       
         } else {
-            //path = "//*[@class='f-idea-page-main']//*[contains(@class,'-medium')]"
             path = "//*[@class='f-idea-page-main' and //*[contains(@class,'-medium')]]"  
         }
-        if(params."Should Exist"){
-            //WebElement tool = Elements.find(ID:"${path}//*[contains(@class,'f-component-title') and contains(.,'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}']",Browser.Driver)
-            List <WebElement> tool = Elements.findAll(ID:"${path}//*[contains(@class,'f-component-title') and contains(.,'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}']",Browser.Driver)
-            //println("Text: ${tool.getText()}")
-            println("Size: ${tool.size()}")
-            assert Exists.run(ID:"${path}//*[contains(@class,'f-component-title') and starts-with(normalize-space(.),'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}']")>0,"Expected Field Not Found"
+        
+        if(params."Should Exist"=="FALSE"){
+        	assert Exists.run(ID:"${path}//*[contains(@class,'f-component-title') and starts-with(normalize-space(.),'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}']")==0,"Unexpected Field Found"
         }else{
-            assert Exists.run(ID:"${path}//*[contains(@class,'f-component-title') and starts-with(normalize-space(.),'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}']")==0,"Unexpected Field Found"
+            assert Exists.run(ID:"${path}//*[contains(@class,'f-component-title') and starts-with(normalize-space(.),'${params."Field Name"}')]/../..//*[text()='${params."Field Value"}' or @placeholder='${params."Field Value"}']")>0,"Expected Field Not Found"
         }
     	
         /*

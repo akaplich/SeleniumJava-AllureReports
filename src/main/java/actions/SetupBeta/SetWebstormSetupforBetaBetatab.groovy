@@ -17,6 +17,8 @@ class SetWebstormSetupforBetaBetatab{
         SetCheckBox.run(ID:"//*[@id='CB_WS_UNIFIED_LOGIN']", Check:params."Unified Login Page")
         SetCheckBox.run(ID:"//*[@id='CB_WS_ENABLE_ADMIN_PERMISSION_IN_SUBMISSION_QUESTION']", Check:params."Enable Administrator Permission option in Submission Questions")
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_SUBMIT_ON_BEHALF']", Check:params."Submit Ideas on Behalf of Other Users")
+        SetCheckBox.run(ID:"//*[@id='CB_RICH_TEXT_HTML_10_UPDATES']",Check:params."Rich Text/HTML 3.0 Widget Updates")
+        
 //        SetCheckBox.run(ID:"//*[@id='CB_VIEW_IDEA_3']",Check:params."View Idea 3.0")
 //        SetCheckBox.run(ID:"//*[@id='CB_ENABLE_BUSINESS_IMPACT_TAB']",Check:params."Business impact tab")
         if(params."Disable Step Evaluator Limit"){

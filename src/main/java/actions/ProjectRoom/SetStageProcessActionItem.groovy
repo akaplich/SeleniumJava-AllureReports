@@ -20,6 +20,8 @@ class SetStageProcessActionItem{
                 Click.run(ID:"//*[@data-test='modal-footer-cancel']")
             }
         }
-        
+        if(params."Button Text"){
+            assert Exists.run(ID:"//*[contains(@class,'f-btn-primary') and contains(.,'${params."Button Text"}')]")==1, "Error - Incorrect text on the button"
+        }     
     }
 }

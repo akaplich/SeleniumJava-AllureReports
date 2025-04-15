@@ -1,4 +1,8 @@
-package actions.selenium
+package actions.selenium;
+
+import actions.selenium.ExecuteJavascript
+import actions.selenium.Browser;
+import actions.selenium.SwitchWindow
 
 class OpenURLInNewTab{
     public void run(def params){

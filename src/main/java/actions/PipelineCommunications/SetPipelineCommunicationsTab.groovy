@@ -8,6 +8,7 @@ import actions.selenium.utils.Elements
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import actions.selenium.SetFocus
+import actions.PipelineSetup.SetEmailConfigurationinPipelineSetup
 
 class SetPipelineCommunicationsTab{
     public void run(def params){
@@ -40,7 +41,13 @@ class SetPipelineCommunicationsTab{
             SelectItem.run(ID:"//*[@id='communications-alert-editor-email-footer']/div[@class='right']/select[@class='form-control']", "Visible Text":params."Dynamic Fields")
             Click.run(ID:"//*[@id='communications-alert-editor-email-footer']//*[@id='communications-alert-editor-email-footer-tag-button']")
         }
+        if(params."Action"=="Save" && params."Select Tab"=="Emails"){Click.run(ID:"//*[@id='save-email-template-btn']")}
+
+        if(params."Contact Name"){
+            SetEmailConfigurationinPipelineSetup.run(params)
+        }
         
+        /*
         //setting Settings tab
         if(params."Contact Name"){SetText.run(ID:"//*[@id='contact-name']", Text:params."Contact Name")}        	
         if(params."Contact Email"){SetText.run(ID:"//*[@id='contact-email']", Text:params."Contact Email")}
@@ -53,5 +60,6 @@ class SetPipelineCommunicationsTab{
         if(params."Action"=="Save" && params."Select Tab"=="Settings"){Click.run(ID:"//*[@id='save-contact-btn']")}
         if(params."Action"=="Save" && params."Select Tab"=="Emails"){Click.run(ID:"//*[@id='save-email-template-btn']")}
         sleep(3000)
+		*/
     }
 }

@@ -11,8 +11,36 @@ class ViewMetricsinLocationDashboardandChallengeTabs{
 
         def verify = [:]
         verify.IDChildren = []
-        //if verifying community dashboard
-        if(Exists.run(ID:"//*[contains(@id,'metrics-table')]//*[text()='${params."Metric Label"}']")>0){
+        if(Exists.run(ID:"//*[@class='f-summary-metrics-container']")>0){
+            println("Verifying Teamsite metrics")
+            verify.ID = "//*[@class='f-summary-metrics-container']/DIV[@class='f-summary-metric']/SPAN[@class='f-summary-metric-title' and normalize-space(.)='${params."Metric Label"}']"
+			if(params."Value" && params."Metric Label".contains("Avg. Per Day")){verify.IDChildren << "./../SPAN[@class='f-summary-metric-value' and matches(text(), '[0-9]+')]"}
+            else if(params."Value"){verify.IDChildren << "./../SPAN[@class='f-summary-metric-value' and text()='${params."Value"}']"}
+            if(params."Placement Number") {
+            	verify.ID="//*[@class='f-summary-metrics-container']/DIV[@class='f-summary-metric' and position()=${params."Placement Number"}]/SPAN[@class='f-summary-metric-title' and normalize-space(.)='${params."Metric Label"}']"
+            	VerifyNumberOfMatches.run(verify)
+        	}
+        	else{
+            	if(params."Number of Matches"){verify."Number of Matches" = params."Number of Matches".toInteger()}
+            	VerifyNumberOfMatches.run(verify)        
+        	}
+        }else{
+            println("Verifying Analytics Dashboard metrics")
+        	verify.ID = "//*[contains(@id,'metrics-table')]/TBODY/TR/TD/*[normalize-space(.)='${params."Metric Label"}']"
+            if(params."Value" && params."Metric Label".contains("Avg. Per Day")){verify.IDChildren << "./../DIV[translate(text(), '0123456789', '') != text()]"}
+            else if(params."Value"){verify.IDChildren << "./../DIV[text()='${params."Value"}']"}
+            if(params."Placement Number") {
+                verify.ID = "//*[contains(@id,'metrics-table')]/TBODY/TR/TD[${params."Placement Number"}]/*[normalize-space(.)='${params."Metric Label"}']"
+            	VerifyNumberOfMatches.run(verify)
+        	}
+        	else{
+            	if(params."Number of Matches"){verify."Number of Matches" = params."Number of Matches".toInteger()}
+            	VerifyNumberOfMatches.run(verify)        
+        	}
+        }
+        
+        
+        /*if(Exists.run(ID:"//*[contains(@id,'metrics-table')]//*[text()='${params."Metric Label"}']")>0){
             println("@id='analytics-grid-metrics-table FOUND")
             verify.ID = "//*[contains(@id,'metrics-table')]/TBODY/TR/TD/*[normalize-space(.)='${params."Metric Label"}']"
             if(params."Value" && params."Metric Label".contains("Avg. Per Day")){verify.IDChildren << "./../DIV[translate(text(), '0123456789', '') != text()]"}
@@ -39,6 +67,6 @@ class ViewMetricsinLocationDashboardandChallengeTabs{
             	if(params."Number of Matches"){verify."Number of Matches" = params."Number of Matches".toInteger()}
             	VerifyNumberOfMatches.run(verify)        
         	}
-        }
+        }*/
     }
 }

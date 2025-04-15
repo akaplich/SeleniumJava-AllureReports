@@ -25,11 +25,11 @@ class SetWhiteboardOnViewIdea3{
         	}
             if(params."Action"){
                 if(params."Action"=="Cancel"){
-                    Click.run(ID:"//*[@id='f-add-select']/../../../../../..//DIV[@class='f-footer ']//BUTTON[@data-test='modal-footer-cancel']")
+                    Click.run(ID:"//*[@id='f-add-select']/../../../../../../..//DIV[@class='f-footer ']//BUTTON[@data-test='modal-footer-cancel']")
                 } else if(params."Action"=="Close"){
-                    Click.run(ID:"//*[@id='f-add-select']/../../../../../..//DIV[@class='fractal-modal-header ']//DIV[@data-for='modal-close']")
+                    Click.run(ID:"//*[@id='f-add-select']/../../../../../../..//DIV[@class='fractal-modal-header ']//DIV[@data-tooltip-id='modal-close']")
                 }else {
-                    Click.run(ID:"//*[@id='f-add-select']/../../../../../..//DIV[@class='f-footer ']//BUTTON[@id='f-modal-submit']")
+                    Click.run(ID:"//*[@id='f-add-select']/../../../../../../..//DIV[@class='f-footer ']//BUTTON[@id='f-modal-submit']")
                 }
             }          
         }

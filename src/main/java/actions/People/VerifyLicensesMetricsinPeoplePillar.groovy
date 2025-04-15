@@ -14,6 +14,8 @@ class VerifyLicensesMetricsinPeoplePillar{
             verify.ID= "//*[contains(@class,'idea-box-manager-license-container')]"  
         }else if(params."License Type"=="Brightidea Moderator Licenses"){ 
             verify.ID= "//*[contains(@class,'moderator-license-container')]"
+        } else if(params."License Type"=="Hackathon Manager Licenses"){ 
+            verify.ID= "//*[contains(@class,'hackathon-license-container')]"
         } else {
             verify.ID= "//*[contains(@class,'whiteboard-license-container')]"
         }

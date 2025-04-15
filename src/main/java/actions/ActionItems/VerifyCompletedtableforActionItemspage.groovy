@@ -28,7 +28,7 @@ class VerifyCompletedtableforActionItemspage{
         if(params."Answer"){verify.IDChildren << "./../TD[contains(@class,'answer-cell')][text()='${params."Answer"}']"}
         if(params."Type"){verify.IDChildren << "./../TD[contains(@class,'type')][.='${params."Type"}']"}
         if(params."Assignee"){verify.IDChildren << "./../TD[contains(@class,'assignee-cell')]/*[text()='${params."Assignee"}']"}
-
+		if(params."Due Date"){verify.IDChildren << "./../TD[contains(@class,'date-cell') and text()='${params."Due Date"}']"}
         if(params."Row Number"){
             verify.ID = "//TD[.='${params."Title"}']"
             def rowNum = GridCommon.RowNumberForValues(verify).toString()

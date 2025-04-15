@@ -14,7 +14,7 @@ class SetRiskCommentsinTeamWorkspace{
         }
         switch(params."Type of Comment"){
             case "Comment":
-            SetText.run(ID:"//*[contains(@class,'redactor-styles redactor-placeholder redactor-in redactor-in') and contains(@placeholder,'comment')]",Text:params.Comment)
+            SetText.run(ID:"//*[contains(@class,'redactor-placeholder') and contains(@placeholder,'comment')]",Text:params.Comment)
             if(Exists.run(ID:"//*[@class='redactor-box redactor-styles-on redactor-blur']")==1){
                 Click.run(ID:"//*[contains(@class,'redactor-styles redactor-in redactor-in') and contains(@placeholder,'comment')]")
             }
@@ -41,16 +41,16 @@ class SetRiskCommentsinTeamWorkspace{
         }
             if (params."Click on Post Button" == null || params."Click on Post Button" == true) {
             	 Click.run(ID:"//*[@id='postContent']") 
-                sleep(5000) 
+                sleep(7000) 
         	}   
            break
             case "Reply":
-            Click.run(ID:"//*[text()='${params.Comment}']/../../../..//*[@class='fractal-comment-btn']", "Type of Click":"Javascript")
-            SetFocus.run(ID:"//*[contains(@class,'redactor-styles redactor-placeholder redactor-in redactor-in') and contains(@placeholder,'Reply')]")
-            SetText.run(ID:"//*[contains(@class,'redactor-styles redactor-placeholder redactor-in redactor-in') and contains(@placeholder,'Reply')]",Text:params."Reply Comment", "Type of Clear":"Cut")
+            Click.run(ID:"//*[contains(text(),'${params.Comment}')]/../../../..//*[@class='fractal-comment-btn']", "Type of Click":"Javascript")
+            SetFocus.run(ID:"//*[contains(@class,'redactor-placeholder') and contains(@placeholder,'Reply')]")
+            SetText.run(ID:"//*[contains(@class,'redactor-placeholder') and contains(@placeholder,'Reply')]",Text:params."Reply Comment", "Type of Clear":"Cut")
             if(params."Attachment File"){
-                SetFocus.run(ID:"//*[text()='${params.Comment}']/../../../..//*[@class='comment-inputbox-container']//*[contains(@class,'attachments-icon')]/I")
-                Click.run(ID:"//*[text()='${params.Comment}']/../../../..//*[@class='comment-inputbox-container']//*[contains(@class,'attachments-icon')]/I")
+                SetFocus.run(ID:"//*[contains(text(),'${params.Comment}')]/../../../..//*[@class='comment-inputbox-container']//*[contains(@class,'attachments-icon')]/I")
+                Click.run(ID:"//*[contains(text(),'${params.Comment}')]/../../../..//*[@class='comment-inputbox-container']//*[contains(@class,'attachments-icon')]/I")
                 params."Attachment File".split(",").eachWithIndex{ name, x ->
 				def fileName 
                     if(os.contains("nix") || os.contains("nux")||os.contains("aix")) {

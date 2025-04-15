@@ -36,7 +36,7 @@ class VerifyIdeaonViewIdea3{
             assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-inner-row')]//*[@class='f-static-title']/*[@class='link']/A[contains(.,'${params."Idea Code"}')]")>0, "Error - unexpected idea code"
         }
         if(params."Description"){
-        	VerifyText.run(ID:"//DIV[@id='f-edit-description']",Text:params."Description")
+        	VerifyText.run(ID:"//DIV[@id='f-edit-description' or @id='idea-description']",Text:params."Description")
         }
         if(params."Idea Image"!=null){
             if(params."Template" == "Small Header"){
@@ -66,7 +66,11 @@ class VerifyIdeaonViewIdea3{
                 }
             }
         }
-        VerifyText.run(ID:"${path}//*[contains(@class,'f-idea-inner-row f-idea-row-mobile')]//*[@class='f-vote-count']",Text:params."Vote Count")
+        if(params."Vote Count" == "hidden"){
+        	assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-inner-row f-idea-row-mobile')]//*[@class='f-vote-count']")==0,"Error - Vote Count was found when expected to be hidden"                                
+        }else if (params."Vote Count"){
+        	VerifyText.run(ID:"${path}//*[contains(@class,'f-idea-inner-row f-idea-row-mobile')]//*[@class='f-vote-count' or @class='f-votes-count']",Text:params."Vote Count")
+        }
     	if(params."Category"){
             if(params."View As"=="End User" || params."Category"=="Quick Add"){
                 assert Exists.run(ID:"${path}//*[contains(@class,'f-component-title') and text()='Category']/..//*[text()='${params."Category"}']")==1,"Incorrect Category"
@@ -90,9 +94,11 @@ class VerifyIdeaonViewIdea3{
         if(params."Stats Points"){
             assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-stats')]//*[text()='Points']/following-sibling::DD[text()='${params."Stats Points"}'][1]")==1,"Incorrect Points"        
     	}
-         if(params."Stats Votes"){
-            assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-stats')]//*[text()='Votes']/following-sibling::DD/*[contains(@class,'fractal-button fractal-button-link f-votes-btn-link') and text()='${params."Stats Votes"}']")==1,"Incorrect Votes"        
-    	}
+        if(params."Stats Votes" == "hidden"){
+            assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-stats')]//*[text()='Votes']/following-sibling::DD/button[contains(@class,'f-votes-btn-link')")==0,"Error - Stats Votes was found when expected to be hidden"                                
+        }else if(params."Stats Votes"){
+            assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-stats')]//*[text()='Votes']/following-sibling::DD/*[contains(@class,'f-votes-btn-link') and text()='${params."Stats Votes"}']")==1,"Incorrect Votes"                    
+        }
         if(params."Stats Rank"){
             assert Exists.run(ID:"${path}//*[contains(@class,'f-idea-stats')]//*[text()='Rank']/following-sibling::DD[text()='${params."Stats Rank"}'][1]")==1,"Incorrect Rank"        
     	}

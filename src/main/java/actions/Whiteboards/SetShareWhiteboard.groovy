@@ -12,11 +12,11 @@ import actions.selenium.SetReactTags
 class SetShareWhiteboard{
     public void run(def params){
         if(params."Click Share Button"==true){
+            SetFocus.run(ID:"//*[@class='f-canvas-top-bar-right']//BUTTON[@id='f-share-dialog-btn']")
             Click.run(ID:"//*[@class='f-canvas-top-bar-right']//BUTTON[@id='f-share-dialog-btn']")
         }        
         if(params."User(s)"){
             SetReactTags.setMemberTagsWithAddRemove("Field Name":"",User:params."User(s)","Add or Remove":params."User Add or Remove")
-            //AppsCommon.NewUserPickerAddRemoveInSetupWizard("Field Name":"",User:params."User(s)","Add or Remove":params."User Add or Remove")
         }         
         if(params."Send Invite"==true){
             Click.run(ID:"//*[contains(@class,'f-send-invite') and .='Send Invite']")
@@ -33,7 +33,7 @@ class SetShareWhiteboard{
         if(params."Toggle anyone with link"== false){Click.run(ID:"//DIV[contains(@class, 'f-toggle-on')]")}
         if(params."Anyone with link..."){
             Click.run(ID:"//INPUT[@id='f-member-share-toggle']/..//DIV[contains(@class,'fractal-dropdown')]//*[contains(@class,'f-wb-share-options')]", "Type of Click":"Javascript")
-            Click.run(ID:"//INPUT[@ID='f-member-share-toggle']/..//DIV[contains(@class,'fractal-dropdown')]//UL[contains(@class,'f-dropdown-options')]/LI/DIV[contains(.,'${params."Anyone with link..."}')]")
+            Click.run(ID:"//INPUT[@ID='f-member-share-toggle']/..//DIV[contains(@class,'fractal-dropdown')]//UL[contains(@class,'f-dropdown-options')]/LI/*[contains(.,'${params."Anyone with link..."}')]")
         }
         if(params."Link to selected object"){
             try {

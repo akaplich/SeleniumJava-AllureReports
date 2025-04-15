@@ -3,10 +3,12 @@ package actions.general;
 import actions.selenium.Click
 import actions.selenium.SetCheckBox
 import actions.selenium.SetText
+import actions.selenium.SetFocus
 import actions.selenium.ExecuteJavascript
 import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
+import actions.selenium.Exists
 import actions.selenium.VerifyText
 
 class SetLicenseManager{
@@ -61,6 +63,21 @@ class SetLicenseManager{
 
         if(params."Require min one user assigned as IT System Admin"==true || params."Require min one user assigned as IT System Admin"==false){
           Click.run(ID:"//*[@id='f-it-manager-requirement']/../I")  
+        }
+         //setting licensing model - Idea Box License
+        if(params."Hackathon Manager Licenses"||params."Hackathon Manager License Type Purchased Count"){
+            Click.run(ID:"//DIV[contains(@class,'f-license-row')]//INPUT[@id='f-standard-hack-model']/..")
+            if(params."Unlimited Hackathon Manager License Type"){
+                Click.run(ID:"//DIV[@class='f-standard-license ']//INPUT[@id='f-hack-unlimited']/..", "Type of Click":"Move to Element")
+            }else if(params."Hackathon Manager License Type Purchased Count"){
+                SetText.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][2]//INPUT[contains(@class,'f-license-input')]", Text:params."Hackathon Manager License Type Purchased Count")
+            }
+            if(params."Hackathon Manager License Type Overage"||params."Hackathon Manager License Type Overage Count"){
+                if(params."Hackathon Manager License Type Overage"){
+                  Click.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][3]//*[contains(@name,'f-standard-idea-box-overage')]/..", "Type of Click":"Move to Element")  
+                }
+                SetText.run(ID:"//*[contains(@class,'f-license-title') and text()='Hackathon Manager Licenses']/../../..//*[contains(@class,'f-license-row')][3]//INPUT[contains(@class,'f-license-input')]", Text:params."Hackathon Manager License Type Overage Count")                
+            }
         }
         SetCheckBox.run(ID:"//INPUT/../../../../*[contains(@class,'f-whiteboard-checkbox')]", Check:params."Enable Whiteboard License")
         SetText.run(Text:params."Unlimited Board Creation",ID:"//*[@data-tooltip-id='whiteboard-license-tooltip']/../..//INPUT[contains(@class,'f-license-input')]")

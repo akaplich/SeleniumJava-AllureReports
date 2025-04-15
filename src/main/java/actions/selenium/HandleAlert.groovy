@@ -1,6 +1,10 @@
 package actions.selenium;
 
 import org.openqa.selenium.Alert
+import org.openqa.selenium.WebDriver
+import actions.selenium.Browser
+
+
 
 class HandleAlert{
     public static run(def params){

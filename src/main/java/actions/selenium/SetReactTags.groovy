@@ -30,6 +30,7 @@ class SetReactTags{
     	}
     }
     public static void setMemberTagsWithAddRemove(params){
+        //share dialog in Whiteboard
         if(params."User"){
             if(params."Field Name"==null) {params."Field Name"=""}
             params."User".split(",").eachWithIndex{ name, x ->
@@ -130,30 +131,19 @@ class SetReactTags{
         SetFocus.run(ID:"//*[starts-with(text(),'${fieldName}')]/../..//*[@class='react-tags__combobox-input']")
         SetText.run(ID:"//*[contains(text(),'${fieldName}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
         sleep(500)
-        Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
+        Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
     }
     
     private static void addMemberTag(def fieldName, def name){
         SetFocus.run(ID:"//*[starts-with(text(),'${fieldName}')]/../..//*[@class='react-tags__combobox-input']")
         SetText.run(ID:"//*[contains(text(),'${fieldName}')]/../..//*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
         sleep(500)
-        //if(Exists.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']")>0){
-            Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..", "Handle Stale Element":true)
-        //}else{
-            //request review on memo
-        	//Click.run(ID:"//DIV[@class='f-modal-body']//DIV[contains(@class,'react-tags__combobox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..","Handle Stale Element":true)
-        //}
+        Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..", "Handle Stale Element":true)
     }
     private static void deleteMemberTag(def fieldName, def name){
         //wizard setup, review on memo
-        //if(Exists.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]")>0){
-            SetFocus.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]")
-        	Click.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[text()='${name}']/..//*[@class='f-tag-remove']")       
-        //}else{
-            //memo review
-            //Click.run(ID:"//*[starts-with(text(),'${fieldName}')]/../..//*[text()='${name}']/..//I")
-            //Click.run(ID:"//*[contains(text(),'${fieldName}')]/../..//*[contains(@class,'f-member-typeahead')][1]/../../..//*[text()='${name}']/..//I")
-        //} 
+        SetFocus.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]")
+        Click.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[text()='${name}']/..//*[@class='f-tag-remove']")       
     }
     private static void deleteMemberTagLabelSideBySideORLabelAbove(def fieldName, def name){
         if(fieldName.contains("Access")){
@@ -172,7 +162,7 @@ class SetReactTags{
         SetFocus.run(ID:"${xPath}//*[@class='react-tags__combobox-input']")
        	SetText.run(ID:"${xPath}//*[@class='react-tags__combobox-input']",Text:name)
         sleep(500)
-        Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
+        Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..")
                 	
     }
     private static void addMemberTagLabelSideBySide(def fieldName, def name){
@@ -192,15 +182,15 @@ class SetReactTags{
         }
 		sleep(500)
        if(name.contains("member")) {
-           Click.run(ID:"//*[@class='react-tags__listbox']//*[contains(text(),'${teamName} ${remainingPart}')]/../../..") 
+           Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[contains(text(),'${teamName} ${remainingPart}')]/../../..") 
        } else {
-           Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${teamName}' or text()='${teamName} (Create new user)' or contains(text(),'${teamName}')]/../../..") 
+           Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${teamName}' or text()='${teamName} (Create new user)']/../../..") 
        }        
     } 
     private static void addMemberTagWithLabelAbove(def fieldName, def name){
         SetFocus.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']")
         SetText.run(ID:"//*[contains(text(),'${fieldName}')]/../following-sibling::*[contains(@class,'f-member-typeahead')][1]//*[@class='react-tags__combobox-input']",Text:name,"Type of Clear":"None")
         sleep(500)
-        Click.run(ID:"//*[@class='react-tags__listbox']//*[text()='${name}' or text()='${name} (Create new user)']/../../..") 
+        Click.run(ID:"//*[contains(@class,'react-tags__listbox')]//*[text()='${name}' or text()='${name} (Create new user)']/../../..") 
     }    
 }

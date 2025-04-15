@@ -14,6 +14,8 @@ class VerifyLicensesUserinPeoplePillarLicensesTab{
          license = "admin"        
         } else if (params."License Type"=="Brightidea Moderator Licenses"){
          license = "moderator"
+        } else if (params."License Type"=="Hackathon Manager Licenses"){
+         license = "hackathon"
         }else {
          license = "idea-box-manager"
         }

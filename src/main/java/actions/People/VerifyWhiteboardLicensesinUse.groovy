@@ -25,6 +25,7 @@ class VerifyWhiteboardLicensesinUse{
             } else { date = params."Last Login"}
             verify.IDChildren << "./..//SPAN[2][@class='f-wb-col' and text()='${date}']"
         }
+        if(params."Remove Tooltip"){verify.IDChildren << "./..//BUTTON[@data-tooltip-content='${params."Remove Tooltip"}']"}
         if(params."Number of Matches"){verify."Number of Matches" = params."Number of Matches".toInteger()}        
         VerifyNumberOfMatches.run(verify) 
         

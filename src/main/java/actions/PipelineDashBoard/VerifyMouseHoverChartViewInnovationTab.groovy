@@ -56,7 +56,10 @@ class VerifyMouseHoverChartViewInnovationTab{
                     break
                 case "Innovations by Status":
                     highchart = new Highcharts(Browser.Driver, 'overall-status-chart')
-                break
+                	break
+                case "Engagement Over Time":
+                    highchart = new Highcharts(Browser.Driver, 'overall-chart')
+                	break
         	}
         	highchart.setFocusOnChart()
         }

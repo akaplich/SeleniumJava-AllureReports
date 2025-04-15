@@ -1,15 +1,17 @@
-package actions.common
+package actions.common;
 
-
+import actions.selenium.Click
 import actions.selenium.*
+import actions.WebstormHomepage.SetActionOnChangeBackgroundModal
+import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 import actions.selenium.utils.Elements
 
 class SetupCommon{
     public static void NavigateTab(def params){
         //Tab (required) = Site, Scheduling, Users, etc.
-        //ExecuteJavascript.run(Code:"window.scrollTo(0, 0);")
-        Click.run(ID:"//A[text()='${params.Tab}']")
+        ExecuteJavascript.run(Code:"window.scrollTo(0, 0);")
+        Click.run(ID:"//A[text()='${params.Tab}'][contains(@onclick,'tab_OnClick')]")
 
         if(params.Section){
             if(params.Tab=='BI' && params.Section=='Custom') {
@@ -58,6 +60,9 @@ class SetupCommon{
             }
             else if(params.Tab=='Ideas' && params."Section"=="Team Workspace"){
                 Click.run(ID:"//*[@id='team_workspace_tab']")
+            }
+            else if(params.Tab=='Site' && params."Section"=="Labels"){
+                Click.run(ID:"//*[@id='label_export_import_tab']")
             }
             else if(params.Tab=='BI Only' && params."Section"=="Search"){
                 Click.run(ID:"//*[@id='bi_search_tab']")

@@ -8,6 +8,7 @@ import actions.selenium.Exists
 import screens.SiteSetup.SchedulerLocators
 import screens.common.ModalButtonLocators
 import screens.ReactFormDifferentFieldLocators
+import actions.selenium.ExecuteJavascript
 
 class SetDisableScheduler{
     public void run(def params){
@@ -52,6 +53,7 @@ class SetDisableScheduler{
         } else {
             Click.run("ID Type":"By", By:ModalButtonLocators.cancelButton)
         }
-        sleep(2000) 
+        sleep(2000)
+        ExecuteJavascript.run(Code:"window.scrollTo(0, 0);")
     }
 }

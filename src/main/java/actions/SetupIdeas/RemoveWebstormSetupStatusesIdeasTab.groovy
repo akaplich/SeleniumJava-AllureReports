@@ -18,7 +18,7 @@ class SetWebstormSetupStatusesforIdeasTab{
             sleep(1000)
             if (params."Status to switch ideas to"){
                 if(Exists.run(ID:"//BUTTON[@id='f-modal-submit']")>0){
-                    Click.run(ID:"//*[@id='f-status-assign']//*[contains(@class,'f-dropdown-btn')]")
+                    Click.run(ID:"//*[@id='f-submitmodal-dropdown-deleteStatus']//*[contains(@class,'f-dropdown-btn')]")
                     Click.run(ID:"//UL[contains(@class,'f-dropdown-options')]//LI//*[starts-with(.,'${params."Status to switch ideas to"}')]")
                 }else{
                     SelectItem.run(ID: "//div[@id='delete_custom_idea_status_popup']//select[@id='status-dropdown']", "Visible Text":params."Status to switch ideas to")

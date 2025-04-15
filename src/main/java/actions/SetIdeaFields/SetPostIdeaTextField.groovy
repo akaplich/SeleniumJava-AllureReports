@@ -4,11 +4,6 @@ import actions.selenium.SetText
 import actions.selenium.Click
 import actions.selenium.GetText
 import actions.selenium.Exists
-import actions.selenium.SetTextByPasting
-import actions.selenium.ExecuteJavascript
-import org.openqa.selenium.WebElement
-import actions.selenium.utils.Elements
-import actions.selenium.Browser
 
 
 class SetPostIdeaTextField{
@@ -22,20 +17,6 @@ class SetPostIdeaTextField{
             else if(params."Field Name"=="Title" || params."Field Name"=="Name" || params."Field Name"=="Company Name" || params."Field Name"== "Project Title" || params."Field Name"== "Job Title"){
             	SetText.run(Text:params."Field Value", ID:"//*[@id='idea-form-title-input']//input[1]")
             }
-            else if(params."Field Name"=="Title With Emoji"){
-                println("Start Setting TextForEmoji")
-                def text = params.'Title With Emoji'
-                def code = '''
-					var elm = arguments[0];
-					elm.innerHTML = '${text}';
-					elm.dispatchEvent(new Event('change'));
-				'''			
-                WebElement element = Elements.find(ID:"//*[@id='idea-form-title-input']",Browser.Driver)
-                ExecuteJavascript.run(Code:code, Arguments: element);
-                println("Finished Setting TextForEmoji")
-
-            }
-
             else if(Exists.run(ID:"//LEGEND[contains(text(),'${params."Field Name"}')]/parent::DIV//DIV[starts-with(@class,'redactor-styles redactor-in redactor-in')]",Timeout:1)){    
                 SetText.run(Text:params."Field Value",ID:"//LEGEND[contains(text(),'${params."Field Name"}')]/parent::DIV//DIV[starts-with(@class,'redactor-styles redactor-in redactor-in')]")
             }

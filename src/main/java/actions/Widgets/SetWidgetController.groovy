@@ -1,6 +1,9 @@
 package actions.Widgets;
 
 import actions.selenium.*
+import screens.ReactFormDifferentFieldLocators
+import actions.selenium.*
+import org.openqa.selenium.By
 
 class SetWidgetController{
     public void run(def params){
@@ -25,8 +28,7 @@ class SetWidgetController{
         	}
             if(params."Add Widget from Selection"){
             	SelectItem.run(ID:"//*[@id='widget-admin-approved-select']","Visible Text":params."Add Widget from Selection")
-            	sleep(500)
-				Click.run(ID:"//*[@id='widget-admin-add-approved-widget-btn']")
+            	Click.run(ID:"//*[@id='widget-admin-add-approved-widget-btn']")
             	sleep(1500)
         	}
             if(params."Add Widget from Unapproved Selection"){
@@ -48,13 +50,16 @@ class SetWidgetController{
             }
             
         }
-        
-        
-        
-        
-        
-        
-        
-        
+        if(params."Show Phase Countdown"){
+            def fieldParams = [
+                    'Field Value': "Show Phase Countdown"
+                ]
+            ReactFormDifferentFieldLocators.run(fieldParams)
+            if(params."Show Phase Countdown"==true) {
+            	Click.run("ID Type":"By", By:ReactFormDifferentFieldLocators.multiChoiceWithoutFieldNameCheckboxUnChecked)
+        	} else {
+            	Click.run("ID Type":"By", By:ReactFormDifferentFieldLocators.multiChoiceWithoutFieldNameCheckboxChecked)
+        	}
+        }          
     }
 }

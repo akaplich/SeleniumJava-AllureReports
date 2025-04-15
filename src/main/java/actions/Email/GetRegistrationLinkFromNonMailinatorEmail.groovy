@@ -20,13 +20,23 @@ class GetRegistrationLinkFromNonMailinatorEmail{
         store.connect(params."Sender Host", params."Sender's Email", params."Password")
         Folder inbox = store.getFolder(params.Folder);
         inbox.open(Folder.READ_WRITE);
+        
         Message message = RetrieveMessage.run(params, session, inbox)
-        def content = message.getContent()
-        def link = content.substring(content.indexOf("title=\"Join Now!\" href=\"") + 24, content.indexOf("\" target"))
+        String emailBody = EmailBodyExtractor.run(message)
+        println("emailbody extracted: ${emailBody}")
+        
+        def links = ExtractURL.run(Content: emailBody)
+        
         DeleteMessage.run(message, true)
         inbox.close(true) //if true, all marked 'Deleted' emails will get deleted from server
        	store.close()
-        return link
         
-    }
+        // need only registration link
+        for (String link : links) {
+        	if (link.contains("register")) {
+            	return link 
+        	}
+    	}
+    return null;
+	}
 }

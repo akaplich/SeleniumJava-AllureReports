@@ -2,6 +2,7 @@ package actions.selenium
 
 import org.openqa.selenium.JavascriptExecutor
 import actions.selenium.utils.Elements
+import actions.selenium.Browser
 import org.openqa.selenium.WebElement
 
 class MouseOver{

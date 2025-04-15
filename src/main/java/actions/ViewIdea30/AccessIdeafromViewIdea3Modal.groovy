@@ -3,7 +3,7 @@ package actions.ViewIdea30;
 import actions.selenium.Click
 
 class AccessIdeafromViewIdea3Modal{
-    public void run(def params){
+    public static void run(def params){
         
         if(params."Access Idea"){
             if(params."Access Idea" == "Modal Header") {

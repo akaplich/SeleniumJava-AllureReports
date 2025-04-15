@@ -6,6 +6,7 @@ import actions.selenium.Click
 import actions.selenium.SetCheckBox
 import actions.selenium.SelectItem
 import actions.selenium.ExplicitWait
+import actions.common.SetRedactorToolbarOptions
 
 class SetEnterpriseSetupSiteUserHomepage{
     public void run(def params){
@@ -25,6 +26,11 @@ class SetEnterpriseSetupSiteUserHomepage{
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_END_USER_ONBOARDING_PANEL_ON_HIGHLIGHTS_PAGE']",Check:params."Onboarding Panel")
         SetCheckBox.run(ID:"//*[@id='CB_ENABLE_ADMINISTRATOR_MESSAGE_ON_HIGHLIGHTS_PAGE']",Check:params."Administrator Message on Highlights page")
         SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_TAB_ACTION_ITEMS']",Check:params."My Action Items")
+
+        //Admin Panel Rich Text Box
+        if(params."Set HTML For User Homepage Message"){
+            SetRedactorToolbarOptions.run(Field: "User Homepage Message","Toolbar Option":"HTML","Set HTML":params."Set HTML For User Homepage Message")
+        } 
         
         //featured activity
         SetCheckBox.run(ID:"//*[@id='CB_USER_HOMEPAGE_FEATURED_ACTIVITY']",Check:params."Featured Activity")
@@ -45,7 +51,8 @@ class SetEnterpriseSetupSiteUserHomepage{
         SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_TAB_SPARKS']",Check:params."My Ideas")
         SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_TAB_SUBMISSIONS']",Check:params."Submissions")
         SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_TAB_PROJECTS']",Check:params."Projects")
-        
+        SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_TAB_ALL_SUBMISSIONS']",Check:params."All Submissions")
+       
         //Additional Options
         SetCheckBox.run(ID:"//*[@id='CB_FEATURE_USER_HOMEPAGE_HELPFUL_LINKS']",Check:params."Helpful Links")
         
