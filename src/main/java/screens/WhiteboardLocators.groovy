@@ -1,5 +1,7 @@
 package screens;
+
 import org.openqa.selenium.By
+import org.openqa.selenium.support.pagefactory.ByChained 
 
 public class WhiteboardLocators {
     // This is a screen based on the Journey Pattern. See here for more details on the Journey Pattern: https://fasterchaos.svbtle.com/journey-pattern & https://www.slideshare.net/RiverGlide/a-journey-beyond-the-page-object-pattern#17
@@ -28,8 +30,19 @@ public class WhiteboardLocators {
     // Whiteboard Right Click Dialog
     public static By rightClick_Copy = By.xpath("//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Copy']")
     public static By rightClick_CopyAsPNG = By.xpath("//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Copy as PNG']")
-    public static By rightClick_Paste = By.xpath("//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Paste here']")
+    public static By rightClick_Paste = By.xpath("//*[contains(@class,'f-canvas-right-click-menu')]//*[contains(text(),'Paste')]")
+    public static By rightClick_Delete = By.xpath("//*[contains(@class,'f-canvas-right-click-menu')]//*[text()='Delete']")
+    public static By rightClick_BrightideaAI = By.xpath("//UL[contains(@class,'f-canvas-right-click-menu')]/LI[contains(.,'Brightidea AI')]")
     
+    // Dynamic locator for Brightidea AI - Submenu
+    public static By rightClick_BrightideaAI_menuOption(String menuOption) {
+        return new ByChained(rightClick_BrightideaAI, By.xpath("//UL[contains(@class,'sub-menu')]//LI//*[starts-with(.,'${menuOption}')]"))
+    }
+    // Dynamic locator for Brightidea AI - Submenu - Option
+    public static By rightClick_BrightideaAI_subMenuOption(String menuOption, String subMenuOption){
+    	return new ByChained(rightClick_BrightideaAI_menuOption(menuOption), By.xpath("./../..//UL[contains(@class,'dropdown-options')]//*[contains(.,'${subMenuOption}')]"))
+    }
+
     //********************************************************************************************************************************
 
     // Constructor to initialize the driver and instantiate elements using PageFactory

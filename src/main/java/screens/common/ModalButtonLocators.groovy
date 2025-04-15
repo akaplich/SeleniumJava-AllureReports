@@ -11,6 +11,8 @@ class ModalButtonLocators{
     static By confirmCancelButton
     static By closeButton
     static By closeOnModalButton
+    public static By actionOnModal = By.xpath("//*[contains(@class,'ui-draggable ui-draggable-handle') and not(contains(@style,'display: none'))]//*[contains(@class,'green_btn_center')]")
+    public static By cancelOnModal = By.xpath("//*[contains(@class,'ui-draggable ui-draggable-handle') and not(contains(@style,'display: none'))]//*[contains(@class,'bimodal-secondary')]")
     
      public static void run(def params) {
       
@@ -19,6 +21,7 @@ class ModalButtonLocators{
         confirmOKButton = By.xpath("//*[contains(@id,'clickToConfirmOkButton')]")
         confirmCancelButton = By.xpath("//*[contains(@id,'clickToConfirmCancelButton')]")
         closeButton = By.xpath("//BUTTON[contains(@class,'close-button')]")
+        closeOnModalButton  = By.xpath("//*[contains(@data-tooltip-id,'close')]")
         closeOnModalButton  = By.xpath("//*[contains(@data-tooltip-id,'close')]")
      }
 }
