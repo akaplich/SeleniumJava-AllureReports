@@ -30,11 +30,16 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."Licensing Model" = null
+        variables."Unlimited Brightidea Administrator License Type" = null
+        variables."Brightidea Administrator License Type Purchased Count" = null
+        variables."Unlimited Idea Box Manager License Type" = null
+        variables."Idea Box Manager License Type Purchased Count" = null
     }
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
+        Action58123c20fa4ee77809f468f6(variables)
         //Delete this action after Unified Commenting toggle is On
         Action5e5ee308c0c2515013b0c7b1([:])
         //Log Out
@@ -55,7 +60,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        variables."affiliateURL" = new CopyAffiliate().run(params)
         //Open Browser
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login

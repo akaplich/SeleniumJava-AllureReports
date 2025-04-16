@@ -17,6 +17,7 @@ Technologies currently included:
   * https://toolsqa.com/testng/what-is-testng/
   * testng.xml can be used to define test suites or executions using the group tag
   * Use "mvn test -Dsurefire.suiteXmlFiles=path/to/your/testng.xml" to run suite based on TestNG
+  * Use "mvn test -Dsurefire.suiteXmlFiles=/src/main/resources/SmokeTestSet.xml" to run smoke suite
   * Use "mvn test -Dtest=TC_C44_SubmitNewValidIdeaWithAllRequiredFields" to run a single case
   * Can generate an emailable report
 * ChromeDriverManager (Requires newer Selenium)

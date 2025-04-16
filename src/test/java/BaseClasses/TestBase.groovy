@@ -11,7 +11,6 @@ public class TestBase {
     }
     @AfterMethod
     public void afterState(){
-        Browser.quit();
+        //Browser.quit();
     }
-
 }

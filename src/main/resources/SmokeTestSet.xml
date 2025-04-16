@@ -8,9 +8,5 @@
             <class name="TestCases.RWHQImports.SmokeTests.TC_C128776_CommentComponent_EditComment"/>
             <class name="TestCases.RWHQImports.SmokeTests.TC_C130972_WB_Text_AddAndRemoveText"/>
         </classes>
-        <groups>
-
-        </groups>
-
     </test>
 </suite>

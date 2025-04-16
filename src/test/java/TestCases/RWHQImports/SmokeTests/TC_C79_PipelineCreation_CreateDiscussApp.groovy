@@ -27,12 +27,17 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."Licensing Model" = /Standard Licensing Model/
+        variables."Unlimited Brightidea Administrator License Type" = /1/
+        variables."Brightidea Administrator License Type Purchased Count" = null
+        variables."Unlimited Idea Box Manager License Type" = null
+        variables."Idea Box Manager License Type Purchased Count" = null
     }
 
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6("Licensing Model":/Standard Licensing Model/.toString(),"Unlimited Brightidea Administrator License Type":/1/.toString())
+        Action58123c20fa4ee77809f468f6(variables)
         //Navigate
         new Navigate().run("Area to Navigate to":/Apps/.toString())
         //Select Product in Apps Pillar Page
@@ -45,7 +50,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        variables."affiliateURL" = new CopyAffiliate().run(params)
         //Open Browser
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login

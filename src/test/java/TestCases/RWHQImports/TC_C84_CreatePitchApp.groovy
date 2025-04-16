@@ -71,8 +71,8 @@ class TC_C84_CreatePitchApp extends TestBase{
         //Open Browser
         new Browser().run(
                 "Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),
-                "URL":/${variables."affiliateURL"}/.toString(),
-                "Browser Type":/${variables."Browser"}/.toString())
+                "URL":/${params."affiliateURL"}/.toString(),
+                "Browser Type":/${params."Browser"}/.toString())
 
 
 
