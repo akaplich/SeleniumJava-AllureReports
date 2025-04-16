@@ -7,7 +7,6 @@ import actions.Utils.SettoLabEnvironment
 import actions.Widgets.*
 import actions.general.Login
 import actions.general.NavigateWebStormAdminBar
-import actions.general.Wait
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.slf4j.Logger

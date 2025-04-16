@@ -1,4 +1,4 @@
-package TestCases.RWHQImports.SmokeTests
+package TestCases.RWHQImports.SmokeTests_Groovy
 
 import BaseClasses.TestBase
 import actions.API.Utils.CopyAffiliate
