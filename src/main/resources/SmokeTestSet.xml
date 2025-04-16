@@ -2,11 +2,11 @@
 <suite name="Automation Smoke Test Suite">
     <test name="Smoke Tests">
         <classes>
-            <class name="TestCases.RWHQImports.SmokeTests.TC_C44_SubmitNewValidIdeaWithAllRequiredFields"/>
-            <class name="TestCases.RWHQImports.SmokeTests.TC_C63_VerifyIdeaExistsInPipeline"/>
-            <class name="TestCases.RWHQImports.SmokeTests.TC_C79_PipelineCreation_CreateDiscussApp"/>
-            <class name="TestCases.RWHQImports.SmokeTests.TC_C128776_CommentComponent_EditComment"/>
-            <class name="TestCases.RWHQImports.SmokeTests.TC_C130972_WB_Text_AddAndRemoveText"/>
+            <class name="TestCases.RWHQImports.SmokeTests_Groovy.TC_C44_SubmitNewValidIdeaWithAllRequiredFields"/>
+            <class name="TestCases.RWHQImports.SmokeTests_Groovy.TC_C63_VerifyIdeaExistsInPipeline"/>
+            <class name="TestCases.RWHQImports.SmokeTests_Groovy.TC_C79_PipelineCreation_CreateDiscussApp"/>
+            <class name="TestCases.RWHQImports.SmokeTests_Groovy.TC_C128776_CommentComponent_EditComment"/>
+            <class name="TestCases.RWHQImports.SmokeTests_Groovy.TC_C130972_WB_Text_AddAndRemoveText"/>
         </classes>
     </test>
 </suite>
