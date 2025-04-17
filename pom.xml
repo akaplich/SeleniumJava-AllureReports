@@ -22,13 +22,6 @@
             <version>5.10.0</version> <!-- You can use any recent version -->
             <scope>test</scope>
         </dependency>
-        <!-- JUnit Platform Suite API -->
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-suite-api</artifactId>
-            <version>1.12.2</version>
-            <scope>test</scope>
-        </dependency>
 
         <!-- JUnit Vintage Engine (if you need to run JUnit 4 tests) -->
         <dependency>
