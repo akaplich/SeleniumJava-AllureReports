@@ -20,6 +20,7 @@ import actions.selenium.CloseWindow
 import actions.selenium.Refresh
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C130972 - WB - Text - Add & Remove Text
@@ -36,6 +37,7 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
         variables."Database" = null
     }
     @Test
+    @Tag("Smoke")
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])

@@ -23,7 +23,7 @@ class TC_C84_CreatePitchApp extends TestBase{
     private static def params = [:]
 
     @BeforeAll
-    public void beforeState(){
+    public static void beforeState(){
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Run Browser in Incognito" = null
         params."affiliateURL" = null

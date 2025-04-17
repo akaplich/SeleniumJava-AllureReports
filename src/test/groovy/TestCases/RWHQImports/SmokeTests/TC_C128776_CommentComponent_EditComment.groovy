@@ -16,6 +16,7 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C128776 - Comment Component - Edit Comment
@@ -37,6 +38,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
         variables."Idea Box Manager License Type Purchased Count" = null
     }
     @Test
+    @Tag("Smoke")
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)

@@ -3,6 +3,10 @@ Instructions:
 * run "mvn clean install" to clear dependencies and download them based on the POM
 * Install GitHub Copilot plugin into Intellij
 
+Running From Commandline
+* "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
+* "mvn clean test -Dgroups="Demo" site" will run the 5 smoke test cases, and generate a site report
+
 Steps to import RWHQ Testcase
 1. Create a new groovy file/class using the RWHQ name. Spaces and dashes need to be removed. I've been using names like this TC_C10805_PostUpdate
 2. Copy groovy code into the class. Replace the "class RedwoodHQTestCase{" with the one generated during the file creation

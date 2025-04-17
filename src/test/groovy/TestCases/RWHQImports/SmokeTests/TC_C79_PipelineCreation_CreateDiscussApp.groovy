@@ -13,6 +13,7 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C79 - Pipeline Creation - Create Discuss App
@@ -35,6 +36,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     }
 
     @Test
+    @Tag("Smoke")
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)

@@ -15,14 +15,20 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C44 - Submit new valid Idea with all Required fields
 class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     private static def variables = [:]
+    private static final Logger logger = LoggerFactory.getLogger(TC_C44_SubmitNewValidIdeaWithAllRequiredFields.class);
+
 
     @BeforeAll
     public static void beforeState(){
+        logger.debug("Before State");
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
@@ -36,7 +42,9 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         variables."Idea Box Manager License Type Purchased Count" = null
     }
     @Test
+    @Tag("Smoke")
     public void testcase(){
+        logger.debug("TestCase");
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)
         //Navigate WebStorm or MTS
@@ -77,6 +85,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     }
     @AfterEach
     public void afterState(){
+        logger.debug("AfterState");
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
     }
