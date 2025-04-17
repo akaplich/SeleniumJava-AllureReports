@@ -13,16 +13,16 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
 
 //C84 - Pipeline Creation - Create Pitch App
 class TC_C84_CreatePitchApp extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C84_CreatePitchApp.class);
     private static def params = [:]
 
-    @BeforeSuite
+    @BeforeAll
     public void beforeState(){
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Run Browser in Incognito" = null
@@ -94,7 +94,7 @@ class TC_C84_CreatePitchApp extends TestBase{
         new DeleteAffiliate().run([:])
 
     }
-    @AfterMethod
+    @AfterEach
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])

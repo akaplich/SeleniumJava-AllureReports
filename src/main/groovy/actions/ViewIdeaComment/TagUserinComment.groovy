@@ -1,4 +1,4 @@
-package actions.ViewIdea;
+package actions.ViewIdeaComment;
 
 import actions.selenium.SetText
 import actions.selenium.Click

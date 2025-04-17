@@ -1,4 +1,4 @@
-package TestCases.RWHQImports.SmokeTests_Groovy
+package TestCases.RWHQImports.SmokeTests
 
 import BaseClasses.TestBase
 import actions.API.Utils.CopyAffiliate
@@ -11,16 +11,16 @@ import actions.general.Login
 import actions.general.Navigate
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
 
 //C79 - Pipeline Creation - Create Discuss App
 class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     private static def variables = [:]
 
-    @BeforeSuite
-    public void beforeState(){
+    @BeforeAll
+    public static void beforeState(){
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
@@ -70,7 +70,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
         new DeleteAffiliate().run([:])
 
     }
-    @AfterMethod
+    @AfterEach
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])

@@ -1,4 +1,4 @@
-package actions.SetupIdeas;
+package actions.SetupUsers;
 
 import actions.common.SetupCommon
 import actions.selenium.Click

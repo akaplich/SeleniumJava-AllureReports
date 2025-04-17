@@ -14,19 +14,19 @@ import actions.general.NavigateWebStormAdminBar
 import actions.general.Wait
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.BeforeAll
 
 //C10805 - Post Update
 class TC_C10805_PostUpdate extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C10805_PostUpdate.class);
     private static def params = [:]
 
-    @BeforeSuite
-    public void beforeState() {
+    @BeforeAll
+    public static void beforeState() {
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Run Browser in Incognito" = null
         params."Browser" = /Chrome/
@@ -88,7 +88,7 @@ class TC_C10805_PostUpdate extends TestBase{
         new DeleteAffiliate().run([:])
 
     }
-    @AfterMethod
+    @AfterEach
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])

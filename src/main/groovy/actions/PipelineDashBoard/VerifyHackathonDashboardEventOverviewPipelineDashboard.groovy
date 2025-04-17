@@ -2,7 +2,6 @@ package actions.PipelineDashBoard;
 
 import actions.selenium.Exists
 import actions.selenium.VerifyText
-import actions.selenium.VerifyNumberOfMatches
 import actions.selenium.utils.VerifyNumberOfMatches
 import screens.PipelineDashboard.EventOverviewDashboardLocators
 

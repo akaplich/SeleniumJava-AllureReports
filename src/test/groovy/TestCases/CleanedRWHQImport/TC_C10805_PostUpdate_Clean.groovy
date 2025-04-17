@@ -11,20 +11,19 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Test
 
 //C10805 - Post Update
 class TC_C10805_PostUpdate_Clean extends TestBase{
     private static final Logger logger = LoggerFactory.getLogger(TC_C10805_PostUpdate_Clean.class);
-    private static Browser browser = Browser.getInstance()
 
     //private static def variables = [:]
     private static def params = [:]
 
-    @BeforeSuite
-    public void beforeState() {
+    @BeforeAll
+    public static void beforeState() {
         params."Username Email" = "bi.adminuser1@brightidea.com"
         params."Password" = "brightidea1"
         params."Run Browser in Incognito" = null
@@ -60,7 +59,7 @@ class TC_C10805_PostUpdate_Clean extends TestBase{
     }
 
 
-    @AfterMethod
+    @AfterEach
     public void afterState(){
         try{
             //Close Current Window

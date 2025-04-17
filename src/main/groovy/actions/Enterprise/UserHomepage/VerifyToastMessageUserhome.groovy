@@ -1,4 +1,4 @@
-package actions.Whiteboards;
+package actions.Enterprise.UserHomepage;
 
 import actions.selenium.Click
 import actions.selenium.utils.Elements
