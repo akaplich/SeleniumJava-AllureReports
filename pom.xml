@@ -192,7 +192,39 @@
     </dependencies>
     <build>
         <plugins>
-
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>4.1.1</version>
+                <executions>
+                    <execution>
+                        <id>main-compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>compileTests</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sources>
+                        <fileset>
+                            <directory>${project.basedir}/src/main/groovy</directory>
+                        </fileset>
+                    </sources>
+                    <testSources>
+                        <fileset>
+                            <directory>${project.basedir}/src/test/groovy</directory>
+                        </fileset>
+                    </testSources>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
