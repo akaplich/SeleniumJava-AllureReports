@@ -40,13 +40,7 @@ jobs:
       run: mvn clean test -DskipTests
 
     - name: Maven Demo Run
-      run: mvn test -Dtest=TestCases.FirstGroovyScriptTest site > selenium.log 2>&1
-
-    - name: Upload Selenium Log
-      uses: actions/upload-artifact@v4
-      with:
-        name: selenium-log
-        path: selenium.log
+      run: mvn test -Dtest=TestCases.FirstGroovyScriptTest site
 
     - name: Upload Maven Site Report
       uses: actions/upload-artifact@v4
