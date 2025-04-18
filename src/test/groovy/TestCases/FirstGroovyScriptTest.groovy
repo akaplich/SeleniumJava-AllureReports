@@ -1,11 +1,13 @@
 package TestCases
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.WebDriverManager
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class FirstGroovyScriptTest {
-    public static void main(String[] args) {
+    @Test
+    public void main() {
         //System.setProperty("webdriver.chrome.driver", "/Users/Brightidea/Documents/chromedriver-mac-arm64/chromedriver");
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();

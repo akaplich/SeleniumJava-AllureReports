@@ -6,6 +6,7 @@ Instructions:
 Running From Commandline
 * "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
 * "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
+* "mvn test -Dtest=TestCases.FirstGroovyScriptTest site will execute a single standalone demo test and generate a site report"
 
 Steps to import RWHQ Testcase
 1. Create a new groovy file/class using the RWHQ name. Spaces and dashes need to be removed. I've been using names like this TC_C10805_PostUpdate

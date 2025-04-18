@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "origin/acooper_RunOnDocker" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "origin/acooper_RunOnDocker" ]
 
 jobs:
   build:
@@ -35,12 +35,25 @@ jobs:
         sudo apt-get install -y wget
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-      
+
     - name: Maven Test
       run: mvn clean test -DskipTests
 
     - name: Maven Demo Run
-      run: mvn clean test -Dgroups="Demo" site
+      run: mvn test -Dtest=TestCases.FirstGroovyScriptTest site > selenium.log 2>&1
+
+    - name: Upload Selenium Log
+      uses: actions/upload-artifact@v3
+      with:
+        name: selenium-log
+        path: selenium.log
+
+    - name: Upload Maven Site Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: maven-site-report
+        path: target/site
+
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
