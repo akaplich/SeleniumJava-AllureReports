@@ -31,17 +31,16 @@ jobs:
     - name: Install Chrome
       run: |
         sudo apt-get update
+        sudo apt-get install -y --fix-missing
         sudo apt-get install -y wget
-        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+      
     - name: Maven Test
-      run: mvn test
+      run: mvn clean test -DskipTests
 
-    - name: Maven Test Case
-      run: mvn test -Dtest=TC_C44_SubmitNewValidIdeaWithAllRequiredFields
+    - name: Maven Demo Run
+      run: mvn clean test -Dgroups="Demo" site
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph

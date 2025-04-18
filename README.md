@@ -5,15 +5,20 @@ Instructions:
 
 Running From Commandline
 * "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
-* "mvn clean test -Dgroups="Demo" site" will run the 5 smoke test cases, and generate a site report
+* "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
 
 Steps to import RWHQ Testcase
 1. Create a new groovy file/class using the RWHQ name. Spaces and dashes need to be removed. I've been using names like this TC_C10805_PostUpdate
 2. Copy groovy code into the class. Replace the "class RedwoodHQTestCase{" with the one generated during the file creation
-3. Add 'private static Browser browser = Browser.getInstance()' in the class outside the functions
-4. Remove 'new Browser().run(…' and replace with 'browser.run(variables."affiliateURL".toString())'
 5. (Optional) Add 'private static final Logger logger = LoggerFactory.getLogger([classname].class);'
 6. (Optional) Replace qualified names with imports
+
+Testing GitHub Actions locally using Docker
+- Reference: https://youtu.be/YORvmxQBPeM?si=HI-QKO9pZWw7x1lF
+- Install Act: https://github.com/nektos/act
+- Dry Run: act -j [workflow name] -n
+- 
+
 
 Technologies currently included:
 * slf4j.Logger with a loggerback backend to provide logging capabilities
