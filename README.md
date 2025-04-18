@@ -18,7 +18,6 @@ Testing GitHub Actions locally using Docker
 - Reference: https://youtu.be/YORvmxQBPeM?si=HI-QKO9pZWw7x1lF
 - Install Act: https://github.com/nektos/act
 - Dry Run: act -j [workflow name] -n
-- 
 
 
 Technologies currently included:
