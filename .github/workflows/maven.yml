@@ -35,12 +35,16 @@ jobs:
         sudo apt-get install -y wget
         wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
         sudo apt-get install -y ./google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+        google-chrome --version
+        google-chrome --headless --no-sandbox --disable-gpu --dump-dom https://www.google.com    
 
-    - name: Maven Test
-      run: mvn clean test -DskipTests
+    - name: Close Chrome
+      if: always()
+      run: |
+        pkill -f "google-chrome" || echo "Chrome is not running"
 
-    - name: Maven Demo Run
-      run: mvn test -Dtest=TestCases.FirstGroovyScriptTest site
+    - name: Maven FirstGroovyScriptTest Run
+      run: mvn clean test -Dtest=TestCases.FirstGroovyScriptTest site
 
     - name: Upload Maven Site Report
       uses: actions/upload-artifact@v4
