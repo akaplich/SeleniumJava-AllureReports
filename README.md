@@ -6,7 +6,7 @@ Instructions:
 Running From Commandline
 * "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
 * "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
-* "mvn test -Dtest=TestCases.FirstGroovyScriptTest site will execute a single standalone demo test and generate a site report"
+* "mvn test -Dtest=TestCases.DockerTesting.FirstGroovyScriptTest site will execute a single standalone demo test and generate a site report"
 
 Steps to import RWHQ Testcase
 1. Create a new groovy file/class using the RWHQ name. Spaces and dashes need to be removed. I've been using names like this TC_C10805_PostUpdate
@@ -18,6 +18,12 @@ Testing GitHub Actions locally using Docker
 - Reference: https://youtu.be/YORvmxQBPeM?si=HI-QKO9pZWw7x1lF
 - Install Act: https://github.com/nektos/act
 - Dry Run: act -j [workflow name] -n
+
+Selenoid Installation
+* Follow these instructions: https://aerokube.com/selenoid/latest/
+* Following article is simplified and can be helpful: https://truuts.medium.com/how-to-install-selenoid-on-macos-751ee2955c70
+* Be sure to use "chmod +x ./cm_darwin_arm64" so the executable can run on mac
+* Go to http://localhost:8080/#/ once the UI is running
 
 
 Technologies currently included:

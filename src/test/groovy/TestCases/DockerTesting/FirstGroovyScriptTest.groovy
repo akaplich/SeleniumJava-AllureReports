@@ -1,4 +1,4 @@
-package TestCases
+package TestCases.DockerTesting
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.junit.jupiter.api.Test;
@@ -7,9 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-
-import java.nio.file.Files
-import java.nio.file.Path;
 
 public class FirstGroovyScriptTest {
     private static final Logger logger = LoggerFactory.getLogger(FirstGroovyScriptTest.class);
