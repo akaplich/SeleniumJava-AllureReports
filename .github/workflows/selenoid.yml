@@ -28,11 +28,7 @@ jobs:
 
       - name: run the Maven Clean Test
         run: |
-          mvn clean test -DskipTests
-
-      - name: run the Maven Clean Test
-        run: |
-          mvn clean test -Dtest=TestCases.TC_CSelenoidDockerTestCase site
+          mvn clean test -Dgroups="SelenoidSet" site
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4

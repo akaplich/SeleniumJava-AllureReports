@@ -1,19 +1,20 @@
 package TestCases.DockerTesting
 
 import io.github.bonigarcia.wdm.WebDriverManager
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver
+import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeOptions
-import org.openqa.selenium.remote.DesiredCapabilities
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-public class TC_CSelenoidDockerTestCase {
+public class TC_CSelenoidDockerTestCase1 {
     private static final Logger logger = LoggerFactory.getLogger(FirstGroovyScriptTest.class);
 
     @Test
+    @Tag("SelenoidSet")
     public void main() {
         //System.setProperty("webdriver.chrome.driver", "/Users/Brightidea/Documents/chromedriver-mac-arm64/chromedriver");
         logger.debug("Downloading ChromeDriver");
@@ -35,6 +36,11 @@ public class TC_CSelenoidDockerTestCase {
 
         logger.debug("Url Title: " + driver.getTitle());
         Thread.sleep(1000)
+        assert 2 + 2 == 4 : "Math error: 2 + 2 should equal 4"
+
+    }
+    @AfterEach
+    public void afterState(){
         logger.debug("Quitting");
         driver.quit();
     }
