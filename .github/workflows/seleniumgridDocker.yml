@@ -1,4 +1,4 @@
-name: Web Test on Single Docker Container
+name: Web Test on Multiple Containers
 
 on: workflow_dispatch
 jobs:
@@ -16,11 +16,18 @@ jobs:
           java-version: '21.0.3'
           cache: maven
 
-      - name: Start Selenium Standalone Chrome container
-        run: |
-          docker pull --platform=linux/amd64 selenium/standalone-chrome
-          docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
+      - name: Create Docker network
+        run: docker network create grid
 
+      - name: Start Selenium Grid Hub
+        run: |
+          docker run -d --network grid --name selenium-hub -p 4444:4444 selenium/hub:latest
+          
+      - name: Start Selenium Chrome Nodes
+        run: |
+          for i in {1..4}; do
+            docker run -d --network grid --name chrome-node-$i -e HUB_HOST=selenium-hub selenium/node-chrome:latest
+          done
 
       - name: run the DockerSet through Maven
         run: |
@@ -31,3 +38,9 @@ jobs:
         with:
           name: maven-site-report
           path: target/site
+
+      - name: Clean up Docker containers
+        if: always()
+        run: |
+          docker rm -f $(docker ps -aq)
+          docker network rm grid

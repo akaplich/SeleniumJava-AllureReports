@@ -1,4 +1,4 @@
-name: Run web test in github actions with Selenoid
+name: Run web test in single container
 
 on: workflow_dispatch
 jobs:
