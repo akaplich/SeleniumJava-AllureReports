@@ -67,7 +67,9 @@ class Browser{
                     "ignore-certificate-errors=false",
                     "--no-sandbox",
                     "--start-maximized",
-                    "--disable-popup-blocking"
+                    "--disable-popup-blocking",
+                    "--headless",
+                    "--disable-gpu"
             )
 
             /* - Legacy Options, adding all of them results in a failure, adding them as needed

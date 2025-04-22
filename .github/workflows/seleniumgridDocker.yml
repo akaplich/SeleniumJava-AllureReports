@@ -1,0 +1,46 @@
+name: Web Test on Multiple Containers
+
+on: workflow_dispatch
+jobs:
+  run-web-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: pull the project into the runner
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # You can use 'zulu', 'adopt', or other distributions that provide OpenJDK
+          java-version: '21.0.3'
+          cache: maven
+
+      - name: Create Docker network
+        run: docker network create grid
+
+      - name: Start Selenium Grid Hub
+        run: |
+          docker run -d --network grid --name selenium-hub -p 4444:4444 selenium/hub:latest
+          
+      - name: Start Selenium Chrome Nodes
+        run: |
+          for i in {1..4}; do
+            docker run -d --network grid --name chrome-node-$i -e HUB_HOST=selenium-hub selenium/node-chrome:latest
+          done
+
+      - name: run the DockerSet through Maven
+        run: |
+          mvn clean test -Dgroups="DockerSet" site
+
+      - name: Upload Maven Site Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-site-report
+          path: target/site
+
+      - name: Clean up Docker containers
+        if: always()
+        run: |
+          docker rm -f $(docker ps -aq)
+          docker network rm grid
