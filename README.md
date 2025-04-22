@@ -3,6 +3,10 @@ Instructions:
 * run "mvn clean install" to clear dependencies and download them based on the POM
 * Install GitHub Copilot plugin into Intellij
 
+Running Locally (If docker isn't working for you)
+* set settings.properties.environment.target = local
+* Browser should now assign Driver using Chromedriver instead of RemoteWebDriver
+
 Running From Commandline
 * "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
 * "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
@@ -18,12 +22,35 @@ Testing GitHub Actions locally using Docker
 - Reference: https://youtu.be/YORvmxQBPeM?si=HI-QKO9pZWw7x1lF
 - Install Act: https://github.com/nektos/act
 - Dry Run: act -j [workflow name] -n
+- Full run: act -j [workflow name]
 
-Selenoid Installation
+Local Selenium Grid on Docker
+* References:
+  * https://github.com/SeleniumHQ/docker-selenium?tab=readme-ov-file
+
+
+* MAC Instructions for a Single container for debugging
+  * docker pull --platform=linux/amd64 selenium/standalone-chrome
+  * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
+  * Open http://localhost:4444/ in browser for Selenium Grid UI
+  * Open http://localhost:7900/ in browser for VNC to container (Watch case running)
+    * Note: Any VNC client can be used to connect to the container 
+* MAC Instructions for 5 containers for parallel runs
+  * 
+
+
+Selenoid Installation - Chome is not being updated - Disregard
 * Follow these instructions: https://aerokube.com/selenoid/latest/
 * Following article is simplified and can be helpful: https://truuts.medium.com/how-to-install-selenoid-on-macos-751ee2955c70
 * Be sure to use "chmod +x ./cm_darwin_arm64" so the executable can run on mac
 * Go to http://localhost:8080/#/ once the UI is running
+* Important Commands
+  * Startup
+    * ./cm_darwin_arm64 selenoid start --vnc
+    * ./cm_darwin_arm64 selenoid-ui start
+  * Shutdown
+    * ./cm_darwin_arm64 selenoid-ui stop
+    * ./cm_darwin_arm64 selenoid stop
 
 
 Technologies currently included:
