@@ -32,6 +32,8 @@ import org.openqa.selenium.*
 import org.openqa.selenium.chrome.*
 import actions.selenium.utils.GetIPAddress
 
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -162,5 +164,24 @@ class Browser{
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(cbPreference);
         return cbPreference;
+    }
+
+    void quit(){
+        if (Driver != null) {
+            captureScreenshot("failingTest")
+            Driver.quit()
+        }
+    }
+
+    void captureScreenshot(String testName) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE)
+            String screenshotPath = "target/screenshots/${testName}.png"
+            Files.createDirectories(Paths.get("target/screenshots"))
+            screenshot.renameTo(new File(screenshotPath))
+            println("Screenshot saved: ${screenshotPath}")
+        } catch (Exception e) {
+            println("Failed to capture screenshot: ${e.message}")
+        }
     }
 }

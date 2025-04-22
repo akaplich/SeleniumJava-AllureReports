@@ -60,6 +60,24 @@ jobs:
           name: maven-site-report
           path: target/site
 
+      - name: Upload test logs
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: test-logs
+          path: '**/target/*-reports/TEST*output.txt'
+          if-no-files-found: error
+          retention-days: 2
+
+      - name: Upload test screenshot
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: test-screenshot
+          path: '**/screenshot/*screenshot.png'
+          if-no-files-found: error
+          retention-days: 2
+
       - name: Publish Test Report
         if: success() || failure()
         uses: scacap/action-surefire-report@v1

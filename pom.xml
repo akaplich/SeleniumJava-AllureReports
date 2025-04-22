@@ -233,6 +233,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin}</version>
                 <configuration>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <systemPropertyVariables>
+                        <log.level>DEBUG</log.level>
+                    </systemPropertyVariables>
                     <parallel>methods</parallel>
                     <threadCount>3</threadCount>
                     <threadCount>4</threadCount>
