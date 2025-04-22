@@ -38,20 +38,21 @@ jobs:
           docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
 
       - name: Restore Maven Cache
-        uses: skjolber/maven-cache-github-action@v1
-        continue-on-error: true
+        uses: actions/cache@v3
         with:
-          step: restore
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Run Web Tests via Maven
         run: |
           mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
 
       - name: Save Maven Cache
-        uses: skjolber/maven-cache-github-action@v1
+        run: |
+          echo "step=save" >> $GITHUB_ENV
         continue-on-error: true
-        with:
-           step: save
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
