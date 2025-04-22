@@ -26,7 +26,7 @@ jobs:
       - name: Start Selenium Chrome Nodes
         run: |
           for i in {1..4}; do
-            docker run -d --network grid --name chrome-node-$i -e HUB_HOST=selenium-hub selenium/node-chrome:latest
+            docker run -d --network grid --name chrome-node-$i --shm-size="2g" -e HUB_HOST=selenium-hub selenium/node-chrome:latest
           done
 
       - name: run the DockerSet through Maven
