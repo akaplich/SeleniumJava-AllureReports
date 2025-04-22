@@ -13,6 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <maven.surefire.plugin>3.5.3</maven.surefire.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <environment.url>defaulturl.com</environment.url>
     </properties>
 
     <dependencies>
@@ -260,6 +261,12 @@
 
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <reporting>
         <plugins>
