@@ -59,3 +59,9 @@ jobs:
         with:
           name: maven-site-report
           path: target/site
+
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
+        with:
+          report_paths: '**/target/surefire-reports/*.xml'
