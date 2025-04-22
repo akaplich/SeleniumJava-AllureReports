@@ -6,8 +6,11 @@ on:
       Mvn_Group:
         description: 'Mvn Group'
         required: true
-        default: 'smoke'
-        type: string
+        default: 'Smoke'
+        type: choice
+        options:
+          - Smoke
+          - DockerSet
       Run_Headless:
         description: 'Run Headless'
         required: true
@@ -42,7 +45,7 @@ jobs:
             docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" selenium/node-chrome:4.31.0-20250414
           done
 
-      - name: run the DockerSet through Maven
+      - name: Run Web Tests via Maven
         run: |
           mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
 

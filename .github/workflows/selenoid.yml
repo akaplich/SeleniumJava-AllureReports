@@ -6,8 +6,11 @@ on:
       Mvn_Group:
         description: 'Mvn Group'
         required: true
-        default: 'smoke'
-        type: string
+        default: 'Smoke'
+        type: choice
+        options:
+          - Smoke
+          - DockerSet
       Run_Headless:
         description: 'Run Headless'
         required: true
@@ -34,7 +37,7 @@ jobs:
           docker pull --platform=linux/amd64 selenium/standalone-chrome
           docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
 
-      - name: run the SelenoidSet through Maven
+      - name: Run Web Tests via Maven
         run: |
           mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
 
