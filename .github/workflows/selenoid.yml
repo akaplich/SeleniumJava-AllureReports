@@ -36,7 +36,7 @@ jobs:
 
       - name: run the SelenoidSet through Maven
         run: |
-          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}}" site
+          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
