@@ -1,6 +1,19 @@
 name: Web Test on Multiple Containers
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      Mvn_Group:
+        description: 'Mvn Group'
+        required: true
+        default: 'smoke'
+        type: string
+      Run_Headless:
+        description: 'Run Headless'
+        required: true
+        default: true
+        type: boolean
+
 jobs:
   run-web-test:
     runs-on: ubuntu-latest
@@ -31,7 +44,7 @@ jobs:
 
       - name: run the DockerSet through Maven
         run: |
-          mvn clean test -Dgroups="DockerSet" -Dheadless=true site
+          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}}" site
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
