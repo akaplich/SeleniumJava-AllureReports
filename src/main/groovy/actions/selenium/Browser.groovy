@@ -67,10 +67,17 @@ class Browser{
                     "ignore-certificate-errors=false",
                     "--no-sandbox",
                     "--start-maximized",
-                    "--disable-popup-blocking",
-                    "--headless",
-                    "--disable-gpu"
+                    "--disable-popup-blocking"
             )
+
+            // See if we should run headless
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"))
+            if(isHeadless){
+                options.addArguments(
+                        "--headless",
+                        "--disable-gpu"
+                )
+            }
 
             /* - Legacy Options, adding all of them results in a failure, adding them as needed
                     "--user-data-dir=/tmp/rwhq",

@@ -31,7 +31,7 @@ jobs:
 
       - name: run the DockerSet through Maven
         run: |
-          mvn clean test -Dgroups="DockerSet" site
+          mvn clean test -Dgroups="DockerSet" -Dheadless=true site
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
