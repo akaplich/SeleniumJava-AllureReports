@@ -31,7 +31,7 @@ public class TestBase {
         try {
             // Capture screenshot
             File screenshot = ((TakesScreenshot) Browser.Driver).getScreenshotAs(OutputType.FILE)
-            String screenshotPath = "screenshots/${testcaseName}-end-screenshot.png"
+            String screenshotPath = "target/screenshots/${testcaseName}-end-screenshot.png"
             Files.createDirectories(Paths.get("screenshots"))
             Files.copy(screenshot.toPath(), Paths.get(screenshotPath))
             logger.info("Screenshot saved at: " + screenshotPath)
