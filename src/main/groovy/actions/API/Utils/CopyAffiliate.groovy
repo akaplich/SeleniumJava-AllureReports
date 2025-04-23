@@ -154,7 +154,7 @@ class CopyAffiliate{
                  logger.debug("Waiting for Affiliate to Copy: ${response} , Attempting for the ${i+1} time...")
                  if(!response.copy && !response.search){
                      assert i < 150,"Copy Affiliate timed out"
-                     sleep(4000)
+                     sleep(2000)
                      i++
                  }else{
                      logger.debug("Affiliate copied with Copy:${response.copy} and Search:${response.search} in ${i*2} seconds")
@@ -166,7 +166,7 @@ class CopyAffiliate{
                          if(!response.search){
                              //search not copied yet
                              assert i < 60,"Copy Affiliate timed out due to Searchindex after ${i} seconds"
-                             sleep(1000)
+                             sleep(4000)
                              i++
                          }else{
                              //search copied
