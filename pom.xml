@@ -8,11 +8,19 @@
     <artifactId>SeleniumJava</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <maven.surefire.plugin>3.5.3</maven.surefire.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <retryCount>0</retryCount>
     </properties>
 
     <dependencies>
@@ -234,6 +242,7 @@
                 <version>${maven.surefire.plugin}</version>
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <rerunFailingTestsCount>${retryCount}</rerunFailingTestsCount>
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
                     </systemPropertyVariables>

@@ -16,6 +16,11 @@ on:
         required: true
         default: false
         type: boolean
+      RetryCount:
+        description: 'Retry Count'
+        required: true
+        default: "0"
+        type: string
 
 jobs:
   run-group-of-web-tests:
@@ -47,7 +52,7 @@ jobs:
 
       - name: Run Web Tests via Maven
         run: |
-          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
+          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -DretryCount=${{github.event.inputs.RetryCount}} -Dheadless=${{github.event.inputs.Run_Headless}} site
 
       - name: Save Maven Cache
         run: |
