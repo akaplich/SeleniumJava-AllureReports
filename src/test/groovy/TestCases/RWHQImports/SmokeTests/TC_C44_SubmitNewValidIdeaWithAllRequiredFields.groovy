@@ -74,7 +74,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot(this.getClass().getSimpleName())
+        captureScreenshot("TC_C44_SubmitNewValidIdeaWithAllRequiredFields")
         try{
             //Close Current Window
             new CloseWindow().run([:])
