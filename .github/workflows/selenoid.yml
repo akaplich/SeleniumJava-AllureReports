@@ -18,7 +18,7 @@ on:
         type: boolean
 
 jobs:
-  run-web-test:
+  run-group-of-web-tests:
     runs-on: ubuntu-latest
 
     steps:
