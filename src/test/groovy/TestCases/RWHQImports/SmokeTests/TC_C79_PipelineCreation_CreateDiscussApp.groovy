@@ -63,6 +63,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
+        captureScreenshot(this.getClass().getSimpleName())
         try{
             //Close Current Window
             new CloseWindow().run([:])

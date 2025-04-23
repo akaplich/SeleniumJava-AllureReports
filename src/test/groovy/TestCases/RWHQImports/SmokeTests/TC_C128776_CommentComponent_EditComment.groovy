@@ -81,6 +81,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
+        captureScreenshot(this.getClass().getSimpleName())
         try{
             //Close Current Window
             new CloseWindow().run([:])

@@ -55,7 +55,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C63_VerifyIdeaExistsInPipeline")
+        captureScreenshot(this.getClass().getSimpleName())
         try{
             //Close Current Window
             new CloseWindow().run([:])

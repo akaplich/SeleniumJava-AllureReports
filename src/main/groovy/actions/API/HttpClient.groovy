@@ -25,12 +25,13 @@ class HttpClient{
     def public static Headers = [:]
     
     public static client = null
-    private static final Logger log = LoggerFactory . getLogger ( HttpClient . class ) ;
+    private static final Logger logger = LoggerFactory.getLogger(HttpClient.class);
     public static createHttpClient(){
         client = new RESTClient()
         client.ignoreSSLIssues()
     }
     public static def MakeRequest(def params){
+        logger.debug("MakeRequest with Params: ${params}")
         if(client == null) createHttpClient()
         def http = new HTTPBuilder(params.URL)
         http.ignoreSSLIssues()
@@ -148,6 +149,7 @@ class HttpClient{
     }
 
     public static def MainMakeRequest(def params){
+        logger.debug("MainMakeReqest with Params: ${params}")
         def requestContentType
         def contentType = ContentType.JSON
         
