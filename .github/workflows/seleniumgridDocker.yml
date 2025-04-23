@@ -55,6 +55,15 @@ jobs:
           name: maven-site-report
           path: target/site
 
+      - name: Upload test logs and screenshots
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: test-logs-screenshots
+          path: target/surefire-reports
+          if-no-files-found: error
+          retention-days: 2
+
       - name: Clean up Docker containers
         if: always()
         run: |

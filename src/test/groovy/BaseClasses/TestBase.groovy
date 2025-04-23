@@ -31,8 +31,8 @@ public class TestBase {
         try {
             // Capture screenshot
             File screenshot = ((TakesScreenshot) Browser.Driver).getScreenshotAs(OutputType.FILE)
-            String screenshotPath = "target/screenshots/${testcaseName}-end-screenshot.png"
-            Files.createDirectories(Paths.get("screenshots"))
+            String screenshotPath = "target/surefire-reports/screenshots/${testcaseName}-end-screenshot.png"
+            Files.createDirectories(Paths.get("target/surefire-reports/screenshots"))
             Files.copy(screenshot.toPath(), Paths.get(screenshotPath))
             logger.info("Screenshot saved at: " + screenshotPath)
         } catch (Exception e) {
