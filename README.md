@@ -27,16 +27,28 @@ Testing GitHub Actions locally using Docker
 Local Selenium Grid on Docker
 * References:
   * https://github.com/SeleniumHQ/docker-selenium?tab=readme-ov-file
+* Commands:
+  * docker network create grid
+  * docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub --platform=linux/amd64 selenium/hub:4.31.0-20250414
+  * (Repeat for each runner you want)
+    * docker run -d -p 4442-4444:4442-4444 --net grid --shm-size="2g" --name selenium-hub --platform=linux/amd64 selenium/hub:4.31.0-20250414
+* Open http://localhost:4444/ in browser for Selenium Grid UI
+* Use the single container configuration to debug
+* Cleanup
+  * Print docker instances: docker ps
+  * delete each instance: docker stop [instance id]
 
 
 * MAC Instructions for a Single container for debugging
-  * docker pull --platform=linux/amd64 selenium/standalone-chrome
-  * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
+  * Commands
+    * docker pull --platform=linux/amd64 selenium/standalone-chrome
+    * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
   * Open http://localhost:4444/ in browser for Selenium Grid UI
   * Open http://localhost:7900/ in browser for VNC to container (Watch case running)
     * Note: Any VNC client can be used to connect to the container 
-* MAC Instructions for 5 containers for parallel runs
-  * 
+  * Cleanup
+    * Print docker instances: docker ps
+    * delete each instance: docker stop [instance id]
 
 
 Selenoid Installation - Chome is not being updated - Disregard

@@ -32,6 +32,8 @@ import org.openqa.selenium.*
 import org.openqa.selenium.chrome.*
 import actions.selenium.utils.GetIPAddress
 
+import java.nio.file.Files
+import java.nio.file.Paths
 import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +50,7 @@ class Browser{
 
     //start browser
     public static void run(def params){
+        logger.debug("Params: ${params}");
         // Clear the Selenium driver cache
         //WebDriver.clearDriverCache();
         //SeleniumManager.getInstance().clearDriverCache();
@@ -67,10 +70,17 @@ class Browser{
                     "ignore-certificate-errors=false",
                     "--no-sandbox",
                     "--start-maximized",
-                    "--disable-popup-blocking",
-                    "--headless",
-                    "--disable-gpu"
+                    "--disable-popup-blocking"
             )
+
+            // See if we should run headless
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"))
+            if(isHeadless){
+                options.addArguments(
+                        "--headless",
+                        "--disable-gpu"
+                )
+            }
 
             /* - Legacy Options, adding all of them results in a failure, adding them as needed
                     "--user-data-dir=/tmp/rwhq",
@@ -155,5 +165,24 @@ class Browser{
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(cbPreference);
         return cbPreference;
+    }
+
+    void quit(){
+        if (Driver != null) {
+            captureScreenshot("failingTest")
+            Driver.quit()
+        }
+    }
+
+    void captureScreenshot(String testName) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE)
+            String screenshotPath = "target/screenshots/${testName}.png"
+            Files.createDirectories(Paths.get("target/screenshots"))
+            screenshot.renameTo(new File(screenshotPath))
+            println("Screenshot saved: ${screenshotPath}")
+        } catch (Exception e) {
+            println("Failed to capture screenshot: ${e.message}")
+        }
     }
 }

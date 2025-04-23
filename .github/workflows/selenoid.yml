@@ -1,6 +1,22 @@
-name: Run web test in single container
+name: Web test Group in single container
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      Mvn_Group:
+        description: 'Mvn Group'
+        required: true
+        default: 'Smoke'
+        type: choice
+        options:
+          - Smoke
+          - DockerSet
+      Run_Headless:
+        description: 'Run Headless'
+        required: true
+        default: false
+        type: boolean
+
 jobs:
   run-web-test:
     runs-on: ubuntu-latest
@@ -21,12 +37,41 @@ jobs:
           docker pull --platform=linux/amd64 selenium/standalone-chrome
           docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
 
-      - name: run the SelenoidSet through Maven
+      - name: Restore Maven Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Run Web Tests via Maven
         run: |
-          mvn clean test -Dgroups="DockerSet" site
+          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
+
+      - name: Save Maven Cache
+        run: |
+          echo "step=save" >> $GITHUB_ENV
+        continue-on-error: true
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
         with:
           name: maven-site-report
           path: target/site
+          retention-days: 2
+
+      - name: Upload test logs and screenshots
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: test-logs-screenshots
+          path: target/surefire-reports
+          if-no-files-found: error
+          retention-days: 2
+
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
+        with:
+          report_paths: '**/target/surefire-reports/*.xml'

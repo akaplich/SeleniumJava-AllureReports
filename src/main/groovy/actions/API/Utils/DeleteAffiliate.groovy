@@ -3,9 +3,14 @@ package actions.API.Utils;
 import actions.API.HttpClient
 import actions.API.Utils.BIAdminLogin
 import actions.Utils.SystemManagerHelper
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class DeleteAffiliate{
+    private static final Logger logger = LoggerFactory.getLogger(DeleteAffiliate.class);
+
     public static void run(def params){
+        logger.debug("Params: ${params}")
         //systemid (optional) = Id for the affiliate that will get deleted, if not specified then will use HttpClient.systemid or System Manager helper if System Manager was used
         //Login
         BIAdminLogin.run()

@@ -1,16 +1,13 @@
-name: Web Test on Multiple Containers
+name: Single Web Test in single container
 
 on:
   workflow_dispatch:
     inputs:
-      Mvn_Group:
-        description: 'Mvn Group'
+      Test:
+        description: 'Test'
         required: true
-        default: 'Smoke'
-        type: choice
-        options:
-          - Smoke
-          - DockerSet
+        default: 'TestCases.RWHQImports.TC_C44_SubmitNewValidIdeaWithAllRequiredFields'
+        type: string
       Run_Headless:
         description: 'Run Headless'
         required: true
@@ -32,28 +29,37 @@ jobs:
           java-version: '21.0.3'
           cache: maven
 
-      - name: Create Docker network
-        run: docker network create grid
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
 
-      - name: Start Selenium Grid Hub
+      - name: Start Selenium Standalone Chrome container
         run: |
-          docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub selenium/hub:latest
+          docker pull --platform=linux/amd64 selenium/standalone-chrome
+          docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
 
-      - name: Start Selenium Chrome Nodes
-        run: |
-          for i in {1..5}; do
-            docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" selenium/node-chrome:4.31.0-20250414
-          done
+      - name: Restore Maven Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: Run Web Tests via Maven
         run: |
-          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
+          mvn clean test -Dtest="${{github.event.inputs.Test}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
+
+      - name: Save Maven Cache
+        run: |
+          echo "step=save" >> $GITHUB_ENV
+        continue-on-error: true
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
         with:
           name: maven-site-report
           path: target/site
+          retention-days: 2
 
       - name: Upload test logs and screenshots
         uses: actions/upload-artifact@v4
@@ -63,12 +69,6 @@ jobs:
           path: target/surefire-reports
           if-no-files-found: error
           retention-days: 2
-
-      - name: Clean up Docker containers
-        if: always()
-        run: |
-          docker rm -f $(docker ps -aq)
-          docker network rm grid
 
       - name: Publish Test Report
         if: success() || failure()

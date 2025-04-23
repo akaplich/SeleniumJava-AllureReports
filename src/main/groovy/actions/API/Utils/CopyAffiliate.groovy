@@ -2,9 +2,12 @@ package actions.API.Utils;
 
 import actions.API.HttpClient
 import actions.API.Utils.BIAdminLogin
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import utils.Settings
 
 class CopyAffiliate{
+    private static final Logger logger = LoggerFactory.getLogger(CopyAffiliate.class);
     public static String run(String licensingModel = null,
                              String unlimitedBA = null,
                              String baLicenseCount = null,
@@ -95,18 +98,20 @@ class CopyAffiliate{
             ]
         }
              def response = HttpClient.MainMakeRequest(Type:"POST",Path:"/bi/bi_xt_create_affiliate.bix",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"BI Admin").responseData
-             println("Affiliate Name = ${name}")
+
+             logger.debug("Affiliate Name = ${name}")
              HttpClient.affiliatename = name
              def affiliateid = response.affiliate_id
              HttpClient.affiliateid = affiliateid
-             println("AffiliateID = ${affiliateid}")
+             logger.debug("AffiliateID = ${affiliateid}")
              def systemid = response.system_id
              HttpClient.systemid = systemid
-             println("SystemID = ${systemid}")
+             logger.debug("SystemID = ${systemid}")
              
              //Now copy an affiliate to a newly created one
              def sourceid
              def host
+             logger.debug("URLPath: ${URLPath}")
              switch(URLPath.split("\\.")[0]){
                  case "brightideatest":
                  sourceid = "${qaSourceId}"
@@ -121,6 +126,7 @@ class CopyAffiliate{
                  host = "eu.eu.brightidea"
                  break
              }
+             assert sourceid != null : "Source ID is null. Ensure the URLPath is correctly set and matches a valid case."
              body = [
                  source: sourceid,
                  destination: systemid,
@@ -135,17 +141,17 @@ class CopyAffiliate{
              int i = 0
              while(true){
                  response = HttpClient.MainMakeRequest(RequestContentType:"text/plain",ContentType:"application/json",Type:"GET",Path:"/bi/bi_copy_affiliate_status.bix?id=${id}","App Environment":"BI Admin","Dont Print":true).responseData
-                 println("Waiting for Affiliate to Copy: ${response} , Attempting for the ${i+1} time...")
+                 logger.debug("Waiting for Affiliate to Copy: ${response} , Attempting for the ${i+1} time...")
                  if(!response.copy && !response.search){
                      assert i < 150,"Copy Affiliate timed out"
                      sleep(2000)
                      i++
                  }else{
-                     println("Affiliate copied with Copy:${response.copy} and Search:${response.search} in ${i*2} seconds")
+                     logger.debug("Affiliate copied with Copy:${response.copy} and Search:${response.search} in ${i*2} seconds")
                      i = 0
                      while(true & !response.search){//add search test cases indicator; go here is must have search
                          //waiting on Search to copy 
-                         println("Waiting on Searchindex to complete ...")
+                         logger.debug("Waiting on Searchindex to complete ...")
                          response = HttpClient.MainMakeRequest(RequestContentType:"text/plain",ContentType:"application/json",Type:"GET",Path:"/bi/bi_copy_affiliate_status.bix?id=${id}","App Environment":"BI Admin","Dont Print":true).responseData
                          if(!response.search){
                              //search not copied yet
@@ -154,7 +160,8 @@ class CopyAffiliate{
                              i++
                          }else{
                              //search copied
-                             println("Affiliate copied. Search:${response.search}. Searchindex completed in ${i} seconds")
+                             logger.debug("Affiliate copied. Search:${response.search}. Searchindex completed in ${i} seconds")
+                             logger.debug("Affiliate copied. Search:${response.search}. Searchindex completed in ${i} seconds")
                              break
                          }
                      }
