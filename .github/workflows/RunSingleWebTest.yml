@@ -61,6 +61,12 @@ jobs:
           path: target/site
           retention-days: 2
 
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
+        with:
+          report_paths: '**/target/surefire-reports/*.xml'
+
       - name: Upload test logs and screenshots
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
@@ -70,8 +76,3 @@ jobs:
           if-no-files-found: error
           retention-days: 2
 
-      - name: Publish Test Report
-        if: success() || failure()
-        uses: scacap/action-surefire-report@v1
-        with:
-          report_paths: '**/target/surefire-reports/*.xml'

@@ -55,6 +55,12 @@ jobs:
           name: maven-site-report
           path: target/site
 
+      - name: Publish Test Report
+        if: success() || failure()
+        uses: scacap/action-surefire-report@v1
+        with:
+          report_paths: '**/target/surefire-reports/*.xml'
+
       - name: Upload test logs and screenshots
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
@@ -69,9 +75,3 @@ jobs:
         run: |
           docker rm -f $(docker ps -aq)
           docker network rm grid
-
-      - name: Publish Test Report
-        if: success() || failure()
-        uses: scacap/action-surefire-report@v1
-        with:
-          report_paths: '**/target/surefire-reports/*.xml'
