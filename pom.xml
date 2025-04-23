@@ -233,8 +233,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin}</version>
                 <configuration>
-                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
-                    <useFile>false</useFile>
+                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
                     </systemPropertyVariables>
