@@ -137,14 +137,16 @@ class CopyAffiliate{
              ]
              response = HttpClient.MainMakeRequest(Type:"POST",Path:"/bi/bi_xt_copy_affiliate.bix",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"BI Admin").responseData
         	def id = response.id
+            logger.debug("Affiliate to be Copied - Response ID: ${id}")
              //Wait until the affiliate gets fully copied
              int i = 0
              while(true){
                  response = HttpClient.MainMakeRequest(RequestContentType:"text/plain",ContentType:"application/json",Type:"GET",Path:"/bi/bi_copy_affiliate_status.bix?id=${id}","App Environment":"BI Admin","Dont Print":true).responseData
+                 logger.debug("CopyAffiliateStatus Response: ${response}")
                  logger.debug("Waiting for Affiliate to Copy: ${response} , Attempting for the ${i+1} time...")
                  if(!response.copy && !response.search){
                      assert i < 150,"Copy Affiliate timed out"
-                     sleep(2000)
+                     sleep(4000)
                      i++
                  }else{
                      logger.debug("Affiliate copied with Copy:${response.copy} and Search:${response.search} in ${i*2} seconds")

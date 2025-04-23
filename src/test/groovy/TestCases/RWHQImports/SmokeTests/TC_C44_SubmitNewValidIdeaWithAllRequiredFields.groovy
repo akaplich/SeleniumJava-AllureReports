@@ -48,8 +48,10 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)
         //Navigate WebStorm or MTS
+        logger.debug("NavigateWebStormAdminBar");
         new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
         //Set Custom and Other App Post Idea
+        logger.debug("SetCustomAppPostIdea");
         new SetCustomAppPostIdea().run("Title":/Idea Title/.toString(),"Description":/Idea Description/.toString(),"Category":/New Product/.toString(),"Required Short Question":/required short/.toString(),"Action":/Submit Idea/.toString())
         //Wait
         new Wait().run("Seconds":/10/.toString())
@@ -63,17 +65,23 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
+        logger.debug("CopyAffiliate");
         variables."affiliateURL" = new CopyAffiliate().run(params)
+        logger.debug("Affiliate URL: ${variables."affiliateURL"}");
         //Open Browser
+        logger.debug("Browser");
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
+        logger.debug("Browser");
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
+        logger.debug("SettoLabEnvironment");
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
+        logger.debug("CopyAffiliate");
         captureScreenshot("TC_C44_SubmitNewValidIdeaWithAllRequiredFields")
         try{
             //Close Current Window
