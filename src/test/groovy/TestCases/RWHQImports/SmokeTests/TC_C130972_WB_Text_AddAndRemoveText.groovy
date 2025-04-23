@@ -22,13 +22,17 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C130972 - WB - Text - Add & Remove Text
 class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
+    private static final Logger logger = LoggerFactory.getLogger(TC_C130972_WB_Text_AddAndRemoveText.class);
     private static def variables = [:]
 
     @BeforeAll
     public static void beforeState(){
+        logger.debug("TC_C130972 beforeState");
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
@@ -96,7 +100,13 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     @AfterEach
     public void afterState(){
+        logger.debug("TC_C130972 afterState");
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+
+        if (Browser.Driver != null) {
+            logger.debug("Quitting Driver in TestBase");
+            Browser.Driver.quit(); // Ensure the WebDriver quits
+        }
     }
 }

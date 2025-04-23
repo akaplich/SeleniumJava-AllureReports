@@ -15,9 +15,12 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C79 - Pipeline Creation - Create Discuss App
 class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
+    private static final Logger logger = LoggerFactory.getLogger(TC_C79_PipelineCreation_CreateDiscussApp.class);
     private static def variables = [:]
 
     @BeforeAll
@@ -77,5 +80,10 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+
+        if (Browser.Driver != null) {
+            logger.debug("Quitting Driver in TestBase");
+            Browser.Driver.quit(); // Ensure the WebDriver quits
+        }
     }
 }

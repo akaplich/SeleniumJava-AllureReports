@@ -13,10 +13,13 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
 //C63 - Verify idea exists in Pipeline
     private static def variables = [:]
+    private static final Logger logger = LoggerFactory.getLogger(TC_C63_VerifyIdeaExistsInPipeline.class);
 
     @BeforeAll
     public static void beforeState(){
