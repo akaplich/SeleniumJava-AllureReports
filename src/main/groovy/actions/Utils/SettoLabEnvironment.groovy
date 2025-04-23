@@ -7,9 +7,14 @@ import actions.general.Login
 import actions.common.SetupCommon
 import actions.selenium.*
 import utils.Settings
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class SettoLabEnvironment{
+    private static final Logger logger = LoggerFactory.getLogger(SettoLabEnvironment.class);
+
     public void run(def params){
+        logger.debug("Params: ${params}")
         def CodeEnvironment  = Settings.getProperty("environment.CodeEnvironment");
         if(CodeEnvironment=="Labs"){
             println("Switching to Labs Code Environment!")

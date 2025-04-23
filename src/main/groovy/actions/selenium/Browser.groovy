@@ -50,6 +50,7 @@ class Browser{
 
     //start browser
     public static void run(def params){
+        logger.debug("Params: ${params}");
         // Clear the Selenium driver cache
         //WebDriver.clearDriverCache();
         //SeleniumManager.getInstance().clearDriverCache();

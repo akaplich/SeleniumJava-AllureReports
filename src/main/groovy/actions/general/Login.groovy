@@ -4,8 +4,12 @@ import actions.selenium.SetText
 import actions.selenium.SendKeys
 import actions.selenium.Click
 import actions.selenium.Exists
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class Login{
+    private static final Logger logger = LoggerFactory.getLogger(Login.class);
+
     public static void run(String email, String password, Boolean loggedInOnEnterprise = false ){
         def params = [:]
         params.Email = email
@@ -15,6 +19,7 @@ class Login{
         run(params)
     }
     public static void run(def params){
+        logger.debug("Starting Login with params: ${params}")
         if(!params.Email){
             params.Email="bi.adminuser1@brightidea.com"
         }else if (params.Email == null){
