@@ -237,9 +237,7 @@
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
                     </systemPropertyVariables>
-                    <parallel>methods</parallel>
-                    <threadCount>3</threadCount>
-                    <threadCount>4</threadCount>
+                    <threadCount>1</threadCount>
                     <forkCount>1</forkCount>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
