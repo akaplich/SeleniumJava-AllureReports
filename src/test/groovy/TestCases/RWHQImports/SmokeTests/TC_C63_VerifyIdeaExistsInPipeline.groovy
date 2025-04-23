@@ -29,6 +29,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
 
     }
     @Test
@@ -51,6 +52,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         //browser.run(variables."affiliateURL".toString())
 
         //Login
+        Thread.sleep(5000)
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
