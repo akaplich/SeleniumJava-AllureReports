@@ -30,7 +30,15 @@ class CopyAffiliate{
 
         //First affiliate gets created
         //Define affiliate name to be created, use current time in miliseconds to keep it unique
-        def name = "auto"+System.currentTimeMillis().toString()
+        def name = null
+        if(params."New Affiliate Name" != null){
+            name = params."New Affiliate Name"
+            logger.debug("Using Passed in Name: ${name}")
+        }else{
+            name = "auto"+System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
+            logger.debug("Generated Name: ${name}")
+        }
+
         def body = [:]
         //def URLPath = redwood.launcher.Launcher.variables.URL
         def URLPath  = Settings.getProperty("environment.url");
@@ -98,7 +106,7 @@ class CopyAffiliate{
             ]
         }
              def response = HttpClient.MainMakeRequest(Type:"POST",Path:"/bi/bi_xt_create_affiliate.bix",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"BI Admin").responseData
-
+             logger.debug("Create Affiliate Response: ${response}")
              logger.debug("Affiliate Name = ${name}")
              HttpClient.affiliatename = name
              def affiliateid = response.affiliate_id
@@ -137,6 +145,8 @@ class CopyAffiliate{
              ]
              response = HttpClient.MainMakeRequest(Type:"POST",Path:"/bi/bi_xt_copy_affiliate.bix",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"BI Admin").responseData
         	def id = response.id
+            logger.debug("Affiliate to be Copied - Response ID: ${id}")
+            logger.debug("Affiliate Copy - Response: ${response}")
              //Wait until the affiliate gets fully copied
              int i = 0
              while(true){
@@ -156,7 +166,7 @@ class CopyAffiliate{
                          if(!response.search){
                              //search not copied yet
                              assert i < 60,"Copy Affiliate timed out due to Searchindex after ${i} seconds"
-                             sleep(1000)
+                             sleep(4000)
                              i++
                          }else{
                              //search copied

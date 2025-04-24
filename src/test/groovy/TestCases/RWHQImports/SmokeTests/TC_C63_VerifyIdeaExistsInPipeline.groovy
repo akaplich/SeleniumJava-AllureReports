@@ -13,10 +13,13 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
 //C63 - Verify idea exists in Pipeline
     private static def variables = [:]
+    private static final Logger logger = LoggerFactory.getLogger(TC_C63_VerifyIdeaExistsInPipeline.class);
 
     @BeforeAll
     public static void beforeState(){
@@ -26,6 +29,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
 
     }
     @Test
@@ -48,6 +52,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         //browser.run(variables."affiliateURL".toString())
 
         //Login
+        Thread.sleep(5000)
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
@@ -55,7 +60,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C63_VerifyIdeaExistsInPipeline")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -69,6 +74,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+        new CloseWindow().run([:])
     }
 
 

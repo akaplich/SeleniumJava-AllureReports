@@ -22,13 +22,17 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C130972 - WB - Text - Add & Remove Text
 class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
+    private static final Logger logger = LoggerFactory.getLogger(TC_C130972_WB_Text_AddAndRemoveText.class);
     private static def variables = [:]
 
     @BeforeAll
     public static void beforeState(){
+        logger.debug("TC_C130972 beforeState");
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
@@ -73,7 +77,7 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        variables."affiliateURL" = new CopyAffiliate().run()
         //Open Browser
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
@@ -84,7 +88,7 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C130972_WB_Text_AddAndRemoveText")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -96,7 +100,10 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     @AfterEach
     public void afterState(){
+        logger.debug("TC_C130972 AfterEach");
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+
+        new CloseWindow().run([:])
     }
 }

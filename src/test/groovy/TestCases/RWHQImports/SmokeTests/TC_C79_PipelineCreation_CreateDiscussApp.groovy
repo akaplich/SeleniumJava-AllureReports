@@ -15,9 +15,12 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C79 - Pipeline Creation - Create Discuss App
 class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
+    private static final Logger logger = LoggerFactory.getLogger(TC_C79_PipelineCreation_CreateDiscussApp.class);
     private static def variables = [:]
 
     @BeforeAll
@@ -33,6 +36,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
         variables."Brightidea Administrator License Type Purchased Count" = null
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
+        variables."Run Browser in Incognito" = false
     }
 
     @Test
@@ -52,10 +56,14 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
+        logger.debug("Copy Affiliate");
         variables."affiliateURL" = new CopyAffiliate().run(params)
         //Open Browser
-        new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
+        logger.debug("Browser");
+        new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${params."affiliateURL"}/.toString(),"Browser Type":/${params."Browser"}/.toString())
+        Thread.sleep(5000)
         //Login
+        logger.debug("Login");
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
@@ -63,7 +71,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C79_PipelineCreation_CreateDiscussApp")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -77,5 +85,7 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+
+        new CloseWindow().run([:])
     }
 }

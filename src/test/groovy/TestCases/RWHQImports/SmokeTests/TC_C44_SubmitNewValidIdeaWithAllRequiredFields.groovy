@@ -27,7 +27,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
 
 
     @BeforeAll
-    public static void beforeState(){
+    public static void beforeState() {
         logger.debug("Before State");
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
@@ -40,7 +40,9 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         variables."Brightidea Administrator License Type Purchased Count" = null
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
+        variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
     }
+
     @Test
     @Tag("Smoke")
     public void testcase(){
@@ -48,8 +50,10 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)
         //Navigate WebStorm or MTS
+        logger.debug("NavigateWebStormAdminBar");
         new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
         //Set Custom and Other App Post Idea
+        logger.debug("SetCustomAppPostIdea");
         new SetCustomAppPostIdea().run("Title":/Idea Title/.toString(),"Description":/Idea Description/.toString(),"Category":/New Product/.toString(),"Required Short Question":/required short/.toString(),"Action":/Submit Idea/.toString())
         //Wait
         new Wait().run("Seconds":/10/.toString())
@@ -63,18 +67,24 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
+        logger.debug("CopyAffiliate");
         variables."affiliateURL" = new CopyAffiliate().run(params)
+        logger.debug("Affiliate URL: ${variables."affiliateURL"}");
         //Open Browser
+        logger.debug("Browser");
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
+        logger.debug("Browser");
+        new Wait().run("Seconds":/5/.toString())
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
+        logger.debug("SettoLabEnvironment");
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C44_SubmitNewValidIdeaWithAllRequiredFields")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -89,6 +99,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         logger.debug("AfterState");
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+        new CloseWindow().run([:])
     }
 }
 

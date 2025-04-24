@@ -18,9 +18,12 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 //C128776 - Comment Component - Edit Comment
 class TC_C128776_CommentComponent_EditComment extends TestBase {
+    private static final Logger logger = LoggerFactory.getLogger(TC_C128776_CommentComponent_EditComment.class);
     private static def variables = [:]
 
     @BeforeAll
@@ -81,7 +84,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C128776_CommentComponent_EditComment")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -95,5 +98,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+
+        new CloseWindow().run([:])
     }
 }

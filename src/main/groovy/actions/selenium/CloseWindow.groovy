@@ -3,7 +3,8 @@ import actions.selenium.Browser
 
 class CloseWindow{
     public static void run(def params){
-        //Browser.Driver.close()
-        Browser.Driver.quit()
+        if (Browser.Driver != null) {
+            Browser.Driver.quit(); // Ensure the WebDriver quits
+        }
     }
 }

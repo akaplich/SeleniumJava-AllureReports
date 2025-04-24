@@ -15,7 +15,7 @@ on:
         type: boolean
 
 jobs:
-  run-web-test:
+  run-single-web-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,8 +29,13 @@ jobs:
           java-version: '21.0.3'
           cache: maven
 
-      - name: Install ffmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Cache Docker layers
+        uses: actions/cache@v3
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-docker-          
 
       - name: Start Selenium Standalone Chrome container
         run: |
@@ -61,17 +66,27 @@ jobs:
           path: target/site
           retention-days: 2
 
-      - name: Upload test logs and screenshots
-        uses: actions/upload-artifact@v4
-        if: ${{ always() }}
-        with:
-          name: test-logs-screenshots
-          path: target/surefire-reports
-          if-no-files-found: error
-          retention-days: 2
-
       - name: Publish Test Report
         if: success() || failure()
         uses: scacap/action-surefire-report@v1
         with:
           report_paths: '**/target/surefire-reports/*.xml'
+
+      - name: Upload test logs
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: test-logs
+          path: '**/target/surefire-reports/*-output.txt'
+          if-no-files-found: error
+          retention-days: 2
+
+      - name: Upload Final View Screenshot
+        uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: Final View Screenshot
+          path: '**/target/surefire-reports/screenshots/*-end-screenshot.png'
+          if-no-files-found: error
+          retention-days: 2
+
