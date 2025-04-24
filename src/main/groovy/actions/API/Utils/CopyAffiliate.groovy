@@ -110,10 +110,10 @@ class CopyAffiliate{
              logger.debug("Affiliate Name = ${name}")
              HttpClient.affiliatename = name
              def affiliateid = response.affiliate_id
-             HttpClient.affiliateid = affiliateid
+             HttpClient.setAffiliateid(affiliateid)
              logger.debug("AffiliateID = ${affiliateid}")
              def systemid = response.system_id
-             HttpClient.systemid = systemid
+             HttpClient.setSystemid(systemid)
              logger.debug("SystemID = ${systemid}")
              
              //Now copy an affiliate to a newly created one

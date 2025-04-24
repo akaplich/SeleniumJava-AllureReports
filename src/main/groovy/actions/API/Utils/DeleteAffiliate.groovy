@@ -21,7 +21,7 @@ class DeleteAffiliate{
         }
         if(!params.systemid){
             println("System Manager Not Used to Create Affiliate")
-            params.systemid=HttpClient.systemid}
+            params.systemid=HttpClient.getSystemid()}
         println("Systemid Set ${params.systemid}")
         def body = [
             //all_dbs:params.db_name,

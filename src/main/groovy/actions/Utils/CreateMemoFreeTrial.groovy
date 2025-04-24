@@ -23,10 +23,10 @@ class CreateMemoFreeTrial{
         
         def response = HttpClient.MainMakeRequest(Type:"POST",Path: "/freeTrial/create",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"Free Trial").responseData
              def affiliateid = response.affiliate
-             HttpClient.affiliateid = affiliateid
+             HttpClient.setAffiliateid(affiliateid)
              println("AffiliateID = ${affiliateid}")
              def systemid = response.systemId
-             HttpClient.systemid = systemid
+             HttpClient.setSystemid(systemid)         
              println("SystemID = ${systemid}")
         
         switch(params."Type of Free Trial"){

@@ -18,14 +18,51 @@ class HttpClient{
     //Dont Print (optional, boolean, default false if ommited) = Dont print of REQUEST or RESPONSE if true (useful to set to true if expected too many printouts)
     
     //Affiliate variables
-    public static systemid =  null
-    public static affiliatename = null
-    public static affiliateid = null
-    
+    public static final ThreadLocal<String> systemid = ThreadLocal.withInitial { null }
+    public static final ThreadLocal<String> affiliatename = ThreadLocal.withInitial { null }
+    public static final ThreadLocal<String> affiliateid = ThreadLocal.withInitial { null }
+    //public static systemid =  null
+    //public static affiliatename = null
+    //public static affiliateid = null
     def public static Headers = [:]
-    
     public static client = null
     private static final Logger logger = LoggerFactory.getLogger(HttpClient.class);
+
+    public static String getSystemid() {
+        return systemid.get();
+    }
+
+    public static void setSystemid(String value) {
+        systemid.set(value);
+    }
+
+    public static void clearSystemid() {
+        systemid.remove();
+    }
+
+    public static String getAffiliatename() {
+        return affiliatename.get();
+    }
+
+    public static void setAffiliatename(String value) {
+        affiliatename.set(value);
+    }
+
+    public static void clearAffiliatename() {
+        affiliatename.remove();
+    }
+
+    public static String getAffiliateid() {
+        return affiliateid.get();
+    }
+
+    public static void setAffiliateid(String value) {
+        affiliateid.set(value);
+    }
+
+    public static void clearAffiliateid() {
+        affiliateid.remove();
+    }
     public static createHttpClient(){
         client = new RESTClient()
         client.ignoreSSLIssues()

@@ -48,6 +48,23 @@ class Browser{
     public static MainWinHandle = null
     private static final Logger logger = LoggerFactory.getLogger(Browser.class);
 
+    private static final ThreadLocal<WebDriver> driverThreadLocal = ThreadLocal.withInitial(() -> {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        return new ChromeDriver();
+    });
+
+    public static WebDriver getDriver() {
+        return driverThreadLocal.get();
+    }
+
+    public static void quitDriver() {
+        WebDriver driver = driverThreadLocal.get();
+        if (driver != null) {
+            driver.quit();
+            driverThreadLocal.remove();
+        }
+    }
+
     //start browser
     public static void run(def params){
         logger.debug("Params: ${params}");
@@ -131,14 +148,14 @@ class Browser{
 
             // Set driver using chromedriver or remotewebdriver depending on settings value
             if(Settings.getProperty("environment.target") == "local"){
-                Driver = new ChromeDriver(options)
+                driverThreadLocal.set(new ChromeDriver(options))
             }else if (Settings.getProperty("environment.target") == "docker"){
-                Driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options)
+                driverThreadLocal.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options))
             }
 
         }
 
-
+        Driver = getDriver()
 
         if (params.URL){
             if (params.URL.startsWith("http://") || params.URL.startsWith("https://")){
@@ -165,13 +182,6 @@ class Browser{
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(cbPreference);
         return cbPreference;
-    }
-
-    void quit(){
-        if (Driver != null) {
-            captureScreenshot("failingTest")
-            Driver.quit()
-        }
     }
 
     void captureScreenshot(String testName) {
