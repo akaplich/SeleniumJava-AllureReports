@@ -13,6 +13,7 @@ import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
@@ -69,23 +70,9 @@ class TC_C79_PipelineCreation_CreateDiscussApp extends TestBase {
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
     }
-    //Afterstate
-    public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot(this.getName().split("\\.")[-1])
-        try{
-            //Close Current Window
-            new CloseWindow().run([:])
-        }
-        catch(all){}catch(Error err){}
-        //Delete Affiliate
-        new DeleteAffiliate().run([:])
 
-    }
     @AfterEach
     public void afterState(){
-        //Afterstate
-        Action581259c8fa4ee77809f46905([:])
 
-        new CloseWindow().run([:])
     }
 }

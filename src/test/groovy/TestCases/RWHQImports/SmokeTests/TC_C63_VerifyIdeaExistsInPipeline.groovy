@@ -58,23 +58,10 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
     }
-    //Afterstate
-    public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot(this.getName().split("\\.")[-1])
-        try{
-            //Close Current Window
-            new CloseWindow().run([:])
-        }
-        catch(all){}catch(Error err){}
-        //Delete Affiliate
-        new DeleteAffiliate().run([:])
 
-    }
     @AfterEach
     public void afterState(){
-        //Afterstate
-        Action581259c8fa4ee77809f46905([:])
-        new CloseWindow().run([:])
+
     }
 
 
