@@ -42,7 +42,7 @@ jobs:
       - name: Start Selenium Chrome Nodes
         run: |
           for i in {1..5}; do
-            docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" selenium/node-chrome:4.31.0-20250414
+            docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" selenium/node-chrome:latest
           done
 
       - name: Run Web Tests via Maven
