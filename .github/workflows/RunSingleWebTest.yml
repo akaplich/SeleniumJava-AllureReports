@@ -6,7 +6,7 @@ on:
       Test:
         description: 'Test'
         required: true
-        default: 'TestCases.RWHQImports.TC_C44_SubmitNewValidIdeaWithAllRequiredFields'
+        default: 'TC_C44_SubmitNewValidIdeaWithAllRequiredFields'
         type: string
       Run_Headless:
         description: 'Run Headless'
