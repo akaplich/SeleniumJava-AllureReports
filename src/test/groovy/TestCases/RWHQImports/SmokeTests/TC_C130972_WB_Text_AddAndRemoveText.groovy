@@ -88,7 +88,7 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C130972_WB_Text_AddAndRemoveText")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -100,13 +100,10 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     @AfterEach
     public void afterState(){
-        logger.debug("TC_C130972 afterState");
+        logger.debug("TC_C130972 AfterEach");
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
 
-        if (Browser.Driver != null) {
-            logger.debug("Quitting Driver in TestBase");
-            Browser.Driver.quit(); // Ensure the WebDriver quits
-        }
+        new CloseWindow().run([:])
     }
 }

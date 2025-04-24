@@ -84,7 +84,7 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C128776_CommentComponent_EditComment")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -99,9 +99,6 @@ class TC_C128776_CommentComponent_EditComment extends TestBase {
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
 
-        if (Browser.Driver != null) {
-            logger.debug("Quitting Driver in TestBase");
-            Browser.Driver.quit(); // Ensure the WebDriver quits
-        }
+        new CloseWindow().run([:])
     }
 }

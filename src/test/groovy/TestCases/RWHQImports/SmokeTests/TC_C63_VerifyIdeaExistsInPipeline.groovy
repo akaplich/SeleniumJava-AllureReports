@@ -60,7 +60,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
     }
     //Afterstate
     public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot("TC_C63_VerifyIdeaExistsInPipeline")
+        captureScreenshot(this.getName().split("\\.")[-1])
         try{
             //Close Current Window
             new CloseWindow().run([:])
@@ -74,6 +74,7 @@ class TC_C63_VerifyIdeaExistsInPipeline extends TestBase {
     public void afterState(){
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
+        new CloseWindow().run([:])
     }
 
 
