@@ -1,5 +1,6 @@
 package BaseClasses
 
+import actions.API.Utils.DeleteAffiliate
 import actions.selenium.Browser
 import actions.selenium.CloseWindow
 import org.junit.AfterClass
@@ -32,7 +33,9 @@ public class TestBase {
     @AfterEach
     public void tb_afterEach() {
         logger.debug("TestBase AfterEach");
+        captureScreenshot(this.getClass().getName().split("\\.")[-1])
         new CloseWindow().run([:])
+        new DeleteAffiliate().run([:])
     }
     @AfterAll
     public static void tb_afterAll(){

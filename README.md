@@ -10,7 +10,7 @@ Running Locally (If docker isn't working for you)
 Running From Commandline
 * "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
 * "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
-* "mvn test -Dtest=TestCases.DockerTesting.FirstGroovyScriptTest site will execute a single standalone demo test and generate a site report"
+* "mvn test -Dtest=FirstGroovyScriptTest site will execute a single standalone demo test and generate a site report"
 
 Steps to import RWHQ Testcase
 1. Create a new groovy file/class using the RWHQ name. Spaces and dashes need to be removed. I've been using names like this TC_C10805_PostUpdate
@@ -29,14 +29,16 @@ Local Selenium Grid on Docker
   * https://github.com/SeleniumHQ/docker-selenium?tab=readme-ov-file
 * Commands:
   * docker network create grid
-  * docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub --platform=linux/amd64 selenium/hub:4.31.0-20250414
+  * docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub --platform=linux/amd64 selenium/hub:latest
   * (Repeat for each runner you want)
-    * docker run -d -p 4442-4444:4442-4444 --net grid --shm-size="2g" --name selenium-hub --platform=linux/amd64 selenium/hub:4.31.0-20250414
+    * docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" --platform=linux/amd64 selenium/node-chrome:latest
 * Open http://localhost:4444/ in browser for Selenium Grid UI
 * Use the single container configuration to debug
 * Cleanup
   * Print docker instances: docker ps
   * delete each instance: docker stop [instance id]
+  * docker stop selenium-hub 
+  * docker rm selenium-hub
 
 
 * MAC Instructions for a Single container for debugging
@@ -49,20 +51,6 @@ Local Selenium Grid on Docker
   * Cleanup
     * Print docker instances: docker ps
     * delete each instance: docker stop [instance id]
-
-
-Selenoid Installation - Chome is not being updated - Disregard
-* Follow these instructions: https://aerokube.com/selenoid/latest/
-* Following article is simplified and can be helpful: https://truuts.medium.com/how-to-install-selenoid-on-macos-751ee2955c70
-* Be sure to use "chmod +x ./cm_darwin_arm64" so the executable can run on mac
-* Go to http://localhost:8080/#/ once the UI is running
-* Important Commands
-  * Startup
-    * ./cm_darwin_arm64 selenoid start --vnc
-    * ./cm_darwin_arm64 selenoid-ui start
-  * Shutdown
-    * ./cm_darwin_arm64 selenoid-ui stop
-    * ./cm_darwin_arm64 selenoid stop
 
 
 Technologies currently included:

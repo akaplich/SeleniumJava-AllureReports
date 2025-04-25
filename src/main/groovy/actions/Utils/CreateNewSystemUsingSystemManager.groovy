@@ -19,12 +19,12 @@ class CreateNewSystemUsingSystemManager{
         def response = HttpClient.MainMakeRequest(Type:"POST",Path:"/systemManager/create",Body:body,RequestContentType:"application/x-www-form-urlencoded",ContentType:"application/json","App Environment":"System Manager").responseData
         println("Response: ${response}")
         println("Affiliate Name = ${name}")
-        HttpClient.affiliatename = name
+        HttpClient.setAffiliatename(name)
         def affiliateid = response.affiliate
-        HttpClient.affiliateid = affiliateid
+        HttpClient.setAffiliateid(affiliateid)
         println("AffiliateID = ${affiliateid}")
         def systemid = response.systemId
-        HttpClient.systemid = systemid
+        HttpClient.setSystemid(systemid)
         println("SystemID = ${systemid}")
         
         body = [

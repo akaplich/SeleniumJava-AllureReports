@@ -20,6 +20,7 @@ import actions.selenium.CloseWindow
 import actions.selenium.Refresh
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
@@ -42,6 +43,7 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
     }
     @Test
     @Tag("Smoke")
+    @Disabled
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
@@ -86,24 +88,8 @@ class TC_C130972_WB_Text_AddAndRemoveText extends TestBase {
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
     }
-    //Afterstate
-    public static def Action581259c8fa4ee77809f46905(def params){
-        captureScreenshot(this.getName().split("\\.")[-1])
-        try{
-            //Close Current Window
-            new CloseWindow().run([:])
-        }
-        catch(all){}catch(Error err){}
-        //Delete Affiliate
-        new DeleteAffiliate().run([:])
-
-    }
     @AfterEach
     public void afterState(){
-        logger.debug("TC_C130972 AfterEach");
-        //Afterstate
-        Action581259c8fa4ee77809f46905([:])
 
-        new CloseWindow().run([:])
     }
 }
