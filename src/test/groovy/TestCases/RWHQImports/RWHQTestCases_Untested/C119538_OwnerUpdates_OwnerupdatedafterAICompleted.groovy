@@ -1,0 +1,106 @@
+import org.testng.annotations.BeforeSuite
+import org.testng.annotations.AfterMethod
+import org.testng.annotations.Test
+
+//C119538 - Owner Updates - Owner updated after AI Completed
+class C119538_OwnerUpdates_OwnerupdatedafterAICompleted
+{
+    private static def variables = [:]
+
+    @BeforeSuite
+    public void beforeState(){
+        variables."URL" = /https:\/\/test.brightideatest.com/
+        variables."Browser" = /Chrome/
+        variables."TestRail_RunName" = null
+        variables."TestRail_ExecutionName" = null
+        variables."CodeEnvironment" = /Default/
+        variables."Database" = null
+    }
+    @Test
+    public void testcase(){
+        //Basestate
+        Action58123c20fa4ee77809f468f6([:])
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/Enterprise Setup/.toString())
+        //Set Enterprise Setup for BIOnly Beta tab
+        new actions.SetupBI.SetEnterpriseSetupforBIOnlyBetatab().run("Owner Edit and History":true,"Display Find Owner Tool Option":true)
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Site Setup for BI Beta tab
+        new actions.SetupBI.SetSiteSetupforBIBetatab().run("Find Owner Tool Type":true)
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Webstorm Setup Ideas for Ideas tab
+        new actions.SetupIdeas.SetWebstormSetupIdeasforIdeastab().run("Idea Owner":true)
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
+        //Set Custom and Other App Post Idea
+        new actions.PostIdea.SetCustomAppPostIdea().run("Title":/Owner Update Idea1/.toString(),"Description":/desc/.toString(),"Category":/New Product/.toString(),"Required Short Question":/desc/.toString(),"Action":/Submit Idea/.toString())
+        //Access Idea in Idea Board page
+        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/Owner Update Idea1/.toString())
+        //Set Owner in View Idea Page
+        new actions.ViewIdea.SetOwnerinViewIdeaPage().run("User":/Pipeline Admin/.toString(),"User Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        //Verify Idea in View Idea page
+        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/Owner Update Idea1/.toString(),"Owner":/Pipeline Admin/.toString(),"Linked Submissions":[])
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
+        //Create Step in Pipeline Steps page
+        new actions.PipelineStepsView.CreateStepinPipelineStepspage().run("Step Name":/Find Owner Custom/.toString(),"Select Tool Type":/Find Owner/.toString(),"Select Stage":/Collection/.toString(),"Action":/Create/.toString())
+        //Configure Find Owner Step in Pipeline Steps page
+        new actions.PipelineStepsConfigure.ConfigureFindOwnerinNewModalinPipelineStepspage().run("Assignment Method":/Category Assignment/.toString(),"Category":/New Product,Operations,Marketing & Branding,Strategy,Quick Add\/New Categories/.toString(),"Owner":/NonBI System Admin,System Admin,System Admin,System Admin,System Admin,System Admin/.toString(),"Owner Add or Remove":/Add,Add,Add,Add,Add/.toString(),"Action":/Activate/.toString())
+        //Select Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Owner Update Idea1/.toString())
+        //Change Idea Step in Pipeline Steps page
+        new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Find Owner Custom/.toString(),"Action":/Change Step/.toString())
+        //Log Out
+        new actions.general.LogOut().run([:])
+        //Login
+        new actions.general.Login().run("Email":/nonbisysadmin@test.com/.toString(),"Password":/brightidea1/.toString())
+        //Access Action Item in Actions Items Global Navigation
+        new actions.ActionItems.AccessActionIteminActionsItemsGlobalNavigation().run("Action Item":/Owner Update Idea1/.toString())
+        //Set Find Owner for an Idea in Action Items page
+        new actions.ActionItems.SetFindOwnerforanIdeainActionItemspage().run("Do you own the decision to implement this idea":/Yes/.toString(),"Do you plan to implement this idea":/Yes - I am considering implementing this idea./.toString(),"Action":/Confirm/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        //Access Idea in Idea Board page
+        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/Owner Update Idea1/.toString())
+        //Verify Idea in View Idea page
+        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/Owner Update Idea1/.toString(),"Owner":/NonBI System Admin/.toString(),"Linked Submissions":[])
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
+        //Access Pipeline Manage Steps for a Step
+        new actions.PipelineStepsView.AccessPipelineManageStepsforaStep().run("Step Name":/Single Scale/.toString())
+        //Access Idea in Pipeline Manage Currently in Step Page
+        new actions.PipelineManageSteps.AccessIdeainPipelineManageCurrentlyinStepPage().run("Idea name":/Owner Update Idea1/.toString())
+        //Verify Idea in NGA View Idea page
+        new actions.NGAViewIdea.VerifyIdeainNGAViewIdeapage().run("Idea Name":/Owner Update Idea1/.toString(),"Creator username":/System Admin/.toString(),"Status":/Submitted/.toString(),"Owner":/NonBI System Admin/.toString())
+    }
+    //Basestate
+    public static def Action58123c20fa4ee77809f468f6(def params){
+        //Create Affiliate based on Master Affiliate
+        variables."affiliateURL" = new actions.API.Utils.CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        //Open Browser
+        new actions.selenium.Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
+        //Login
+        new actions.general.Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
+        //Set to Lab Environment
+        new actions.Utils.SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
+
+    }
+    //Afterstate
+    public static def Action581259c8fa4ee77809f46905(def params){
+        try{
+            //Close Current Window
+            new actions.selenium.CloseWindow().run([:])
+        }
+       catch(all){}catch(Error err){}
+        //Delete Affiliate
+        new actions.API.Utils.DeleteAffiliate().run([:])
+
+    }
+    @AfterMethod
+    public void afterState(){
+        //Afterstate
+        Action581259c8fa4ee77809f46905([:])
+    }
+}

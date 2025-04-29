@@ -1,0 +1,120 @@
+import org.testng.annotations.BeforeSuite
+import org.testng.annotations.AfterMethod
+import org.testng.annotations.Test
+
+//C130773 - Filtering with URL in Initiative-level Action Items Manager
+class C130773_FilteringwithURLinInitiative_levelActionItemsManager
+{
+    private static def variables = [:]
+
+    @BeforeSuite
+    public void beforeState(){
+        variables."URL" = /https:\/\/test.brightideatest.com/
+        variables."Browser" = /Chrome/
+        variables."TestRail_RunName" = null
+        variables."TestRail_ExecutionName" = null
+        variables."CodeEnvironment" = /Default/
+        variables."Database" = null
+    }
+    @Test
+    public void testcase(){
+        //Basestate
+        variables."affiliateURL" = Action58123c20fa4ee77809f468f6([:])
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
+        //Create Custom Webstorm
+        new actions.WebstormCreation.CreateCustomWebstorm().run("Webstorm Title":/Custom App2/.toString(),"Description":/desc/.toString(),"Action":/Create/.toString())
+        //Navigate Webstorm via Admin Dropdown Only
+        new actions.general.NavigateWebstormviaAdminBarOnly().run("Area to Navigate to":/Steps/.toString())
+        //Edit Step in Pipeline Steps page
+        new actions.PipelineStepsView.EditStepinPipelineStepspage().run("Step to Edit":/Initial Screen/.toString(),"Step Name":/Single Scale/.toString(),"Tool Type":/Single Scale/.toString(),"Action":/Save/.toString())
+        //Refresh
+        new actions.selenium.Refresh().run([:])
+        //Configure Single Scale Step in Pipeline Steps page
+        new actions.PipelineStepsConfigure.ConfigureSingleScaleStepinNewModalinPipelineStepspage().run("Step Name to Configure (optional)":/Single Scale/.toString(),"Individual Assignment User":/End User,Moderator/.toString(),"Individual Assignment User Add or Remove":/Add,Add/.toString(),"Action":/Activate/.toString())
+        //Refresh
+        new actions.selenium.Refresh().run([:])
+        //Edit Step in Pipeline Steps page
+        new actions.PipelineStepsView.EditStepinPipelineStepspage().run("Step to Edit":/Scorecarding/.toString(),"Tool Type":/Scorecard/.toString(),"Action":/Save/.toString())
+        //Configure Scorecard Step in Pipeline Steps page
+        new actions.PipelineStepsConfigure.ConfigureScorecardStepinNewModalinPipelineStepspage().run("Assignment Method":/Individual Assignment/.toString(),"Individual Assignment User":/Moderator,End User/.toString(),"Individual Assignment User Add or Remove":/Add,Add/.toString(),"Action":/Activate/.toString())
+        //Quick Add an Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Single Scale1/.toString(),"Action":/Submit/.toString())
+        //Quick Add an Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Single Scale2/.toString(),"Action":/Submit/.toString())
+        //Quick Add an Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Scorecard1/.toString(),"Action":/Submit/.toString())
+        //Quick Add an Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Scorecard2/.toString(),"Action":/Submit/.toString())
+        //Select Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Single Scale1/.toString())
+        //Change Idea Step in Pipeline Steps page
+        new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Single Scale/.toString(),"Action":/Change Step/.toString())
+        //Select Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Single Scale2/.toString())
+        //Change Idea Step in Pipeline Steps page
+        new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Single Scale/.toString(),"Action":/Change Step/.toString())
+        //Select Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Scorecard1/.toString())
+        //Change Idea Step in Pipeline Steps page
+        new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Scorecarding/.toString(),"Action":/Change Step/.toString())
+        //Select Idea in Pipeline Steps page
+        new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Scorecard2/.toString())
+        //Change Idea Step in Pipeline Steps page
+        new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Scorecarding/.toString(),"Action":/Change Step/.toString())
+        //Log Out
+        new actions.general.LogOut().run([:])
+        //Login
+        new actions.general.Login().run("Email":/moderator@test.com/.toString(),"Password":/brightidea1/.toString(),"Verify if Logged In On Enterprise homepage":false)
+        //Access Action Item in Actions Items Global Navigation
+        new actions.ActionItems.AccessActionIteminActionsItemsGlobalNavigation().run("Action Item":/Single Scale1/.toString())
+        //Set Single Scale for Idea in Action Items page
+        new actions.ActionItems.SetSingleScaleforIdeainActionItemspage().run("What is your initial impression of this idea":/5/.toString())
+        //Access Action Item in Actions Items React Global Navigation
+        new actions.ActionItems.AccessActionIteminActionsItemsReactGlobalNavigation().run("Action Item":/Scorecard1/.toString())
+        //Set General Evaluation Scorecard for Idea in Action Items page
+        new actions.ActionItems.SetGeneralEvaluationScorecardforIdeainActionItemspage().run("What is the strategic impact":/High/.toString(),"What is the likely timeframe to implement":/1-3 months/.toString())
+        //Log Out
+        new actions.general.LogOut().run([:])
+        //Login
+        new actions.general.Login().run("Email":/bi.adminuser1@brightidea.com/.toString(),"Password":/brightidea1/.toString(),"Verify if Logged In On Enterprise homepage":false)
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App2/.toString(),"Area to Navigate to":/Home/.toString())
+        //Navigate Webstorm via Admin Dropdown Only
+        new actions.general.NavigateWebstormviaAdminBarOnly().run("Area to Navigate to":/Action Items Manager/.toString())
+        //Copy Current URL
+        variables."currentURL" = new actions.selenium.CopyCurrentURL().run([:])
+        //Navigate to URL
+        new actions.selenium.NavigateToURL().run("URL":/${variables."currentURL"}?status=open&member.screen_name=moderator&step.name=scorecarding/.toString())
+        //Verify Open table for Action Items page
+        new actions.ActionItems.VerifyOpentableforActionItemspage().run("Open Tab Value":/1/.toString(),"Title":/Scorecard2/.toString(),"Assignee":/Moderator/.toString(),"Pipeline":/Custom App2/.toString(),"Type":/Scorecard/.toString(),"Assigner":/System Admin/.toString(),"Row Number":/1/.toString(),"Number of Matches":/1/.toString())
+    }
+    //Basestate
+    public static def Action58123c20fa4ee77809f468f6(def params){
+        //Create Affiliate based on Master Affiliate
+        variables."affiliateURL" = new actions.API.Utils.CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        //Open Browser
+        new actions.selenium.Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
+        //Login
+        new actions.general.Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
+        //Set to Lab Environment
+        new actions.Utils.SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
+
+    }
+    //Afterstate
+    public static def Action581259c8fa4ee77809f46905(def params){
+        try{
+            //Close Current Window
+            new actions.selenium.CloseWindow().run([:])
+        }
+       catch(all){}catch(Error err){}
+        //Delete Affiliate
+        new actions.API.Utils.DeleteAffiliate().run([:])
+
+    }
+    @AfterMethod
+    public void afterState(){
+        //Afterstate
+        Action581259c8fa4ee77809f46905([:])
+    }
+}
