@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129623 - Move Ideas - Source Pipeline - Expertise & Tags Intact, Saved When Moved Back
-class C129623_MoveIdeas_SourcePipeline_ExpertiseRedwoodHQTestCaseTagsIntact_SavedWhenMovedBack
+class C129623_MoveIdeas_SourcePipeline_ExpertiseAndTagsIntact_SavedWhenMovedBack
 {
     private static def variables = [:]
 

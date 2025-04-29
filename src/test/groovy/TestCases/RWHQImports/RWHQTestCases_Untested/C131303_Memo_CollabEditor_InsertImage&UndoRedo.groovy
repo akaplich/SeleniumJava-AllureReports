@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131303 - Memo - Collab Editor - Insert Image & Undo Redo
-class C131303_Memo_CollabEditor_InsertImageRedwoodHQTestCaseUndoRedo
+class C131303_Memo_CollabEditor_InsertImageAndUndoRedo
 {
     private static def variables = [:]
 

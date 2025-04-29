@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65860 - Emails - Question is answer at Challenge Brief Q&A - Email Trigger, Template Update
-class C65860_Emails_QuestionisansweratChallengeBriefQRedwoodHQTestCaseA_EmailTrigger_TemplateUpdate
+class C65860_Emails_QuestionisansweratChallengeBriefQAndA_EmailTrigger_TemplateUpdate
 {
     private static def variables = [:]
 

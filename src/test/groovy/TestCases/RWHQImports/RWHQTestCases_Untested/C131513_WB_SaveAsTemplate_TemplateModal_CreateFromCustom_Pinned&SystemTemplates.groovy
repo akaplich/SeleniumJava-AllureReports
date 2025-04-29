@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131513 - WB - Save As Template - Template Modal - Create From Custom, Pinned & System Templates
-class C131513_WB_SaveAsTemplate_TemplateModal_CreateFromCustom_PinnedRedwoodHQTestCaseSystemTemplates
+class C131513_WB_SaveAsTemplate_TemplateModal_CreateFromCustom_PinnedAndSystemTemplates
 {
     private static def variables = [:]
 

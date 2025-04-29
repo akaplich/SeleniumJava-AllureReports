@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130528 - Security Questions - Self-Registration & Reset Password
-class C130528_SecurityQuestions_Self_RegistrationRedwoodHQTestCaseResetPassword
+class C130528_SecurityQuestions_Self_RegistrationAndResetPassword
 {
     private static def variables = [:]
 

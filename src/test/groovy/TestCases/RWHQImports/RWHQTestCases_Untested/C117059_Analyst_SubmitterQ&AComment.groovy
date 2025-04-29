@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117059 - Analyst - Submitter Q&A Comment
-class C117059_Analyst_SubmitterQRedwoodHQTestCaseAComment
+class C117059_Analyst_SubmitterQAndAComment
 {
     private static def variables = [:]
 

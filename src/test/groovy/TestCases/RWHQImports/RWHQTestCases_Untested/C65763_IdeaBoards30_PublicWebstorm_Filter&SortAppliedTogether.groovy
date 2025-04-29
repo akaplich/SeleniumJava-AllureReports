@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65763 - Idea Boards 30 - Public Webstorm - Filter & Sort Applied Together
-class C65763_IdeaBoards30_PublicWebstorm_FilterRedwoodHQTestCaseSortAppliedTogether
+class C65763_IdeaBoards30_PublicWebstorm_FilterAndSortAppliedTogether
 {
     private static def variables = [:]
 

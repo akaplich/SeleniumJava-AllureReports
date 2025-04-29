@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130593 - Un-Merge Ideas - Un-Merge Dialog on Steps & List View
-class C130593_Un_MergeIdeas_Un_MergeDialogonStepsRedwoodHQTestCaseListView
+class C130593_Un_MergeIdeas_Un_MergeDialogonStepsAndListView
 {
     private static def variables = [:]
 

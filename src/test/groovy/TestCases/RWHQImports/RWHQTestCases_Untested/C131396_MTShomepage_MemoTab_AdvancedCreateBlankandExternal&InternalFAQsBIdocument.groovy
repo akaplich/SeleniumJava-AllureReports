@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131396 - MTS homepage > Memo Tab > Advanced Create Blank and External & Internal FAQs BI document
-class C131396_MTShomepage_MemoTab_AdvancedCreateBlankandExternalRedwoodHQTestCaseInternalFAQsBIdocument
+class C131396_MTShomepage_MemoTab_AdvancedCreateBlankandExternalAndInternalFAQsBIdocument
 {
     private static def variables = [:]
 

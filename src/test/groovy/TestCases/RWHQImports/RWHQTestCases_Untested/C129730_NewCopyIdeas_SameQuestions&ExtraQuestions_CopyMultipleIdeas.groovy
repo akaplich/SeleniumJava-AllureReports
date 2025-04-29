@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129730 - New Copy Ideas - Same Questions & Extra Questions, Copy Multiple Ideas
-class C129730_NewCopyIdeas_SameQuestionsRedwoodHQTestCaseExtraQuestions_CopyMultipleIdeas
+class C129730_NewCopyIdeas_SameQuestionsAndExtraQuestions_CopyMultipleIdeas
 {
     private static def variables = [:]
 

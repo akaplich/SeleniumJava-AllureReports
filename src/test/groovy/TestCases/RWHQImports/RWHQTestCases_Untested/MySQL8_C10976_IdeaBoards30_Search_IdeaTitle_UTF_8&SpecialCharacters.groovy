@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //MySQL8 - C10976 - Idea Boards 30 - Search - Idea Title - UTF-8 & Special Characters
-class MySQL8_C10976_IdeaBoards30_Search_IdeaTitle_UTF_8RedwoodHQTestCaseSpecialCharacters
+class MySQL8_C10976_IdeaBoards30_Search_IdeaTitle_UTF_8AndSpecialCharacters
 {
     private static def variables = [:]
 

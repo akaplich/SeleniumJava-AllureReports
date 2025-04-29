@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129009 - Submission Days in Status - Report Format & Data
-class C129009_SubmissionDaysinStatus_ReportFormatRedwoodHQTestCaseData
+class C129009_SubmissionDaysinStatus_ReportFormatAndData
 {
     private static def variables = [:]
 

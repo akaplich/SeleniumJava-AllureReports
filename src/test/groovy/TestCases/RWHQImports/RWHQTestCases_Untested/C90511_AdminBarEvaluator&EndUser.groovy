@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C90511 - Admin Bar Evaluator & End User
-class C90511_AdminBarEvaluatorRedwoodHQTestCaseEndUser
+class C90511_AdminBarEvaluatorAndEndUser
 {
     private static def variables = [:]
 

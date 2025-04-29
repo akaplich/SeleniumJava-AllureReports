@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130976 - WB - Timer - Add, Play & Stop Timer
-class C130976_WB_Timer_Add_PlayRedwoodHQTestCaseStopTimer
+class C130976_WB_Timer_Add_PlayAndStopTimer
 {
     private static def variables = [:]
 

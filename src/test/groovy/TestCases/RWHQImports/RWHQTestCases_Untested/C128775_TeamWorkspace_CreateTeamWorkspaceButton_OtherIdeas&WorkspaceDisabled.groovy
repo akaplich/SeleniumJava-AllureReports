@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C128775 - Team Workspace - Create Team Workspace Button - Other Ideas & Workspace Disabled
-class C128775_TeamWorkspace_CreateTeamWorkspaceButton_OtherIdeasRedwoodHQTestCaseWorkspaceDisabled
+class C128775_TeamWorkspace_CreateTeamWorkspaceButton_OtherIdeasAndWorkspaceDisabled
 {
     private static def variables = [:]
 

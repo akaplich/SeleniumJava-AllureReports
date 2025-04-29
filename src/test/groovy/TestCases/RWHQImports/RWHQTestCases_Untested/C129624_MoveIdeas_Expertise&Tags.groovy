@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129624 - Move Ideas - Expertise & Tags
-class C129624_MoveIdeas_ExpertiseRedwoodHQTestCaseTags
+class C129624_MoveIdeas_ExpertiseAndTags
 {
     private static def variables = [:]
 

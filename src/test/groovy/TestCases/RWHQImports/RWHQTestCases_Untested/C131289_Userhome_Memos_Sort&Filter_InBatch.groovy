@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131289 - Userhome - Memos - Sort & Filter - In Batch
-class C131289_Userhome_Memos_SortRedwoodHQTestCaseFilter_InBatch
+class C131289_Userhome_Memos_SortAndFilter_InBatch
 {
     private static def variables = [:]
 

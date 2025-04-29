@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131404 - WB - Shapes & Text - Duplicated Objects Save Order
-class C131404_WB_ShapesRedwoodHQTestCaseText_DuplicatedObjectsSaveOrder
+class C131404_WB_ShapesAndText_DuplicatedObjectsSaveOrder
 {
     private static def variables = [:]
 

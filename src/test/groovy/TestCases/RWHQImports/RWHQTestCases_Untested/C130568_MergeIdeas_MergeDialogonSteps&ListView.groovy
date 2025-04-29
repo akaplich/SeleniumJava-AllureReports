@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130568 - Merge Ideas - Merge Dialog on Steps & List View
-class C130568_MergeIdeas_MergeDialogonStepsRedwoodHQTestCaseListView
+class C130568_MergeIdeas_MergeDialogonStepsAndListView
 {
     private static def variables = [:]
 

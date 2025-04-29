@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131336 - Quick & Advanced Search - Links to Results Page - Enterprise & MTS
-class C131336_QuickRedwoodHQTestCaseAdvancedSearch_LinkstoResultsPage_EnterpriseRedwoodHQTestCaseMTS
+class C131336_QuickAndAdvancedSearch_LinkstoResultsPage_EnterpriseAndMTS
 {
     private static def variables = [:]
 

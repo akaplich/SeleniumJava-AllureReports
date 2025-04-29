@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65875 - Emails - Question is asked at Challenge Brief Q&A - Disable
-class C65875_Emails_QuestionisaskedatChallengeBriefQRedwoodHQTestCaseA_Disable
+class C65875_Emails_QuestionisaskedatChallengeBriefQAndA_Disable
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129841 - Visibility Administrator & Evaluator - System Admin on NGA View Idea (Manage Page)
-class C129841_VisibilityAdministratorRedwoodHQTestCaseEvaluator_SystemAdminonNGAViewIdea(ManagePage)
+class C129841_VisibilityAdministratorAndEvaluator_SystemAdminonNGAViewIdea(ManagePage)
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C128896 - My Idea - Post My Idea & Send Registration (Default Setup)
-class C128896_MyIdea_PostMyIdeaRedwoodHQTestCaseSendRegistration(DefaultSetup)
+class C128896_MyIdea_PostMyIdeaAndSendRegistration(DefaultSetup)
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117405 - Linked Submissions Across Initiatives - Submitters Can Not Search Hidden & Restricted
-class C117405_LinkedSubmissionsAcrossInitiatives_SubmittersCanNotSearchHiddenRedwoodHQTestCaseRestricted
+class C117405_LinkedSubmissionsAcrossInitiatives_SubmittersCanNotSearchHiddenAndRestricted
 {
     private static def variables = [:]
 

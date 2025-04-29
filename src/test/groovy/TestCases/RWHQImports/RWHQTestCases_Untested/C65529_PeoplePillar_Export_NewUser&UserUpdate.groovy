@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65529 - People Pillar - Export - New User & User Update
-class C65529_PeoplePillar_Export_NewUserRedwoodHQTestCaseUserUpdate
+class C65529_PeoplePillar_Export_NewUserAndUserUpdate
 {
     private static def variables = [:]
 

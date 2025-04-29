@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130780 - Top Ideas By Category - Clear Filters - Status & Tags
-class C130780_TopIdeasByCategory_ClearFilters_StatusRedwoodHQTestCaseTags
+class C130780_TopIdeasByCategory_ClearFilters_StatusAndTags
 {
     private static def variables = [:]
 

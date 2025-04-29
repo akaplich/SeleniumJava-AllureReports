@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117083 - Enable Steps&Stages view and Move idea to another step
-class C117083_EnableStepsRedwoodHQTestCaseStagesviewandMoveideatoanotherstep
+class C117083_EnableStepsAndStagesviewandMoveideatoanotherstep
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130889 - Whiteboard Search - Quick Results - Show Shared & Access Link
-class C130889_WhiteboardSearch_QuickResults_ShowSharedRedwoodHQTestCaseAccessLink
+class C130889_WhiteboardSearch_QuickResults_ShowSharedAndAccessLink
 {
     private static def variables = [:]
 

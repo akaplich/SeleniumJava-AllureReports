@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65530 - People Pillar - Export - Report Format & Data
-class C65530_PeoplePillar_Export_ReportFormatRedwoodHQTestCaseData
+class C65530_PeoplePillar_Export_ReportFormatAndData
 {
     private static def variables = [:]
 

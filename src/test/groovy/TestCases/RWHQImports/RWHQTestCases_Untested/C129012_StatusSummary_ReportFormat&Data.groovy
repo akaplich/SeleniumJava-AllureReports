@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129012 - Status Summary - Report Format & Data
-class C129012_StatusSummary_ReportFormatRedwoodHQTestCaseData
+class C129012_StatusSummary_ReportFormatAndData
 {
     private static def variables = [:]
 

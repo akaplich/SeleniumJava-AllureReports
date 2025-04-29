@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131346 - Memo - Pagination Off - Image & Text Combination Add, Delete, Unsplash
-class C131346_Memo_PaginationOff_ImageRedwoodHQTestCaseTextCombinationAdd_Delete_Unsplash
+class C131346_Memo_PaginationOff_ImageAndTextCombinationAdd_Delete_Unsplash
 {
     private static def variables = [:]
 

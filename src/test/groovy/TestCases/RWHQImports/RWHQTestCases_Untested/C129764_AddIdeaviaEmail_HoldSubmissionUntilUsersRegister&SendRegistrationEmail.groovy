@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129764 - Add Idea via Email - Hold Submission Until Users Register & Send Registration Email
-class C129764_AddIdeaviaEmail_HoldSubmissionUntilUsersRegisterRedwoodHQTestCaseSendRegistrationEmail
+class C129764_AddIdeaviaEmail_HoldSubmissionUntilUsersRegisterAndSendRegistrationEmail
 {
     private static def variables = [:]
 

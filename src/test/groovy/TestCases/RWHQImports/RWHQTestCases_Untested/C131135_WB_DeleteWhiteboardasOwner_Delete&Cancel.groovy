@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131135 - WB - Delete Whiteboard as Owner - Delete & Cancel
-class C131135_WB_DeleteWhiteboardasOwner_DeleteRedwoodHQTestCaseCancel
+class C131135_WB_DeleteWhiteboardasOwner_DeleteAndCancel
 {
     private static def variables = [:]
 

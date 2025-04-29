@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131347 - WB - Print to PDF, Hotkey & Menu
-class C131347_WB_PrinttoPDF_HotkeyRedwoodHQTestCaseMenu
+class C131347_WB_PrinttoPDF_HotkeyAndMenu
 {
     private static def variables = [:]
 

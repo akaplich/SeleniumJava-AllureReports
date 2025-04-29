@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131454 - WB - Marker - Select & Drag Object from Empty Space
-class C131454_WB_Marker_SelectRedwoodHQTestCaseDragObjectfromEmptySpace
+class C131454_WB_Marker_SelectAndDragObjectfromEmptySpace
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C119054 - NGA View Idea Comments - Analyst Not Able Add Private or Q&A comments
-class C119054_NGAViewIdeaComments_AnalystNotAbleAddPrivateorQRedwoodHQTestCaseAcomments
+class C119054_NGAViewIdeaComments_AnalystNotAbleAddPrivateorQAndAcomments
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C118688 - Change order of default questions and check post idea 2.0 & view idea 2.0 pages - System Admin
-class C118688_Changeorderofdefaultquestionsandcheckpostidea2.0RedwoodHQTestCaseviewidea2.0pages_SystemAdmin
+class C118688_Changeorderofdefaultquestionsandcheckpostidea2.0Andviewidea2.0pages_SystemAdmin
 {
     private static def variables = [:]
 

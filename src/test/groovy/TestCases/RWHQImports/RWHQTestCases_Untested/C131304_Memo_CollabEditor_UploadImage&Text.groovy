@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131304 - Memo - Collab Editor - Upload Image & Text
-class C131304_Memo_CollabEditor_UploadImageRedwoodHQTestCaseText
+class C131304_Memo_CollabEditor_UploadImageAndText
 {
     private static def variables = [:]
 

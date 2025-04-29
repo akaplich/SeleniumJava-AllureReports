@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130156 - Stage Color - Create & Update (Typed In)
-class C130156_StageColor_CreateRedwoodHQTestCaseUpdate(TypedIn)
+class C130156_StageColor_CreateAndUpdate(TypedIn)
 {
     private static def variables = [:]
 

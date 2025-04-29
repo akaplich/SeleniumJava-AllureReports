@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130849 - Advanced Search - Search Comments, Deleted Comments, Enterprise & Activity
-class C130849_AdvancedSearch_SearchComments_DeletedComments_EnterpriseRedwoodHQTestCaseActivity
+class C130849_AdvancedSearch_SearchComments_DeletedComments_EnterpriseAndActivity
 {
     private static def variables = [:]
 

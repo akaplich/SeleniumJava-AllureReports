@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131977 - HTS > Submissions & Empty State
-class C131977_HTS_SubmissionsRedwoodHQTestCaseEmptyState
+class C131977_HTS_SubmissionsAndEmptyState
 {
     private static def variables = [:]
 

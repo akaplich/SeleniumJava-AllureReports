@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130931 - WB - Image - Undo (Ctrl+Z) Upload & Unsplash
-class C130931_WB_Image_Undo(Ctrl+Z)UploadRedwoodHQTestCaseUnsplash
+class C130931_WB_Image_Undo(Ctrl+Z)UploadAndUnsplash
 {
     private static def variables = [:]
 

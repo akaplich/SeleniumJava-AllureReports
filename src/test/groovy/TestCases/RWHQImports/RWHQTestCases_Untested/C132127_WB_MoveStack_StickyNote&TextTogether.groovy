@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C132127 - WB - Move Stack, Sticky Note & Text Together 
-class C132127_WB_MoveStack_StickyNoteRedwoodHQTestCaseTextTogether
+class C132127_WB_MoveStack_StickyNoteAndTextTogether
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130573 - Idea Submitted - Copy Idea & Link Ideas (Default)
-class C130573_IdeaSubmitted_CopyIdeaRedwoodHQTestCaseLinkIdeas(Default)
+class C130573_IdeaSubmitted_CopyIdeaAndLinkIdeas(Default)
 {
     private static def variables = [:]
 

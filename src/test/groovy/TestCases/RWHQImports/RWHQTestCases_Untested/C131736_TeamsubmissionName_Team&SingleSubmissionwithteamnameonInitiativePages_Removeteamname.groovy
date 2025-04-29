@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131736 - Team submission Name - Team & Single Submission with team name on Initiative Pages - Remove team name
-class C131736_TeamsubmissionName_TeamRedwoodHQTestCaseSingleSubmissionwithteamnameonInitiativePages_Removeteamname
+class C131736_TeamsubmissionName_TeamAndSingleSubmissionwithteamnameonInitiativePages_Removeteamname
 {
     private static def variables = [:]
 

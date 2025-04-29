@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C132057 - Task Sort and Filter - Filter Page with Assignee & Status & Due Date
-class C132057_TaskSortandFilter_FilterPagewithAssigneeRedwoodHQTestCaseStatusRedwoodHQTestCaseDueDate
+class C132057_TaskSortandFilter_FilterPagewithAssigneeAndStatusAndDueDate
 {
     private static def variables = [:]
 

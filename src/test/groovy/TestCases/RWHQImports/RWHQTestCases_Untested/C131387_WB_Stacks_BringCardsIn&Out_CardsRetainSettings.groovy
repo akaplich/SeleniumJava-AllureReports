@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131387 - WB - Stacks - Bring Cards In & Out, Cards Retain Settings
-class C131387_WB_Stacks_BringCardsInRedwoodHQTestCaseOut_CardsRetainSettings
+class C131387_WB_Stacks_BringCardsInAndOut_CardsRetainSettings
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C132464 - Project Room > Left Rail - Favorites - Rename Memo & WB
-class C132464_ProjectRoom_LeftRail_Favorites_RenameMemoRedwoodHQTestCaseWB
+class C132464_ProjectRoom_LeftRail_Favorites_RenameMemoAndWB
 {
     private static def variables = [:]
 

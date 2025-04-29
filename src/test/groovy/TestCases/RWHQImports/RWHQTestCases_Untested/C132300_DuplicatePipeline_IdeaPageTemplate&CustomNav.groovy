@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C132300 - Duplicate Pipeline - Idea Page Template & Custom Nav
-class C132300_DuplicatePipeline_IdeaPageTemplateRedwoodHQTestCaseCustomNav
+class C132300_DuplicatePipeline_IdeaPageTemplateAndCustomNav
 {
     private static def variables = [:]
 

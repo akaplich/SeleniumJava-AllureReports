@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129844 - Vote Submitted - Perform Multiple Actions - Move Idea & Add Comment
-class C129844_VoteSubmitted_PerformMultipleActions_MoveIdeaRedwoodHQTestCaseAddComment
+class C129844_VoteSubmitted_PerformMultipleActions_MoveIdeaAndAddComment
 {
     private static def variables = [:]
 

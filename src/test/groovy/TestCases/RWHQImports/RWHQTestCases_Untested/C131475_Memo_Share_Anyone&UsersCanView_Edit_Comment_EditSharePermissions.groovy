@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131475 - Memo - Share - Anyone & Users Can View, Edit, Comment - Edit Share Permissions
-class C131475_Memo_Share_AnyoneRedwoodHQTestCaseUsersCanView_Edit_Comment_EditSharePermissions
+class C131475_Memo_Share_AnyoneAndUsersCanView_Edit_Comment_EditSharePermissions
 {
     private static def variables = [:]
 

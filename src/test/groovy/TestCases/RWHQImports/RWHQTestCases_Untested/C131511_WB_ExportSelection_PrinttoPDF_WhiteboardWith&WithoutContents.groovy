@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131511 - WB - Export Selection, Print to PDF - Whiteboard With & Without Contents
-class C131511_WB_ExportSelection_PrinttoPDF_WhiteboardWithRedwoodHQTestCaseWithoutContents
+class C131511_WB_ExportSelection_PrinttoPDF_WhiteboardWithAndWithoutContents
 {
     private static def variables = [:]
 

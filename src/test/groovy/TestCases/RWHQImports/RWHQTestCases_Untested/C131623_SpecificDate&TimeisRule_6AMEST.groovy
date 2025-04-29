@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131623 - Specific Date & Time is Rule, 6AM EST
-class C131623_SpecificDateRedwoodHQTestCaseTimeisRule_6AMEST
+class C131623_SpecificDateAndTimeisRule_6AMEST
 {
     private static def variables = [:]
 

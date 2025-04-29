@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130971 - WB - Shapes - Lock & Unlock
-class C130971_WB_Shapes_LockRedwoodHQTestCaseUnlock
+class C130971_WB_Shapes_LockAndUnlock
 {
     private static def variables = [:]
 

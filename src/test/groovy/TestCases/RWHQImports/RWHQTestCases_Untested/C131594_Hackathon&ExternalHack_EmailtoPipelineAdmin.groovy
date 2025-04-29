@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131594 - Hackathon & External Hack - Email to Pipeline Admin
-class C131594_HackathonRedwoodHQTestCaseExternalHack_EmailtoPipelineAdmin
+class C131594_HackathonAndExternalHack_EmailtoPipelineAdmin
 {
     private static def variables = [:]
 

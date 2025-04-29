@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C128890 - Comment Component - Tagging Pipeline Admin & Moderator in all types of comments replies
-class C128890_CommentComponent_TaggingPipelineAdminRedwoodHQTestCaseModeratorinalltypesofcommentsreplies
+class C128890_CommentComponent_TaggingPipelineAdminAndModeratorinalltypesofcommentsreplies
 {
     private static def variables = [:]
 

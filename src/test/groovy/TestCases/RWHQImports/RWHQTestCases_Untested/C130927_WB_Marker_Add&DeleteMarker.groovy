@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130927 - WB - Marker - Add & Delete Marker
-class C130927_WB_Marker_AddRedwoodHQTestCaseDeleteMarker
+class C130927_WB_Marker_AddAndDeleteMarker
 {
     private static def variables = [:]
 

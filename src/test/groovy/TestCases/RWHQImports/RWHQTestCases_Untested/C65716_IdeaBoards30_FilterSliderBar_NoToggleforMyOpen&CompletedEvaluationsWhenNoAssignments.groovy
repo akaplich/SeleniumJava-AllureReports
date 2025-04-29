@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65716 - Idea Boards 30 - Filter Slider Bar - No Toggle for My Open & Completed Evaluations When No Assignments
-class C65716_IdeaBoards30_FilterSliderBar_NoToggleforMyOpenRedwoodHQTestCaseCompletedEvaluationsWhenNoAssignments
+class C65716_IdeaBoards30_FilterSliderBar_NoToggleforMyOpenAndCompletedEvaluationsWhenNoAssignments
 {
     private static def variables = [:]
 

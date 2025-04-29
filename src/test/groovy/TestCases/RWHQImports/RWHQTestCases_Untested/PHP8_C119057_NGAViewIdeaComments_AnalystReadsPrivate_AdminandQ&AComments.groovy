@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //PHP8 - C119057 - NGA View Idea Comments - Analyst Reads Private, Admin and Q&A Comments
-class PHP8_C119057_NGAViewIdeaComments_AnalystReadsPrivate_AdminandQRedwoodHQTestCaseAComments
+class PHP8_C119057_NGAViewIdeaComments_AnalystReadsPrivate_AdminandQAndAComments
 {
     private static def variables = [:]
 

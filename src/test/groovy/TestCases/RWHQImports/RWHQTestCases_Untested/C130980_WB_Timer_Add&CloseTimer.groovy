@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130980 - WB - Timer - Add & Close Timer
-class C130980_WB_Timer_AddRedwoodHQTestCaseCloseTimer
+class C130980_WB_Timer_AddAndCloseTimer
 {
     private static def variables = [:]
 

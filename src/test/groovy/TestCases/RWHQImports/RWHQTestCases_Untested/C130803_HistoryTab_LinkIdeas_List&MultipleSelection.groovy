@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130803 - History Tab - Link Ideas - List & Multiple Selection
-class C130803_HistoryTab_LinkIdeas_ListRedwoodHQTestCaseMultipleSelection
+class C130803_HistoryTab_LinkIdeas_ListAndMultipleSelection
 {
     private static def variables = [:]
 

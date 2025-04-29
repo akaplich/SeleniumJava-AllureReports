@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131136 - WB - Delete Whiteboard as Editor & Shared Users
-class C131136_WB_DeleteWhiteboardasEditorRedwoodHQTestCaseSharedUsers
+class C131136_WB_DeleteWhiteboardasEditorAndSharedUsers
 {
     private static def variables = [:]
 

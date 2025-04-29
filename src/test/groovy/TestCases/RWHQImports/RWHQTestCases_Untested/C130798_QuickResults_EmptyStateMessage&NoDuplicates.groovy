@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130798 - Quick Results - Empty State Message & No Duplicates
-class C130798_QuickResults_EmptyStateMessageRedwoodHQTestCaseNoDuplicates
+class C130798_QuickResults_EmptyStateMessageAndNoDuplicates
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129011 - Status Summary - Empty Pipeline, Report Format & Data
-class C129011_StatusSummary_EmptyPipeline_ReportFormatRedwoodHQTestCaseData
+class C129011_StatusSummary_EmptyPipeline_ReportFormatAndData
 {
     private static def variables = [:]
 

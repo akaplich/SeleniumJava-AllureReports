@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131406 - WB - Shapes & Text - Select Underneath Object and Right Click
-class C131406_WB_ShapesRedwoodHQTestCaseText_SelectUnderneathObjectandRightClick
+class C131406_WB_ShapesAndText_SelectUnderneathObjectandRightClick
 {
     private static def variables = [:]
 

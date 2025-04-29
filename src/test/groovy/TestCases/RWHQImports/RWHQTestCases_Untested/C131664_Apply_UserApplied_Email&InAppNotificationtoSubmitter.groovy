@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131664 - Apply - User Applied - Email & In App Notification to Submitter
-class C131664_Apply_UserApplied_EmailRedwoodHQTestCaseInAppNotificationtoSubmitter
+class C131664_Apply_UserApplied_EmailAndInAppNotificationtoSubmitter
 {
     private static def variables = [:]
 

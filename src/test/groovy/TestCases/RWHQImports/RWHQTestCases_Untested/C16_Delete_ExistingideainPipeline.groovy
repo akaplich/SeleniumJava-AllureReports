@@ -1,16 +1,18 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import BaseClasses.TestBase
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
 
 //C16 - Delete - Existing idea in Pipeline
-class C16_Delete_ExistingideainPipeline
-{
+class C16_Delete_ExistingideainPipeline extends TestBase {
+
     private static def variables = [:]
 
-    @BeforeSuite
-    public void beforeState(){
+    @BeforeAll
+    public static void beforeState(){{
         variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
@@ -46,21 +48,5 @@ class C16_Delete_ExistingideainPipeline
         //Set to Lab Environment
         new actions.Utils.SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
 
-    }
-    //Afterstate
-    public static def Action581259c8fa4ee77809f46905(def params){
-        try{
-            //Close Current Window
-            new actions.selenium.CloseWindow().run([:])
-        }
-       catch(all){}catch(Error err){}
-        //Delete Affiliate
-        new actions.API.Utils.DeleteAffiliate().run([:])
-
-    }
-    @AfterMethod
-    public void afterState(){
-        //Afterstate
-        Action581259c8fa4ee77809f46905([:])
     }
 }

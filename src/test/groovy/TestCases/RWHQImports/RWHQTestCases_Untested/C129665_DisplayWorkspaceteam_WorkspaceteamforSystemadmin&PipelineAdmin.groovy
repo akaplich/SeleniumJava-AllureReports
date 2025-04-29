@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129665 - Display Workspace team - Workspace team for System admin & Pipeline Admin
-class C129665_DisplayWorkspaceteam_WorkspaceteamforSystemadminRedwoodHQTestCasePipelineAdmin
+class C129665_DisplayWorkspaceteam_WorkspaceteamforSystemadminAndPipelineAdmin
 {
     private static def variables = [:]
 

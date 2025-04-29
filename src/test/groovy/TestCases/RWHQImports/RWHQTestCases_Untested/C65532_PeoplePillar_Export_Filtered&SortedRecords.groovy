@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65532 - People Pillar - Export - Filtered & Sorted Records
-class C65532_PeoplePillar_Export_FilteredRedwoodHQTestCaseSortedRecords
+class C65532_PeoplePillar_Export_FilteredAndSortedRecords
 {
     private static def variables = [:]
 

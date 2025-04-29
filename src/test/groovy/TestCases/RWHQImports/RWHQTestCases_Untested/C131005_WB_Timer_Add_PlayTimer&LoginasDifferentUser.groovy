@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131005 - WB - Timer - Add, Play Timer & Login as Different User
-class C131005_WB_Timer_Add_PlayTimerRedwoodHQTestCaseLoginasDifferentUser
+class C131005_WB_Timer_Add_PlayTimerAndLoginasDifferentUser
 {
     private static def variables = [:]
 

@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C132122 - WB - Search for Text (Stack & NNL)
-class C132122_WB_SearchforText(StackRedwoodHQTestCaseNNL)
+class C132122_WB_SearchforText(StackAndNNL)
 {
     private static def variables = [:]
 

@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65830 - Team Workspace - Files - Attach Audio & Video
-class C65830_TeamWorkspace_Files_AttachAudioRedwoodHQTestCaseVideo
+class C65830_TeamWorkspace_Files_AttachAudioAndVideo
 {
     private static def variables = [:]
 

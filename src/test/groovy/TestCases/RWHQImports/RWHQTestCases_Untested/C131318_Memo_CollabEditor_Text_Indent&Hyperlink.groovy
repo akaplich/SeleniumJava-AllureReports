@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131318 - Memo - Collab Editor - Text - Indent & Hyperlink
-class C131318_Memo_CollabEditor_Text_IndentRedwoodHQTestCaseHyperlink
+class C131318_Memo_CollabEditor_Text_IndentAndHyperlink
 {
     private static def variables = [:]
 

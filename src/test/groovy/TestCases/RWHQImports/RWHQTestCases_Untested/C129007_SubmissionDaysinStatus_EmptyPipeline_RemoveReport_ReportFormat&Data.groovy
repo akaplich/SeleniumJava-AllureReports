@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129007 - Submission Days in Status - Empty Pipeline, Remove Report, Report Format & Data
-class C129007_SubmissionDaysinStatus_EmptyPipeline_RemoveReport_ReportFormatRedwoodHQTestCaseData
+class C129007_SubmissionDaysinStatus_EmptyPipeline_RemoveReport_ReportFormatAndData
 {
     private static def variables = [:]
 

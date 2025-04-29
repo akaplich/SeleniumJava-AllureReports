@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C119058 - NGA View Idea Comments - Moderator Adds Private or Q&A comments
-class C119058_NGAViewIdeaComments_ModeratorAddsPrivateorQRedwoodHQTestCaseAcomments
+class C119058_NGAViewIdeaComments_ModeratorAddsPrivateorQAndAcomments
 {
     private static def variables = [:]
 

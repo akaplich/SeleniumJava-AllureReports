@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129394 - Move Ideas - Same Questions & Extra Questions
-class C129394_MoveIdeas_SameQuestionsRedwoodHQTestCaseExtraQuestions
+class C129394_MoveIdeas_SameQuestionsAndExtraQuestions
 {
     private static def variables = [:]
 

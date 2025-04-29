@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117071 - History Tab - Tab Visibility - Admins Only - System & Pipeline Admin
-class C117071_HistoryTab_TabVisibility_AdminsOnly_SystemRedwoodHQTestCasePipelineAdmin
+class C117071_HistoryTab_TabVisibility_AdminsOnly_SystemAndPipelineAdmin
 {
     private static def variables = [:]
 

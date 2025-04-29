@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130548 - History Tab - Copy Ideas & Don't Link
-class C130548_HistoryTab_CopyIdeasRedwoodHQTestCaseDon'tLink
+class C130548_HistoryTab_CopyIdeasAndDon'tLink
 {
     private static def variables = [:]
 

@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C131109 - WB - Shapes - Line - Update Width & Color
-class C131109_WB_Shapes_Line_UpdateWidthRedwoodHQTestCaseColor
+class C131109_WB_Shapes_Line_UpdateWidthAndColor
 {
     private static def variables = [:]
 

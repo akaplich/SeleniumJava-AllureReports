@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130172 - Stage Color - Create & Update (Select from Palette)
-class C130172_StageColor_CreateRedwoodHQTestCaseUpdate(SelectfromPalette)
+class C130172_StageColor_CreateAndUpdate(SelectfromPalette)
 {
     private static def variables = [:]
 

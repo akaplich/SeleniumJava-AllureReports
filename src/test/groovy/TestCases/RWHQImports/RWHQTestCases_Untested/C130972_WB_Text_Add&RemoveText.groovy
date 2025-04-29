@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C130972 - WB - Text - Add & Remove Text
-class C130972_WB_Text_AddRedwoodHQTestCaseRemoveText
+class C130972_WB_Text_AddAndRemoveText
 {
     private static def variables = [:]
 

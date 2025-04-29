@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117189 - Q&A comment count in submission hover
-class C117189_QRedwoodHQTestCaseAcommentcountinsubmissionhover
+class C117189_QAndAcommentcountinsubmissionhover
 {
     private static def variables = [:]
 
