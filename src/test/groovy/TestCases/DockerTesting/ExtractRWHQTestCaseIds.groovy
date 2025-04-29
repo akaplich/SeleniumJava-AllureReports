@@ -47,30 +47,37 @@ class ExtractRWHQTestCaseIds {
                 "--enable-logging",
                 "--log-file=/var/log/rwhq/chromium-debug.log",
                 "--skip-force-online-signin-for-testing",
-                "--disable-popup-blocking"
+                "--disable-popup-blocking",
         )
 
         logger.debug("Assigning Chrome Driver");
         WebDriver driver = new ChromeDriver();
+        String csvFilePath = "test_case_ids.csv"
+        File csvFile = new File(csvFilePath)
+        csvFile.text = "" // Clear or create the file
 
         logger.debug("Navigate to URL");
         driver.get("https://rwhq2.brightidea.cloud/index.html");
         logger.debug("Login Manually");
         driver.get("https://rwhq2.brightidea.cloud/index.html?execution=680c9283a2feb0494d91fd1d&project=Brightidea");
 
-        String containerXpath = "//*[@id='gridpanel-1377-body']"
+        String containerXpath = "//*[@id='gridview-1390']"
         WebElement containerElement = driver.findElement(By.xpath(containerXpath));
-        for (i in 1..5){
+        for (i in 1..50000){
             String xpath = "//*[@id='gridview-1390-body']//td[2]//a"
             List<WebElement> elements = driver.findElements(By.xpath(xpath));
             for (WebElement element : elements) {
                 String href = element.getDomAttribute("href");
-                println(href);
+                String tcID = href.find(/openResultDetails\("([a-z0-9]+)"/) { match, id -> id }
+                println(tcID);
+                if (tcID) {
+                    csvFile.append("${tcID}\n")
+                }
             }
             containerElement.sendKeys(Keys.PAGE_DOWN)
         }
 
 
-        driver.quit();
+        //driver.quit();
     }
 }
