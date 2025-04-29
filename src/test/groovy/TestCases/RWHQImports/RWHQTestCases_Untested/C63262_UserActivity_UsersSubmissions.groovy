@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C63262 - User Activity - User's Submissions
-class C63262_UserActivity_User'sSubmissions
+class C63262_UserActivity_UsersSubmissions
 {
     private static def variables = [:]
 

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C117559 - Idea Boards 30 - Additional Questions for admins when 'Allow all users to see extra questions' disabled
-class C117559_IdeaBoards30_AdditionalQuestionsforadminswhen'Allowalluserstoseeextraquestions'disabled
+class C117559_IdeaBoards30_AdditionalQuestionsforadminswhenAllowalluserstoseeextraquestionsdisabled
 {
     private static def variables = [:]
 

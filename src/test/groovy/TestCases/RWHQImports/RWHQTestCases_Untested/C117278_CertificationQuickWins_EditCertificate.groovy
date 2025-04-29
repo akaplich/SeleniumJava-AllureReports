@@ -1,11 +1,9 @@
-package TestCases.RWHQImports.RWHQTestCases_Untested
-
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117276 - Certification Quick Wins: No Certificates
-class C117276_CertificationQuickWins:NoCertificates
+//C117278 - Certification Quick Wins: Edit Certificate
+class C117278_CertificationQuickWins_EditCertificate
 {
     private static def variables = [:]
 
@@ -23,11 +21,37 @@ class C117276_CertificationQuickWins:NoCertificates
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Access User From User List in People Pillar
+        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
+        //Add Certifications to a User
+        new actions.People.AddCertificationstoaUser().run("Certifications":/Business Model Canvas/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Access User From User List in People Pillar
+        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
+        //Set Certification tab
+        new actions.People.SetCertificationtab().run("Add or Update or Remove":/Update/.toString(),"Certificate":/Business Model Canvas/.toString(),"Updated Certificate":/Edited Business Model Canvas/.toString())
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Access User From User List in People Pillar
+        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
+        //Add Certifications to a User
+        new actions.People.AddCertificationstoaUser().run("Certifications":/Lean Startup/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        //Log Out
+        new actions.general.LogOut().run([:])
+        //Login
+        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
+        //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Message
-        new actions.general.VerifyMessage().run("Message Text":/Certifications/.toString(),"Should Exist":false)
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Edited Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/0/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

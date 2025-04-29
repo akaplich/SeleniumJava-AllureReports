@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C65546 - Team Workspace - Business Model - Canvas - Edit Customer Segment(s)
-class C65546_TeamWorkspace_BusinessModel_Canvas_EditCustomerSegment(s)
+//C117277 - Certification Quick Wins: Add Certificates
+class C117277_CertificationQuickWins_AddCertificates
 {
     private static def variables = [:]
 
@@ -20,26 +20,22 @@ class C65546_TeamWorkspace_BusinessModel_Canvas_EditCustomerSegment(s)
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
-        //Set Webstorm Setup Ideas for Team Workspace Tab
-        new actions.SetupIdeas.SetWebstormSetupIdeasforTeamWorkspaceTab().run("Team Workspace":true,"Business Model Tab":true,"Type of Model":/Business Model Canvas/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
-        //Access Idea in Idea Board page
-        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString())
-        //Access Team Workspace
-        new actions.ViewIdea.TeamWorkspace.AccessTeamWorkspace().run([:])
-        //Edit Business Model Fields in Team Workspace
-        new actions.ViewIdea.TeamWorkspace.EditBusinessModelFieldsinTeamWorkspace().run("Field to Edit":/Customer Segment(s)/.toString(),"Text to Set":/Test text here/.toString(),"Action":/Save/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
-        //Access Idea in Idea Board page
-        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString())
-        //Access Team Workspace
-        new actions.ViewIdea.TeamWorkspace.AccessTeamWorkspace().run([:])
-        //Verify Business Model Canvas in Team Workspace
-        new actions.ViewIdea.TeamWorkspace.VerifyBusinessModelCanvasinTeamWorkspace().run("Verify in Which Tab (optional)":/Business Model/.toString(),"Customer Segment(s)":/Test text here/.toString())
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Access User From User List in People Pillar
+        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
+        //Add Certifications to a User
+        new actions.People.AddCertificationstoaUser().run("User Email":/bi.enduser1@brightidea.com/.toString(),"Certifications":/Business Model Canvas/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        //Log Out
+        new actions.general.LogOut().run([:])
+        //Login
+        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
+        //Set Tab on User Profile page
+        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

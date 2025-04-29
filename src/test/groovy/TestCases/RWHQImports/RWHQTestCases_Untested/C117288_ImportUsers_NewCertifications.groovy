@@ -4,8 +4,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117293 - Import Group: Existing Certifications
-class C117293_ImportGroup:ExistingCertifications
+//C117288 - Import Users: New Certifications
+class C117288_ImportUsers_NewCertifications
 {
     private static def variables = [:]
 
@@ -23,15 +23,13 @@ class C117293_ImportGroup:ExistingCertifications
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
-        //Create App Webstorm
-        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117293.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117293/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
-        //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Import User in People page
+        new actions.People.ImportUserinPeoplepage().run("Import File":/TestCaseC117288.xls/.toString(),"Action":/Import/.toString())
         //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117293@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Department":/Innovation/.toString(),"Location":/United States/.toString(),"Expertise":/New Expertise/.toString(),"Certification":/Business Model Canvas,Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117288@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Certification":/Scrum Master123,Automation,Automation Developer/.toString(),"Number of Matches":/1/.toString())
         //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
         //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/Home/.toString())
         //Search Global Enterprise/Webstorm/Community
@@ -41,9 +39,11 @@ class C117293_ImportGroup:ExistingCertifications
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
         //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Automation/.toString(),"Number of Matches":/1/.toString())
         //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Automation Developer/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
@@ -53,7 +53,7 @@ class C117293_ImportGroup:ExistingCertifications
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
         //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

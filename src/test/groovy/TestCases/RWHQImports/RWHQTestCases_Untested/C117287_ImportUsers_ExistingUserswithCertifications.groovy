@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117294 - Import Group: Existing Users with Certifications
-class C117294_ImportGroup:ExistingUserswithCertifications
+//C117287 - Import Users: Existing Users with Certifications
+class C117287_ImportUsers_ExistingUserswithCertifications
 {
     private static def variables = [:]
 
@@ -25,13 +25,11 @@ class C117294_ImportGroup:ExistingUserswithCertifications
         //Access User From User List in People Pillar
         new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
         //Add Certifications to a User
-        new actions.People.AddCertificationstoaUser().run("User Email":/bi.enduser1@brightidea.com/.toString(),"Certifications":/Business Model Canvas,Lean Startup/.toString(),"Add or Remove":/Add,Add/.toString(),"Action":/Update/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
-        //Create App Webstorm
-        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117294.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117294/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
+        new actions.People.AddCertificationstoaUser().run("Certifications":/Business Model Canvas,Lean Startup/.toString(),"Add or Remove":/Add,Add/.toString(),"Action":/Update/.toString())
         //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Import User in People page
+        new actions.People.ImportUserinPeoplepage().run("Import File":/TestCaseC117287.xls/.toString(),"Action":/Import/.toString())
         //Verify User in Users tab for People page
         new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Innovation 101,Business Model Canvas,Design Thinking,Lean Startup/.toString(),"Number of Matches":/1/.toString())
         //Log Out

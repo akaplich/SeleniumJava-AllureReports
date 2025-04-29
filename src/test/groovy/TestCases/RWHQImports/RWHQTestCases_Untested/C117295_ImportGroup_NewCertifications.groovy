@@ -4,8 +4,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117288 - Import Users: New Certifications
-class C117288_ImportUsers:NewCertifications
+//C117295 - Import Group: New Certifications
+class C117295_ImportGroup_NewCertifications
 {
     private static def variables = [:]
 
@@ -23,11 +23,13 @@ class C117288_ImportUsers:NewCertifications
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
+        //Create App Webstorm
+        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117295.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117295/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
+        //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Import User in People page
-        new actions.People.ImportUserinPeoplepage().run("Import File":/TestCaseC117288.xls/.toString(),"Action":/Import/.toString())
         //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117288@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Certification":/Scrum Master123,Automation,Automation Developer/.toString(),"Number of Matches":/1/.toString())
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117295@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Certification":/Scrum Master123,Automation,Automation Developer/.toString(),"Number of Matches":/1/.toString())
         //Verify User in Users tab for People page
         new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
         //Navigate

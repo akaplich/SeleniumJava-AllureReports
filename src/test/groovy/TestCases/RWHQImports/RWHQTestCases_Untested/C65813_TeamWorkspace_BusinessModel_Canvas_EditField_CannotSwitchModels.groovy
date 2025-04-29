@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65813 - Team Workspace - Business Model - Canvas - Edit Field, Can't Switch Models
-class C65813_TeamWorkspace_BusinessModel_Canvas_EditField_Can'tSwitchModels
+class C65813_TeamWorkspace_BusinessModel_Canvas_EditField_CannotSwitchModels
 {
     private static def variables = [:]
 

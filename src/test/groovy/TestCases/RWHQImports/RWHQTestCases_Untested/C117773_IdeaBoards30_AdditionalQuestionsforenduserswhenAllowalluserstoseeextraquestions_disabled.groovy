@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117287 - Import Users: Existing Users with Certifications
-class C117287_ImportUsers:ExistingUserswithCertifications
+//C117773 - Idea Boards 30 - Additional Questions for end users when 'Allow all users to see extra questions' disabled
+class C117773_IdeaBoards30_AdditionalQuestionsforenduserswhenAllowalluserstoseeextraquestions_disabled
 {
     private static def variables = [:]
 
@@ -20,34 +20,29 @@ class C117287_ImportUsers:ExistingUserswithCertifications
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Access User From User List in People Pillar
-        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
-        //Add Certifications to a User
-        new actions.People.AddCertificationstoaUser().run("Certifications":/Business Model Canvas,Lean Startup/.toString(),"Add or Remove":/Add,Add/.toString(),"Action":/Update/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Import User in People page
-        new actions.People.ImportUserinPeoplepage().run("Import File":/TestCaseC117287.xls/.toString(),"Action":/Import/.toString())
-        //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Innovation 101,Business Model Canvas,Design Thinking,Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Webstorm Setup Ideas for Ideas tab
+        new actions.SetupIdeas.SetWebstormSetupIdeasforIdeastab().run("Allow all users to see extra questions":false)
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Webstorm Setup Idea Board
+        new actions.SetupIdeas.SetWebstormSetuptoIdeaBoard().run("Additional Submission Questions":/Checkbox Question,Dropdown Question,Multiple Choice Question/.toString(),"Additional Submission Questions Check":/TRUE,TRUE,TRUE/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
         new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
-        //Set Tab on User Profile page
-        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Innovation 101/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Design Thinking/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        try{
+            //Set Submission Form Question Filter on Idea Boards
+            new actions.IdeaBoard.SetSubmissionFormQuestionFilteronIdeaBoards().run("Question":/Multiple Choice Question/.toString(),"Answers":/Answer 1/.toString(),"Answers Check":/TRUE/.toString())
+        }
+       catch(all){}catch(Error err){}
+        //Verify Idea in Idea Board page
+        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString(),"Number of Matches":/1/.toString())
+        //Verify Idea in Idea Board page
+        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/test idea2/.toString(),"Number of Matches":/1/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

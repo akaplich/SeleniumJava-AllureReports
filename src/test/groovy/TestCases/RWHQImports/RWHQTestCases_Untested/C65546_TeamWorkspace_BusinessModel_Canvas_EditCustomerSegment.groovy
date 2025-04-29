@@ -1,11 +1,9 @@
-package TestCases.RWHQImports.RWHQTestCases_Untested
-
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117004 - Analyst: Move the ideas in steps
-class C117004_Analyst:Movetheideasinsteps
+//C65546 - Team Workspace - Business Model - Canvas - Edit Customer Segment(s)
+class C65546_TeamWorkspace_BusinessModel_Canvas_EditCustomerSegment
 {
     private static def variables = [:]
 
@@ -21,23 +19,27 @@ class C117004_Analyst:Movetheideasinsteps
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6("Username Email":/analyst@test.com/.toString())
+        Action58123c20fa4ee77809f468f6([:])
         //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
-        try{
-            //Select Idea in Pipeline Steps page
-            new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString())
-        }
-       catch(all){}catch(Error err){}
-        try{
-            //Change Idea Step in Pipeline Steps page
-            new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Single Scale/.toString(),"Action":/Change Step/.toString())
-        }
-       catch(all){}catch(Error err){}
-        //Verify Idea in Pipeline Steps page
-        new actions.PipelineStepsView.VerifyIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString(),"Step Name idea belongs to":/Review/.toString(),"Number of Matches":/1/.toString())
-        //Verify Idea in Pipeline Steps page
-        new actions.PipelineStepsView.VerifyIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString(),"Step Name idea belongs to":/Single Scale/.toString(),"Number of Matches":/0/.toString())
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Webstorm Setup Ideas for Team Workspace Tab
+        new actions.SetupIdeas.SetWebstormSetupIdeasforTeamWorkspaceTab().run("Team Workspace":true,"Business Model Tab":true,"Type of Model":/Business Model Canvas/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        //Access Idea in Idea Board page
+        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString())
+        //Access Team Workspace
+        new actions.ViewIdea.TeamWorkspace.AccessTeamWorkspace().run([:])
+        //Edit Business Model Fields in Team Workspace
+        new actions.ViewIdea.TeamWorkspace.EditBusinessModelFieldsinTeamWorkspace().run("Field to Edit":/Customer Segment(s)/.toString(),"Text to Set":/Test text here/.toString(),"Action":/Save/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        //Access Idea in Idea Board page
+        new actions.IdeaBoard.AccessIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString())
+        //Access Team Workspace
+        new actions.ViewIdea.TeamWorkspace.AccessTeamWorkspace().run([:])
+        //Verify Business Model Canvas in Team Workspace
+        new actions.ViewIdea.TeamWorkspace.VerifyBusinessModelCanvasinTeamWorkspace().run("Verify in Which Tab (optional)":/Business Model/.toString(),"Customer Segment(s)":/Test text here/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

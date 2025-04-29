@@ -1,11 +1,9 @@
-package TestCases.RWHQImports.RWHQTestCases_Untested
-
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117295 - Import Group: New Certifications
-class C117295_ImportGroup:NewCertifications
+//C117294 - Import Group: Existing Users with Certifications
+class C117294_ImportGroup_ExistingUserswithCertifications
 {
     private static def variables = [:]
 
@@ -23,29 +21,19 @@ class C117295_ImportGroup:NewCertifications
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
+        //Access User From User List in People Pillar
+        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
+        //Add Certifications to a User
+        new actions.People.AddCertificationstoaUser().run("User Email":/bi.enduser1@brightidea.com/.toString(),"Certifications":/Business Model Canvas,Lean Startup/.toString(),"Add or Remove":/Add,Add/.toString(),"Action":/Update/.toString())
+        //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
         //Create App Webstorm
-        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117295.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117295/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
+        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117294.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117294/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
         //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
         //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117295@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Certification":/Scrum Master123,Automation,Automation Developer/.toString(),"Number of Matches":/1/.toString())
-        //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Home/.toString())
-        //Search Global Enterprise/Webstorm/Community
-        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/New User/.toString(),"Click View All Results after search":true)
-        //Click link on Search Page results section
-        new actions.Search.ClicklinkonSearchPageresultssection().run("Search Results Type":/Users/.toString(),"Link name":/New User/.toString())
-        //Set Tab on User Profile page
-        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Automation/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Automation Developer/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Innovation 101,Business Model Canvas,Design Thinking,Lean Startup/.toString(),"Number of Matches":/1/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
@@ -55,7 +43,13 @@ class C117295_ImportGroup:NewCertifications
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
         //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Scrum Master123/.toString(),"Number of Matches":/1/.toString())
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Innovation 101/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Design Thinking/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

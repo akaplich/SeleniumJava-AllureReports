@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C82241 - Find Owner: Cancel on Forward Idea to Category
-class C82241_FindOwner:CancelonForwardIdeatoCategory
+class C82241_FindOwner_CancelonForwardIdeatoCategory
 {
     private static def variables = [:]
 

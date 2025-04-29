@@ -1,9 +1,11 @@
+package TestCases.RWHQImports.RWHQTestCases_Untested
+
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117277 - Certification Quick Wins: Add Certificates
-class C117277_CertificationQuickWins:AddCertificates
+//C117004 - Analyst: Move the ideas in steps
+class C117004_Analyst_Movetheideasinsteps
 {
     private static def variables = [:]
 
@@ -19,23 +21,23 @@ class C117277_CertificationQuickWins:AddCertificates
     @Test
     public void testcase(){
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Access User From User List in People Pillar
-        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
-        //Add Certifications to a User
-        new actions.People.AddCertificationstoaUser().run("User Email":/bi.enduser1@brightidea.com/.toString(),"Certifications":/Business Model Canvas/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
-        //Log Out
-        new actions.general.LogOut().run([:])
-        //Login
-        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
-        //Set Tab on User Profile page
-        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
+        Action58123c20fa4ee77809f468f6("Username Email":/analyst@test.com/.toString())
+        //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
+        try{
+            //Select Idea in Pipeline Steps page
+            new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString())
+        }
+       catch(all){}catch(Error err){}
+        try{
+            //Change Idea Step in Pipeline Steps page
+            new actions.PipelineStepsView.ChangeIdeaStepinPipelineStepspage().run("Step":/Single Scale/.toString(),"Action":/Change Step/.toString())
+        }
+       catch(all){}catch(Error err){}
+        //Verify Idea in Pipeline Steps page
+        new actions.PipelineStepsView.VerifyIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString(),"Step Name idea belongs to":/Review/.toString(),"Number of Matches":/1/.toString())
+        //Verify Idea in Pipeline Steps page
+        new actions.PipelineStepsView.VerifyIdeainPipelineStepsViewpage().run("Idea Name":/test idea1/.toString(),"Step Name idea belongs to":/Single Scale/.toString(),"Number of Matches":/0/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C65764 - Idea Boards 30 - Public Webstorm - View Submitter's Profile
-class C65764_IdeaBoards30_PublicWebstorm_ViewSubmitter'sProfile
+class C65764_IdeaBoards30_PublicWebstorm_ViewSubmittersProfile
 {
     private static def variables = [:]
 

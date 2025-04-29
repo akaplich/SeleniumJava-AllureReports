@@ -1,9 +1,11 @@
+package TestCases.RWHQImports.RWHQTestCases_Untested
+
 import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117278 - Certification Quick Wins: Edit Certificate
-class C117278_CertificationQuickWins:EditCertificate
+//C117293 - Import Group: Existing Certifications
+class C117293_ImportGroup_ExistingCertifications
 {
     private static def variables = [:]
 
@@ -21,23 +23,27 @@ class C117278_CertificationQuickWins:EditCertificate
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Access User From User List in People Pillar
-        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
-        //Add Certifications to a User
-        new actions.People.AddCertificationstoaUser().run("Certifications":/Business Model Canvas/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        new actions.general.Navigate().run("Area to Navigate to":/Apps/.toString())
+        //Create App Webstorm
+        new actions.WebstormCreation.CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/Sri/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/New Forum/.toString(),"Description":/New Forum Description/.toString(),"Import Group as":/Early Access/.toString(),"Import File":/TestCaseC117293.xls/.toString(),"Add or Remove Group":/Add/.toString(),"Import Group Action":/Import/.toString(),"Group Name":/TestCase117293/.toString(),"Action":/Create/.toString(),"Action on General Information Tab":/Continue/.toString(),"Action on Design Tab":/Continue/.toString())
         //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Access User From User List in People Pillar
-        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
-        //Set Certification tab
-        new actions.People.SetCertificationtab().run("Add or Update or Remove":/Update/.toString(),"Certificate":/Business Model Canvas/.toString(),"Updated Certificate":/Edited Business Model Canvas/.toString())
+        //Verify User in Users tab for People page
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117293@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Department":/Innovation/.toString(),"Location":/United States/.toString(),"Expertise":/New Expertise/.toString(),"Certification":/Business Model Canvas,Lean Startup/.toString(),"Number of Matches":/1/.toString())
+        //Verify User in Users tab for People page
+        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
         //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Access User From User List in People Pillar
-        new actions.People.AccessUserFromUserListinPeoplePillar().run("User Email or Screen Name":/bi.enduser1@brightidea.com/.toString())
-        //Add Certifications to a User
-        new actions.People.AddCertificationstoaUser().run("Certifications":/Lean Startup/.toString(),"Add or Remove":/Add/.toString(),"Action":/Update/.toString())
+        new actions.general.Navigate().run("Area to Navigate to":/Home/.toString())
+        //Search Global Enterprise/Webstorm/Community
+        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/New User/.toString(),"Click View All Results after search":true)
+        //Click link on Search Page results section
+        new actions.Search.ClicklinkonSearchPageresultssection().run("Search Results Type":/Users/.toString(),"Link name":/New User/.toString())
+        //Set Tab on User Profile page
+        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
+        //Verify Certifications On Info tab on Profile page
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
@@ -47,11 +53,7 @@ class C117278_CertificationQuickWins:EditCertificate
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
         //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Edited Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/0/.toString())
+        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

@@ -4,8 +4,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C117286 - Import Users: Existing Certifications
-class C117286_ImportUsers:ExistingCertifications
+//C117276 - Certification Quick Wins: No Certificates
+class C117276_CertificationQuickWins_NoCertificates
 {
     private static def variables = [:]
 
@@ -23,35 +23,11 @@ class C117286_ImportUsers:ExistingCertifications
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/People/.toString())
-        //Import User in People page
-        new actions.People.ImportUserinPeoplepage().run("Import File":/TestCaseC117286.xls/.toString(),"Action":/Import/.toString())
-        //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/brightideaC117286@mailinator.com/.toString(),"Screen Name":/New User/.toString(),"Department":/Innovation/.toString(),"Location":/United States/.toString(),"Expertise":/New Expertise/.toString(),"Certification":/Business Model Canvas,Lean Startup/.toString(),"Number of Matches":/1/.toString())
-        //Verify User in Users tab for People page
-        new actions.People.VerifyUserinUserstabforPeoplepage().run("Email Address":/bi.enduser1@brightidea.com/.toString(),"Screen Name":/End User/.toString(),"Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
-        //Navigate
-        new actions.general.Navigate().run("Area to Navigate to":/Home/.toString())
-        //Search Global Enterprise/Webstorm/Community
-        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/New User/.toString(),"Click View All Results after search":true)
-        //Click link on Search Page results section
-        new actions.Search.ClicklinkonSearchPageresultssection().run("Search Results Type":/Users/.toString(),"Link name":/New User/.toString())
-        //Set Tab on User Profile page
-        new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Business Model Canvas/.toString(),"Number of Matches":/1/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Lean Startup/.toString(),"Number of Matches":/1/.toString())
-        //Log Out
-        new actions.general.LogOut().run([:])
-        //Login
-        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
-        //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
         //Set Tab on User Profile page
         new actions.UserProfile.SetTabonUserProfilepage().run("Tab":/Info/.toString())
-        //Verify Certifications On Info tab on Profile page
-        new actions.UserProfile.VerifyCertificationsOnInfotabonProfilepage().run("Certification":/Disruptive Innovation/.toString(),"Number of Matches":/1/.toString())
+        //Verify Message
+        new actions.general.VerifyMessage().run("Message Text":/Certifications/.toString(),"Should Exist":false)
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
