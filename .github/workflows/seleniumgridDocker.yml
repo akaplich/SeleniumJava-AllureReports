@@ -11,6 +11,7 @@ on:
         options:
           - Smoke
           - DockerSet
+          - OldRulesModalRegression
       Run_Headless:
         description: 'Run Headless'
         required: true
