@@ -33,7 +33,6 @@ class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     @BeforeAll
     public static void beforeState() {
         logger.debug("Before State");
-        variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
         variables."TestRail_ExecutionName" = null

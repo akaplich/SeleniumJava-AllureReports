@@ -3,6 +3,14 @@ name: Web test Group in single container
 on:
   workflow_dispatch:
     inputs:
+      Environment:
+        description: 'Environment'
+        required: true
+        default: 'brightideatest.com'
+        type: choice
+        options:
+          - brightideatest.com
+          - brightideasandbox.com
       Mvn_Group:
         description: 'Mvn Group'
         required: true
@@ -61,7 +69,7 @@ jobs:
 
       - name: Run Web Tests via Maven
         run: |
-          mvn clean test -Dgroups="${{github.event.inputs.Mvn_Group}}" -DretryCount=${{github.event.inputs.RetryCount}} -Dheadless=${{github.event.inputs.Run_Headless}} site
+          mvn clean test -Denvironment.url="${{github.event.inputs.Environment}}" -Dgroups="${{github.event.inputs.Mvn_Group}}" -DretryCount=${{github.event.inputs.RetryCount}} -Dheadless=${{github.event.inputs.Run_Headless}} site
 
       - name: Save Maven Cache
         run: |

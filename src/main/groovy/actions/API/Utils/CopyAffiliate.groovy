@@ -40,8 +40,8 @@ class CopyAffiliate{
         }
 
         def body = [:]
-        //def URLPath = redwood.launcher.Launcher.variables.URL
-        def URLPath  = Settings.getProperty("environment.url");
+        String URLPath = System.getProperty("environment.url", Settings.getProperty("environment.url"));
+        logger.debug("URLPath: ${URLPath}")
         def qaSourceId,sandboxSourceId
         
         
@@ -125,7 +125,7 @@ class CopyAffiliate{
                  sourceid = "${qaSourceId}"
                  host = "test.brightideatest"
                  break
-                 case "brightideasandbox.com":
+                 case "brightideasandbox":
                  sourceid = "${sandboxSourceId}"
                  host = "sandbox.brightideasandbox"
                  break
