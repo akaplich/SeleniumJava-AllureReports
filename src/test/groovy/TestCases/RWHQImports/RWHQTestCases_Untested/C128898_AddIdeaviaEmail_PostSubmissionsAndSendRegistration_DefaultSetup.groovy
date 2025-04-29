@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C128898 - Add Idea via Email - Post Submissions & Send Registration (Default Setup)
-class C128898_AddIdeaviaEmail_PostSubmissionsAndSendRegistration(DefaultSetup)
+class C128898_AddIdeaviaEmail_PostSubmissionsAndSendRegistration_DefaultSetup
 {
     private static def variables = [:]
 

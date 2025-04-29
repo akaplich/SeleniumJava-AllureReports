@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C128825 - Search Dev Question (Admin Eval all other Users Visibility) on Initiative Global Navigation
-class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlobalNavigation
+//C128824 - Search Dev Question (Admin Eval Submitters Visibility) in Initiative Global Navigation
+class C128824_SearchDevQuestion_AdminEvalSubmittersVisibility_inInitiativeGlobalNavigation
 {
     private static def variables = [:]
 
@@ -23,7 +23,7 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
         //Edit Additional Questions in Submission Form tab
-        new actions.SetupIdeas.EditAdditionalQuestionsinSubmissionFormtab().run("Question":/Development Long Answer Question (Development Field)/.toString(),"Edit or Hide or Remove":/Edit/.toString(),"Action on Edit, Hide or Remove":/Submit/.toString(),"Viewing Permissions":/admin_evals_all/.toString(),"Save Form":true)
+        new actions.SetupIdeas.EditAdditionalQuestionsinSubmissionFormtab().run("Question":/Development Long Answer Question (Development Field)/.toString(),"Edit or Hide or Remove":/Edit/.toString(),"Action on Edit, Hide or Remove":/Submit/.toString(),"Viewing Permissions":/admin_evals_submitters/.toString(),"Save Form":true)
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Create Step in Pipeline Steps page
@@ -52,24 +52,20 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         new actions.ActionItems.AccessActionIteminActionsItemsGlobalNavigation().run("Action Item":/test idea1/.toString())
         //Set Development for Idea in Action Items page
         new actions.ActionItems.SetDevelopmentforIdeainActionItemspage().run("Development Long Answer Question":/Automation purpose/.toString(),"Development Child Checkbox Question":[],"Action":/Mark Complete/.toString(),"Action on Mark Development Form Complete":/Mark Complete/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
-        //Search Global Enterprise/Webstorm/Community
-        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
-        //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
         new actions.general.Login().run("Email":/bi.adminuser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
+        //Navigate
+        new actions.general.Navigate().run("Area to Navigate to":/Enterprise Setup/.toString())
+        //Reindex Affiliate Data
+        new actions.SetupBI.ReindexAffiliateData().run([:])
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
         //Verify Idea in View Idea page
         new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
         //Log Out
@@ -81,7 +77,7 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
         //Verify Idea in View Idea page
         new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
         //Log Out
@@ -93,31 +89,7 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
-        //Log Out
-        new actions.general.LogOut().run([:])
-        //Login
-        new actions.general.Login().run("Email":/pipelinesponsor@test.com/.toString(),"Password":/password3/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
-        //Search Global Enterprise/Webstorm/Community
-        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
-        //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
-        //Log Out
-        new actions.general.LogOut().run([:])
-        //Login
-        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
-        //Search Global Enterprise/Webstorm/Community
-        new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
-        //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
         //Verify Idea in View Idea page
         new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
         //Log Out
@@ -129,9 +101,7 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/0/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
@@ -141,21 +111,17 @@ class C128825_SearchDevQuestion(AdminEvalallotherUsersVisibility)onInitiativeGlo
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/0/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
-        new actions.general.Login().run("Email":/pipelineadmin@test.com/.toString(),"Password":/brightidea1/.toString())
+        new actions.general.Login().run("Email":/bi.enduser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Automation purpose/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Title":/test idea1/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify Idea in View Idea page
-        new actions.ViewIdea.VerifyIdeainViewIdeapage().run("Idea Name":/test idea1/.toString(),"Description":/test idea1 desc/.toString(),"Linked Submissions":[])
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Submissions/.toString(),"Title":/test idea1/.toString(),"Number of Matches":/0/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

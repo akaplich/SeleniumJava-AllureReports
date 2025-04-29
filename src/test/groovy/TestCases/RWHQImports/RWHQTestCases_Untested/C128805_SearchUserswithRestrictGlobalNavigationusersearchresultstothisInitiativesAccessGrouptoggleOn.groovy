@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C128806 - Search Users with Restrict Global Navigation user search results to this Initiative's Access Group toggle Off
-class C128806_SearchUserswithRestrictGlobalNavigationusersearchresultstothisInitiative'sAccessGrouptoggleOff
+//C128805 - Search Users with Restrict Global Navigation user search results to this Initiative's Access Group toggle On
+class C128805_SearchUserswithRestrictGlobalNavigationusersearchresultstothisInitiativesAccessGrouptoggleOn
 {
     private static def variables = [:]
 
@@ -29,6 +29,10 @@ class C128806_SearchUserswithRestrictGlobalNavigationusersearchresultstothisInit
         //Login
         new actions.general.Login().run("Email":/bi.adminuser1@brightidea.com/.toString(),"Password":/brightidea1/.toString())
         //Navigate WebStorm or MTS
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Setup/.toString())
+        //Set Webstorm Site Enterprise Tab
+        new actions.SetupSite.SetWebstormSiteEnterpriseTab().run("Restrict Global Navigation user search results to this Initiative's Access Group":true)
+        //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Setup/.toString())
         //Set Participants in Pipeline Setup Page
         new actions.PipelineSetup.SetParticipantsinPipelineSetupPage().run("General Access":/All,Pipeline Sponsor/.toString(),"General Access Add or Remove":/Remove,Add/.toString())
@@ -37,65 +41,35 @@ class C128806_SearchUserswithRestrictGlobalNavigationusersearchresultstothisInit
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Testing/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Rob/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Stark/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/QA Lead/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/Innovation/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/United States/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/automation/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
-        //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Home/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
         //Search Global Enterprise/Webstorm/Community
         new actions.Search.SearchEnterpriseWebstorm().run("Search Value":/bi.enduser1@brightidea.com/.toString())
         //Verify On Global Search Result
-        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/1/.toString(),"Click on the result":true)
-        //Verify and Access Submissions in My Activity page
-        new actions.MyActivity.VerifySubmissionsinMyActivitypage().run("Value Type to Verify":/COMMENT ON IDEAS/.toString(),"Idea Name":/test idea1/.toString(),"Value":/test comment/.toString(),"Number of Matches":/1/.toString())
+        new actions.Search.VerifyOnGlobalSearchResult().run("Type":/Users/.toString(),"Title":/Testing/.toString(),"Number of Matches":/0/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

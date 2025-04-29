@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C129395 - Hide Private Comments - Email Notification to Idea Subscriber Eval For Private Comments(new commenting)
-class C129395_HidePrivateComments_EmailNotificationtoIdeaSubscriberEvalForPrivateComments(newcommenting)
+class C129395_HidePrivateComments_EmailNotificationtoIdeaSubscriberEvalForPrivateComments_newcommenting
 {
     private static def variables = [:]
 
