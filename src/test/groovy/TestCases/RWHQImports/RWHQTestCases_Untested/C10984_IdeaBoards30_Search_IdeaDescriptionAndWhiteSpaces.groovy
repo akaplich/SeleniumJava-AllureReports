@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C10984 - Idea Boards 30 - Search - Idea Description & White Spaces
-class C10984_IdeaBoards30_Search_IdeaDescriptionRedwoodHQTestCaseWhiteSpaces
+class C10984_IdeaBoards30_Search_IdeaDescriptionAndWhiteSpaces
 {
     private static def variables = [:]
 

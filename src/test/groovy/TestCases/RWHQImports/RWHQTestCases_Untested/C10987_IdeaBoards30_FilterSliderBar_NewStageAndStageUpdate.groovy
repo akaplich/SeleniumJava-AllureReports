@@ -3,7 +3,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C10987 - Idea Boards 30 - Filter Slider Bar - New Stage & Stage Update
-class C10987_IdeaBoards30_FilterSliderBar_NewStageRedwoodHQTestCaseStageUpdate
+class C10987_IdeaBoards30_FilterSliderBar_NewStageAndStageUpdate
 {
     private static def variables = [:]
 

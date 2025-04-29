@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C17561 - Search History - Report Format & Data
-class C17561_SearchHistory_ReportFormatRedwoodHQTestCaseData
+class C17561_SearchHistory_ReportFormatAndData
 {
     private static def variables = [:]
 

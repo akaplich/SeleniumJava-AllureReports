@@ -2,8 +2,8 @@ import org.testng.annotations.BeforeSuite
 import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
-//C10985 - Idea Boards 30 - Search - Idea Description - UTF-8 & Special Characters
-class C10985_IdeaBoards30_Search_IdeaDescription_UTF_8RedwoodHQTestCaseSpecialCharacters
+//C11001 - Idea Boards 30 - Filter Slider Bar - Open & Collapse
+class C11001_IdeaBoards30_FilterSliderBar_OpenAndCollapse
 {
     private static def variables = [:]
 
@@ -21,19 +21,15 @@ class C10985_IdeaBoards30_Search_IdeaDescription_UTF_8RedwoodHQTestCaseSpecialCh
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate WebStorm or MTS
-        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
-        //Set Custom and Other App Post Idea
-        new actions.PostIdea.SetCustomAppPostIdea().run("Title":/test idea4/.toString(),"Description":/Μπορώ etið szkło mănânc їсти Կրնամ მინას काँच זכוכית נישט 私は ฉันกินกร снежные/.toString(),"Category":/New Product/.toString(),"Required Short Question":/Required Short/.toString(),"Action":/Submit Idea/.toString())
-        //Search Idea in Idea Board page
-        new actions.IdeaBoard.SearchIdeainIdeaBoards30().run("Search Value":/їсти/.toString())
-        //Verify Idea in Idea Board page
-        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/test idea4/.toString(),"Number of Matches":/1/.toString(),"Placement Number":/1/.toString())
-        //Verify Idea in Idea Board page
-        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/test idea1/.toString(),"Number of Matches":/0/.toString())
-        //Verify Idea in Idea Board page
-        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/test idea2/.toString(),"Number of Matches":/0/.toString())
-        //Verify Idea in Idea Board page
-        new actions.IdeaBoard.VerifyIdeainIdeaBoardpage30().run("Idea Name":/quick add1/.toString(),"Number of Matches":/0/.toString())
+        new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
+        //Filter Idea in Idea Board page
+        new actions.IdeaBoard.FilterIdeainIdeaBoardpage30().run("Status":[],"Stage":[],"Categories":[],"Tags":[],"Desired Expertise":[])
+        //Verify Message
+        new actions.general.VerifyMessage().run("Message Text":/Search/.toString(),"Should Exist":true)
+        //Filter Idea in Idea Board page
+        new actions.IdeaBoard.FilterIdeainIdeaBoardpage30().run("Open/Close Filter Bar":/Close/.toString(),"Status":[],"Stage":[],"Categories":[],"Tags":[],"Desired Expertise":[])
+        //Verify Message
+        new actions.general.VerifyMessage().run("Message Text":/Search/.toString(),"Should Exist":false)
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

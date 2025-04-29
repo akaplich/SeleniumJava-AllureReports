@@ -5,7 +5,7 @@ import org.testng.annotations.AfterMethod
 import org.testng.annotations.Test
 
 //C17564 - Search Term Frequency - Report Format & Data
-class C17564_SearchTermFrequency_ReportFormatRedwoodHQTestCaseData
+class C17564_SearchTermFrequency_ReportFormatAndData
 {
     private static def variables = [:]
 
