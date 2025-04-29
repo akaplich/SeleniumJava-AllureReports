@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131990 - Flow B - Register and Create Project Room With Teammates and Team Name
 class C131990_FlowB_RegisterandCreateProjectRoomWithTeammatesandTeamName

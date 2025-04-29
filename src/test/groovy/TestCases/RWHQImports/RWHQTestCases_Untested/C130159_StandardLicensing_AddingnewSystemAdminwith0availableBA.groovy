@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130159 - Standard Licensing - Adding new System Admin with 0 available BA
 class C130159_StandardLicensing_AddingnewSystemAdminwith0availableBA

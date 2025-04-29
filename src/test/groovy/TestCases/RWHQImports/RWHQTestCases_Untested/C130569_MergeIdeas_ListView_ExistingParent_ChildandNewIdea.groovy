@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130569 - Merge Ideas - List View - Existing Parent, Child and New Idea
 class C130569_MergeIdeas_ListView_ExistingParent_ChildandNewIdea

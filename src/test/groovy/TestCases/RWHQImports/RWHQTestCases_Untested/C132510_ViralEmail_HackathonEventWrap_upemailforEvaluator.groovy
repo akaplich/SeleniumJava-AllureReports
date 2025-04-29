@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132510 - Viral Email - Hackathon Event Wrap-up email for Evaluator
 class C132510_ViralEmail_HackathonEventWrap_upemailforEvaluator

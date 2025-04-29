@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131276 - WB - Import From Pipeline - Import Ideas, Verify View Idea Data
 class C131276_WB_ImportFromPipeline_ImportIdeas_VerifyViewIdeaData

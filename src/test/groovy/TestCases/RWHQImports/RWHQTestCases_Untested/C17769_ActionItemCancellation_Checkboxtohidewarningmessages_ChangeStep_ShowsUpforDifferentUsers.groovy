@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C17769 - [Action Item Cancellation] - Checkbox to hide warning messages (Change Step) Shows Up for Different Users
 class C17769_ActionItemCancellation_Checkboxtohidewarningmessages_ChangeStep_ShowsUpforDifferentUsers

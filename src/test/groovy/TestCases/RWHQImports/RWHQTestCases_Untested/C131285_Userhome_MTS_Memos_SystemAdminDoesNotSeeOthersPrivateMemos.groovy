@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131285 - Userhome, MTS - Memos - System Admin Does Not See Others' Private Memos
 class C131285_Userhome_MTS_Memos_SystemAdminDoesNotSeeOthersPrivateMemos

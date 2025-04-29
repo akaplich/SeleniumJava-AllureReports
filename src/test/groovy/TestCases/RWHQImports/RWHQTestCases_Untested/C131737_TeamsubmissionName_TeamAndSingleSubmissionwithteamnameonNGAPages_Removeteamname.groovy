@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131737 - Team submission Name - Team & Single Submission with team name on NGA Pages - Remove team name
 class C131737_TeamsubmissionName_TeamAndSingleSubmissionwithteamnameonNGAPages_Removeteamname

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131487 - Top Ideas for Memos > Card Display (Code, Status, Stage, Step)
 class C131487_TopIdeasforMemos_CardDisplay_Code_Status_Stage_Step

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131142 - WB - Share - Anyone with link... - Update View Only to Edit Permission And Back
 class C131142_WB_Share_Anyonewithlink_UpdateViewOnlytoEditPermissionAndBack

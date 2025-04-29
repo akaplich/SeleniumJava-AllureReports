@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128610 - End User should not access to the Business Impact Tab in View Idea 2.0 page
 class C128610_EndUsershouldnotaccesstotheBusinessImpactTabinViewIdea20page

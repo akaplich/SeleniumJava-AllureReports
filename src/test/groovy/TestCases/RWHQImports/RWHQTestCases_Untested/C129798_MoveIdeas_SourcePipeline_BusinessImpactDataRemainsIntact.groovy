@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129798 - Move Ideas - Source Pipeline - Business Impact Data Remains Intact
 class C129798_MoveIdeas_SourcePipeline_BusinessImpactDataRemainsIntact

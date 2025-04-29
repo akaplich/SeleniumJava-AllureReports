@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131224 - VI3 - Linked Ideas - End Users Cannot See Hidden Linked Ideas
 class C131224_VI3_LinkedIdeas_EndUsersCannotSeeHiddenLinkedIdeas

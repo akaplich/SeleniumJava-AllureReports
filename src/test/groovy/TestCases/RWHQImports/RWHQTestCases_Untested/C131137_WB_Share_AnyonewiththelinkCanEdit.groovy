@@ -1,8 +1,9 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131137 - WB - Share - Anyone with the link Can Edit
 class C131137_WB_Share_AnyonewiththelinkCanEdit

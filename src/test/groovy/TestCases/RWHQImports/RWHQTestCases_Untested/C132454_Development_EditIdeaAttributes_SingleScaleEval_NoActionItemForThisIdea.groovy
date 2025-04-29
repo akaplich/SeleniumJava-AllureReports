@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132454 - Development - Edit Idea Attributes - Single Scale Eval, No Action Item For This Idea
 class C132454_Development_EditIdeaAttributes_SingleScaleEval_NoActionItemForThisIdea

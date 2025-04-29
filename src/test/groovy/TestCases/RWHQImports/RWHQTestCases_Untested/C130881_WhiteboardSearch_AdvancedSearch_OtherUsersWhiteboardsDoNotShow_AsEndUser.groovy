@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130881 - Whiteboard Search - Advanced Search -  Other Users Whiteboards Do Not Show, As End User
 class C130881_WhiteboardSearch_AdvancedSearch_OtherUsersWhiteboardsDoNotShow_AsEndUser

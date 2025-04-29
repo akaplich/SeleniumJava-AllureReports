@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //PHP8 - C17767 - [Action Item Cancellation] - Checkbox to hide warning messages (Change Step)
 class PHP8_C17767_ActionItemCancellation_Checkboxtohidewarningmessages_ChangeStep

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65838 - Read Only Admin - Development Question Visibility on View Idea 2.0
 class C65838_ReadOnlyAdmin_DevelopmentQuestionVisibilityonViewIdea20

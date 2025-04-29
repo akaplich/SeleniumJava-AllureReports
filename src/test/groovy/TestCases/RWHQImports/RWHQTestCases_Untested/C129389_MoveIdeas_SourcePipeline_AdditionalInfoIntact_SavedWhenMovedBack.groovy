@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129389 - Move Ideas - Source Pipeline - Additional Info Intact, Saved When Moved Back
 class C129389_MoveIdeas_SourcePipeline_AdditionalInfoIntact_SavedWhenMovedBack

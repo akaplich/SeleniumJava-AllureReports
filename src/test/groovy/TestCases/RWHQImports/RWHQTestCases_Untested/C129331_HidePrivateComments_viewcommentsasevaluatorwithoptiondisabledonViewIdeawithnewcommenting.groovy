@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129331 - Hide Private Comments - view comments as evaluator with option disabled on View Idea with new commenting
 class C129331_HidePrivateComments_viewcommentsasevaluatorwithoptiondisabledonViewIdeawithnewcommenting

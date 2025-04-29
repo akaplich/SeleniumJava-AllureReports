@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132020 - Project Room > Left Rail - Drag And Drop Folder With Pages Inside Another Folder and Root Folder
 class C132020_ProjectRoom_LeftRail_DragAndDropFolderWithPagesInsideAnotherFolderandRootFolder

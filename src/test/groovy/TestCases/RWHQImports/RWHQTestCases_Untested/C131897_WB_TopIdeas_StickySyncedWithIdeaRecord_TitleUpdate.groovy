@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131897 - WB - Top Ideas - Sticky Synced With Idea Record - Title Update
 class C131897_WB_TopIdeas_StickySyncedWithIdeaRecord_TitleUpdate

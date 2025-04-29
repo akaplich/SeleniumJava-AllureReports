@@ -1,8 +1,9 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132127 - WB - Move Stack, Sticky Note & Text Together 
 class C132127_WB_MoveStack_StickyNoteAndTextTogether

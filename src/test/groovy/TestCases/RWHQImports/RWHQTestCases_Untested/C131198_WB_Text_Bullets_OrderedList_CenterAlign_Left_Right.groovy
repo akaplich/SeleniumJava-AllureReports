@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131198 - WB - Text - Bullets - Ordered List, Center Align,Left,Right
 class C131198_WB_Text_Bullets_OrderedList_CenterAlign_Left_Right

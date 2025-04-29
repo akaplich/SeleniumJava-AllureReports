@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128767 - Single Scale Not Affected When Entering Digit Tag in My Ideas
 class C128767_SingleScaleNotAffectedWhenEnteringDigitTaginMyIdeas

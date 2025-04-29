@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131936 - WB - Smart Matrix - Top Ideas Sort URL Updated When Smart Matrix Removed
 class C131936_WB_SmartMatrix_TopIdeasSortURLUpdatedWhenSmartMatrixRemoved

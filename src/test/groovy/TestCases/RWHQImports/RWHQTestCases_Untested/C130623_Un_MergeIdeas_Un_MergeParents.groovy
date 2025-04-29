@@ -1,8 +1,9 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130623 - Un-Merge Ideas - Un-Merge Parents
 class C130623_Un_MergeIdeas_Un_MergeParents

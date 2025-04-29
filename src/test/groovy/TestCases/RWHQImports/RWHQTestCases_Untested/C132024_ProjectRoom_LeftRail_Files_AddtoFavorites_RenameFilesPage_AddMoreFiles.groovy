@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132024 - Project Room > Left Rail - Files - Add to Favorites, Rename Files Page, Add More Files
 class C132024_ProjectRoom_LeftRail_Files_AddtoFavorites_RenameFilesPage_AddMoreFiles

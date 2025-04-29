@@ -1,8 +1,9 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C670 - Long Answer Question - Insert Links - Same Tab
 class C670_LongAnswerQuestion_InsertLinks_SameTab

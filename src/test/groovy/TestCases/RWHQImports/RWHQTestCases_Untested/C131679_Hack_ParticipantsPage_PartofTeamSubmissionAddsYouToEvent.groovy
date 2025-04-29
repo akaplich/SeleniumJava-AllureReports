@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131679 - Hack > Participants Page - Part of Team Submission Adds You To Event
 class C131679_Hack_ParticipantsPage_PartofTeamSubmissionAddsYouToEvent

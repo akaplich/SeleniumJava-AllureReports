@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131942 - WB - Top Ideas - Sticky and Stack Card Synced With Idea Record - Custom Idea Code Prefix Updated
 class C131942_WB_TopIdeas_StickyandStackCardSyncedWithIdeaRecord_CustomIdeaCodePrefixUpdated

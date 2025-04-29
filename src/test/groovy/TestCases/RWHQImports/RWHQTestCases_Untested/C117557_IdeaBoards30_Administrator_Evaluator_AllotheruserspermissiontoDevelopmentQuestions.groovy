@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117557 - Idea Boards 30 - Administrator,Evaluator,All other users permission to Development Questions
 class C117557_IdeaBoards30_Administrator_Evaluator_AllotheruserspermissiontoDevelopmentQuestions

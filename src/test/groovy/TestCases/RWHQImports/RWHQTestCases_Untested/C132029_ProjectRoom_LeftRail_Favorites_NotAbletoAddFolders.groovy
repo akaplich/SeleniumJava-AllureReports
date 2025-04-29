@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132029 - Project Room > Left Rail - Favorites - Not Able to Add Folders
 class C132029_ProjectRoom_LeftRail_Favorites_NotAbletoAddFolders

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130666 - Top Ideas By Category - Advanced Search Visible and Hidden Ideas as Admin, Moderator, Analyst
 class C130666_TopIdeasByCategory_AdvancedSearchVisibleandHiddenIdeasasAdmin_Moderator_Analyst

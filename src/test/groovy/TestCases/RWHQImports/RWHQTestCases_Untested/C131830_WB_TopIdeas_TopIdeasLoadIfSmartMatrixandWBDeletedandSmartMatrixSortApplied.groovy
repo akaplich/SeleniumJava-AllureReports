@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131830 - WB - Top Ideas > Top Ideas Load If Smart Matrix and WB Deleted and Smart Matrix Sort Applied
 class C131830_WB_TopIdeas_TopIdeasLoadIfSmartMatrixandWBDeletedandSmartMatrixSortApplied

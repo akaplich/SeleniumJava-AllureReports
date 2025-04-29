@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132319 - PR > Save a copy > Name,Icon,Description,Email Notification and Members 
 class C132319_PR_Saveacopy_Name_Icon_Description_EmailNotificationandMembers

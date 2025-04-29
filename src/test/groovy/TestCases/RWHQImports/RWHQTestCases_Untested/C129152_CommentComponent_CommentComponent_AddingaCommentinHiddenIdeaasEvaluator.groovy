@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129152 - Comment Component - Comment Component - Adding a Comment in Hidden Idea as Evaluator
 class C129152_CommentComponent_CommentComponent_AddingaCommentinHiddenIdeaasEvaluator

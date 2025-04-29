@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119432 - Change order of additional questions and check NGA view idea page (manage step view) - System Admin
 class C119432_ChangeorderofadditionalquestionsandcheckNGAviewideapage_managestepview_SystemAdmin

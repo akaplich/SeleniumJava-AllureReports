@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117401 - Linked Submissions Across Initiatives - Removed Team Submitters Cannot Link Submissions
 class C117401_LinkedSubmissionsAcrossInitiatives_RemovedTeamSubmittersCannotLinkSubmissions

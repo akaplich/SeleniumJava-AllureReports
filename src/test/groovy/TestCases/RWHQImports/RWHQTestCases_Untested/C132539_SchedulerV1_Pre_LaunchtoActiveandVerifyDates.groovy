@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132539 - Scheduler V1 - Pre-Launch to Active and Verify Dates
 class C132539_SchedulerV1_Pre_LaunchtoActiveandVerifyDates

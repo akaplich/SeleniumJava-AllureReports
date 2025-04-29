@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129730 - New Copy Ideas - Same Questions & Extra Questions, Copy Multiple Ideas
 class C129730_NewCopyIdeas_SameQuestionsAndExtraQuestions_CopyMultipleIdeas

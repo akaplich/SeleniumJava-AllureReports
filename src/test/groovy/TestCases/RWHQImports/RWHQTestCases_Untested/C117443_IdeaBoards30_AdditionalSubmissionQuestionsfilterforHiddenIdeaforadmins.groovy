@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117443 - Idea Boards 30 - Additional Submission Questions filter for Hidden Idea for admins
 class C117443_IdeaBoards30_AdditionalSubmissionQuestionsfilterforHiddenIdeaforadmins

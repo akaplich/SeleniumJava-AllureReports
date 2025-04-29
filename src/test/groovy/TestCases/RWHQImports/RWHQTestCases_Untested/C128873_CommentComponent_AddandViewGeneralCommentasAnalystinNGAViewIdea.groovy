@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128873 - Comment Component - Add and View General Comment as Analyst in NGA View Idea
 class C128873_CommentComponent_AddandViewGeneralCommentasAnalystinNGAViewIdea

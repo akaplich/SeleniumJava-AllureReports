@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130115 - Standard Licensing - Add System Sponsor with 0 available BA Licenses
 class C130115_StandardLicensing_AddSystemSponsorwith0availableBALicenses

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132066 - Task Sort and Filter - Disable Filter Options for Status and Due Date
 class C132066_TaskSortandFilter_DisableFilterOptionsforStatusandDueDate

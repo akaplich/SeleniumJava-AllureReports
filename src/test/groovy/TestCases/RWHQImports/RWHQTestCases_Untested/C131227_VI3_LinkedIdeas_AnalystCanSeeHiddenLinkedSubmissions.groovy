@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131227 - VI3 - Linked Ideas - Analyst Can See Hidden Linked Submissions
 class C131227_VI3_LinkedIdeas_AnalystCanSeeHiddenLinkedSubmissions

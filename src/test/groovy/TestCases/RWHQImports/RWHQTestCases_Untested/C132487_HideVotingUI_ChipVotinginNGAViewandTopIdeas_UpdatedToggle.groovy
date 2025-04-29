@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132487 - Hide Voting UI > Chip Voting in NGA View and Top Ideas (Updated Toggle)
 class C132487_HideVotingUI_ChipVotinginNGAViewandTopIdeas_UpdatedToggle

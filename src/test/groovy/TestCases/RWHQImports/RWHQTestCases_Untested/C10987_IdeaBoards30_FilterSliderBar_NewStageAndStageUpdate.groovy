@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C10987 - Idea Boards 30 - Filter Slider Bar - New Stage & Stage Update
 class C10987_IdeaBoards30_FilterSliderBar_NewStageAndStageUpdate

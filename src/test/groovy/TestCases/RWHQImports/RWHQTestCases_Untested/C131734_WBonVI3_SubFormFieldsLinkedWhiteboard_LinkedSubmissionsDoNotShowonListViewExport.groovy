@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131734 - WB on VI3 > Sub Form Fields Linked Whiteboard, Linked Submissions Do Not Show on List View Export
 class C131734_WBonVI3_SubFormFieldsLinkedWhiteboard_LinkedSubmissionsDoNotShowonListViewExport

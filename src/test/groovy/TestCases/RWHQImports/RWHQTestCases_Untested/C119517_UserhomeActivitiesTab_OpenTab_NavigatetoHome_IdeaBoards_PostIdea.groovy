@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119517 - Userhome Activities Tab - Open Tab - Navigate to Home, Idea Boards, Post Idea
 class C119517_UserhomeActivitiesTab_OpenTab_NavigatetoHome_IdeaBoards_PostIdea

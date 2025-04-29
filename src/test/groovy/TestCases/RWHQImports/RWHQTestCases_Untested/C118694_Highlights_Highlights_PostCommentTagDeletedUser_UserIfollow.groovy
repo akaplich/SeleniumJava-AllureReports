@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118694 - Highlights - Highlights - Post Comment Tag Deleted User - User I follow
 class C118694_Highlights_Highlights_PostCommentTagDeletedUser_UserIfollow

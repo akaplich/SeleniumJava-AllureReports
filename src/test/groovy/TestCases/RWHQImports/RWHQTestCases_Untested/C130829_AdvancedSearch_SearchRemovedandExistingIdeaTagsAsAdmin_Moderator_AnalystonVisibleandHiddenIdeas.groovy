@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130829 - Advanced Search - Search Removed and Existing Idea Tags As Admin, Moderator, Analyst on Visible and Hidden Ideas
 class C130829_AdvancedSearch_SearchRemovedandExistingIdeaTagsAsAdmin_Moderator_AnalystonVisibleandHiddenIdeas

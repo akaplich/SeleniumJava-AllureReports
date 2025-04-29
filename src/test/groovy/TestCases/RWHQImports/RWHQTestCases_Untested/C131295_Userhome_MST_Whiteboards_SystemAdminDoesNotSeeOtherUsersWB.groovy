@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131295 - Userhome, MST - Whiteboards - System Admin Does Not See Other User's WB
 class C131295_Userhome_MST_Whiteboards_SystemAdminDoesNotSeeOtherUsersWB

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132015 - Onboarding Custom Template - 20+ project rooms in Project Room list
 class C132015_OnboardingCustomTemplate_20_projectroomsinProjectRoomlist

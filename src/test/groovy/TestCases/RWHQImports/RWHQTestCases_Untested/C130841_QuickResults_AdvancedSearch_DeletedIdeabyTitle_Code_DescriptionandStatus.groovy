@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130841 - Quick Results, Advanced Search  - Deleted Idea by Title,Code,Description and Status
 class C130841_QuickResults_AdvancedSearch_DeletedIdeabyTitle_Code_DescriptionandStatus

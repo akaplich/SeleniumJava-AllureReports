@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131843 - WB - Smart Matrix - Right Click Into Overlapping Space Does Not Crash Page
 class C131843_WB_SmartMatrix_RightClickIntoOverlappingSpaceDoesNotCrashPage

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132025 - Project Room > Left Rail - Files - Add to Favorites, Delete Files Page
 class C132025_ProjectRoom_LeftRail_Files_AddtoFavorites_DeleteFilesPage

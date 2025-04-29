@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129007 - Submission Days in Status - Empty Pipeline, Remove Report, Report Format & Data
 class C129007_SubmissionDaysinStatus_EmptyPipeline_RemoveReport_ReportFormatAndData

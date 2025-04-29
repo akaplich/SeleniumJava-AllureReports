@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119400 - Disable Submission Attachments and check View Idea 2.0 page - End User
 class C119400_DisableSubmissionAttachmentsandcheckViewIdea20page_EndUser

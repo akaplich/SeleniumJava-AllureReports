@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132249  - Idea Boards 30 - Filter Slider Bar - Hidden Idea Tags For Moderator, Analyst
 class C132249_IdeaBoards30_FilterSliderBar_HiddenIdeaTagsForModerator_Analyst

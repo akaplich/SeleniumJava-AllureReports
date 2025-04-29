@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65546 - Team Workspace - Business Model - Canvas - Edit Customer Segment(s)
 class C65546_TeamWorkspace_BusinessModel_Canvas_EditCustomerSegment

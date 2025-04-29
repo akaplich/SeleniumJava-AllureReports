@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119382 - Idea Tag Notification - Enterprise - Automatic idea Tag Subscription
 class C119382_IdeaTagNotification_Enterprise_AutomaticideaTagSubscription

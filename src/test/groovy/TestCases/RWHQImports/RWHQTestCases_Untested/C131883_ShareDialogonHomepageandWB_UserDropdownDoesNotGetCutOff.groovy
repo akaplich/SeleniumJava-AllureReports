@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131883 - Share Dialog on Homepage and WB - User Dropdown Does Not Get Cut Off
 class C131883_ShareDialogonHomepageandWB_UserDropdownDoesNotGetCutOff

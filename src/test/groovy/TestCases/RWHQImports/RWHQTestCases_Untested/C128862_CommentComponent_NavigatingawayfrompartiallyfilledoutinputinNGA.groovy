@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128862 - Comment Component - Navigating away from partially filled out input in NGA
 class C128862_CommentComponent_NavigatingawayfrompartiallyfilledoutinputinNGA

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131474 - Memo - Share - Anyone With Link Can View - Pipeline Admin, Moderator, Analyst
 class C131474_Memo_Share_AnyoneWithLinkCanView_PipelineAdmin_Moderator_Analyst

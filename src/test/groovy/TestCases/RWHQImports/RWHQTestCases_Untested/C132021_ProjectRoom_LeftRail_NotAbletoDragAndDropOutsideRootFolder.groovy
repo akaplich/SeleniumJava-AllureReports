@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132021 - Project Room > Left Rail - Not Able to Drag And DropOutside Root Folder
 class C132021_ProjectRoom_LeftRail_NotAbletoDragAndDropOutsideRootFolder

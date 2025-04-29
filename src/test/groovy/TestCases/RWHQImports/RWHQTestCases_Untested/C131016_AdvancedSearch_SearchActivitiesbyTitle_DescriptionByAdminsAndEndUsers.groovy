@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131016 - Advanced Search - Search Activities by Title, Description By Admins & End Users
 class C131016_AdvancedSearch_SearchActivitiesbyTitle_DescriptionByAdminsAndEndUsers

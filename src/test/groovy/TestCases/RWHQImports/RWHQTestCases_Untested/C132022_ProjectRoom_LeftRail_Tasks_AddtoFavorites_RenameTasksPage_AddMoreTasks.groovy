@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132022 - Project Room > Left Rail - Tasks - Add to Favorites, Rename Tasks Page, Add More Tasks
 class C132022_ProjectRoom_LeftRail_Tasks_AddtoFavorites_RenameTasksPage_AddMoreTasks

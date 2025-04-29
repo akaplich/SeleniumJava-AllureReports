@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128784 - Comment Component - Edit Comment Permission and Text for Pipeline Admin
 class C128784_CommentComponent_EditCommentPermissionandTextforPipelineAdmin

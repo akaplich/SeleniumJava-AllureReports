@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132307 - WB - Group kanban, non-kanban items with Stack, Sticky, Text objects
 class C132307_WB_Groupkanban_non_kanbanitemswithStack_Sticky_Textobjects

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118989 - NGA View Idea Comments - Evaluator with AI can add private, Q&A comments
 class C118989_NGAViewIdeaComments_EvaluatorwithAIcanaddprivate_QAndAcomments

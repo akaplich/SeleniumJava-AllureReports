@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131818 - Hack > Participants Page - Invite to Join Team - User Removed From Team
 class C131818_Hack_ParticipantsPage_InvitetoJoinTeam_UserRemovedFromTeam

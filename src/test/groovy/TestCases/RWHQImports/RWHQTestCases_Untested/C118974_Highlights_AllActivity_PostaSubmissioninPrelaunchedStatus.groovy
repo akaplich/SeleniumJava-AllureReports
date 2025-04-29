@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118974 - Highlights - All Activity - Post a Submission in Prelaunched Status
 class C118974_Highlights_AllActivity_PostaSubmissioninPrelaunchedStatus

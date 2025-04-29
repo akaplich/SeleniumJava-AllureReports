@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129388 - Move Ideas - Submission Form, Idea Img, Attachment Intact in Source Pipeline
 class C129388_MoveIdeas_SubmissionForm_IdeaImg_AttachmentIntactinSourcePipeline

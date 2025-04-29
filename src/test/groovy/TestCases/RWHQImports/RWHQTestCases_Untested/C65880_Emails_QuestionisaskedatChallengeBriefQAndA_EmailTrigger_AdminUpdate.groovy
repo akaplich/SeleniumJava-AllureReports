@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65880 - Emails - Question is asked at Challenge Brief Q&A - Email Trigger, Admin Update
 class C65880_Emails_QuestionisaskedatChallengeBriefQAndA_EmailTrigger_AdminUpdate

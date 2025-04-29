@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131164 - Registration Invite from Site Setup - Send Registration Invite - Free Trial Idea Box
 class C131164_RegistrationInvitefromSiteSetup_SendRegistrationInvite_FreeTrialIdeaBox

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132344 - WB - Brightidea Ai - Fix Grammar - Select Multiple Objects
 class C132344_WB_BrightideaAi_FixGrammar_SelectMultipleObjects

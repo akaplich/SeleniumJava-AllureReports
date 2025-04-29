@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C63236 - NGA View Idea - Add Comment, Private, General, Submitter Q&A
 class C63236_NGAViewIdea_AddComment_Private_General_SubmitterQAndA

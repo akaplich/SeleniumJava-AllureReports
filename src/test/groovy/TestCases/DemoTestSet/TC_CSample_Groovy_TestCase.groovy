@@ -1,6 +1,10 @@
 package TestCases.DemoTestSet
 
 import BaseClasses.TestBase
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 import actions.API.Utils.DeleteAffiliate
 import actions.general.Login
 import actions.general.Wait

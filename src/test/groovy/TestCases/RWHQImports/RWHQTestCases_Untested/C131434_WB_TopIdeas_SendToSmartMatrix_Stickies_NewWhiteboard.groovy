@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131434 - WB - Top Ideas - Send To Smart Matrix - Stickies - New Whiteboard
 class C131434_WB_TopIdeas_SendToSmartMatrix_Stickies_NewWhiteboard

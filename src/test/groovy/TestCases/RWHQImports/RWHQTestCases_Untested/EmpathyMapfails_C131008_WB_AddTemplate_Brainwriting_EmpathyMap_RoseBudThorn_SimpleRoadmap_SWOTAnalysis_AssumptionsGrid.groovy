@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //Empathy Map fails - C131008 - WB - Add Template - Brainwriting, Empathy Map,Rose Bud Thorn, Simple Roadmap, SWOT Analysis, Assumptions Grid
 class EmpathyMapfails_C131008_WB_AddTemplate_Brainwriting_EmpathyMap_RoseBudThorn_SimpleRoadmap_SWOTAnalysis_AssumptionsGrid

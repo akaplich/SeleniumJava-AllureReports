@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131740 - WB - Add Link to Object - Invalid Link (Rectangle, Note, Circle)
 class C131740_WB_AddLinktoObject_InvalidLink_Rectangle_Note_Circle

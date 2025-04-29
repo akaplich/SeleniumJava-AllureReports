@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128892 - Comment Component - Tagging EU,Evaluator of another step in all types of comments replies
 class C128892_CommentComponent_TaggingEU_Evaluatorofanotherstepinalltypesofcommentsreplies

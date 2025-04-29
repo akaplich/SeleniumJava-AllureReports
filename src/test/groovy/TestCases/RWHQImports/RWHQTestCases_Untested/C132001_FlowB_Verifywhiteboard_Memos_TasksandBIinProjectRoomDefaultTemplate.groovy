@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132001 - Flow B - Verify whiteboard,Memos,Tasks and BI in Project Room Default Template
 class C132001_FlowB_Verifywhiteboard_Memos_TasksandBIinProjectRoomDefaultTemplate

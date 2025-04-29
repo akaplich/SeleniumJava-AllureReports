@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132436 - Project Room > Left Rail - Favorites - Rename BI, Link and Tasks
 class C132436_ProjectRoom_LeftRail_Favorites_RenameBI_LinkandTasks

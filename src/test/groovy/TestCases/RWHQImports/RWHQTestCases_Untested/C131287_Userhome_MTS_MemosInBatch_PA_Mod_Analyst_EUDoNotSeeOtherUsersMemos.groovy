@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131287 - Userhome, MTS - Memos In Batch - PA, Mod, Analyst, EU Do Not See Other Users' Memos
 class C131287_Userhome_MTS_MemosInBatch_PA_Mod_Analyst_EUDoNotSeeOtherUsersMemos

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65726 - Idea Boards 30 - Filter Slider Bar - My Completed Evaluations - Multiple Items Assigned
 class C65726_IdeaBoards30_FilterSliderBar_MyCompletedEvaluations_MultipleItemsAssigned

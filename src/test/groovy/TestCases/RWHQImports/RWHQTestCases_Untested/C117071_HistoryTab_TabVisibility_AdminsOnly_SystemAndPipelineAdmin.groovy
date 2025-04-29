@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117071 - History Tab - Tab Visibility - Admins Only - System & Pipeline Admin
 class C117071_HistoryTab_TabVisibility_AdminsOnly_SystemAndPipelineAdmin

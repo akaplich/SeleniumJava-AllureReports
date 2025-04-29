@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C58991 - Disable option 'Submitter access to Business Impact Tab' and check view idea page as Idea submitter
 class C58991_Disableoption_SubmitteraccesstoBusinessImpactTab_andcheckviewideapageasIdeasubmitter

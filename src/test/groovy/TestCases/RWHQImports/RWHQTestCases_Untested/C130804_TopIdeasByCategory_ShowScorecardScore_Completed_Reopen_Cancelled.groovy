@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130804 - Top Ideas By Category - Show Scorecard Score - Completed, Reopen, Cancelled
 class C130804_TopIdeasByCategory_ShowScorecardScore_Completed_Reopen_Cancelled

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129986 - Add Idea via Email - Do Not Post Idea if Initiative Closed
 class C129986_AddIdeaviaEmail_DoNotPostIdeaifInitiativeClosed

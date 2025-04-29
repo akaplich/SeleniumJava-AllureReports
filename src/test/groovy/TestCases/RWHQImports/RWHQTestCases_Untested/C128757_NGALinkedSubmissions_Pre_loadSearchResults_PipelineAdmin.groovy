@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128757 - NGA Linked Submissions - Pre-load Search Results - Pipeline Admin
 class C128757_NGALinkedSubmissions_Pre_loadSearchResults_PipelineAdmin

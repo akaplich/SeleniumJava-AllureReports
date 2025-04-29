@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C10816 - Action Items Manager - Sorting Columns by Assignee and Pipeline
 class C10816_ActionItemsManager_SortingColumnsbyAssigneeandPipeline

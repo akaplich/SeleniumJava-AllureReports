@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132418 - Gate Export - Gate Approval Response Detail (Percentage) and Gate Approval Response Detail (Text)
 class C132418_GateExport_GateApprovalResponseDetail_Percentage_andGateApprovalResponseDetail_Text

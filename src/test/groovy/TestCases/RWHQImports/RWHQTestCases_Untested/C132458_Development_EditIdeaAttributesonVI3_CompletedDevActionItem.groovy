@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132458 - Development - Edit Idea Attributes on VI3 - Completed Dev Action Item
 class C132458_Development_EditIdeaAttributesonVI3_CompletedDevActionItem

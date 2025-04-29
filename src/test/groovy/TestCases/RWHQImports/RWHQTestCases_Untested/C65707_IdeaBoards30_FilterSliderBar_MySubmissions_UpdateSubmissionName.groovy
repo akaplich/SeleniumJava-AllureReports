@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65707 - Idea Boards 30 - Filter Slider Bar - My Submissions - Update Submission Name
 class C65707_IdeaBoards30_FilterSliderBar_MySubmissions_UpdateSubmissionName

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131293 - Advanced Search - Project Not Searchable Outside Community or Memo Team Site
 class C131293_AdvancedSearch_ProjectNotSearchableOutsideCommunityorMemoTeamSite

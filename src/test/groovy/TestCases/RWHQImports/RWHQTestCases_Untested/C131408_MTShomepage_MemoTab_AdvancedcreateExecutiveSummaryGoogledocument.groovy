@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131408 - MTS homepage > Memo Tab > Advanced create Executive Summary Google document
 class C131408_MTShomepage_MemoTab_AdvancedcreateExecutiveSummaryGoogledocument

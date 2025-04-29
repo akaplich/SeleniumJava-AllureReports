@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117096 - Public webstorm - Hidden idea should not be displayed on End User Steps View
 class C117096_Publicwebstorm_HiddenideashouldnotbedisplayedonEndUserStepsView

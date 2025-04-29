@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131929 - Stage and Gate > Copy project room and folder icon in new PR from template
 class C131929_StageandGate_CopyprojectroomandfoldericoninnewPRfromtemplate

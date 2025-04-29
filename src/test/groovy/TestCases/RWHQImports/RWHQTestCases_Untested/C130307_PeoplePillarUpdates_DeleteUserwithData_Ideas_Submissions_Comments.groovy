@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130307 - People Pillar Updates - Delete User with Data (Ideas,Submissions,Comments)
 class C130307_PeoplePillarUpdates_DeleteUserwithData_Ideas_Submissions_Comments

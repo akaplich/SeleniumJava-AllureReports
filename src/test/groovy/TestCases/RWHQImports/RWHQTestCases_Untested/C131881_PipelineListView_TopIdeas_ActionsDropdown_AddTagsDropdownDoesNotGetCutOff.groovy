@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131881 - Pipeline List View, Top Ideas - Actions Dropdown - Add Tags Dropdown Does Not Get Cut Off
 class C131881_PipelineListView_TopIdeas_ActionsDropdown_AddTagsDropdownDoesNotGetCutOff

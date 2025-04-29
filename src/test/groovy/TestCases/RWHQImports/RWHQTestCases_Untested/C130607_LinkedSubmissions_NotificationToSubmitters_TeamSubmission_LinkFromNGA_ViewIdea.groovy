@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130607 - Linked Submissions - Notification To Submitters - Team Submission - Link From NGA, View Idea
 class C130607_LinkedSubmissions_NotificationToSubmitters_TeamSubmission_LinkFromNGA_ViewIdea

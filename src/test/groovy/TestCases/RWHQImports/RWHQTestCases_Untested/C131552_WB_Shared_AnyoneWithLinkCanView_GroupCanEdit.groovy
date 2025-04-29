@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131552 - WB - Shared - Anyone With Link Can View, Group Can Edit
 class C131552_WB_Shared_AnyoneWithLinkCanView_GroupCanEdit

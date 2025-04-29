@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131688 - WB on VI3 > Whiteboard Menu Options - Submitter Can Access, End User, Analyst Cannot
 class C131688_WBonVI3_WhiteboardMenuOptions_SubmitterCanAccess_EndUser_AnalystCannot

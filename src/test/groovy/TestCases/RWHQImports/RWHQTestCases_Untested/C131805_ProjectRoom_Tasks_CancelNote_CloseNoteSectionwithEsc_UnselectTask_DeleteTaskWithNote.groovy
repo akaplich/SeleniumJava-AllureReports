@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131805 - Project Room > Tasks - Cancel Note, Close Note Section with Esc, Unselect Task, Delete Task With Note
 class C131805_ProjectRoom_Tasks_CancelNote_CloseNoteSectionwithEsc_UnselectTask_DeleteTaskWithNote

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131933 - Permissions on Project Room + Team > Change team after sent to project room(multiple)
 class C131933_PermissionsonProjectRoom_Team_Changeteamaftersenttoprojectroom_multiple

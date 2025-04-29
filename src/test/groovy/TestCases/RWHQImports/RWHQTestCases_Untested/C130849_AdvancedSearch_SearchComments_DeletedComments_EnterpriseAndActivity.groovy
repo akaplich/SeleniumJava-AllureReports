@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130849 - Advanced Search - Search Comments, Deleted Comments, Enterprise & Activity
 class C130849_AdvancedSearch_SearchComments_DeletedComments_EnterpriseAndActivity

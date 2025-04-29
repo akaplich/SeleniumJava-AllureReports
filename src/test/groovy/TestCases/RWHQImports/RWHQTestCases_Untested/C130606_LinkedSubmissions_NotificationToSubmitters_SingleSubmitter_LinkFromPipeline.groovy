@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130606 - Linked Submissions - Notification To Submitters - Single Submitter - Link From Pipeline
 class C130606_LinkedSubmissions_NotificationToSubmitters_SingleSubmitter_LinkFromPipeline

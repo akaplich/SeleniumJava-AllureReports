@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132453 - Development - Edit Idea Attributes - Dev Evaluator From Another Step, No Action Item For This Idea
 class C132453_Development_EditIdeaAttributes_DevEvaluatorFromAnotherStep_NoActionItemForThisIdea

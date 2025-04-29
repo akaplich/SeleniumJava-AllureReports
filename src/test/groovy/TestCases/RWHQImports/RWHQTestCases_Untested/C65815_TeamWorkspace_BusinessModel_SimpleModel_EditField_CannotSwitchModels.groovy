@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65815 - Team Workspace - Business Model - Simple Model - Edit Field, Can't Switch Models
 class C65815_TeamWorkspace_BusinessModel_SimpleModel_EditField_CannotSwitchModels

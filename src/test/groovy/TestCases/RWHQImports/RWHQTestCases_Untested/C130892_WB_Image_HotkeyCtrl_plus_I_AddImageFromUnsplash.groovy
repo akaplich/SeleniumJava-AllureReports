@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130892 - WB - Image (Hotkey Ctrl+I) - Add Image From Unsplash
 class C130892_WB_Image_HotkeyCtrl_plus_I_AddImageFromUnsplash

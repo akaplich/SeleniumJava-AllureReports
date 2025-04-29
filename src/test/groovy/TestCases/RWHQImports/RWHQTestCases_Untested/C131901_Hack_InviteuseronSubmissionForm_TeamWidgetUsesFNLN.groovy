@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131901 - Hack > Invite user on Submission Form - Team Widget Uses FN LN
 class C131901_Hack_InviteuseronSubmissionForm_TeamWidgetUsesFNLN

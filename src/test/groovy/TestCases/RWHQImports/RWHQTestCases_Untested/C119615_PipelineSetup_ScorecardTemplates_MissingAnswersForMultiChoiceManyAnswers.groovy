@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119615 - Pipeline Setup - Scorecard Templates - Missing Answers For Multi Choice Many Answers
 class C119615_PipelineSetup_ScorecardTemplates_MissingAnswersForMultiChoiceManyAnswers

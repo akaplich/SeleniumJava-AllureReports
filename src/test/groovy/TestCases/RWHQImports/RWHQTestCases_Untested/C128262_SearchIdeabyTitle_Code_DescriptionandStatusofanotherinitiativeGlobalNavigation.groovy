@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128262 - Search Idea by Title,Code,Description and Status of another initiative Global Navigation
 class C128262_SearchIdeabyTitle_Code_DescriptionandStatusofanotherinitiativeGlobalNavigation

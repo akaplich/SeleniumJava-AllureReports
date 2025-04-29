@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131641 - Step Config Modal - Load Balancing OFF, No Change to Users, ENABLE Load Balancing
 class C131641_StepConfigModal_LoadBalancingOFF_NoChangetoUsers_ENABLELoadBalancing

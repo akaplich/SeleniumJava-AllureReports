@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C63097 - Gross Benefits Over Time Chart - Mouseover Behavior for Yearly View with Targets
 class C63097_GrossBenefitsOverTimeChart_MouseoverBehaviorforYearlyViewwithTargets

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132210 - Update Assignee - Single Scale - Add new evaluator with resend toggle on
 class C132210_UpdateAssignee_SingleScale_Addnewevaluatorwithresendtoggleon

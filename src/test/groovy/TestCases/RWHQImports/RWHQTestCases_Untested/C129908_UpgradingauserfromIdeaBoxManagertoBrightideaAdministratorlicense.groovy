@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129908 - Upgrading a user from Idea Box Manager to Brightidea Administrator license
 class C129908_UpgradingauserfromIdeaBoxManagertoBrightideaAdministratorlicense

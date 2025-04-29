@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118712 - Disable Submission Attachments and check NGA view idea page (action item view) - Evaluator
 class C118712_DisableSubmissionAttachmentsandcheckNGAviewideapage_actionitemview_Evaluator

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132330 - Resend Action Items - With Update Assignees in Scorecard Open, Completed and Removed AI
 class C132330_ResendActionItems_WithUpdateAssigneesinScorecardOpen_CompletedandRemovedAI

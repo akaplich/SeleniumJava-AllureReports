@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132027 - Project Room > Left Rail - Business Impact - Add to Favorites, Delete Page
 class C132027_ProjectRoom_LeftRail_BusinessImpact_AddtoFavorites_DeletePage

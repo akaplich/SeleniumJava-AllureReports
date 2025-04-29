@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131231 - Community Dashboard - Overall - Innovations Created in Period vs. Prior Period - Chart
 class C131231_CommunityDashboard_Overall_InnovationsCreatedinPeriodvs_PriorPeriod_Chart

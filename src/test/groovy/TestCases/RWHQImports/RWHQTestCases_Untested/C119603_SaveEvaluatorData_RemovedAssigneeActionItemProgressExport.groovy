@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119603 - Save Evaluator Data - Removed Assignee Action Item Progress Export
 class C119603_SaveEvaluatorData_RemovedAssigneeActionItemProgressExport

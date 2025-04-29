@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132308 - WB - Add multiple non-kanban, Shapes, Sticky and Text objects
 class C132308_WB_Addmultiplenon_kanban_Shapes_StickyandTextobjects

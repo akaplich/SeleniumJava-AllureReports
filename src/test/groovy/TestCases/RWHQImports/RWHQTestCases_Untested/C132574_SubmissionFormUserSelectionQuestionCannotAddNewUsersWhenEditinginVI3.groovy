@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132574 - Submission Form User Selection Question Cannot Add New Users When Editing in VI3
 class C132574_SubmissionFormUserSelectionQuestionCannotAddNewUsersWhenEditinginVI3

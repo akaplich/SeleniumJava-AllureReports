@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131621 - Step Config Modal - Load Balancing On, Add User, Remove User, Increase Load Balancing Setting
 class C131621_StepConfigModal_LoadBalancingOn_AddUser_RemoveUser_IncreaseLoadBalancingSetting

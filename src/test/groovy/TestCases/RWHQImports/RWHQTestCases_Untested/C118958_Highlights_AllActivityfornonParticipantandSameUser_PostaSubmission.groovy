@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118958 - Highlights - All Activity for non Participant and Same User - Post a Submission
 class C118958_Highlights_AllActivityfornonParticipantandSameUser_PostaSubmission

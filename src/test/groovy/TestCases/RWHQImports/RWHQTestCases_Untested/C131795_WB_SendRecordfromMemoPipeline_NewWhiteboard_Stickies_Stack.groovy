@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131795 - WB - Send Record from Memo Pipeline - New Whiteboard, Stickies, Stack
 class C131795_WB_SendRecordfromMemoPipeline_NewWhiteboard_Stickies_Stack

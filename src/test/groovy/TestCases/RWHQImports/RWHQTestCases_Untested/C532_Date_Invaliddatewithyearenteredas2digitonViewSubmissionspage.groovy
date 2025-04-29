@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C532 - Date - Invalid date with year entered as 2 digit on View Submissions page
 class C532_Date_Invaliddatewithyearenteredas2digitonViewSubmissionspage

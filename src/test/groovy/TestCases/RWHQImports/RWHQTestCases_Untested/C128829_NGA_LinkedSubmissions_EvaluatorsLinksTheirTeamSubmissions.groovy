@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128829 - NGA - Linked Submissions - Evaluators Links Their Team Submissions
 class C128829_NGA_LinkedSubmissions_EvaluatorsLinksTheirTeamSubmissions

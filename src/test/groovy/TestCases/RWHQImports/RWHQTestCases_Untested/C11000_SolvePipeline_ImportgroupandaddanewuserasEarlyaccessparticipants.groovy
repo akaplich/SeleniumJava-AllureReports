@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C11000 - Solve Pipeline - Import group and add a new user as Early access participants
 class C11000_SolvePipeline_ImportgroupandaddanewuserasEarlyaccessparticipants

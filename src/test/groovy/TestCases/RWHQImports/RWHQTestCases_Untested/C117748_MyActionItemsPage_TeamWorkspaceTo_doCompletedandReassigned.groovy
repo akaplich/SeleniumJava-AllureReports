@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117748 - My Action Items Page - Team Workspace To-do Completed and Reassigned
 class C117748_MyActionItemsPage_TeamWorkspaceTo_doCompletedandReassigned

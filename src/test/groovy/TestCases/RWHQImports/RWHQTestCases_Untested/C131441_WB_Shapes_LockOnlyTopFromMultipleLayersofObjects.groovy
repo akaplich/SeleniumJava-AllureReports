@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131441 - WB - Shapes - Lock Only Top From Multiple Layers of Objects
 class C131441_WB_Shapes_LockOnlyTopFromMultipleLayersofObjects

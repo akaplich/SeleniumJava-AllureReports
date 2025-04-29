@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C17626 - Visual Initiative List (Large) - Check and Uncheck Web List checkbox
 class C17626_VisualInitiativeList_Large_CheckandUncheckWebListcheckbox

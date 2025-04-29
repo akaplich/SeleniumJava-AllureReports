@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130664 - Top Ideas By Category As Pipeline Admin, Moderator, Analyst
 class C130664_TopIdeasByCategoryAsPipelineAdmin_Moderator_Analyst

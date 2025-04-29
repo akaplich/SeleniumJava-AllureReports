@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132421 - Scheduler V1 - Communications Modal - Time Dropdown Saves Correct Time
 class C132421_SchedulerV1_CommunicationsModal_TimeDropdownSavesCorrectTime

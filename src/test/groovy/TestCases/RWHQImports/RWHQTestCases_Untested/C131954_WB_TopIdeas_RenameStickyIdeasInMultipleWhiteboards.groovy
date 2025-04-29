@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131954 - WB - Top Ideas - Rename Sticky Ideas In Multiple Whiteboards
 class C131954_WB_TopIdeas_RenameStickyIdeasInMultipleWhiteboards

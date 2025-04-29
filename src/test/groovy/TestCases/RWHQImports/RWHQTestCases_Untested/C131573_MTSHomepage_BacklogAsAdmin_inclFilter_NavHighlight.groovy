@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131573 - MTS Homepage > Backlog As Admin (incl Filter, Nav Highlight)
 class C131573_MTSHomepage_BacklogAsAdmin_inclFilter_NavHighlight

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132481 - VI3 - 'Display Vote Count' is on - Vote count is displayed in VI3, IdeaBoard 3, and Mini Idea Widget
 class C132481_VI3_DisplayVoteCount_ison_VotecountisdisplayedinVI3_IdeaBoard3_andMiniIdeaWidget

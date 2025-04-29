@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132216 - Submission Form - Dependent On Dev Question - Update Dev Question
 class C132216_SubmissionForm_DependentOnDevQuestion_UpdateDevQuestion

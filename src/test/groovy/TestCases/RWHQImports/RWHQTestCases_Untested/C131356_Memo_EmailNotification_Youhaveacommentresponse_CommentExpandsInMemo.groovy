@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131356 - Memo - Email Notification - 'You have a comment response ' - Comment Expands In Memo
 class C131356_Memo_EmailNotification_Youhaveacommentresponse_CommentExpandsInMemo

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C65716 - Idea Boards 30 - Filter Slider Bar - No Toggle for My Open & Completed Evaluations When No Assignments
 class C65716_IdeaBoards30_FilterSliderBar_NoToggleforMyOpenAndCompletedEvaluationsWhenNoAssignments

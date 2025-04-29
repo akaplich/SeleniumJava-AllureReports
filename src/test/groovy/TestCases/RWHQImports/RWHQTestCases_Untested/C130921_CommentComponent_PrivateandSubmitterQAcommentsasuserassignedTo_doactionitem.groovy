@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130921 - Comment Component - Private and Submitter QA comments as user assigned To-do action item
 class C130921_CommentComponent_PrivateandSubmitterQAcommentsasuserassignedTo_doactionitem

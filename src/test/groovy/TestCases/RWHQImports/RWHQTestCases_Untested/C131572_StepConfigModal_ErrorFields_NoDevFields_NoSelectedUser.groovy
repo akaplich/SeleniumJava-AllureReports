@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131572 - Step Config Modal - Error Fields - No Dev Fields, No Selected User
 class C131572_StepConfigModal_ErrorFields_NoDevFields_NoSelectedUser

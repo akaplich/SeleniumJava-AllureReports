@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132426 - Community Search - Search Idea Category from inside as well as outside the community
 class C132426_CommunitySearch_SearchIdeaCategoryfrominsideaswellasoutsidethecommunity

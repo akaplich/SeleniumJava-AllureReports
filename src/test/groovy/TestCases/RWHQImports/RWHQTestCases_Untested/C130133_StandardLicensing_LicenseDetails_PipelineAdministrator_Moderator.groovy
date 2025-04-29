@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130133 - Standard Licensing - License Details (Pipeline Administrator,Moderator)
 class C130133_StandardLicensing_LicenseDetails_PipelineAdministrator_Moderator

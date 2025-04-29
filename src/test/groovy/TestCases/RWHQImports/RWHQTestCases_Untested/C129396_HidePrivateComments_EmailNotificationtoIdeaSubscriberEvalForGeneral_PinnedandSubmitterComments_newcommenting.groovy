@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129396 - Hide Private Comments - Email Notification to Idea Subscriber Eval For General,Pinned and Submitter Comments(new commenting)
 class C129396_HidePrivateComments_EmailNotificationtoIdeaSubscriberEvalForGeneral_PinnedandSubmitterComments_newcommenting

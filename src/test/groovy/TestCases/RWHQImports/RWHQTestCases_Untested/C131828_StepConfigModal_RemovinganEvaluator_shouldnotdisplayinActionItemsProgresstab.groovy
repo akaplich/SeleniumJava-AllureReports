@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131828 - Step Config Modal - Removing an Evaluator, should not display in Action Items Progress tab
 class C131828_StepConfigModal_RemovinganEvaluator_shouldnotdisplayinActionItemsProgresstab

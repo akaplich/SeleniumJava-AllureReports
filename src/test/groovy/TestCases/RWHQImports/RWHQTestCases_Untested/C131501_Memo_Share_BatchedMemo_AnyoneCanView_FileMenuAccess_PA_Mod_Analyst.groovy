@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131501 - Memo - Share - Batched Memo - Anyone Can View - File Menu Access - PA, Mod, Analyst
 class C131501_Memo_Share_BatchedMemo_AnyoneCanView_FileMenuAccess_PA_Mod_Analyst

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132306 - WB - Add Stack, Sticky, Text and Delete from Right Click Menu
 class C132306_WB_AddStack_Sticky_TextandDeletefromRightClickMenu

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131815 - File Upload on View Idea 3 Attachment > File size site limit over enterprise limit
 class C131815_FileUploadonViewIdea3Attachment_Filesizesitelimitoverenterpriselimit

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119519 - Submissions Tab - Submissions with Comment Details - Profile Data and Comment Vote Summary
 class C119519_SubmissionsTab_SubmissionswithCommentDetails_ProfileDataandCommentVoteSummary

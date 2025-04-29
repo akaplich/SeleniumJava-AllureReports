@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //PHP8 - C119061 - NGA View Idea Comments - Moderator Reads Private, Admin and Q&A Comments
 class PHP8_C119061_NGAViewIdeaComments_ModeratorReadsPrivate_AdminandQAndAComments

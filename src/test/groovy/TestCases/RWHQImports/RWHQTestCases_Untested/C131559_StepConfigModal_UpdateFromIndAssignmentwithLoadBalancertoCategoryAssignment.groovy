@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131559 - Step Config Modal - Update From Ind Assignment with Load Balancer to Category Assignment
 class C131559_StepConfigModal_UpdateFromIndAssignmentwithLoadBalancertoCategoryAssignment

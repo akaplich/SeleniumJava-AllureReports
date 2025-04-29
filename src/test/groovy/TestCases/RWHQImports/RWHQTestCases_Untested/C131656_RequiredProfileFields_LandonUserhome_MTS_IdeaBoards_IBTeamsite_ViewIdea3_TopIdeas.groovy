@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131656 - Required Profile Fields > Land on Userhome,MTS,Idea Boards,IB Team site,View Idea 3,Top Ideas
 class C131656_RequiredProfileFields_LandonUserhome_MTS_IdeaBoards_IBTeamsite_ViewIdea3_TopIdeas

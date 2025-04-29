@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132167 - PR > Delete Folder,Stage,Gate > Pages inside the objects
 class C132167_PR_DeleteFolder_Stage_Gate_Pagesinsidetheobjects

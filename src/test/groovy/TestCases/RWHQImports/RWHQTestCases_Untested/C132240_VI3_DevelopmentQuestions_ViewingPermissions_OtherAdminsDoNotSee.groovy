@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132240 - VI3 - Development Questions - Viewing Permissions - Other Admins Do Not See
 class C132240_VI3_DevelopmentQuestions_ViewingPermissions_OtherAdminsDoNotSee

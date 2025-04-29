@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131488 - Top Ideas for Memos > Card Display (Activity, Owner, Action Items)
 class C131488_TopIdeasforMemos_CardDisplay_Activity_Owner_ActionItems

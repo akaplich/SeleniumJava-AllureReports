@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130776 - Top Ideas by Category - Change Category - By Click - Admin Can, Analyst Can Not
 class C130776_TopIdeasbyCategory_ChangeCategory_ByClick_AdminCan_AnalystCanNot

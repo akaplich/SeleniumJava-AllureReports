@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129595 - Move Ideas - Notify Submitters ON - Idea Moved Email (Submitter Deactivated)
 class C129595_MoveIdeas_NotifySubmittersON_IdeaMovedEmail_SubmitterDeactivated

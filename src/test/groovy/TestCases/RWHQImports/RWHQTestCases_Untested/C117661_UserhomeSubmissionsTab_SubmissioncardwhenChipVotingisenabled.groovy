@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117661 - Userhome Submissions Tab - Submission card when Chip Voting is enabled
 class C117661_UserhomeSubmissionsTab_SubmissioncardwhenChipVotingisenabled

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131819 - Hack > Participants Page - Invite to Join Team - Invite User to Join Same Team Twice
 class C131819_Hack_ParticipantsPage_InvitetoJoinTeam_InviteUsertoJoinSameTeamTwice

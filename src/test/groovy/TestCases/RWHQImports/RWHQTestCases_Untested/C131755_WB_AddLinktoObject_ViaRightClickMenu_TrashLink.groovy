@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131755 - WB - Add Link to Object - Via Right Click Menu, Trash Link
 class C131755_WB_AddLinktoObject_ViaRightClickMenu_TrashLink

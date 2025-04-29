@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131173 - WB - Send Ideas - Stack - Existing Can Edit Whiteboard
 class C131173_WB_SendIdeas_Stack_ExistingCanEditWhiteboard

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117618 - My Idea - Email submission when option is not checked in enterprise setup
 class C117618_MyIdea_Emailsubmissionwhenoptionisnotcheckedinenterprisesetup

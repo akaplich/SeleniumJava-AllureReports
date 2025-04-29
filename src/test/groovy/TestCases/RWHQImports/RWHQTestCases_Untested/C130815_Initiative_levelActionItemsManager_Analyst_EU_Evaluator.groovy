@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130815 - Initiative-level Action Items Manager - Analyst,EU,Evaluator
 class C130815_Initiative_levelActionItemsManager_Analyst_EU_Evaluator

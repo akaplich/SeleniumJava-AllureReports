@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C119396 - Change order of default questions and check post idea 2.0 & view idea 2.0 pages - End User
 class C119396_Changeorderofdefaultquestionsandcheckpostidea20Andviewidea20pages_EndUser

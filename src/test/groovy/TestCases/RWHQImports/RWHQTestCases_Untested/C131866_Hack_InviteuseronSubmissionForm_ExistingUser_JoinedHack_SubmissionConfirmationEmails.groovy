@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131866 - Hack > Invite user on Submission Form - Existing User, Joined Hack, Submission Confirmation Emails
 class C131866_Hack_InviteuseronSubmissionForm_ExistingUser_JoinedHack_SubmissionConfirmationEmails

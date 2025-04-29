@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131115 - WB License - Set WB license to new user, licensed user or brightidea domain user
 class C131115_WBLicense_SetWBlicensetonewuser_licenseduserorbrightideadomainuser

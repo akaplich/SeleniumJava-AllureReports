@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128759 - Comment Component - Deleting Comments as End User,Eval and Analyst
 class C128759_CommentComponent_DeletingCommentsasEndUser_EvalandAnalyst

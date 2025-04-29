@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131331 - Memo - Collab Editor - Filter Comments, All, Open, Assigned To Me, Resolved
 class C131331_Memo_CollabEditor_FilterComments_All_Open_AssignedToMe_Resolved

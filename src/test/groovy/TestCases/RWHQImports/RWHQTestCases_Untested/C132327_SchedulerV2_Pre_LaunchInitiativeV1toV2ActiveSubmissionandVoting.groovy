@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132327 - Scheduler V2 - Pre-Launch Initiative V1 to V2 Active Submission and Voting
 class C132327_SchedulerV2_Pre_LaunchInitiativeV1toV2ActiveSubmissionandVoting

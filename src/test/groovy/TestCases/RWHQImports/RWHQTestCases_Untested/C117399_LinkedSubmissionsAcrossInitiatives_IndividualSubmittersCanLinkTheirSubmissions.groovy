@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117399 - Linked Submissions Across Initiatives - Individual Submitters Can Link Their Submissions
 class C117399_LinkedSubmissionsAcrossInitiatives_IndividualSubmittersCanLinkTheirSubmissions

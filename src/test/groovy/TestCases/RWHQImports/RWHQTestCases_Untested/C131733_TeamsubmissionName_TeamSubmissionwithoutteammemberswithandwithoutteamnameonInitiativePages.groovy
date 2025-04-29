@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131733 - Team submission Name - Team Submission with out team members with and without team name on Initiative Pages
 class C131733_TeamsubmissionName_TeamSubmissionwithoutteammemberswithandwithoutteamnameonInitiativePages

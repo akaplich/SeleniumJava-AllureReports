@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117402 - Linked Submissions Across Initiatives - Individual Submitters Can Link Their Hidden Submissions
 class C117402_LinkedSubmissionsAcrossInitiatives_IndividualSubmittersCanLinkTheirHiddenSubmissions

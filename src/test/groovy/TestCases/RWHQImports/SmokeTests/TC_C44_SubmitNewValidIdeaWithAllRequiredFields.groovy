@@ -1,6 +1,10 @@
 package TestCases.RWHQImports.SmokeTests
 
 import BaseClasses.TestBase
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 import actions.API.Utils.CopyAffiliate
 import actions.API.Utils.DeleteAffiliate
 import actions.IdeaBoard.AccessIdeainIdeaBoardpage30
@@ -21,9 +25,9 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 //C44 - Submit new valid Idea with all Required fields
-class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
+class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     private static def variables = [:]
-    private static final Logger logger = LoggerFactory.getLogger(TC_C44_SubmitNewValidIdeaWithAllRequiredFields.class);
+    private static final Logger logger = LoggerFactory.getLogger(C44_SubmitNewValidIdeaWithAllRequiredFields.class);
 
 
     @BeforeAll
@@ -43,8 +47,7 @@ class TC_C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
     }
 
-    @Test
-    @Tag("Smoke")
+    @Test @Tag("Smoke")
     public void testcase(){
         logger.debug("TestCase");
         //Basestate

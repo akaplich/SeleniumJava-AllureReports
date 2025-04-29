@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C130285 - Pipeline List View - Actions Dropdown - Select All - Remove Admin Tags
 class C130285_PipelineListView_ActionsDropdown_SelectAll_RemoveAdminTags

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117104 - Scorecard - Analyst can see Evaluations Tab when visibility is set to Administrators only
 class C117104_Scorecard_AnalystcanseeEvaluationsTabwhenvisibilityissettoAdministratorsonly

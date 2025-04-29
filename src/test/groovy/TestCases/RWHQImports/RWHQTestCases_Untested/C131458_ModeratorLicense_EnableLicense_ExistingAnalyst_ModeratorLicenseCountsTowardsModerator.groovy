@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131458 - Moderator License - Enable License - Existing Analyst+Moderator License Counts Towards Moderator
 class C131458_ModeratorLicense_EnableLicense_ExistingAnalyst_ModeratorLicenseCountsTowardsModerator

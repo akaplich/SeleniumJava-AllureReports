@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C63183 - [Team Workspace] - Financial and NonFinancial Data in Business Impact tab on Refresh
 class C63183_TeamWorkspace_FinancialandNonFinancialDatainBusinessImpacttabonRefresh

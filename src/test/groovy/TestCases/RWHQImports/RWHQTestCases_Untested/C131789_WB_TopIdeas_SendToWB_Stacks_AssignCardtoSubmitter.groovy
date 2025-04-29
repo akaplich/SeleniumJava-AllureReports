@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131789 - WB - Top Ideas - Send To WB - Stacks - Assign Card to Submitter
 class C131789_WB_TopIdeas_SendToWB_Stacks_AssignCardtoSubmitter

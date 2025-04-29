@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132467 - Pipeline Setup - Newsletter - Pipeline Admin, Link to Pipeline Setup
 class C132467_PipelineSetup_Newsletter_PipelineAdmin_LinktoPipelineSetup

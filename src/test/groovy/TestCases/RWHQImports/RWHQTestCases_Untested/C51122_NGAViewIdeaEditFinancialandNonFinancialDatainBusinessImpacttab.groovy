@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C51122 - NGA View Idea Edit Financial and NonFinancial Data in Business Impact tab
 class C51122_NGAViewIdeaEditFinancialandNonFinancialDatainBusinessImpacttab

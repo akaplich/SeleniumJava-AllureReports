@@ -1,24 +1,26 @@
 package TestCases.RWHQImports.RWHQTestCases_Untested
 
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C118925 - Users Tab - User Activity
 class C118925_UsersTab_UserActivity
 {
-    private static def variables = [:]
-
-    @BeforeSuite
-    public void beforeState(){
-        variables."URL" = /https:\/\/test.brightideatest.com/
-        variables."Browser" = /Chrome/
-        variables."TestRail_RunName" = null
-        variables."TestRail_ExecutionName" = null
-        variables."CodeEnvironment" = /Default/
-        variables."Database" = null
-    }
-    @Test
+//    private static def variables = [:]
+//
+//    @BeforeSuite
+//    public void beforeState(){
+//        variables."URL" = /https:\/\/test.brightideatest.com/
+//        variables."Browser" = /Chrome/
+//        variables."TestRail_RunName" = null
+//        variables."TestRail_ExecutionName" = null
+//        variables."CodeEnvironment" = /Default/
+//        variables."Database" = null
+//    }
+//    @Test
+    /* - Case uses csv, we don't currently support that here
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
@@ -99,4 +101,6 @@ class C118925_UsersTab_UserActivity
         //Afterstate
         Action581259c8fa4ee77809f46905([:])
     }
+    */
+
 }

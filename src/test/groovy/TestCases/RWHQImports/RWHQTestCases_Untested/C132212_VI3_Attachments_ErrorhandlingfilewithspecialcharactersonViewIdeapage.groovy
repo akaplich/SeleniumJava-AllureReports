@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132212 - VI3 - Attachments - Error handling file with special characters on View Idea page
 class C132212_VI3_Attachments_ErrorhandlingfilewithspecialcharactersonViewIdeapage

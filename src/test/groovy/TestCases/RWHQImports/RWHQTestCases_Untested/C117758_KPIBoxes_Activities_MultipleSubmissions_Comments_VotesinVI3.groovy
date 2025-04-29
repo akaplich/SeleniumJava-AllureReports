@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C117758 - KPI Boxes - Activities - Multiple Submissions, Comments, Votes in VI3
 class C117758_KPIBoxes_Activities_MultipleSubmissions_Comments_VotesinVI3

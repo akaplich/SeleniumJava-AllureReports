@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C111062 - Business Impact tab - Versioning dropdown, current version, previous versions
 class C111062_BusinessImpacttab_Versioningdropdown_currentversion_previousversions

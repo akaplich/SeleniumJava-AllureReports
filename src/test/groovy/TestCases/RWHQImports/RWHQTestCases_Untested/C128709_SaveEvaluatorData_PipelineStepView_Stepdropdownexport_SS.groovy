@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C128709 - Save Evaluator Data - Pipeline Step View - Step dropdown export (SS)
 class C128709_SaveEvaluatorData_PipelineStepView_Stepdropdownexport_SS

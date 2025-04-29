@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131090 - Comment Component - Change Permission using Modal as Mod+Eval and PA+IS
 class C131090_CommentComponent_ChangePermissionusingModalasMod_EvalandPA_IS

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132169 - VI3 - Subscribe To Tags with Automatic Subscription Disabled
 class C132169_VI3_SubscribeToTagswithAutomaticSubscriptionDisabled

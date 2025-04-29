@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129729 - New Copy Ideas - Sub Form - Append Extra Questions - OFF
 class C129729_NewCopyIdeas_SubForm_AppendExtraQuestions_OFF

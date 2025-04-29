@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C131692 - WB on VI3 > Submission Form > Only One WB field Can Be Added
 class C131692_WBonVI3_SubmissionForm_OnlyOneWBfieldCanBeAdded

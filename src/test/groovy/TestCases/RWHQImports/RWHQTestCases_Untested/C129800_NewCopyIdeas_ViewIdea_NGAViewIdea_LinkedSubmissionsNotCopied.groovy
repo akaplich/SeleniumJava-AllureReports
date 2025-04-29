@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C129800 - New Copy Ideas - View Idea, NGA View Idea - Linked Submissions Not Copied
 class C129800_NewCopyIdeas_ViewIdea_NGAViewIdea_LinkedSubmissionsNotCopied

@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132489 - VI3 - 'Display Vote Count' is off - Vote count is hidden in VI3, IdeaBoard 3, and Mini Idea Widget
 class C132489_VI3_DisplayVoteCount_isoff_VotecountishiddeninVI3_IdeaBoard3_andMiniIdeaWidget

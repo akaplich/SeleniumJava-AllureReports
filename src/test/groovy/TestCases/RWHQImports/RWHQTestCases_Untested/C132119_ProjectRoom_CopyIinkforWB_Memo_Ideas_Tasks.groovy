@@ -1,6 +1,7 @@
-import org.testng.annotations.BeforeSuite
-import org.testng.annotations.AfterMethod
-import org.testng.annotations.Test
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Tag
+import org.junit.jupiter.api.Test
 
 //C132119 - Project Room - Copy Iink for WB,Memo,Ideas,Tasks
 class C132119_ProjectRoom_CopyIinkforWB_Memo_Ideas_Tasks
