@@ -197,8 +197,8 @@ class HttpClient{
             contentType = params.ContentType
         }
 
-        //String URLPath = redwood.launcher.Launcher.variables.URL
-        String URLPath = Settings.getProperty("environment.url");
+        String URLPath = System.getProperty("environment.url", Settings.getProperty("environment.url"));
+        logger.debug("URLPath: ${URLPath}")
                 //If 'App Environment' paramater is specified then modify URL from standard one that is used to access affiliate variable to a different one
         if(params."App Environment"){
             if(params."App Environment"=="BI Admin"){
