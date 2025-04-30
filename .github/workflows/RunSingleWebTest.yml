@@ -14,7 +14,7 @@ on:
       Test:
         description: 'Test'
         required: true
-        default: 'TC_C44_SubmitNewValidIdeaWithAllRequiredFields'
+        default: 'C44_SubmitNewValidIdeaWithAllRequiredFields'
         type: string
       Run_Headless:
         description: 'Run Headless'

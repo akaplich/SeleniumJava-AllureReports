@@ -8,10 +8,15 @@ Running Locally (If docker isn't working for you)
 * Browser should now assign Driver using Chromedriver instead of RemoteWebDriver
 
 Running From Commandline
-* "mvn clean test -Dgroups="Demo" site" will run a couple cases that are short and do not copy affiliate, and generate a site report
-* "mvn clean test -Dgroups="Smoke" site" will run the 5 smoke test cases, and generate a site report
-* "mvn test -Dtest=FirstGroovyScriptTest site" will execute a single standalone demo test and generate a site report
-* "mvn clean test -Denvironment.url=brightideasandbox.com -Dtest=C44_SubmitNewValidIdeaWithAllRequiredFields"
+* Examples
+  * Run a couple cases that are short and do not copy affiliate, and generate a site report
+    * "mvn clean test -Dgroups="Demo" site"
+  * Run the 5 smoke test cases, and generate a site report
+    * "mvn clean test -Dgroups="Smoke" site"  
+  * Run a single standalone demo test and generate a site report
+    * "mvn test -Dtest=FirstGroovyScriptTest site"  
+  * Run a single smoke testcase on the sandbox environment
+    * "mvn clean test -Denvironment.url=brightideasandbox.com -Dtest=C44_SubmitNewValidIdeaWithAllRequiredFields"
 
 
 Steps to import RWHQ Testcase

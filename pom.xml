@@ -250,7 +250,8 @@
                     <forkCount>1</forkCount>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
-                        <include>TC_C*.*</include>
+                        <include>C*.*</include>
+                        <groups>OldRulesModalRegression</groups>
                         <groups>Smoke</groups>
                         <groups>Demo</groups>
                     </includes>
