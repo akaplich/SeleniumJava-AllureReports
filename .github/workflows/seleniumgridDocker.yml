@@ -59,7 +59,11 @@ jobs:
 
       - name: Run Web Tests via Maven
         run: |
-          mvn clean test -Denvironment.url="${{github.event.inputs.Environment}}" -Dgroups="${{github.event.inputs.Mvn_Group}}" -Dheadless=${{github.event.inputs.Run_Headless}} site
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            mvn clean test -Denvironment.url="${{ github.event.inputs.Environment }}" -Dgroups="${{ github.event.inputs.Mvn_Group }}" -Dheadless=${{ github.event.inputs.Run_Headless }} site
+          elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            mvn clean test -Denvironment.url="${{ github.event.client_payload.Environment }}" -Dgroups="${{ github.event.client_payload.Mvn_Group }}" -Dheadless=${{ github.event.client_payload.Run_Headless }} site
+          fi
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
