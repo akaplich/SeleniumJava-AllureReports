@@ -1,6 +1,9 @@
 name: Web Test on Multiple Containers
 
 on:
+  repository_dispatch:
+    types:
+      - trigger-web-test
   workflow_dispatch:
     inputs:
       Environment:
