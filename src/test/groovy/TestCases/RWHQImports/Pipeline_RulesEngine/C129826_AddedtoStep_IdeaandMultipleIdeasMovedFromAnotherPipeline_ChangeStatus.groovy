@@ -1,29 +1,42 @@
 package TestCases.RWHQImports.Pipeline_RulesEngine
 
-
+import BaseClasses.TestBase
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import actions.API.Utils.CopyAffiliate
+import actions.general.Login
+import actions.general.Wait
+import actions.Utils.SettoLabEnvironment
+import actions.selenium.Browser
 
 //C129826 - Added to Step - Idea and Multiple Ideas Moved From Another Pipeline - Change Status
-class C129826_AddedtoStep_IdeaandMultipleIdeasMovedFromAnotherPipeline_ChangeStatus
-extends TestBase {
+class C129826_AddedtoStep_IdeaandMultipleIdeasMovedFromAnotherPipeline_ChangeStatus extends TestBase {
     private static def variables = [:]
+    private static final Logger logger = LoggerFactory.getLogger(C129826_AddedtoStep_IdeaandMultipleIdeasMovedFromAnotherPipeline_ChangeStatus.class);
 
     @BeforeAll
     public static void beforeState(){
-        variables."URL" = /https:\/\/test.brightideatest.com/
+        logger.debug("Before State");
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."Licensing Model" = null
+        variables."Unlimited Brightidea Administrator License Type" = null
+        variables."Brightidea Administrator License Type Purchased Count" = null
+        variables."Unlimited Idea Box Manager License Type" = null
+        variables."Idea Box Manager License Type Purchased Count" = null
     }
     @Test @Tag("OldRulesModalRegression")
-    public void testcase(){
+    public void testcase(){     
+        logger.debug("TestCase");
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
+        Action58123c20fa4ee77809f468f6(variables)
         //Delete this when Rules Engine Updated UI is enabled for everyone
         Action66ee0346e12425a91eeb06ab([:])
         //Navigate
