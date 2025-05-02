@@ -1,6 +1,7 @@
 package actions.PipelineStepsView;
 
 import actions.selenium.SetText
+import actions.selenium.ExplicitWait
 import actions.selenium.Click
 import actions.common.AppsCommon
 import actions.selenium.SetCombobox
@@ -16,7 +17,8 @@ import screens.ReactFormDifferentFieldLocators
 class SetQuickAddMemoorIdea{
     public void run(def params){
         Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true)
-        sleep(5000)
+        ExplicitWait.run(ID:"//*[contains(@class,'f-quick-add-dropdown')]")
+        
         if(params."Memo or Idea"){
             Click.run(ID:"//*[@class='f-quick-add-options']//INPUT[@name='${params."Memo or Idea"}_radio']/..")
         }        

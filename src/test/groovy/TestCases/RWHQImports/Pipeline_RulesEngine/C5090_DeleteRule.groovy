@@ -20,7 +20,6 @@ class C5090_DeleteRule extends TestBase {
     @BeforeAll
     public static void beforeState(){
         logger.debug("Before State");
-        variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
         variables."TestRail_ExecutionName" = null
@@ -31,7 +30,6 @@ class C5090_DeleteRule extends TestBase {
         variables."Brightidea Administrator License Type Purchased Count" = null
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
-        variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
     }
     @Test @Tag("OldRulesModalRegression")
     public void testcase(){
@@ -69,8 +67,6 @@ class C5090_DeleteRule extends TestBase {
         logger.debug("Browser");
         new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
-        logger.debug("Browser");
-        new Wait().run("Seconds":/5/.toString())
         new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
         logger.debug("SettoLabEnvironment");
@@ -88,8 +84,5 @@ class C5090_DeleteRule extends TestBase {
     public static def Action59518d0537f5aeb0023220b7(def params){
         //Set Action Dropdown for Rules
         new actions.Rules.SetActionDropdownforRules().run("Action Menu Option":/Delete Rule/.toString())
-    }
-    @AfterEach
-    public void afterState(){
     }
 }

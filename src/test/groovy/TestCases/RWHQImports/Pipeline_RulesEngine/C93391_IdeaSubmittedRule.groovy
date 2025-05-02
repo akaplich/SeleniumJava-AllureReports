@@ -20,7 +20,6 @@ class C93391_IdeaSubmittedRule extends TestBase {
     @BeforeAll
     public static void beforeState(){
         logger.debug("Before State");
-        variables."URL" = /https:\/\/test.brightideatest.com/
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
         variables."TestRail_ExecutionName" = null
@@ -95,8 +94,5 @@ class C93391_IdeaSubmittedRule extends TestBase {
     public static def Action594d63e45cb815bc19ca15e6(def params){
         //Set Action Dropdown for Rules
         new actions.Rules.SetActionDropdownforRules().run("Action Menu Option":/Change Status/.toString(),"Change Status":/${params."Change Status"}/.toString())
-    }
-    @AfterEach
-    public void afterState(){
     }
 }

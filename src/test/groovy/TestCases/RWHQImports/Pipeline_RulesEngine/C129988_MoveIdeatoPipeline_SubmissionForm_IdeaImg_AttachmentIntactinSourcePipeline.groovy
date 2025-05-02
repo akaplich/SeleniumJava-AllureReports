@@ -1,29 +1,45 @@
 package TestCases.RWHQImports.Pipeline_RulesEngine
 
-
+import BaseClasses.TestBase
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import actions.API.Utils.CopyAffiliate
+import actions.general.Login
+import actions.general.Wait
+import actions.Utils.SettoLabEnvironment
+import actions.selenium.Browser
+import org.junit.jupiter.api.Disabled
 
 //C129988 - Move Idea to Pipeline  - Submission Form, Idea Img, Attachment Intact in Source Pipeline
-class C129988_MoveIdeatoPipeline_SubmissionForm_IdeaImg_AttachmentIntactinSourcePipeline
-extends TestBase {
+class C129988_MoveIdeatoPipeline_SubmissionForm_IdeaImg_AttachmentIntactinSourcePipeline extends TestBase {
     private static def variables = [:]
-
+    private static final Logger logger = LoggerFactory.getLogger(C129988_MoveIdeatoPipeline_SubmissionForm_IdeaImg_AttachmentIntactinSourcePipeline.class);
+    
     @BeforeAll
     public static void beforeState(){
-        variables."URL" = /https:\/\/test.brightideatest.com/
+        logger.debug("Before State");
         variables."Browser" = /Chrome/
         variables."TestRail_RunName" = null
         variables."TestRail_ExecutionName" = null
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
+        variables."Licensing Model" = null
+        variables."Unlimited Brightidea Administrator License Type" = null
+        variables."Brightidea Administrator License Type Purchased Count" = null
+        variables."Unlimited Idea Box Manager License Type" = null
+        variables."Idea Box Manager License Type Purchased Count" = null
     }
     @Test @Tag("OldRulesModalRegression")
-    public void testcase(){
+    //Disabling this for now as we need to figure out where to store the attchment file used in the test case
+    @Disabled
+    public void testcase(){     
+        logger.debug("TestCase");
         //Basestate
-        Action58123c20fa4ee77809f468f6([:])
+        Action58123c20fa4ee77809f468f6(variables)
         //Delete this when Rules Engine Updated UI is enabled for everyone
         Action66ee0346e12425a91eeb06ab([:])
         //Navigate
@@ -84,14 +100,17 @@ extends TestBase {
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){
         //Create Affiliate based on Master Affiliate
-        variables."affiliateURL" = new actions.API.Utils.CopyAffiliate().run("Licensing Model":/${params."Licensing Model"}/.toString(),"Unlimited Brightidea Administrator License Type":/${params."Unlimited Brightidea Administrator License Type"}/.toString(),"Brightidea Administrator License Type Purchased Count":/${params."Brightidea Administrator License Type Purchased Count"}/.toString(),"Unlimited Idea Box Manager License Type":/${params."Unlimited Idea Box Manager License Type"}/.toString(),"Idea Box Manager License Type Purchased Count":/${params."Idea Box Manager License Type Purchased Count"}/.toString())
+        logger.debug("CopyAffiliate");
+        variables."affiliateURL" = new CopyAffiliate().run(params)
+        logger.debug("Affiliate URL: ${variables."affiliateURL"}");
         //Open Browser
-        new actions.selenium.Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
+        logger.debug("Browser");
+        new Browser().run("Run Browser in Incognito":/${params."Run Browser in Incognito"}/.toString(),"URL":/${variables."affiliateURL"}/.toString(),"Browser Type":/${variables."Browser"}/.toString())
         //Login
-        new actions.general.Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
+        new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
         //Set to Lab Environment
-        new actions.Utils.SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
-
+        logger.debug("SettoLabEnvironment");
+        new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
     }
     //Delete this when Rules Engine Updated UI is enabled for everyone
     public static def Action66ee0346e12425a91eeb06ab(def params){
@@ -99,13 +118,11 @@ extends TestBase {
         new actions.general.Navigate().run("Area to Navigate to":/Enterprise Setup/.toString())
         //Set Enterprise Setup for Beta tab
         new actions.SetupBeta.SetEnterpriseSetupforBetatab().run("Rules Engine Updated UI":true)
-
     }
     //Change Rule Status
     public static def Action594d63e45cb815bc19ca15e6(def params){
         //Set Action Dropdown for Rules
         new actions.Rules.SetActionDropdownforRules().run("Action Menu Option":/Change Status/.toString(),"Change Status":/${params."Change Status"}/.toString())
-
     }
     //Verify Custom App Description tab fields in View Idea page
     public static def Action5812921cfa4ee77809f46b4f(def params){
@@ -131,7 +148,5 @@ extends TestBase {
         new actions.ViewIdeaFields.VerifyViewIdeaDescriptionTabFieldValue().run("Field Name":/Admin Only Dropdown Question/.toString(),"Field Value":/${params."Admin Only Dropdown Question"}/.toString())
         //Verify View Idea Description Tab Field Value
         new actions.ViewIdeaFields.VerifyViewIdeaDescriptionTabFieldValue().run("Field Name":/Required Short Question/.toString(),"Field Value":/${params."Required Short Question"}/.toString())
-
     }
-
 }
