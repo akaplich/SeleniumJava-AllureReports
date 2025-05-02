@@ -13,10 +13,10 @@ import actions.general.Wait
 import actions.Utils.SettoLabEnvironment
 import actions.selenium.Browser
 
-
 //C129862 - Copy Idea Rule Error Message - Admin Has No Access to Destination Pipeline
 class C129862_CopyIdeaRuleErrorMessage_AdminHasNoAccesstoDestinationPipeline extends TestBase {
     private static def variables = [:]
+    private static Logger logger = LoggerFactory.getLogger(C129862_CopyIdeaRuleErrorMessage_AdminHasNoAccesstoDestinationPipeline.class)
 
    @BeforeAll
     public static void beforeState(){
