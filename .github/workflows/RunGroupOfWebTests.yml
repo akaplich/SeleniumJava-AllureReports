@@ -59,6 +59,17 @@ jobs:
           docker pull --platform=linux/amd64 selenium/standalone-chrome
           docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
 
+      - name: Wait for Selenium to be ready
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:4444/wd/hub/status | grep -q '"ready":true'; then
+              echo "Selenium is ready"
+              break
+            fi
+            echo "Waiting for Selenium..."
+            sleep 2
+          done
+
       - name: Restore Maven Cache
         uses: actions/cache@v3
         with:
