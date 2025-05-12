@@ -40,7 +40,7 @@ class C130972_WB_Text_AddAndRemoveText extends TestBase {
         variables."Database" = null
     }
     @Test
-    @Tag("Smoke")
+    @Tag("Smoke")@Tag("TestGroup")
     @Disabled
     public void testcase(){
         //Basestate

@@ -32,7 +32,7 @@ class C129840_CommentSubmitted_CommentCount_MoveIdea extends TestBase {
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("OldRulesModalRegression")@Tag("TestGroup")
     public void testcase(){     
         logger.debug("TestCase");
         //Basestate

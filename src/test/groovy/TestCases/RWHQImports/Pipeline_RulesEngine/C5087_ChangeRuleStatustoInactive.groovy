@@ -35,7 +35,7 @@ class C5087_ChangeRuleStatustoInactive extends TestBase {
         variables."Idea Box Manager License Type Purchased Count" = null
     }
 
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("OldRulesModalRegression")@Tag("TestGroup")
     public void testcase(){
         logger.debug("TestCase");
         //Basestate
