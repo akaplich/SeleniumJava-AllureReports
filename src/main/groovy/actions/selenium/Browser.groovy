@@ -87,14 +87,15 @@ class Browser{
                     "ignore-certificate-errors=false",
                     "--no-sandbox",
                     "--start-maximized",
-                    "--disable-popup-blocking"
+                    "--disable-popup-blocking",
+                    "--enable-automation"
             )
 
             // See if we should run headless
-            boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"))
+            boolean isHeadless = Boolean.parseBoolean(System.getProperty("environment.headless", Settings.getProperty("environment.headless")))
             if(isHeadless){
                 options.addArguments(
-                        "--headless",
+                        "--headless=new",
                         "--disable-gpu"
                 )
             }
