@@ -32,7 +32,7 @@ class C129845_AICompleted_AverageRating_MoveIdea_CancelActionItem extends TestBa
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("OldRulesModalRegression")@Tag("TestGroup")
     public void testcase(){     
         logger.debug("TestCase");
         //Basestate

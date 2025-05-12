@@ -254,6 +254,7 @@
                         <groups>OldRulesModalRegression</groups>
                         <groups>Smoke</groups>
                         <groups>Demo</groups>
+                        <groups>TestGroup</groups>
                     </includes>
                 </configuration>
             </plugin>
