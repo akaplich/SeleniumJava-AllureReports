@@ -69,9 +69,9 @@ jobs:
               selenium/node-chrome:latest          
           done
 
-        # Wait for nodes to register properly
+         # Wait for nodes to register properly
           sleep 30
-        # Verify nodes are registered
+         # Verify nodes are registered
           curl -s http://localhost:4444/status | jq '.nodes | length'          
 
       - name: Check Grid Status
