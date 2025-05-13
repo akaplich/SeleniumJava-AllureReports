@@ -50,13 +50,27 @@ jobs:
 
       - name: Start Selenium Grid Hub
         run: |
-          docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub selenium/hub:latest
+          docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
+            -e GRID_MAX_SESSION=5 \
+            -e GRID_TIMEOUT=120 \
+            selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
         run: |
           for i in {1..5}; do
-            docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" selenium/node-chrome:latest
+            docker run -d --net grid \
+              -e SE_EVENT_BUS_HOST=selenium-hub \
+              -e SE_NODE_MAX_SESSIONS=1 \
+              -e SE_NODE_SESSION_TIMEOUT=90 \
+              --shm-size="4g" \
+              selenium/node-chrome:latest          
           done
+          # Wait for nodes to register properly
+          sleep 15
+
+      - name: Check Grid Status
+        run: |
+          curl -s http://localhost:4444/status | jq .          
 
       - name: Run Web Tests via Maven
         run: |
