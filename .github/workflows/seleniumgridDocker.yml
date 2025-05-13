@@ -51,28 +51,27 @@ jobs:
       - name: Start Selenium Grid Hub
         run: >
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub
-          -e GRID_MAX_SESSION=3
-          -e GRID_TIMEOUT=180
-          -e GRID_BROWSER_TIMEOUT=180
-          -e GRID_NEW_SESSION_WAIT_TIMEOUT=300
-          selenium/hub:latest
+            -e GRID_MAX_SESSION=3
+            -e GRID_TIMEOUT=180
+            -e GRID_BROWSER_TIMEOUT=180
+            -e GRID_NEW_SESSION_WAIT_TIMEOUT=300
+            selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
-        run: >
+        run: |
           for i in {1..3}; do
-            docker run -d --net grid 
-              -e SE_EVENT_BUS_HOST=selenium-hub 
-              -e SE_NODE_MAX_SESSIONS=1 
-              -e SE_NODE_SESSION_TIMEOUT=180 
-              --shm-size="4g" 
-              -e SE_JAVA_OPTS="-Xmx1024m"          
-              selenium/node-chrome:latest          
+            docker run -d --net grid \
+              -e SE_EVENT_BUS_HOST=selenium-hub \
+              -e SE_NODE_MAX_SESSIONS=1 \
+              -e SE_NODE_SESSION_TIMEOUT=180 \
+              --shm-size="4g" \
+              -e SE_JAVA_OPTS="-Xmx1024m" \
+              selenium/node-chrome:latest
           done
-
-         # Wait for nodes to register properly
+          # Wait for nodes to register properly
           sleep 30
-         # Verify nodes are registered
-          curl -s http://localhost:4444/status | jq '.nodes | length'          
+          # Verify nodes are registered
+          curl -s http://localhost:4444/status | jq '.nodes | length'        
 
       - name: Check Grid Status
         run: |
