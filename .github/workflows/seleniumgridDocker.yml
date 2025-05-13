@@ -104,6 +104,7 @@ jobs:
               -DreuseForks=false \
               site          
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            mvn clean test \
               -Denvironment.url="${{ github.event.client_payload.Environment }}" \
               -Dgroups="${{ github.event.client_payload.Mvn_Group }}" \
               -Dheadless=${{ github.event.client_payload.Run_Headless }} \
@@ -133,7 +134,7 @@ jobs:
         with:
           name: test-logs
           path: '**/target/surefire-reports/*-output.txt'
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 2
 
       - name: Upload Final View Screenshot
@@ -142,7 +143,7 @@ jobs:
         with:
           name: Final View Screenshot
           path: '**/target/surefire-reports/screenshots/*-end-screenshot.png'
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 2
 
       - name: Collect Docker logs
