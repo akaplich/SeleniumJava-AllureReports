@@ -114,22 +114,6 @@ jobs:
               -DreuseForks=false \
               site         
           fi
-          
-          MAVEN_PID=$!
-          
-          # Show progress while tests are running
-          while ps -p $MAVEN_PID > /dev/null; do
-          if [ -f target/test-progress.txt ]; then
-          echo "----------------------"
-          echo "### TEST PROGRESS: $(cat target/test-progress.txt) ###"  
-          echo "----------------------"
-          fi
-          sleep 30
-          done
-          
-          # Wait for Maven to finish and get its exit code
-          wait $MAVEN_PID
-          exit $?          
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
