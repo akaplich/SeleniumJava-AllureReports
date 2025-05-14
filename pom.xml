@@ -30,7 +30,18 @@
             <version>5.10.0</version> <!-- You can use any recent version -->
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.12.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+            <version>1.12.2</version>
+            <scope>test</scope>
+        </dependency>
         <!-- JUnit Vintage Engine (if you need to run JUnit 4 tests) -->
         <dependency>
             <groupId>org.junit.vintage</groupId>
@@ -241,9 +252,17 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.plugin}</version>
                 <configuration>
-                    <redirectTestOutputToFile>true</redirectTestOutputToFile>
+                    <properties>
+                        <configurationParameters>
+                            junit.jupiter.extensions.autodetection.enabled=true
+                        </configurationParameters>
+                    </properties>
+                    <redirectTestOutputToFile>false</redirectTestOutputToFile>
                     <rerunFailingTestsCount>${retryCount}</rerunFailingTestsCount>
                     <systemPropertyVariables>
+                        <junit.platform.launcher.core.LauncherDiscoveryRequestBuilder.CONFIG_FILE_NAME>
+                            src/test/resources/junit-platform.properties
+                        </junit.platform.launcher.core.LauncherDiscoveryRequestBuilder.CONFIG_FILE_NAME>
                         <log.level>DEBUG</log.level>
                     </systemPropertyVariables>
                     <threadCount>1</threadCount>
