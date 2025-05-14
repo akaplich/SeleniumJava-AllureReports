@@ -52,13 +52,13 @@ jobs:
       - name: Start Selenium Grid Hub
         run: |
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
-            -e GRID_MAX_SESSION=4 \
+            -e GRID_MAX_SESSION=5 \
             -e GRID_TIMEOUT=120 \
             selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
         run: |
-          for i in {1..4}; do
+          for i in {1..5}; do
             docker run -d --net grid \
               -e SE_EVENT_BUS_HOST=selenium-hub \
               -e SE_NODE_MAX_SESSIONS=1 \
@@ -77,9 +77,9 @@ jobs:
           curl -s http://localhost:4444/status | jq .
           echo "Ensuring Grid is ready..."
           for i in {1..6}; do
-            NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.nodes | length')
+            NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
             echo "Current node count: $NODE_COUNT"
-            if [ "$NODE_COUNT" -ge 4 ]; then
+            if [ "$NODE_COUNT" -ge 5 ]; then
               echo "Grid is ready with $NODE_COUNT nodes"
               break
             fi
