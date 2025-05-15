@@ -38,7 +38,7 @@ Local Selenium Grid on Docker
   * docker network create grid
   * docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub --platform=linux/amd64 selenium/hub:latest
   * (Repeat for each runner you want)
-    * docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" --platform=linux/amd64 selenium/node-chrome:latest
+    * docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="4g" --platform=linux/amd64 selenium/node-chrome:latest
 * Open http://localhost:4444/ in browser for Selenium Grid UI
 * Use the single container configuration to debug
 * Cleanup
@@ -51,7 +51,7 @@ Local Selenium Grid on Docker
 * MAC Instructions for a Single container for debugging
   * Commands
     * docker pull --platform=linux/amd64 selenium/standalone-chrome
-    * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
+    * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="4g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
   * Open http://localhost:4444/ in browser for Selenium Grid UI
   * Open http://localhost:7900/ in browser for VNC to container (Watch case running)
     * Note: Any VNC client can be used to connect to the container 
