@@ -1,27 +1,17 @@
 package BaseClasses
 
 import actions.API.Utils.DeleteAffiliate
-import actions.selenium.Browser
 import actions.selenium.CloseWindow
-import actions.selenium.ScreenshotOnFailureExtension
-import org.junit.AfterClass
+import actions.selenium.utils.OnFailureExtension
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.TestInfo
-import org.junit.jupiter.api.TestReporter
 import org.junit.jupiter.api.extension.ExtendWith
-import org.junit.jupiter.api.extension.ExtensionContext
-import org.openqa.selenium.OutputType
-import org.openqa.selenium.TakesScreenshot
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
-@ExtendWith(ScreenshotOnFailureExtension.class)
+@ExtendWith(OnFailureExtension.class)
 public class TestBase {
     private static final Logger logger = LoggerFactory.getLogger(TestBase.class);
 
