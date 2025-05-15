@@ -127,21 +127,12 @@ jobs:
         with:
           report_paths: '**/target/surefire-reports/*.xml'
 
-      - name: Upload test logs
+      - name: Upload surefire-reports-Screenshots-ConsoleLog-Dom
         uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
-          name: test-logs
-          path: '**/target/surefire-reports/*-output.txt'
-          if-no-files-found: warn
-          retention-days: 2
-
-      - name: Upload Final View Screenshot
-        uses: actions/upload-artifact@v4
-        if: ${{ always() }}
-        with:
-          name: Final View Screenshot
-          path: '**/target/surefire-reports/screenshots/*-end-screenshot.png'
+          name: test-logs-Screenshots-ConsoleLog-Dom
+          path: '**/target/surefire-reports'
           if-no-files-found: warn
           retention-days: 2
 
