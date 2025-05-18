@@ -29,7 +29,19 @@ on:
         required: true
         default: false
         type: boolean
-
+      Containers:
+        description: 'Number of Containers/Parallel Threads'
+        required: true
+        default: '5'
+        type: choice
+        options:
+          - '1'
+          - '3'
+          - '5'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
 
 jobs:
   run-group-of-web-tests-in-grid:
@@ -51,14 +63,21 @@ jobs:
 
       - name: Start Selenium Grid Hub
         run: |
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+      
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
-            -e GRID_MAX_SESSION=5 \
+            -e GRID_MAX_SESSION=$CONTAINER_COUNT \
             -e GRID_TIMEOUT=120 \
             selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
         run: |
-          for i in {1..5}; do
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          echo "Starting $CONTAINER_COUNT Chrome nodes"      
+          
+          for i in $(seq 1 $CONTAINER_COUNT); do
             docker run -d --net grid \
               -e SE_EVENT_BUS_HOST=selenium-hub \
               -e SE_NODE_MAX_SESSIONS=1 \
@@ -74,12 +93,15 @@ jobs:
 
       - name: Check Grid Status
         run: |
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+    
           curl -s http://localhost:4444/status | jq .
           echo "Ensuring Grid is ready..."
           for i in {1..6}; do
             NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
             echo "Current node count: $NODE_COUNT"
-            if [ "$NODE_COUNT" -ge 5 ]; then
+            if [ "$NODE_COUNT" -ge $CONTAINER_COUNT ]; then
               echo "Grid is ready with $NODE_COUNT nodes"
               break
             fi
@@ -91,6 +113,9 @@ jobs:
         run: |
           export MAVEN_OPTS="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"
 
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             mvn clean test \
               -Denvironment.url="${{ github.event.inputs.Environment }}" \
@@ -99,8 +124,9 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=5 \
-              -DreuseForks=false \
+              -DforkCount=$CONTAINER_COUNT \
+              -DreuseForks=true \
+              -Dparallel=classes \
               site          
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
@@ -110,8 +136,9 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=5 \
+              -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
+              -Dparallel=classes \
               site         
           fi
 
