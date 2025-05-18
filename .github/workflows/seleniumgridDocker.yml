@@ -29,11 +29,6 @@ on:
         required: true
         default: false
         type: boolean
-      Containers:
-        description: 'Containers'
-        required: true
-        default: 5
-        type: number
 
 
 jobs:
@@ -57,13 +52,13 @@ jobs:
       - name: Start Selenium Grid Hub
         run: |
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
-            -e GRID_MAX_SESSION=${{ github.event.inputs.Run_Headless }} \
+            -e GRID_MAX_SESSION=5 \
             -e GRID_TIMEOUT=120 \
             selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
         run: |
-          for i in {1..${{ github.event.inputs.Run_Headless }}}; do
+          for i in {1..5}; do
             docker run -d --net grid \
               -e SE_EVENT_BUS_HOST=selenium-hub \
               -e SE_NODE_MAX_SESSIONS=1 \
@@ -84,7 +79,7 @@ jobs:
           for i in {1..6}; do
             NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
             echo "Current node count: $NODE_COUNT"
-            if [ "$NODE_COUNT" -ge ${{ github.event.inputs.Run_Headless }} ]; then
+            if [ "$NODE_COUNT" -ge 5 ]; then
               echo "Grid is ready with $NODE_COUNT nodes"
               break
             fi
@@ -104,7 +99,7 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=1 \
+              -DforkCount=5 \
               -DreuseForks=false \
               site          
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
@@ -115,8 +110,8 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=1 \
-              -DreuseForks=false \
+              -DforkCount=5 \
+              -DreuseForks=true \
               site         
           fi
 
