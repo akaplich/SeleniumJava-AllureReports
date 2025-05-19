@@ -88,6 +88,13 @@ class Browser{
                     "--no-sandbox",
                     "--start-maximized",
                     "--disable-popup-blocking",
+                    "--enable-logging",
+                    "--xkb",
+                    "--noxrecord",
+                    "--noxfixes",
+                    "--noxdamage",
+                    "--use-gl=swiftshader",
+                    "--window-size=2560,1440",
                     "--enable-automation"
             )
 

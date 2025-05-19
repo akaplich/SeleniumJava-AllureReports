@@ -13,6 +13,7 @@ Running From Commandline
     * "mvn clean test -Dgroups="Demo" site"
   * Run the 5 smoke test cases, and generate a site report
     * "mvn clean test -Dgroups="Smoke" site"  
+    * mvn clean test -Denvironment.url="brightideatest.com" -Dgroups="Smoke" -Dheadless=false -Dselenium.grid.url="http://localhost:4444" -Dwebdriver.timeouts.implicitlywait=30 -Dwebdriver.remote.quietExceptions=false -DforkCount=2 -DreuseForks=true -Dparallel=classes site 
   * Run a single standalone demo test and generate a site report
     * "mvn test -Dtest=FirstGroovyScriptTest site"  
   * Run a single smoke testcase on the sandbox environment
@@ -38,12 +39,13 @@ Local Selenium Grid on Docker
   * docker network create grid
   * docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub --platform=linux/amd64 selenium/hub:latest
   * (Repeat for each runner you want)
-    * docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="2g" --platform=linux/amd64 selenium/node-chrome:latest
+    * docker run -d --net grid -e SE_EVENT_BUS_HOST=selenium-hub --shm-size="4g" -e SE_NODE_MAX_SESSIONS=1 -e SE_JAVA_OPTS="-Xmx1024m" -e SE_NODE_SESSION_TIMEOUT=180 --platform=linux/amd64 selenium/node-chrome:latest
 * Open http://localhost:4444/ in browser for Selenium Grid UI
 * Use the single container configuration to debug
 * Cleanup
   * Print docker instances: docker ps
   * delete each instance: docker stop [instance id]
+  * remove each instance: docker rm [instance id]
   * docker stop selenium-hub 
   * docker rm selenium-hub
 
@@ -51,7 +53,7 @@ Local Selenium Grid on Docker
 * MAC Instructions for a Single container for debugging
   * Commands
     * docker pull --platform=linux/amd64 selenium/standalone-chrome
-    * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
+    * docker run -d -p 4444:4444 -p 7900:7900 --shm-size="4g" -v /dev/shm:/dev/shm --platform=linux/amd64 selenium/standalone-chrome
   * Open http://localhost:4444/ in browser for Selenium Grid UI
   * Open http://localhost:7900/ in browser for VNC to container (Watch case running)
     * Note: Any VNC client can be used to connect to the container 

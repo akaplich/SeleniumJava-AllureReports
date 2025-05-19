@@ -1,21 +1,17 @@
 package BaseClasses
 
 import actions.API.Utils.DeleteAffiliate
-import actions.selenium.Browser
 import actions.selenium.CloseWindow
-import org.junit.AfterClass
+import actions.selenium.utils.OnFailureExtension
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
-import org.openqa.selenium.OutputType
-import org.openqa.selenium.TakesScreenshot
+import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
+@ExtendWith(OnFailureExtension.class)
 public class TestBase {
     private static final Logger logger = LoggerFactory.getLogger(TestBase.class);
 
@@ -33,7 +29,6 @@ public class TestBase {
     @AfterEach
     public void tb_afterEach() {
         logger.debug("TestBase AfterEach");
-        captureScreenshot(this.getClass().getName().split("\\.")[-1])
         new CloseWindow().run([:])
         new DeleteAffiliate().run([:])
     }
@@ -43,17 +38,4 @@ public class TestBase {
 
     }
 
-    public static void captureScreenshot(String testcaseName){
-        try {
-            logger.info("Saving screenshot using the testcase name: ${testcaseName}")
-            // Capture screenshot
-            File screenshot = ((TakesScreenshot) Browser.Driver).getScreenshotAs(OutputType.FILE)
-            String screenshotPath = "target/surefire-reports/screenshots/${testcaseName}-end-screenshot.png"
-            Files.createDirectories(Paths.get("target/surefire-reports/screenshots"))
-            Files.copy(screenshot.toPath(), Paths.get(screenshotPath))
-            logger.info("Screenshot saved at: " + screenshotPath)
-        } catch (Exception e) {
-            logger.error("Failed to capture screenshot: ", e)
-        }
-    }
 }
