@@ -148,11 +148,20 @@ jobs:
           name: maven-site-report
           path: target/site
 
+      - name: Consolidate Test Reports
+        if: success() || failure()
+        run: |
+          mkdir -p merged-reports
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > merged-reports/merged-test-report.xml
+          echo '<testsuites>' >> merged-reports/merged-test-report.xml
+          find target/surefire-reports -name "TEST-*.xml" -exec grep -v '<?xml' {} \; | grep -v '<testsuites>' | grep -v '</testsuites>' >> merged-reports/merged-test-report.xml
+          echo '</testsuites>' >> merged-reports/merged-test-report.xml          
+
       - name: Publish Test Report
         if: success() || failure()
         uses: scacap/action-surefire-report@v1
         with:
-          report_paths: '**/target/surefire-reports/*.xml'
+          report_paths: 'merged-reports/merged-test-report.xml'
 
       - name: Upload surefire-reports-Screenshots-ConsoleLog-Dom
         uses: actions/upload-artifact@v4
@@ -183,5 +192,6 @@ jobs:
       - name: Clean up Docker containers
         if: always()
         run: |
-          docker rm -f $(docker ps -aq)
-          docker network rm grid
+          docker stop $(docker ps -aq) || true
+          docker rm -f $(docker ps -aq) || true
+          docker network rm grid || true
