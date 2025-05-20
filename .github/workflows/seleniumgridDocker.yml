@@ -42,6 +42,11 @@ on:
           - '8'
           - '9'
           - '10'
+      RetryCount:
+        description: 'Retry Count'
+        required: true
+        default: "0"
+        type: string
 
 jobs:
   run-group-of-web-tests-in-grid:
@@ -126,7 +131,9 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
+              -DthreadCount=$CONTAINER_COUNT \
               -Dparallel=classes \
+              -DretryCount=${{github.event.inputs.RetryCount}} \
               site          
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
@@ -138,7 +145,9 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
+              -DthreadCount=$CONTAINER_COUNT \
               -Dparallel=classes \
+              -DretryCount=${{github.event.inputs.RetryCount}} \          
               site         
           fi
 
