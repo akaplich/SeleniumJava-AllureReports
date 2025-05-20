@@ -132,6 +132,7 @@ jobs:
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
               -DthreadCount=$CONTAINER_COUNT \
+              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \
               -Dparallel=classes \
               -DretryCount=${{github.event.inputs.RetryCount}} \
               site          
@@ -146,6 +147,7 @@ jobs:
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
               -DthreadCount=$CONTAINER_COUNT \
+              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \         
               -Dparallel=classes \
               -DretryCount=${{github.event.inputs.RetryCount}} \          
               site         
