@@ -1,4 +1,5 @@
-name: "Web Test: ${{ github.event_name == 'workflow_dispatch' ? 'Manual' : 'Triggered' }} - ${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group || 'Smoke' }} on ${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }} containers"
+name: Web Test on Multiple Containers
+
 on:
   repository_dispatch:
     types:
