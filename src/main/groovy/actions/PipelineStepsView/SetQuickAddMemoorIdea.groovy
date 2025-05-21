@@ -17,10 +17,12 @@ import actions.selenium.Exists
 
 class SetQuickAddMemoorIdea{
     public void run(def params){
+
+        sleep(3000)
         Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true)
         ExplicitWait.run(ID:"//*[contains(@class,'f-quick-add-dropdown')]")
         if(Exists.run(ID:"//*[contains(@class,'f-quick-add-dropdown')]")==0){
-            Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true)
+            Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true, "Type of Click":"Move to Element")
         }
         
         if(params."Memo or Idea"){
