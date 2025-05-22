@@ -38,10 +38,16 @@ on:
           - '1'
           - '3'
           - '5'
+          - '6'
           - '7'
           - '8'
           - '9'
           - '10'
+      RetryCount:
+        description: 'Retry Count'
+        required: true
+        default: "0"
+        type: string
 
 jobs:
   run-group-of-web-tests-in-grid:
@@ -126,7 +132,10 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
+              -DthreadCount=$CONTAINER_COUNT \
+              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \
               -Dparallel=classes \
+              -DretryCount=${{github.event.inputs.RetryCount}} \
               site          
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
@@ -138,9 +147,45 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DforkCount=$CONTAINER_COUNT \
               -DreuseForks=true \
+              -DthreadCount=$CONTAINER_COUNT \
+              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \         
               -Dparallel=classes \
+              -DretryCount=${{github.event.inputs.RetryCount}} \          
               site         
           fi
+
+      - name: Create Run Summary
+        if: always()
+        run: |
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
+          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
+          RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
+          
+          # Create a markdown summary
+          echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Container Count | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| forkCount | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| threadCount | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Parallel Mode | classes |" >> $GITHUB_STEP_SUMMARY
+          echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| JUnit parallelism | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          
+          # Add Docker stats
+          echo "## Docker Statistics" >> $GITHUB_STEP_SUMMARY
+          echo "| Container Type | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | ---: |" >> $GITHUB_STEP_SUMMARY
+          HUB_COUNT=$(docker ps -q --filter name=selenium-hub | wc -l)
+          NODE_COUNT=$(docker ps -q --filter ancestor=selenium/node-chrome:latest | wc -l)
+          echo "| Selenium Hub | ${HUB_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Chrome Nodes | ${NODE_COUNT} |" >> $GITHUB_STEP_SUMMARY
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
