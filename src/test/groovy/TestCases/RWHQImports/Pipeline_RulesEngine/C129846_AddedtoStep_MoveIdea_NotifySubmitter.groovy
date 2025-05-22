@@ -64,9 +64,9 @@ class C129846_AddedtoStep_MoveIdea_NotifySubmitter extends TestBase {
         //Change Rule Status
         Action594d63e45cb815bc19ca15e6("Change Status":/Active/.toString())
         //Create Mailinator User
-        new actions.Mailinator.CreateMailinatorUser().run("Email":/brightC129846teamtest1014/.toString(),"Finally Login as What User":/bi.adminuser1@brightidea.com/.toString())
+        new actions.Mailinator.CreateMailinatorUser().run("Email":/brightC129846teamtest1017/.toString(),"Finally Login as What User":/bi.adminuser1@brightidea.com/.toString())
         //Create Mailinator User
-        new actions.Mailinator.CreateMailinatorUser().run("Email":/brightC129846test1014/.toString(),"Finally Login as What User":/brightC129846test1014@mailinator.com/.toString())
+        new actions.Mailinator.CreateMailinatorUser().run("Email":/brightC129846test1017/.toString(),"Finally Login as What User":/brightC129846test1017@mailinator.com/.toString())
         //Navigate
         new actions.general.Navigate().run("Area to Navigate to":/Profile/.toString())
         //Edit Your Profile
@@ -75,10 +75,6 @@ class C129846_AddedtoStep_MoveIdea_NotifySubmitter extends TestBase {
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
         //Set Custom and Other App Post Idea
         new actions.PostIdea.SetCustomAppPostIdea().run("Title":/test idea3/.toString(),"Submitter":/Team/.toString(),"Submitter Team User":/Autofirst/.toString(),"Submitter Team User Add or Remove":/Add/.toString(),"Description":/desc/.toString(),"Category":/New Product/.toString(),"Required Short Question":/short/.toString(),"Action":/Submit Idea/.toString())
-        //Verify Email
-        new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846teamtest1014/.toString(),"Subject":/Custom App: Idea Submission Confirmation/.toString(),"From":/noreply@brightidea.com/.toString(),"Full From":/noreply@brightidea.com <noreply@brightidea.com>/.toString())
-        //Verify Email
-        new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846test1014/.toString(),"Subject":/Custom App: Idea Submission Confirmation/.toString(),"From":/noreply@brightidea.com/.toString(),"Full From":/noreply@brightidea.com <noreply@brightidea.com>/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login
@@ -90,9 +86,13 @@ class C129846_AddedtoStep_MoveIdea_NotifySubmitter extends TestBase {
         //Wait
         new actions.general.Wait().run("Seconds":/45/.toString())
         //Verify Email
-        new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846test1014/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString())
+        new actions.Email.VerifyEmailbyIteratingthroughInboxMailinator().run("Email Address":/brightC129846teamtest1017/.toString(),"Subject":/Custom App: Idea Submission Confirmation/.toString(),"From":/noreply@brightidea.com/.toString(),"Full From":/noreply@brightidea.com <noreply@brightidea.com>/.toString(),"Email Should Be Received":true)
+        new actions.Email.VerifyEmailbyIteratingthroughInboxMailinator().run("Email Address":/brightC129846test1017/.toString(),"Subject":/Custom App: Idea Submission Confirmation/.toString(),"From":/noreply@brightidea.com/.toString(),"Full From":/noreply@brightidea.com <noreply@brightidea.com>/.toString(),"Email Should Be Received":true)
+        new actions.Email.VerifyEmailbyIteratingthroughInboxMailinator().run("Email Address":/brightC129846test1017/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString(),"Email Should Be Received":true)
+        new actions.Email.VerifyEmailbyIteratingthroughInboxMailinator().run("Email Address":/brightC129846teamtest1017/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString(),"Email Should Be Received":true)
+        //new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846test1016/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString())
         //Verify Email
-        new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846teamtest1014/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString())
+        //new actions.Mailinator.VerifyEmail().run("Email Address":/brightC129846teamtest1016/.toString(),"Subject":/Custom App: Idea was moved/.toString(),"From":/Brightidea/.toString(),"Full From":/Brightidea <noreply@brightidea.com>/.toString())
     }
     //Basestate
     public static def Action58123c20fa4ee77809f468f6(def params){

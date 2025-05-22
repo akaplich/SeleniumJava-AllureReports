@@ -13,11 +13,17 @@ import actions.selenium.Refresh
 import actions.selenium.SetCheckBox
 import org.openqa.selenium.StaleElementReferenceException;
 import screens.ReactFormDifferentFieldLocators
+import actions.selenium.Exists
 
 class SetQuickAddMemoorIdea{
     public void run(def params){
+
+        sleep(3000)
         Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true)
         ExplicitWait.run(ID:"//*[contains(@class,'f-quick-add-dropdown')]")
+        if(Exists.run(ID:"//*[contains(@class,'f-quick-add-dropdown')]")==0){
+            Click.run(ID:"//*[@class='f-quick-add-wrapper']//button", "Handle Stale Element":true, "Type of Click":"Move to Element")
+        }
         
         if(params."Memo or Idea"){
             Click.run(ID:"//*[@class='f-quick-add-options']//INPUT[@name='${params."Memo or Idea"}_radio']/..")
