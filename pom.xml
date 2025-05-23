@@ -251,8 +251,8 @@
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
                     </systemPropertyVariables>
-                    <threadCount>5</threadCount>
-                    <forkCount>5</forkCount>
+                    <threadCount>10</threadCount>
+                    <forkCount>10</forkCount>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>C*.*</include>
