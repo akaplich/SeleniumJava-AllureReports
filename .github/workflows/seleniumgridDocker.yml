@@ -136,7 +136,7 @@ jobs:
               -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \
               -Dparallel=classes \
               -DretryCount=${{github.event.inputs.RetryCount}} \
-              site          
+              site
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
               -Denvironment.url="${{ github.event.client_payload.Environment }}" \
@@ -151,7 +151,7 @@ jobs:
               -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \         
               -Dparallel=classes \
               -DretryCount=${{github.event.inputs.RetryCount}} \          
-              site         
+              site
           fi
 
       - name: Create Run Summary
