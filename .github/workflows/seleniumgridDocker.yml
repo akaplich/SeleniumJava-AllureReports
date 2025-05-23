@@ -75,6 +75,9 @@ jobs:
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
             -e GRID_MAX_SESSION=$CONTAINER_COUNT \
             -e GRID_TIMEOUT=120 \
+            -e SE_NODE_SESSION_TIMEOUT=180 \
+            -e SE_SESSION_REQUEST_TIMEOUT=180 \
+            -e SE_SESSION_RETRY_INTERVAL=2000 \
             selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
