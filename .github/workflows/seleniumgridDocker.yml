@@ -134,7 +134,7 @@ jobs:
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${{github.event.inputs.RetryCount}} \
-              -DcontainerCount=${{github.event.inputs.containerCount}} \
+              -DcontainerCount=${{github.event.inputs.Containers}} \
               site
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
@@ -145,7 +145,7 @@ jobs:
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${{github.event.inputs.RetryCount}} \
-              -DcontainerCount=${{github.event.inputs.containerCount}} \
+              -DcontainerCount=${{github.event.inputs.Containers}} \
               site
           fi
 
