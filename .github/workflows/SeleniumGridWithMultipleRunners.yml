@@ -1,0 +1,268 @@
+name: Selenium Grid Tests with Multiple Runners
+
+on:
+  workflow_dispatch:
+    inputs:
+      Environment:
+        description: 'Test Environment URL'
+        required: true
+      Mvn_Group:
+        description: 'Test Group to Run'
+        required: true
+      Run_Headless:
+        description: 'Run in Headless Mode'
+        required: true
+        default: true
+        type: boolean
+      Containers:
+        description: 'Number of Containers'
+        required: true
+        default: '5'
+      RetryCount:
+        description: 'Retry Count for Failed Tests'
+        required: true
+        default: '0'
+      TestList:
+        description: 'List of tests to run (comma-separated)'
+        required: false
+
+  repository_dispatch:
+    types: [run-selenium-tests]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      test-matrix: ${{ steps.create-matrix.outputs.matrix }}
+      test-count: ${{ steps.create-matrix.outputs.test-count }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Create test matrix
+        id: create-matrix
+        run: |
+          # Get container count
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          
+          # If specific tests are provided, use those
+          if [[ -n "${{ github.event.inputs.TestList || github.event.client_payload.TestList }}" ]]; then
+            TESTS="${{ github.event.inputs.TestList || github.event.client_payload.TestList }}"
+            IFS=',' read -ra TEST_ARRAY <<< "$TESTS"
+            TEST_COUNT=${#TEST_ARRAY[@]}
+            
+            # Build test matrix
+            echo "Creating matrix for $TEST_COUNT specific tests"
+            JSON_ARRAY="["
+            for ((i=0; i<$TEST_COUNT; i++)); do
+              if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
+              JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"test\":\"${TEST_ARRAY[$i]}\"}"
+            done
+            JSON_ARRAY="$JSON_ARRAY]"
+            echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
+            echo "test-count=$TEST_COUNT" >> $GITHUB_OUTPUT
+          else
+            # Just create N containers based on container count
+            echo "Creating matrix for $CONTAINER_COUNT containers"
+            JSON_ARRAY="["
+            for ((i=0; i<$CONTAINER_COUNT; i++)); do
+              if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
+              JSON_ARRAY="$JSON_ARRAY{\"index\":$i}"
+            done
+            JSON_ARRAY="$JSON_ARRAY]"
+            echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
+            echo "test-count=$CONTAINER_COUNT" >> $GITHUB_OUTPUT
+          fi
+          
+          echo "Matrix: $JSON_ARRAY"
+
+  run-tests:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        container: ${{ fromJson(needs.setup.outputs.test-matrix) }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Start Selenium Grid
+        run: |
+          # Create Docker network
+          docker network create grid
+          
+          # Start Selenium Hub
+          docker run -d -p 4444:4444 --net grid --name selenium-hub selenium/hub:latest
+          
+          # Start Chrome node
+          docker run -d --net grid \
+            -e SE_EVENT_BUS_HOST=selenium-hub \
+            -e SE_NODE_MAX_SESSIONS=1 \
+            -e SE_NODE_SESSION_TIMEOUT=180 \
+            --shm-size="4g" \
+            -e SE_JAVA_OPTS="-Xmx1024m" \
+            --name chrome-node \
+            selenium/node-chrome:latest
+          
+          # Wait for node to register properly
+          sleep 30
+          
+          # Verify node is registered
+          curl -s http://localhost:4444/status | jq '.nodes | length'
+
+      - name: Check Grid Status
+        run: |
+          curl -s http://localhost:4444/status | jq .
+          echo "Ensuring Grid is ready..."
+          for i in {1..6}; do
+            NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
+            echo "Current node count: $NODE_COUNT"
+            if [ "$NODE_COUNT" -ge 1 ]; then
+              echo "Grid is ready with $NODE_COUNT node"
+              break
+            fi
+            echo "Waiting for nodes to register... Attempt $i of 6"
+            sleep 10
+          done
+
+      - name: Run Test on Single Node
+        run: |
+          export MAVEN_OPTS="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"
+          
+          # Configuration variables
+          ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
+          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
+          RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
+          CONTAINER_COUNT="1" # Each runner uses 1 container
+          
+          # Run with specific test if provided
+          if [[ -n "${{ matrix.container.test }}" ]]; then
+            TEST="${{ matrix.container.test }}"
+            echo "Running specific test: $TEST"
+            
+            mvn clean test \
+              -Denvironment.url="${ENVIRONMENT}" \
+              -Dgroups="${MVN_GROUP}" \
+              -Dheadless=${RUN_HEADLESS} \
+              -Dselenium.grid.url="http://localhost:4444" \
+              -Dwebdriver.timeouts.implicitlywait=30 \
+              -Dwebdriver.remote.quietExceptions=false \
+              -DretryCount=${RETRY_COUNT} \
+              -DcontainerCount=${CONTAINER_COUNT} \
+              -Dtest=${TEST} \
+              site
+          else
+            # Run portion of tests using shard properties
+            TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
+            SHARD_INDEX="${{ matrix.container.index }}"
+            
+            echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
+            
+            mvn clean test \
+              -Denvironment.url="${ENVIRONMENT}" \
+              -Dgroups="${MVN_GROUP}" \
+              -Dheadless=${RUN_HEADLESS} \
+              -Dselenium.grid.url="http://localhost:4444" \
+              -Dwebdriver.timeouts.implicitlywait=30 \
+              -Dwebdriver.remote.quietExceptions=false \
+              -DretryCount=${RETRY_COUNT} \
+              -DcontainerCount=${CONTAINER_COUNT} \
+              -Dsurefire.shardIndex=${SHARD_INDEX} \
+              -Dsurefire.totalShards=${TOTAL_SHARDS} \
+              site
+          fi
+
+      - name: Upload Maven Site Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-site-report-${{ matrix.container.index }}
+          path: target/site
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: surefire-reports-${{ matrix.container.index }}
+          path: '**/target/surefire-reports/*.xml'
+          if-no-files-found: warn
+
+      - name: Upload Screenshots and Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-logs-screenshots-${{ matrix.container.index }}
+          path: '**/target/surefire-reports'
+          if-no-files-found: warn
+          retention-days: 2
+
+      - name: Collect Docker logs
+        if: always()
+        run: |
+          mkdir -p docker-logs
+          docker logs selenium-hub > docker-logs/selenium-hub.log 2>&1
+          docker logs chrome-node > docker-logs/chrome-node.log 2>&1
+
+      - name: Upload Docker logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: docker-logs-${{ matrix.container.index }}
+          path: docker-logs/
+          retention-days: 2
+
+  aggregate-results:
+    needs: run-tests
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: surefire-reports-*
+          path: all-test-results
+          merge-multiple: true
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: 'all-test-results/**/*.xml'
+          check_name: "Aggregated Test Results"
+          comment_mode: off
+          fail_on: nothing
+
+      - name: Create Run Summary
+        run: |
+          # Get parameters
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
+          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
+          RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
+          
+          # Create a markdown summary
+          echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Container Count | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Parallel Runners | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
