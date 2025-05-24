@@ -75,6 +75,9 @@ jobs:
           docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
             -e GRID_MAX_SESSION=$CONTAINER_COUNT \
             -e GRID_TIMEOUT=120 \
+            -e SE_NODE_SESSION_TIMEOUT=180 \
+            -e SE_SESSION_REQUEST_TIMEOUT=180 \
+            -e SE_SESSION_RETRY_INTERVAL=2000 \
             selenium/hub:latest
 
       - name: Start Selenium Chrome Nodes
@@ -130,13 +133,9 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=$CONTAINER_COUNT \
-              -DreuseForks=true \
-              -DthreadCount=$CONTAINER_COUNT \
-              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \
-              -Dparallel=classes \
               -DretryCount=${{github.event.inputs.RetryCount}} \
-              site          
+              -DcontainerCount=${{github.event.inputs.Containers}} \
+              site
           elif [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             mvn clean test \
               -Denvironment.url="${{ github.event.client_payload.Environment }}" \
@@ -145,13 +144,9 @@ jobs:
               -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
-              -DforkCount=$CONTAINER_COUNT \
-              -DreuseForks=true \
-              -DthreadCount=$CONTAINER_COUNT \
-              -Djunit.jupiter.execution.parallel.config.fixed.parallelism=$CONTAINER_COUNT \         
-              -Dparallel=classes \
-              -DretryCount=${{github.event.inputs.RetryCount}} \          
-              site         
+              -DretryCount=${{github.event.inputs.RetryCount}} \
+              -DcontainerCount=${{github.event.inputs.Containers}} \
+              site
           fi
 
       - name: Create Run Summary
