@@ -261,12 +261,12 @@ jobs:
         with:
           pattern: surefire-reports-*
           path: all-test-results
-          merge-multiple: true
+          merge-multiple: false
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          files: 'all-test-results/**/*.xml'
+          files: 'all-test-results/**/**/*.xml'
           check_name: "Aggregated Test Results"
           comment_mode: off
           fail_on: nothing
