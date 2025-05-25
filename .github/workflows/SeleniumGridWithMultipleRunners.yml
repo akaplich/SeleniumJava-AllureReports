@@ -133,22 +133,23 @@ jobs:
           # Create Docker network
           docker network create grid
           
-          # Start Selenium Hub
-          docker run -d -p 4444:4444 --net grid --name selenium-hub selenium/hub:latest
+          # Start Selenium Hub         
+          docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
+            -e GRID_MAX_SESSION=$CONTAINER_COUNT \
+            -e GRID_TIMEOUT=120 \
+            -e SE_NODE_SESSION_TIMEOUT=180 \
+            -e SE_SESSION_REQUEST_TIMEOUT=180 \
+            -e SE_SESSION_RETRY_INTERVAL=2000 \
+            selenium/hub:latest
           
           # Start Chrome node
           docker run -d --net grid \
             -e SE_EVENT_BUS_HOST=selenium-hub \
-            -e GRID_MAX_SESSION=$CONTAINER_COUNT \
-            -e GRID_TIMEOUT=120 \
             -e SE_NODE_MAX_SESSIONS=1 \
             -e SE_NODE_MAX_INSTANCES=1 \    
             -e SE_NODE_SESSION_TIMEOUT=180 \
             --shm-size="4g" \
-            -e SE_JAVA_OPTS="-Xmx2048m" \
-            --name chrome-node \
-            -e SE_SESSION_REQUEST_TIMEOUT=180 \
-            -e SE_SESSION_RETRY_INTERVAL=2000 \          
+            -e SE_JAVA_OPTS="-Xmx1024m" \
             selenium/node-chrome:latest
           
           # Wait for node to register properly
