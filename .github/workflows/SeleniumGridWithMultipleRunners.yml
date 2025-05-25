@@ -128,6 +128,8 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          
           # Create Docker network
           docker network create grid
           
@@ -137,11 +139,16 @@ jobs:
           # Start Chrome node
           docker run -d --net grid \
             -e SE_EVENT_BUS_HOST=selenium-hub \
+            -e GRID_MAX_SESSION=$CONTAINER_COUNT \
+            -e GRID_TIMEOUT=120 \
             -e SE_NODE_MAX_SESSIONS=1 \
+            -e SE_NODE_MAX_INSTANCES=1 \    
             -e SE_NODE_SESSION_TIMEOUT=180 \
             --shm-size="4g" \
-            -e SE_JAVA_OPTS="-Xmx1024m" \
+            -e SE_JAVA_OPTS="-Xmx2048m" \
             --name chrome-node \
+            -e SE_SESSION_REQUEST_TIMEOUT=180 \
+            -e SE_SESSION_RETRY_INTERVAL=2000 \          
             selenium/node-chrome:latest
           
           # Wait for node to register properly
