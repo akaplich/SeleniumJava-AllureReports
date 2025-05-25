@@ -252,6 +252,7 @@
                     <forkCount>${containerCount}</forkCount>
                     <reuseForks>true</reuseForks>
                     <threadCount>${containerCount}</threadCount>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                     <parallel>classes</parallel>
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
@@ -264,11 +265,8 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>C*.*</include>
-                        <groups>OldRulesModalRegression</groups>
-                        <groups>Smoke</groups>
-                        <groups>Demo</groups>
-                        <groups>TestGroup</groups>
                     </includes>
+                    <groups>OldRulesModalRegression,Smoke,Demo,TestGroup</groups>
                 </configuration>
             </plugin>
             <plugin>
