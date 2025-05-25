@@ -143,7 +143,7 @@ jobs:
             selenium/hub:latest
           
           # Start Chrome node
-          docker run -d --net grid \
+          docker run -d --net grid --name chrome-node\
             -e SE_EVENT_BUS_HOST=selenium-hub \
             -e SE_NODE_MAX_SESSIONS=1 \
             -e SE_NODE_MAX_INSTANCES=1 \    
