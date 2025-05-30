@@ -225,6 +225,7 @@ jobs:
             echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
             
             mvn clean test \
+              -X
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
@@ -235,6 +236,8 @@ jobs:
               -DcontainerCount=${CONTAINER_COUNT} \
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
+              -Dsurefire.printSummary=true \
+              -Dsurefire.useFile=false \
               site
           fi
 
