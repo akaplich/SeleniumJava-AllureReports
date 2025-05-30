@@ -21,6 +21,7 @@ on:
           - DockerSet
           - OldRulesModalRegression
           - TestGroup
+          - ShardRun
       Run_Headless:
         description: 'Run in Headless Mode'
         required: true

@@ -39,6 +39,7 @@ class C79_PipelineCreation_CreateDiscussApp extends TestBase {
 
     @Test
     @Tag("Smoke")
+    @Tag("ShardRun")
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6(variables)
