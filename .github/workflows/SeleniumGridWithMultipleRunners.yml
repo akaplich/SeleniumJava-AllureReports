@@ -206,7 +206,7 @@ jobs:
             TEST="${{ matrix.container.test }}"
             echo "Running specific test: $TEST"
             
-            mvn clean test \
+            mvn clean test -X \
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
@@ -224,8 +224,7 @@ jobs:
             
             echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
             
-            mvn clean test \
-              -X
+            mvn clean test -X \            
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
