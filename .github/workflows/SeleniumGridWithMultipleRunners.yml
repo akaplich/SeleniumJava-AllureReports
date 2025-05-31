@@ -95,17 +95,58 @@ jobs:
             echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
             echo "test-count=$TEST_COUNT" >> $GITHUB_OUTPUT
           else
-            # Just create N containers based on container count
-            echo "Creating matrix for $CONTAINER_COUNT containers"
-            JSON_ARRAY="["
-            for ((i=0; i<$CONTAINER_COUNT; i++)); do
-              if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
-              JSON_ARRAY="$JSON_ARRAY{\"index\":$i}"
+            # When running by group tag, pre-scan the tests to get a better distribution
+            MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
+            echo "Finding tests with @Tag(\"$MVN_GROUP\")"
+            
+            # Find all test classes with the specified tag
+            # This command scans groovy files for the specified tag
+            TAGGED_TESTS=$(grep -r --include="*.groovy" "@Tag(\"$MVN_GROUP\")" src/test/groovy | grep -o "[A-Za-z0-9_]*\.groovy" | sed 's/\.groovy//' | sort | uniq)
+            
+            # Count total tests found
+            TEST_COUNT=$(echo "$TAGGED_TESTS" | wc -l)
+            echo "Found $TEST_COUNT tests with tag $MVN_GROUP"
+            
+            # If too few tests found or search failed, fallback to container-based sharding
+            if [[ $TEST_COUNT -lt 1 ]]; then
+              echo "No specific tests found with tag, using container count for sharding"
+              JSON_ARRAY="["
+              for ((i=0; i<$CONTAINER_COUNT; i++)); do
+                if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
+                JSON_ARRAY="$JSON_ARRAY{\"index\":$i}"
+              done
+              JSON_ARRAY="$JSON_ARRAY]"
+              echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
+              echo "test-count=$CONTAINER_COUNT" >> $GITHUB_OUTPUT
+            else
+              # Distribute found tests across containers
+              TESTS_PER_CONTAINER=$(( ($TEST_COUNT + $CONTAINER_COUNT - 1) / $CONTAINER_COUNT ))
+              echo "Distributing tests: $TESTS_PER_CONTAINER tests per container"
+            
+              JSON_ARRAY="["
+              TEST_INDEX=0
+              for ((i=0; i<$CONTAINER_COUNT && $TEST_INDEX<$TEST_COUNT; i++)); do
+                if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
+            
+                # Get tests for this container
+                CONTAINER_TESTS=""
+                for ((j=0; j<$TESTS_PER_CONTAINER && $TEST_INDEX<$TEST_COUNT; j++)); do
+                  TEST=$(echo "$TAGGED_TESTS" | sed -n "$((TEST_INDEX+1))p")
+                  if [ -n "$CONTAINER_TESTS" ]; then
+                    CONTAINER_TESTS="$CONTAINER_TESTS,$TEST"
+                  else
+                    CONTAINER_TESTS="$TEST"
+                  fi
+                  TEST_INDEX=$((TEST_INDEX+1))
+              done
+            
+              JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"tests\":\"$CONTAINER_TESTS\"}"
             done
             JSON_ARRAY="$JSON_ARRAY]"
             echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
-            echo "test-count=$CONTAINER_COUNT" >> $GITHUB_OUTPUT
+            echo "test-count=$TEST_COUNT" >> $GITHUB_OUTPUT
           fi
+        
           
           echo "Matrix: $JSON_ARRAY"
 
