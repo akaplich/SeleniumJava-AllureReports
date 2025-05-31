@@ -50,7 +50,7 @@ on:
       TestList:
         description: 'List of tests to run (comma-separated)'
         required: false
-        default: 'C79_PipelineCreation_CreateDiscussApp,C63_VerifyIdeaExistsInPipeline,C44_SubmitNewValidIdeaWithAllRequiredFields'
+        #default: 'C79_PipelineCreation_CreateDiscussApp,C63_VerifyIdeaExistsInPipeline,C44_SubmitNewValidIdeaWithAllRequiredFields'
 
   repository_dispatch:
     types: [run-selenium-tests]
