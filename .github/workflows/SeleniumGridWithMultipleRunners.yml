@@ -349,7 +349,8 @@ jobs:
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
-          
+          TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
+
           # Create a markdown summary
           echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
           echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
@@ -360,3 +361,7 @@ jobs:
           echo "| Container Count | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
           echo "| Parallel Runners | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
           echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          # Add TestList to summary if specified
+          if [[ "$TEST_LIST" != "None" ]]; then
+            echo "| Specific Tests | ${TEST_LIST} |" >> $GITHUB_STEP_SUMMARY
+          fi
