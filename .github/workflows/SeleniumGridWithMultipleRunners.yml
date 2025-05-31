@@ -228,28 +228,21 @@ jobs:
       - name: Run Test on Single Node
         run: |
           export MAVEN_OPTS="-Xmx2g -XX:+HeapDumpOnOutOfMemoryError"
-          
-          # Add this to ensure better test distribution
-          if [[ -z "${{ matrix.container.test }}" ]]; then
-          # Use statistically rerun feature for better distribution
-          EXTRA_ARGS="-Dsurefire.rerunFailingTestsCount=0 -Dsurefire.statistic=true"
-          else
-          EXTRA_ARGS=""
-          fi
-          
+      
           # Configuration variables
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           CONTAINER_COUNT="1" # Each runner uses 1 container
-          
+      
           # Run with specific test if provided
           if [[ -n "${{ matrix.container.test }}" ]]; then
+            # Individual test from input list
             TEST="${{ matrix.container.test }}"
             echo "Running specific test: $TEST"
-            
-            mvn clean test -X \
+      
+            mvn clean test \
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
@@ -260,14 +253,32 @@ jobs:
               -DcontainerCount=${CONTAINER_COUNT} \
               -Dtest=${TEST} \
               site
+          
+          elif [[ -n "${{ matrix.container.tests }}" ]]; then
+            # Multiple tests from discovered tag
+            TESTS="${{ matrix.container.tests }}"
+            echo "Running discovered tests: $TESTS"
+      
+            mvn clean test \
+              -Denvironment.url="${ENVIRONMENT}" \
+              -Dgroups="${MVN_GROUP}" \
+              -Dheadless=${RUN_HEADLESS} \
+              -Dselenium.grid.url="http://localhost:4444" \
+              -Dwebdriver.timeouts.implicitlywait=30 \
+              -Dwebdriver.remote.quietExceptions=false \
+              -DretryCount=${RETRY_COUNT} \
+              -DcontainerCount=${CONTAINER_COUNT} \
+              -Dtest=${TESTS} \
+              site
+          
           else
-            # Run portion of tests using shard properties
+            # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
             SHARD_INDEX="${{ matrix.container.index }}"
-            
+      
             echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
-            
-            mvn clean test -X \            
+      
+            mvn clean test \
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
@@ -281,7 +292,7 @@ jobs:
               -Dsurefire.printSummary=true \
               -Dsurefire.useFile=false \
               site
-          fi
+          fi    
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
