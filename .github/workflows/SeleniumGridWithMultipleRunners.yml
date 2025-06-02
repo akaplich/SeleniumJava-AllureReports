@@ -244,8 +244,7 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
               -DcontainerCount=${CONTAINER_COUNT} \
-              -Dtest=${TEST} \
-              site
+              -Dtest=${TEST}
           
           elif [[ -n "${{ matrix.container.tests }}" ]]; then
             # Multiple tests from discovered tag
@@ -261,8 +260,7 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
               -DcontainerCount=${CONTAINER_COUNT} \
-              -Dtest=${TESTS} \
-              site
+              -Dtest=${TESTS}            
           
           else
             # Sharding-based approach (fallback)
@@ -283,15 +281,8 @@ jobs:
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
-              -Dsurefire.useFile=false \
-              site
+              -Dsurefire.useFile=false              
           fi    
-
-      - name: Upload Maven Site Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: maven-site-report-${{ matrix.container.index }}
-          path: target/site
 
       - name: Upload Screenshots and Logs
         uses: actions/upload-artifact@v4
@@ -321,45 +312,6 @@ jobs:
           check_name: "Aggregated Test Results"
           comment_mode: off
           fail_on: nothing
-
-      - name: Download all site reports
-        uses: actions/download-artifact@v4
-        with:
-          pattern: maven-site-report
-          path: all-site-reports
-          merge-multiple: false
-
-      - name: Combine Site Reports
-        run: |
-          echo "Combining Maven Site reports..."
-          
-          # Create directory for combined reports
-          mkdir -p combined-site-report
-          
-          # Find all report directories
-          for dir in all-site-reports/*/; do
-            if [ -d "$dir" ]; then
-              echo "Processing site report from: $dir"
-              # Copy contents while avoiding conflicts
-              cp -r $dir/* combined-site-report/ || true
-            fi
-          done
-          
-          # Handle any potential report merging (e.g. surefire reports)
-          if [ -d "combined-site-report/surefire-reports" ]; then
-            echo "Merging surefire reports..."
-            mkdir -p combined-site-report/merged-surefire-reports
-            find all-site-reports -name "*.xml" | xargs -I{} cp {} combined-site-report/merged-surefire-reports/
-          fi
-
-      - name: Upload Combined Site Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: combined-maven-site-report
-          path: combined-site-report
-          if-no-files-found: warn
-          retention-days: 5
-
 
       - name: Aggregated Surefire Reports
         uses: actions/upload-artifact@v4
