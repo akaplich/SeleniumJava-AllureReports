@@ -195,6 +195,7 @@ jobs:
             -e SE_NODE_MAX_INSTANCES=1 \
             -e SE_JAVA_OPTS="-Xmx1024m" \
             -e SE_NODE_SESSION_TIMEOUT=180 \
+            -e SE_SESSION_RETRY_INTERVAL=250 \
             selenium/node-chrome:latest
           
           # Wait for node to register properly
@@ -244,6 +245,8 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
               -DcontainerCount=${CONTAINER_COUNT} \
+              -Dwebdriver.reuse.browser=false \
+              -Dwebdriver.quit.on.failure=true \       
               -Dtest=${TEST}
           
           elif [[ -n "${{ matrix.container.tests }}" ]]; then
@@ -260,6 +263,8 @@ jobs:
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
               -DcontainerCount=${CONTAINER_COUNT} \
+              -Dwebdriver.reuse.browser=false \
+              -Dwebdriver.quit.on.failure=true \
               -Dtest=${TESTS}            
           
           else
@@ -281,6 +286,8 @@ jobs:
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
+              -Dwebdriver.reuse.browser=false \
+              -Dwebdriver.quit.on.failure=true \
               -Dsurefire.useFile=false              
           fi    
 
