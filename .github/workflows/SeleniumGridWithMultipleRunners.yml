@@ -27,8 +27,8 @@ on:
         required: true
         default: true
         type: boolean
-      Containers:
-        description: 'Number of Containers/Parallel Threads'
+      Runners:
+        description: 'Number of Runners'
         required: true
         default: '5'
         type: choice
@@ -43,6 +43,17 @@ on:
           - '8'
           - '9'
           - '10'
+      ContainersPerRunner:
+        description: 'Number of Containers Per Runner'
+        required: true
+        default: '2'
+        type: choice
+        options:
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
       RetryCount:
         description: 'Retry Count for Failed Tests'
         required: true
@@ -75,8 +86,8 @@ jobs:
       - name: Create test matrix
         id: create-matrix
         run: |
-          # Get container count
-          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          # Get runner count
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '5' }}"
       
           # If specific tests are provided, use those
           if [[ -n "${{ github.event.inputs.TestList || github.event.client_payload.TestList }}" ]]; then
@@ -107,40 +118,40 @@ jobs:
             TEST_COUNT=$(echo "$TAGGED_TESTS" | wc -l)
             echo "Found $TEST_COUNT tests with tag $MVN_GROUP"
       
-            # If too few tests found or search failed, fallback to container-based sharding
+            # If too few tests found or search failed, fallback to runner-based sharding
             if [[ $TEST_COUNT -lt 1 ]]; then
-              echo "No specific tests found with tag, using container count for sharding"
+              echo "No specific tests found with tag, using runner count for sharding"
               JSON_ARRAY="["
-              for ((i=0; i<$CONTAINER_COUNT; i++)); do
+              for ((i=0; i<RUNNER_COUNT; i++)); do
                 if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
                 JSON_ARRAY="$JSON_ARRAY{\"index\":$i}"
               done
               JSON_ARRAY="$JSON_ARRAY]"
               echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
-              echo "test-count=$CONTAINER_COUNT" >> $GITHUB_OUTPUT
+              echo "test-count=RUNNER_COUNT" >> $GITHUB_OUTPUT
             else
-              # Distribute found tests across containers
-              TESTS_PER_CONTAINER=$(( ($TEST_COUNT + $CONTAINER_COUNT - 1) / $CONTAINER_COUNT ))
-              echo "Distributing tests: $TESTS_PER_CONTAINER tests per container"
+              # Distribute found tests across Runners
+              TESTS_PER_RUNNER=$(( ($TEST_COUNT + RUNNER_COUNT - 1) / RUNNER_COUNT ))
+              echo "Distributing tests: TESTS_PER_RUNNER tests per container"
       
               JSON_ARRAY="["
               TEST_INDEX=0
-              for ((i=0; i<$CONTAINER_COUNT && $TEST_INDEX<$TEST_COUNT; i++)); do
+              for ((i=0; i<RUNNER_COUNT && $TEST_INDEX<$TEST_COUNT; i++)); do
                 if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
       
                 # Get tests for this container
-                CONTAINER_TESTS=""
-                for ((j=0; j<$TESTS_PER_CONTAINER && $TEST_INDEX<$TEST_COUNT; j++)); do
-                  TEST=$(echo "$TAGGED_TESTS" | sed -n "$((TEST_INDEX+1))p")
-                  if [ -n "$CONTAINER_TESTS" ]; then
-                    CONTAINER_TESTS="$CONTAINER_TESTS,$TEST"
+                RUNNER_TESTS=""
+                for ((j=0; j<TESTS_PER_RUNNER && $TEST_INDEX<$TEST_COUNT; j++)); do
+                  TEST="${TAGGED_TESTS_ARRAY[TEST_INDEX]}"
+                  if [ -n "RUNNER_TESTS" ]; then
+                    RUNNER_TESTS="RUNNER_TESTS,$TEST"
                   else
-                    CONTAINER_TESTS="$TEST"
+                    RUNNER_TESTS="$TEST"
                   fi
                   TEST_INDEX=$((TEST_INDEX+1))
                 done
-      
-                JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"tests\":\"$CONTAINER_TESTS\"}"
+                if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
+                JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"tests\":\"RUNNER_TESTS\"}"
               done
               JSON_ARRAY="$JSON_ARRAY]"
               echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
@@ -157,7 +168,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        container: ${{ fromJson(needs.setup.outputs.test-matrix) }}
+        Runners: ${{ fromJson(needs.setup.outputs.test-matrix) }}
 
     steps:
       - name: Checkout code
@@ -172,15 +183,14 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
-          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '5' }}"
           
           # Create Docker network
           docker network create grid
           
           # Start Selenium Hub
-          #docker run -d -p 4444:4444 --net grid --name selenium-hub selenium/hub:latest
           docker run -d -p 4444:4444 --net grid --name selenium-hub \
-            -e SE_NODE_MAX_SESSION=$CONTAINER_COUNT \
+            -e SE_NODE_MAX_SESSION=RUNNER_COUNT \
             -e GRID_TIMEOUT=120 \
             -e SE_NODE_SESSION_TIMEOUT=180 \
             -e SE_SESSION_REQUEST_TIMEOUT=180 \
@@ -206,7 +216,7 @@ jobs:
           sleep 30
           
           # Verify node is registered
-          curl -s http://localhost:4444/status | jq '.nodes | length'
+          curl -s http://selenium-hub:4444/status | jq '.nodes | length'
 
       - name: Wait for Grid to be fully ready
         run: |
@@ -216,7 +226,7 @@ jobs:
           
           for ((i=1; i<=MAX_ATTEMPTS; i++)); do
             echo "Checking grid status (attempt $i of $MAX_ATTEMPTS)..."
-            GRID_STATUS=$(curl -s http://localhost:4444/status)
+            GRID_STATUS=$(curl -s http://selenium-hub:4444/status)
             NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length')
             UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready')
             
@@ -224,7 +234,7 @@ jobs:
             
             if [[ "$NODE_COUNT" -ge 1 && "$UP_STATUS" == "true" ]]; then
               echo "Grid is ready with $NODE_COUNT node(s)"
-              curl -s http://localhost:4444/status | jq .
+              curl -s http://selenium-hub:4444/status | jq .
               break
             fi
             
@@ -252,16 +262,16 @@ jobs:
           CONTAINER_COUNT="1" # Each runner uses 1 container
       
           # Run with specific test if provided
-          if [[ -n "${{ matrix.container.test }}" ]]; then
+          if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
-            TEST="${{ matrix.container.test }}"
+            TEST="${{ matrix.Runners.test }}"
             echo "Running specific test: $TEST"
       
             mvn clean test \
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
+              -Dselenium.grid.url="http://selenium-hub:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
@@ -271,16 +281,16 @@ jobs:
               -Dselenium.browser.cleanup=true \
               -Dtest=${TEST}
           
-          elif [[ -n "${{ matrix.container.tests }}" ]]; then
+          elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
-            TESTS="${{ matrix.container.tests }}"
+            TESTS="${{ matrix.Runners.tests }}"
             echo "Running discovered tests: $TESTS"
       
             mvn clean test \
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
+              -Dselenium.grid.url="http://selenium-hub:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
@@ -293,7 +303,7 @@ jobs:
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
-            SHARD_INDEX="${{ matrix.container.index }}"
+            SHARD_INDEX="${{ matrix.Runners.index }}"
       
             echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
       
@@ -301,7 +311,7 @@ jobs:
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
+              -Dselenium.grid.url="http://selenium-hub:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
@@ -356,7 +366,7 @@ jobs:
       - name: Create Run Summary
         run: |
           # Get parameters
-          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '5' }}"
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
@@ -370,8 +380,7 @@ jobs:
           echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
           echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
           echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Container Count | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Parallel Runners | ${CONTAINER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
           echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
           # Add TestList to summary if specified
           if [[ "$TEST_LIST" != "None" ]]; then
