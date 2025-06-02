@@ -287,6 +287,21 @@ jobs:
               site
           fi    
 
+      - name: Upload Maven Site Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-site-report-${{ matrix.container.index }}
+          path: target/site
+
+      - name: Upload Screenshots and Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-logs-screenshots-${{ matrix.container.index }}
+          path: '**/target/surefire-reports'
+          if-no-files-found: warn
+          retention-days: 2
+
   aggregate-results:
     needs: run-tests
     runs-on: ubuntu-latest
@@ -298,6 +313,14 @@ jobs:
           pattern: test-logs-screenshots-*
           path: all-test-results
           merge-multiple: false
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: 'all-test-results/**/**/*.xml'
+          check_name: "Aggregated Test Results"
+          comment_mode: off
+          fail_on: nothing
 
       - name: Download all site reports
         uses: actions/download-artifact@v4
@@ -337,13 +360,6 @@ jobs:
           if-no-files-found: warn
           retention-days: 5
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          files: 'all-test-results/**/**/*.xml'
-          check_name: "Aggregated Test Results"
-          comment_mode: off
-          fail_on: nothing
 
       - name: Aggregated Surefire Reports
         uses: actions/upload-artifact@v4
