@@ -299,6 +299,44 @@ jobs:
           path: all-test-results
           merge-multiple: false
 
+      - name: Download all site reports
+        uses: actions/download-artifact@v4
+        with:
+          pattern: maven-site-report
+          path: all-site-reports
+          merge-multiple: false
+
+      - name: Combine Site Reports
+        run: |
+          echo "Combining Maven Site reports..."
+          
+          # Create directory for combined reports
+          mkdir -p combined-site-report
+          
+          # Find all report directories
+          for dir in all-site-reports/*/; do
+            if [ -d "$dir" ]; then
+              echo "Processing site report from: $dir"
+              # Copy contents while avoiding conflicts
+              cp -r $dir/* combined-site-report/ || true
+            fi
+          done
+          
+          # Handle any potential report merging (e.g. surefire reports)
+          if [ -d "combined-site-report/surefire-reports" ]; then
+            echo "Merging surefire reports..."
+            mkdir -p combined-site-report/merged-surefire-reports
+            find all-site-reports -name "*.xml" | xargs -I{} cp {} combined-site-report/merged-surefire-reports/
+          fi
+
+      - name: Upload Combined Site Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-maven-site-report
+          path: combined-site-report
+          if-no-files-found: warn
+          retention-days: 5
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
