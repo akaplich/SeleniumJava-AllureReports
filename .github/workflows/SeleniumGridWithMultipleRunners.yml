@@ -193,9 +193,13 @@ jobs:
             --shm-size="4g" \
             -e SE_NODE_MAX_SESSIONS=1 \
             -e SE_NODE_MAX_INSTANCES=1 \
-            -e SE_JAVA_OPTS="-Xmx1024m" \
-            -e SE_NODE_SESSION_TIMEOUT=180 \
-            -e SE_SESSION_RETRY_INTERVAL=250 \
+            -e SE_JAVA_OPTS="-Xmx2g" \
+            -e SE_NODE_SESSION_TIMEOUT=300 \
+            -e SE_SESSION_RETRY_INTERVAL=2000 \
+            -e SE_SESSION_REQUEST_TIMEOUT=300 \
+            -e SE_NODE_CLEANUP_CYCLE=10000 \
+            -e SE_DRAIN_AFTER_SESSION_COUNT=2 \
+            -e SE_OFFLINE_TIMEOUT=60000 \
             selenium/node-chrome:latest
           
           # Wait for node to register properly
@@ -204,19 +208,36 @@ jobs:
           # Verify node is registered
           curl -s http://localhost:4444/status | jq '.nodes | length'
 
-      - name: Check Grid Status
+      - name: Wait for Grid to be fully ready
         run: |
-          curl -s http://localhost:4444/status | jq .
-          echo "Ensuring Grid is ready..."
-          for i in {1..6}; do
-            NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
-            echo "Current node count: $NODE_COUNT"
-            if [ "$NODE_COUNT" -ge 1 ]; then
-              echo "Grid is ready with $NODE_COUNT node"
+          echo "Ensuring Grid is fully ready..."
+          MAX_ATTEMPTS=20
+          DELAY=3
+          
+          for ((i=1; i<=MAX_ATTEMPTS; i++)); do
+            echo "Checking grid status (attempt $i of $MAX_ATTEMPTS)..."
+            GRID_STATUS=$(curl -s http://localhost:4444/status)
+            NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length')
+            UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready')
+            
+            echo "Node count: $NODE_COUNT, Ready status: $UP_STATUS"
+            
+            if [[ "$NODE_COUNT" -ge 1 && "$UP_STATUS" == "true" ]]; then
+              echo "Grid is ready with $NODE_COUNT node(s)"
+              curl -s http://localhost:4444/status | jq .
               break
             fi
-            echo "Waiting for nodes to register... Attempt $i of 6"
-            sleep 10
+            
+            if [[ $i -eq $MAX_ATTEMPTS ]]; then
+              echo "Grid failed to initialize properly"
+              docker ps -a
+              docker logs selenium-hub
+              docker logs chrome-node
+              exit 1
+            fi
+            
+            echo "Waiting for grid to be ready... ($i/$MAX_ATTEMPTS)"
+            sleep $DELAY
           done
 
       - name: Run Test on Single Node
@@ -246,7 +267,8 @@ jobs:
               -DretryCount=${RETRY_COUNT} \
               -DcontainerCount=${CONTAINER_COUNT} \
               -Dwebdriver.reuse.browser=false \
-              -Dwebdriver.quit.on.failure=true \       
+              -Dwebdriver.quit.on.failure=true \
+              -Dselenium.browser.cleanup=true \
               -Dtest=${TEST}
           
           elif [[ -n "${{ matrix.container.tests }}" ]]; then
@@ -265,6 +287,7 @@ jobs:
               -DcontainerCount=${CONTAINER_COUNT} \
               -Dwebdriver.reuse.browser=false \
               -Dwebdriver.quit.on.failure=true \
+              -Dselenium.browser.cleanup=true \
               -Dtest=${TESTS}            
           
           else
@@ -288,6 +311,7 @@ jobs:
               -Dsurefire.printSummary=true \
               -Dwebdriver.reuse.browser=false \
               -Dwebdriver.quit.on.failure=true \
+              -Dselenium.browser.cleanup=true \
               -Dsurefire.useFile=false              
           fi    
 
