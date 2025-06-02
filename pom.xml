@@ -22,9 +22,23 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <retryCount>0</retryCount>
         <containerCount>1</containerCount>
+        <allure.version>2.25.0</allure.version>
     </properties>
 
     <dependencies>
+        <!--AShot for full screen screenshots-->
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+        <!-- ↓ Allure JUnit5 integration -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.29.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -264,11 +278,14 @@
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>C*.*</include>
-                        <groups>OldRulesModalRegression</groups>
+                        <!--<groups>OldRulesModalRegression</groups>
                         <groups>Smoke</groups>
                         <groups>Demo</groups>
-                        <groups>TestGroup</groups>
+                        <groups>TestGroup</groups>-->
                     </includes>
+                    <properties>
+                        <junit.jupiter.tags>Smoke,Demo,OldRulesModalRegression,TestGroup</junit.jupiter.tags>
+                    </properties>
                 </configuration>
             </plugin>
             <plugin>
@@ -284,6 +301,42 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.21.0</version>
 
+            </plugin>
+            <!-- ↓ Allure Maven plugin to generate reports -->
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.15.2</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-allure-categories</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/allure-results</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/test/resources</directory>
+                                    <includes>
+                                        <include>categories.json</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
