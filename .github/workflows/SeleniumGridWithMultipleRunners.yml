@@ -238,7 +238,7 @@ jobs:
       - name: Check Grid Status
         run: |
           # Get container count, default to 5 if not set
-          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '5' }}"
           
           curl -s http://localhost:4444/status | jq .
           echo "Ensuring Grid is ready..."
@@ -287,7 +287,7 @@ jobs:
               -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
               -Dwebdriver.remote.connection.timeout=90000 \
               -Dwebdriver.remote.socket.timeout=90000 \
-              -Dwebdriver.remote.handshake.timeout=90000 \          
+              -Dwebdriver.remote.handshake.timeout=90000 \
               -Dtest=${TEST}
           
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
@@ -312,7 +312,7 @@ jobs:
               -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
               -Dwebdriver.remote.connection.timeout=90000 \
               -Dwebdriver.remote.socket.timeout=90000 \
-              -Dwebdriver.remote.handshake.timeout=90000 \          
+              -Dwebdriver.remote.handshake.timeout=90000 \
               -Dtest=${TESTS}            
           
           else
