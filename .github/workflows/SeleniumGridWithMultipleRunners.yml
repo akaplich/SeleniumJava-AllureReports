@@ -112,10 +112,11 @@ jobs:
       
             # Find all test classes with the specified tag
             # This command scans groovy files for the specified tag
-            TAGGED_TESTS=$(grep -r --include="*.groovy" "@Tag(\"$MVN_GROUP\")" src/test/groovy | grep -o "[A-Za-z0-9_]*\.groovy" | sed 's/\.groovy//' | sort | uniq)
+            # Add || true to prevent non-zero exit codes when no matches are found
+            TAGGED_TESTS=$(grep -r --include="*.groovy" "@Tag(\"$MVN_GROUP\")" src/test/groovy | grep -o "[A-Za-z0-9_]*\.groovy" | sed 's/\.groovy//' | sort | uniq || true)
       
-            # Count total tests found
-            TEST_COUNT=$(echo "$TAGGED_TESTS" | wc -l)
+            # Count total tests found - handle empty result properly
+            TEST_COUNT=$(echo "$TAGGED_TESTS" | grep -v "^$" | wc -l || echo 0)
             echo "Found $TEST_COUNT tests with tag $MVN_GROUP"
       
             # If too few tests found or search failed, fallback to runner-based sharding
@@ -134,8 +135,8 @@ jobs:
               TESTS_PER_RUNNER=$(( ($TEST_COUNT + RUNNER_COUNT - 1) / RUNNER_COUNT ))
               echo "Distributing tests: $TESTS_PER_RUNNER tests per container"
       
-              # Convert TAGGED_TESTS to an array
-              IFS=$'\n' read -d '' -r -a TAGGED_TESTS_ARRAY <<< "$TAGGED_TESTS"
+              # Convert TAGGED_TESTS to an array - fix the read command that was causing errors
+              mapfile -t TAGGED_TESTS_ARRAY <<< "$TAGGED_TESTS"
       
               JSON_ARRAY="["
               TEST_INDEX=0
@@ -144,11 +145,23 @@ jobs:
                 RUNNER_TESTS_ARRAY=()
                 for ((j=0; j<TESTS_PER_RUNNER && TEST_INDEX<TEST_COUNT; j++)); do
                   TEST="${TAGGED_TESTS_ARRAY[TEST_INDEX]}"
-                  RUNNER_TESTS_ARRAY+=("$TEST")
+                  # Skip empty lines that might be in the array
+                  if [[ -n "$TEST" ]]; then
+                    RUNNER_TESTS_ARRAY+=("$TEST")
+                  fi
                   TEST_INDEX=$((TEST_INDEX+1))
                 done
+                
                 if [ $i -gt 0 ]; then JSON_ARRAY="$JSON_ARRAY,"; fi
-                JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"tests\":\"${RUNNER_TESTS_ARRAY[*]}\"}"
+                
+                # Only add the tests property if there are tests to add
+                if [ ${#RUNNER_TESTS_ARRAY[@]} -gt 0 ]; then
+                  # Use proper JSON escaping for the array
+                  TESTS_JSON=$(printf '%s,' "${RUNNER_TESTS_ARRAY[@]}" | sed 's/,$//')
+                  JSON_ARRAY="$JSON_ARRAY{\"index\":$i,\"tests\":\"$TESTS_JSON\"}"
+                else
+                  JSON_ARRAY="$JSON_ARRAY{\"index\":$i}"
+                fi
               done
               JSON_ARRAY="$JSON_ARRAY]"
               echo "matrix=$JSON_ARRAY" >> $GITHUB_OUTPUT
