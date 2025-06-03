@@ -218,7 +218,7 @@ jobs:
           for i in $(seq 1 $CONTAINER_COUNT); do
             docker run -d --net grid --name chrome-node-$i \
               -e SE_EVENT_BUS_HOST=selenium-hub \
-              --shm-size="4g" \
+              --shm-size="8g" \
               -e SE_NODE_MAX_SESSIONS=1 \
               -e SE_NODE_MAX_INSTANCES=1 \
               -e SE_JAVA_OPTS="-Xmx2g -XX:+UseG1GC -XX:MaxGCPauseMillis=1000" \
