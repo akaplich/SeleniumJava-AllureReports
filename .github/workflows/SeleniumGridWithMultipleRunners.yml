@@ -50,6 +50,14 @@ on:
           - '3'
           - '4'
           - '5'
+      ContainerRestartStrategy:
+        description: 'Container Restart Strategy'
+        required: true
+        default: 'after-session'
+        type: choice
+        options:
+          - 'after-session'   # Use SE_DRAIN_AFTER_SESSION_COUNT=1 only
+          - 'after-test'      # Restart container after each test
       RetryCount:
         description: 'Retry Count for Failed Tests'
         required: true
@@ -266,82 +274,115 @@ jobs:
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-              
+          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || 'after-session' }}"
+      
+          # Define container restart function
+          restart_containers() {
+            echo "Restarting Chrome containers..."
+            for i in $(seq 1 $CONTAINER_COUNT); do
+              docker stop chrome-node-$i || true
+              docker rm chrome-node-$i || true
+      
+              docker run -d --net grid --name chrome-node-$i \
+                -e SE_EVENT_BUS_HOST=selenium-hub \
+                --shm-size="8g" \
+                -e SE_NODE_MAX_SESSIONS=1 \
+                -e SE_NODE_MAX_INSTANCES=1 \
+                -e SE_JAVA_OPTS="-Xmx2g -XX:+UseG1GC -XX:MaxGCPauseMillis=1000" \
+                -e SE_NODE_SESSION_TIMEOUT=600 \
+                -e SE_SESSION_RETRY_INTERVAL=5000 \
+                -e SE_SESSION_REQUEST_TIMEOUT=600 \
+                -e SE_NODE_CLEANUP_CYCLE=5000 \
+                -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
+                -e SE_OFFLINE_TIMEOUT=60000 \
+                -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
+                selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
+            done
+      
+            # Wait for containers to initialize
+            sleep 15
+      
+            # Check if containers are ready
+            for i in {1..6}; do
+              NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
+              echo "Current node count: $NODE_COUNT"
+              if [ "$NODE_COUNT" -ge $CONTAINER_COUNT ]; then
+                echo "Grid is ready with $NODE_COUNT nodes"
+                break
+              fi
+              echo "Waiting for nodes to register... Attempt $i of 6"
+              sleep 10
+            done
+          }
+      
+          # Common Maven parameters
+          MAVEN_PARAMS=(
+            -Denvironment.url="${ENVIRONMENT}"
+            -Dgroups="${MVN_GROUP}"
+            -Dheadless=${RUN_HEADLESS}
+            -Dselenium.grid.url="http://localhost:4444"
+            -Dwebdriver.timeouts.implicitlywait=30
+            -Dwebdriver.remote.quietExceptions=false
+            -DretryCount=${RETRY_COUNT}
+            -DcontainerCount=${CONTAINER_COUNT}
+            -Dwebdriver.reuse.browser=false
+            -Dwebdriver.quit.on.failure=true
+            -Dselenium.browser.cleanup=true
+            -Dselenium.driver.provider=RemoteProvider
+            -Dwebdriver.remote.session.timeout=300
+            -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage,--use-gl=swiftshader,--enable-unsafe-swiftshader"
+            -Dwebdriver.remote.connection.timeout=90000
+            -Dwebdriver.remote.socket.timeout=90000
+            -Dwebdriver.remote.handshake.timeout=90000
+          )
+      
           # Run with specific test if provided
           if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
             TEST="${{ matrix.Runners.test }}"
             echo "Running specific test: $TEST"
       
-            mvn clean test \
-              -Denvironment.url="${ENVIRONMENT}" \
-              -Dgroups="${MVN_GROUP}" \
-              -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
-              -Dwebdriver.timeouts.implicitlywait=30 \
-              -Dwebdriver.remote.quietExceptions=false \
-              -DretryCount=${RETRY_COUNT} \
-              -DcontainerCount=${CONTAINER_COUNT} \
-              -Dwebdriver.reuse.browser=false \
-              -Dwebdriver.quit.on.failure=true \
-              -Dselenium.browser.cleanup=true \
-              -Dselenium.driver.provider=RemoteProvider \
-              -Dwebdriver.remote.session.timeout=300 \
-              -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
-              -Dwebdriver.remote.connection.timeout=90000 \
-              -Dwebdriver.remote.socket.timeout=90000 \
-              -Dwebdriver.remote.handshake.timeout=90000 \
-              -Dtest=${TEST}
-          
+            # Always restart containers if strategy is 'after-test'
+            if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
+              restart_containers
+            fi
+      
+            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
+      
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
-            TESTS="${{ matrix.Runners.tests }}"
-            echo "Running discovered tests: $TESTS"
+            IFS=',' read -ra TEST_ARRAY <<< "${{ matrix.Runners.tests }}"
       
-            mvn clean test \
-              -Denvironment.url="${ENVIRONMENT}" \
-              -Dgroups="${MVN_GROUP}" \
-              -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
-              -Dwebdriver.timeouts.implicitlywait=30 \
-              -Dwebdriver.remote.quietExceptions=false \
-              -DretryCount=${RETRY_COUNT} \
-              -DcontainerCount=${CONTAINER_COUNT} \
-              -Dwebdriver.reuse.browser=false \
-              -Dwebdriver.quit.on.failure=true \
-              -Dselenium.browser.cleanup=true \
-              -Dselenium.driver.provider=RemoteProvider \
-              -Dwebdriver.remote.session.timeout=300 \
-              -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
-              -Dwebdriver.remote.connection.timeout=90000 \
-              -Dwebdriver.remote.socket.timeout=90000 \
-              -Dwebdriver.remote.handshake.timeout=90000 \
-              -Dtest=${TESTS}            
-          
+            for TEST in "${TEST_ARRAY[@]}"; do
+              echo "Running test: $TEST"
+      
+              # Restart containers if strategy is 'after-test'
+              if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
+                restart_containers
+              fi
+      
+              mvn test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
+            done
+      
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
             SHARD_INDEX="${{ matrix.Runners.index }}"
       
             echo "Running shard ${SHARD_INDEX} of ${TOTAL_SHARDS}"
+            
+            # For sharded tests, restart once at beginning if after-test is set
+            if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
+              echo "Using 'after-test' strategy with sharded tests - restarting containers once at beginning"
+              restart_containers
+            fi
       
-            mvn clean test \
-              -Denvironment.url="${ENVIRONMENT}" \
-              -Dgroups="${MVN_GROUP}" \
-              -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://localhost:4444" \
-              -Dwebdriver.timeouts.implicitlywait=30 \
-              -Dwebdriver.remote.quietExceptions=false \
-              -DretryCount=${RETRY_COUNT} \
-              -DcontainerCount=${CONTAINER_COUNT} \
+            mvn clean test "${MAVEN_PARAMS[@]}" \
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
-              -Dwebdriver.reuse.browser=false \
-              -Dwebdriver.quit.on.failure=true \
-              -Dselenium.browser.cleanup=true \
-              -Dsurefire.useFile=false              
-          fi    
+              -Dsurefire.useFile=false
+          fi
 
       - name: Upload Screenshots and Logs
         uses: actions/upload-artifact@v4
@@ -410,6 +451,7 @@ jobs:
           echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
           echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
           echo "| Containers Per Runner | ${CONTAINERS_PER_RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY         
+          echo "| Container Restart Strategy | ${CONTAINER_RESTART} |" >> $GITHUB_STEP_SUMMARY    
           echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
           # Add TestList to summary if specified
           if [[ "$TEST_LIST" != "None" ]]; then
