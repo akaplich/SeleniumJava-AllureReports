@@ -215,7 +215,7 @@ jobs:
             -e SE_NODE_CLEANUP_CYCLE=5000 \
             -e SE_NODE_MAX_SESSIONS=1 \
             -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-            selenium/hub:${{github.event.inputs.ChromeVersion}}            
+            selenium/hub:latest            
       
           # Start Chrome node with unique names
           for i in $(seq 1 $CONTAINER_COUNT); do
