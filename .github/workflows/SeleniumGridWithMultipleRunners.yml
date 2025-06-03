@@ -384,7 +384,8 @@ jobs:
       - name: Create Run Summary
         run: |
           # Get parameters
-          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '5' }}"
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
+          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
@@ -399,6 +400,7 @@ jobs:
           echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
           echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
           echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Containers Per Runner | ${CONTAINERS_PER_RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY         
           echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
           # Add TestList to summary if specified
           if [[ "$TEST_LIST" != "None" ]]; then
