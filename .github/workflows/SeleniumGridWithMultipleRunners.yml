@@ -270,8 +270,8 @@ jobs:
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
-          CONTAINER_COUNT="1" # Each runner uses 1 container
-      
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+              
           # Run with specific test if provided
           if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
