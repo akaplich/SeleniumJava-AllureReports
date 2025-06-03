@@ -18,6 +18,8 @@ Running From Commandline
     * "mvn test -Dtest=FirstGroovyScriptTest site"  
   * Run a single smoke testcase on the sandbox environment
     * "mvn clean test -Denvironment.url=brightideasandbox.com -Dtest=C44_SubmitNewValidIdeaWithAllRequiredFields"
+  * Run Parallel using multiple containers
+    * mvn clean test -Denvironment.url="brightideatest.com" -Dgroups="Smoke" -Dheadless=false -Dselenium.grid.url="http://localhost:4444" -Dwebdriver.timeouts.implicitlywait=30 -Dwebdriver.remote.quietExceptions=false -DcontainerCount=2 -Dsurefire.shardIndex=2 -Dsurefire.totalShards=5 site
 
 
 Steps to import RWHQ Testcase

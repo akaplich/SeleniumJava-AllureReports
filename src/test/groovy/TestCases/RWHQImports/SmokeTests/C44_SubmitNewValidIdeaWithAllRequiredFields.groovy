@@ -40,7 +40,9 @@ class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
     }
 
-    @Test @Tag("Smoke")
+    @Test
+    @Tag("Smoke")
+    @Tag("ShardRun")
     public void testcase(){
         logger.debug("TestCase");
         //Basestate

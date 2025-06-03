@@ -1,0 +1,9 @@
+{
+  "inputs": {
+    "Environment": "brightideatest.com",
+    "Mvn_Group": "ShardRun",
+    "Run_Headless": "false",
+    "Containers": "2",
+    "RetryCount": "0"
+  }
+}

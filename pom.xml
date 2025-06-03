@@ -249,9 +249,10 @@
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <rerunFailingTestsCount>${retryCount}</rerunFailingTestsCount>
-                    <forkCount>${containerCount}</forkCount>
+                    <forkCount>1</forkCount>
                     <reuseForks>true</reuseForks>
                     <threadCount>${containerCount}</threadCount>
+                    <useSystemClassLoader>false</useSystemClassLoader>
                     <parallel>classes</parallel>
                     <systemPropertyVariables>
                         <log.level>DEBUG</log.level>
@@ -260,14 +261,14 @@
                         <junit.jupiter.execution.parallel.mode.classes.default>concurrent</junit.jupiter.execution.parallel.mode.classes.default>
                         <junit.jupiter.execution.parallel.config.strategy>fixed</junit.jupiter.execution.parallel.config.strategy>
                         <junit.jupiter.execution.parallel.config.fixed.parallelism>${containerCount}</junit.jupiter.execution.parallel.config.fixed.parallelism>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <surefire.shardIndex>${env.SHARD_INDEX}</surefire.shardIndex>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <surefire.totalShards>${env.TOTAL_SHARDS}</surefire.totalShards>
                     </systemPropertyVariables>
                     <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>C*.*</include>
-                        <groups>OldRulesModalRegression</groups>
-                        <groups>Smoke</groups>
-                        <groups>Demo</groups>
-                        <groups>TestGroup</groups>
                     </includes>
                 </configuration>
             </plugin>
