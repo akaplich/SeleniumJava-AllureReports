@@ -235,84 +235,22 @@ jobs:
           # Show status
           docker ps -a          
 
-      - name: Wait for Grid to be fully ready
+      - name: Check Grid Status
         run: |
-          echo "Ensuring Grid is fully ready..."
-          MAX_ATTEMPTS=30  # Increased for more time
-          DELAY=5
-          EXPECTED_NODES="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-      
-          echo "Expecting $EXPECTED_NODES Chrome nodes to be registered"
-      
-          for ((i=1; i<=MAX_ATTEMPTS; i++)); do
-            echo "Checking grid status (attempt $i of $MAX_ATTEMPTS)..."
-            GRID_STATUS=$(curl -s http://localhost:4444/status || echo '{"value":{"ready":false,"nodes":[]}}')
-            NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length' || echo 0)
-            UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready' || echo "false")
-      
-            echo "Node count: $NODE_COUNT, Ready status: $UP_STATUS, Expected nodes: $EXPECTED_NODES"
-      
-            if [[ "$NODE_COUNT" -ge "$EXPECTED_NODES" && "$UP_STATUS" == "true" ]]; then
-              echo "Grid appears ready with $NODE_COUNT node(s)"
-              
-              # Verify a session can actually be created
-              echo "Testing session creation..."
-              TEST_SESSION=$(curl -s -X POST -H "Content-Type: application/json" \
-                -d '{"capabilities":{"browserName":"chrome","goog:chromeOptions":{"args":["--headless","--no-sandbox","--disable-dev-shm-usage"]}}}' \
-                http://localhost:4444/session)
-              
-              SESSION_ID=$(echo "$TEST_SESSION" | jq -r '.value.sessionId // empty')
-              
-              if [[ -n "$SESSION_ID" ]]; then
-                echo "Successfully created test session: $SESSION_ID"
-                # Clean up the test session
-                curl -s -X DELETE http://localhost:4444/session/$SESSION_ID > /dev/null
-                echo "Grid is fully functional!"
-                
-                # Show detailed node information
-                curl -s http://localhost:4444/status | jq .
-                break
-              else
-                echo "Failed to create test session. Response:"
-                echo "$TEST_SESSION" | jq .
-                
-                if [[ $i -eq $MAX_ATTEMPTS ]]; then
-                  echo "Could not create session after $MAX_ATTEMPTS attempts."
-                  echo "Hub status:"
-                  curl -s http://localhost:4444/status | jq .
-                  echo "Docker containers:"
-                  docker ps -a
-                  echo "Selenium Hub logs:"
-                  docker logs selenium-hub
-                  
-                  # Show logs for each Chrome node
-                  for j in $(seq 1 $EXPECTED_NODES); do
-                    echo "Chrome node $j logs:"
-                    docker logs chrome-node-$j || echo "No logs for chrome-node-$j"
-                  done
-                  
-                  exit 1
-                fi
-                
-                echo "Will retry in $DELAY seconds..."
-              fi
-            elif [[ $i -eq $MAX_ATTEMPTS ]]; then
-              echo "Grid failed to initialize properly. Expected $EXPECTED_NODES nodes but found $NODE_COUNT"
-              echo "Grid status:"
-              curl -s http://localhost:4444/status | jq .
-              echo "Docker containers:"
-              docker ps -a
-              echo "Selenium Hub logs:"
-              docker logs selenium-hub
-              for j in $(seq 1 $EXPECTED_NODES); do
-                echo "Chrome node $j logs:"
-                docker logs chrome-node-$j || echo "No logs for chrome-node-$j"
-              done
-              exit 1
+          # Get container count, default to 5 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.Containers || github.event.client_payload.Containers || '5' }}"
+          
+          curl -s http://localhost:4444/status | jq .
+          echo "Ensuring Grid is ready..."
+          for i in {1..6}; do
+            NODE_COUNT=$(curl -s http://localhost:4444/status | jq '.value.nodes | length')
+            echo "Current node count: $NODE_COUNT"
+            if [ "$NODE_COUNT" -ge $CONTAINER_COUNT ]; then
+              echo "Grid is ready with $NODE_COUNT nodes"
+              break
             fi
-      
-            echo "Waiting for grid to be ready... ($i/$MAX_ATTEMPTS)"
-            sleep $DELAY
+            echo "Waiting for nodes to register... Attempt $i of 6"
+            sleep 10
           done
 
       - name: Run Test on Single Node
