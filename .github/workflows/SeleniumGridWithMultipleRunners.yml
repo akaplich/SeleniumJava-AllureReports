@@ -191,22 +191,22 @@ jobs:
         run: |
           RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
           CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-
+      
           # Create Docker network
           docker network create grid
-          
+      
           # Start Selenium Hub
           docker run -d -p 4444:4444 --net grid --name selenium-hub \
-            -e SE_NODE_MAX_SESSION=RUNNER_COUNT \
+            -e SE_NODE_MAX_SESSIONS=$RUNNER_COUNT \
             -e GRID_TIMEOUT=120 \
             -e SE_NODE_SESSION_TIMEOUT=180 \
             -e SE_SESSION_REQUEST_TIMEOUT=180 \
             -e SE_SESSION_RETRY_INTERVAL=2000 \
             selenium/hub:latest
-          
-          # Start Chrome node
+      
+          # Start Chrome node with unique names
           for i in $(seq 1 $CONTAINER_COUNT); do
-            docker run -d --net grid --name chrome-node \
+            docker run -d --net grid --name chrome-node-$i \
               -e SE_EVENT_BUS_HOST=selenium-hub \
               --shm-size="4g" \
               -e SE_NODE_MAX_SESSIONS=1 \
@@ -219,13 +219,7 @@ jobs:
               -e SE_DRAIN_AFTER_SESSION_COUNT=2 \
               -e SE_OFFLINE_TIMEOUT=60000 \
               selenium/node-chrome:latest
-          done          
-          
-          # Wait for node to register properly
-          sleep 30
-          
-          # Verify node is registered
-          curl -s http://localhost:4444/status | jq '.nodes | length'
+          done
 
       - name: Wait for Grid to be fully ready
         run: |
@@ -346,10 +340,17 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-logs-screenshots-${{ matrix.container.index }}
+          name: test-logs-screenshots-${{ matrix.Runners.index }}
           path: '**/target/surefire-reports'
           if-no-files-found: warn
           retention-days: 2
+
+      - name: Clean up Docker resources
+        if: always()
+        run: |
+          docker stop $(docker ps -a -q) || true
+          docker rm $(docker ps -a -q) || true
+          docker network rm grid || true          
 
   aggregate-results:
     needs: run-tests
