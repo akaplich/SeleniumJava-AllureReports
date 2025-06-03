@@ -61,11 +61,9 @@ on:
       ChromeVersion:
         description: 'Chrome Version'
         required: true
-        default: '131.0'
+        default: '136.0'
         type: choice
         options:
-          - '124.0'
-          - '131.0'
           - '136.0'
           - 'latest'
 
@@ -401,6 +399,7 @@ jobs:
           RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
           CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
@@ -411,6 +410,7 @@ jobs:
           echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Chrome Version | ${CHROMEVERSION} |" >> $GITHUB_STEP_SUMMARY         
           echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
           echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
           echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
