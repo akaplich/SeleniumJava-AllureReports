@@ -1,4 +1,4 @@
-name: Selenium Grid Tests with Multiple Runners
+name: Multi Runner and Container
 
 on:
   workflow_dispatch:
