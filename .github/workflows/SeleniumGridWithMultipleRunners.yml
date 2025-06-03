@@ -228,31 +228,75 @@ jobs:
               -e SE_SCREEN_DEPTH=24 \
               selenium/node-chrome:latest
           done
+          
+          # Wait for containers to initialize
+          sleep 20
+      
+          # Show status
+          docker ps -a          
 
       - name: Wait for Grid to be fully ready
         run: |
           echo "Ensuring Grid is fully ready..."
-          MAX_ATTEMPTS=20
-          DELAY=3
+          MAX_ATTEMPTS=30  # Increased for more time
+          DELAY=5
           EXPECTED_NODES="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-          
+      
           echo "Expecting $EXPECTED_NODES Chrome nodes to be registered"
-          
+      
           for ((i=1; i<=MAX_ATTEMPTS; i++)); do
             echo "Checking grid status (attempt $i of $MAX_ATTEMPTS)..."
             GRID_STATUS=$(curl -s http://localhost:4444/status || echo '{"value":{"ready":false,"nodes":[]}}')
-            NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length')
-            UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready')
-            
+            NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length' || echo 0)
+            UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready' || echo "false")
+      
             echo "Node count: $NODE_COUNT, Ready status: $UP_STATUS, Expected nodes: $EXPECTED_NODES"
-            
+      
             if [[ "$NODE_COUNT" -ge "$EXPECTED_NODES" && "$UP_STATUS" == "true" ]]; then
-              echo "Grid is ready with $NODE_COUNT node(s)"
-              curl -s http://localhost:4444/status | jq .
-              break
-            fi
-            
-            if [[ $i -eq $MAX_ATTEMPTS ]]; then
+              echo "Grid appears ready with $NODE_COUNT node(s)"
+              
+              # Verify a session can actually be created
+              echo "Testing session creation..."
+              TEST_SESSION=$(curl -s -X POST -H "Content-Type: application/json" \
+                -d '{"capabilities":{"browserName":"chrome","goog:chromeOptions":{"args":["--headless","--no-sandbox","--disable-dev-shm-usage"]}}}' \
+                http://localhost:4444/session)
+              
+              SESSION_ID=$(echo "$TEST_SESSION" | jq -r '.value.sessionId // empty')
+              
+              if [[ -n "$SESSION_ID" ]]; then
+                echo "Successfully created test session: $SESSION_ID"
+                # Clean up the test session
+                curl -s -X DELETE http://localhost:4444/session/$SESSION_ID > /dev/null
+                echo "Grid is fully functional!"
+                
+                # Show detailed node information
+                curl -s http://localhost:4444/status | jq .
+                break
+              else
+                echo "Failed to create test session. Response:"
+                echo "$TEST_SESSION" | jq .
+                
+                if [[ $i -eq $MAX_ATTEMPTS ]]; then
+                  echo "Could not create session after $MAX_ATTEMPTS attempts."
+                  echo "Hub status:"
+                  curl -s http://localhost:4444/status | jq .
+                  echo "Docker containers:"
+                  docker ps -a
+                  echo "Selenium Hub logs:"
+                  docker logs selenium-hub
+                  
+                  # Show logs for each Chrome node
+                  for j in $(seq 1 $EXPECTED_NODES); do
+                    echo "Chrome node $j logs:"
+                    docker logs chrome-node-$j || echo "No logs for chrome-node-$j"
+                  done
+                  
+                  exit 1
+                fi
+                
+                echo "Will retry in $DELAY seconds..."
+              fi
+            elif [[ $i -eq $MAX_ATTEMPTS ]]; then
               echo "Grid failed to initialize properly. Expected $EXPECTED_NODES nodes but found $NODE_COUNT"
               echo "Grid status:"
               curl -s http://localhost:4444/status | jq .
@@ -260,11 +304,13 @@ jobs:
               docker ps -a
               echo "Selenium Hub logs:"
               docker logs selenium-hub
-              echo "Chrome node logs (first container):"
-              docker logs $(docker ps -q --filter ancestor=selenium/node-chrome:latest | head -1)
+              for j in $(seq 1 $EXPECTED_NODES); do
+                echo "Chrome node $j logs:"
+                docker logs chrome-node-$j || echo "No logs for chrome-node-$j"
+              done
               exit 1
             fi
-            
+      
             echo "Waiting for grid to be ready... ($i/$MAX_ATTEMPTS)"
             sleep $DELAY
           done
@@ -298,6 +344,12 @@ jobs:
               -Dwebdriver.reuse.browser=false \
               -Dwebdriver.quit.on.failure=true \
               -Dselenium.browser.cleanup=true \
+              -Dselenium.driver.provider=RemoteProvider \
+              -Dwebdriver.remote.session.timeout=300 \
+              -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
+              -Dwebdriver.remote.connection.timeout=90000 \
+              -Dwebdriver.remote.socket.timeout=90000 \
+              -Dwebdriver.remote.handshake.timeout=90000 \          
               -Dtest=${TEST}
           
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
@@ -317,6 +369,12 @@ jobs:
               -Dwebdriver.reuse.browser=false \
               -Dwebdriver.quit.on.failure=true \
               -Dselenium.browser.cleanup=true \
+              -Dselenium.driver.provider=RemoteProvider \
+              -Dwebdriver.remote.session.timeout=300 \
+              -Dwebdriver.capabilities.chromeOptions.args="--no-sandbox,--disable-dev-shm-usage" \
+              -Dwebdriver.remote.connection.timeout=90000 \
+              -Dwebdriver.remote.socket.timeout=90000 \
+              -Dwebdriver.remote.handshake.timeout=90000 \          
               -Dtest=${TESTS}            
           
           else
