@@ -197,7 +197,6 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
-          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
           CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
       
           # Create Docker network
@@ -230,10 +229,6 @@ jobs:
               -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
               -e SE_OFFLINE_TIMEOUT=60000 \
               -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-              -e SE_VNC_NO_PASSWORD=1 \
-              -e SE_SCREEN_WIDTH=1920 \
-              -e SE_SCREEN_HEIGHT=1080 \
-              -e SE_SCREEN_DEPTH=24 \
               selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
           done
           
