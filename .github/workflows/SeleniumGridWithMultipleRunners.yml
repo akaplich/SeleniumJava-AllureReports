@@ -58,6 +58,16 @@ on:
         description: 'List of tests to run (comma-separated)'
         required: false
         #default: 'C79_PipelineCreation_CreateDiscussApp,C63_VerifyIdeaExistsInPipeline,C44_SubmitNewValidIdeaWithAllRequiredFields'
+      ChromeVersion:
+        description: 'Chrome Version'
+        required: true
+        default: '131.0'
+        type: choice
+        options:
+          - '124.0'
+          - '131.0'
+          - '136.0'
+          - 'latest'
 
   repository_dispatch:
     types: [run-selenium-tests]
@@ -205,7 +215,7 @@ jobs:
             -e SE_NODE_CLEANUP_CYCLE=5000 \
             -e SE_NODE_MAX_SESSIONS=1 \
             -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-            selenium/hub:latest            
+            selenium/hub:${{github.event.inputs.ChromeVersion}}            
       
           # Start Chrome node with unique names
           for i in $(seq 1 $CONTAINER_COUNT); do
@@ -226,7 +236,7 @@ jobs:
               -e SE_SCREEN_WIDTH=1920 \
               -e SE_SCREEN_HEIGHT=1080 \
               -e SE_SCREEN_DEPTH=24 \
-              selenium/node-chrome:latest
+              selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
           done
           
           # Wait for containers to initialize
