@@ -198,10 +198,11 @@ jobs:
           # Start Selenium Hub
           docker run -d -p 4444:4444 --net grid --name selenium-hub \
             -e SE_NODE_MAX_SESSIONS=$RUNNER_COUNT \
-            -e GRID_TIMEOUT=120 \
-            -e SE_NODE_SESSION_TIMEOUT=180 \
-            -e SE_SESSION_REQUEST_TIMEOUT=180 \
-            -e SE_SESSION_RETRY_INTERVAL=2000 \
+            -e GRID_TIMEOUT=300 \
+            -e SE_NODE_SESSION_TIMEOUT=600 \
+            -e SE_SESSION_REQUEST_TIMEOUT=600 \
+            -e SE_SESSION_RETRY_INTERVAL=5000 \
+            -e SE_NODE_CLEANUP_CYCLE=5000 \
             selenium/hub:latest
       
           # Start Chrome node with unique names
@@ -212,11 +213,11 @@ jobs:
               -e SE_NODE_MAX_SESSIONS=1 \
               -e SE_NODE_MAX_INSTANCES=1 \
               -e SE_JAVA_OPTS="-Xmx2g" \
-              -e SE_NODE_SESSION_TIMEOUT=300 \
-              -e SE_SESSION_RETRY_INTERVAL=2000 \
-              -e SE_SESSION_REQUEST_TIMEOUT=300 \
-              -e SE_NODE_CLEANUP_CYCLE=10000 \
-              -e SE_DRAIN_AFTER_SESSION_COUNT=2 \
+              -e SE_NODE_SESSION_TIMEOUT=600 \
+              -e SE_SESSION_RETRY_INTERVAL=5000 \
+              -e SE_SESSION_REQUEST_TIMEOUT=600 \
+              -e SE_NODE_CLEANUP_CYCLE=5000 \
+              -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
               -e SE_OFFLINE_TIMEOUT=60000 \
               selenium/node-chrome:latest
           done
