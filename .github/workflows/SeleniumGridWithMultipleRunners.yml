@@ -30,7 +30,7 @@ on:
       Runners:
         description: 'Number of Runners'
         required: true
-        default: '5'
+        default: '2'
         type: choice
         options:
           - '1'
@@ -39,14 +39,10 @@ on:
           - '4'
           - '5'
           - '6'
-          - '7'
-          - '8'
-          - '9'
-          - '10'
       ContainersPerRunner:
         description: 'Number of Containers Per Runner'
         required: true
-        default: '2'
+        default: '4'
         type: choice
         options:
           - '1'
@@ -193,8 +189,9 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
-          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '5' }}"
-          
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+
           # Create Docker network
           docker network create grid
           
@@ -208,51 +205,61 @@ jobs:
             selenium/hub:latest
           
           # Start Chrome node
-          docker run -d --net grid --name chrome-node \
-            -e SE_EVENT_BUS_HOST=selenium-hub \
-            --shm-size="4g" \
-            -e SE_NODE_MAX_SESSIONS=1 \
-            -e SE_NODE_MAX_INSTANCES=1 \
-            -e SE_JAVA_OPTS="-Xmx2g" \
-            -e SE_NODE_SESSION_TIMEOUT=300 \
-            -e SE_SESSION_RETRY_INTERVAL=2000 \
-            -e SE_SESSION_REQUEST_TIMEOUT=300 \
-            -e SE_NODE_CLEANUP_CYCLE=10000 \
-            -e SE_DRAIN_AFTER_SESSION_COUNT=2 \
-            -e SE_OFFLINE_TIMEOUT=60000 \
-            selenium/node-chrome:latest
+          for i in $(seq 1 $CONTAINER_COUNT); do
+            docker run -d --net grid --name chrome-node \
+              -e SE_EVENT_BUS_HOST=selenium-hub \
+              --shm-size="4g" \
+              -e SE_NODE_MAX_SESSIONS=1 \
+              -e SE_NODE_MAX_INSTANCES=1 \
+              -e SE_JAVA_OPTS="-Xmx2g" \
+              -e SE_NODE_SESSION_TIMEOUT=300 \
+              -e SE_SESSION_RETRY_INTERVAL=2000 \
+              -e SE_SESSION_REQUEST_TIMEOUT=300 \
+              -e SE_NODE_CLEANUP_CYCLE=10000 \
+              -e SE_DRAIN_AFTER_SESSION_COUNT=2 \
+              -e SE_OFFLINE_TIMEOUT=60000 \
+              selenium/node-chrome:latest
+          done          
           
           # Wait for node to register properly
           sleep 30
           
           # Verify node is registered
-          curl -s http://selenium-hub:4444/status | jq '.nodes | length'
+          curl -s http://localhost:4444/status | jq '.nodes | length'
 
       - name: Wait for Grid to be fully ready
         run: |
           echo "Ensuring Grid is fully ready..."
           MAX_ATTEMPTS=20
           DELAY=3
+          EXPECTED_NODES="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+          
+          echo "Expecting $EXPECTED_NODES Chrome nodes to be registered"
           
           for ((i=1; i<=MAX_ATTEMPTS; i++)); do
             echo "Checking grid status (attempt $i of $MAX_ATTEMPTS)..."
-            GRID_STATUS=$(curl -s http://selenium-hub:4444/status)
+            GRID_STATUS=$(curl -s http://localhost:4444/status || echo '{"value":{"ready":false,"nodes":[]}}')
             NODE_COUNT=$(echo $GRID_STATUS | jq '.value.nodes | length')
             UP_STATUS=$(echo $GRID_STATUS | jq -r '.value.ready')
             
-            echo "Node count: $NODE_COUNT, Ready status: $UP_STATUS"
+            echo "Node count: $NODE_COUNT, Ready status: $UP_STATUS, Expected nodes: $EXPECTED_NODES"
             
-            if [[ "$NODE_COUNT" -ge 1 && "$UP_STATUS" == "true" ]]; then
+            if [[ "$NODE_COUNT" -ge "$EXPECTED_NODES" && "$UP_STATUS" == "true" ]]; then
               echo "Grid is ready with $NODE_COUNT node(s)"
-              curl -s http://selenium-hub:4444/status | jq .
+              curl -s http://localhost:4444/status | jq .
               break
             fi
             
             if [[ $i -eq $MAX_ATTEMPTS ]]; then
-              echo "Grid failed to initialize properly"
+              echo "Grid failed to initialize properly. Expected $EXPECTED_NODES nodes but found $NODE_COUNT"
+              echo "Grid status:"
+              curl -s http://localhost:4444/status | jq .
+              echo "Docker containers:"
               docker ps -a
+              echo "Selenium Hub logs:"
               docker logs selenium-hub
-              docker logs chrome-node
+              echo "Chrome node logs (first container):"
+              docker logs $(docker ps -q --filter ancestor=selenium/node-chrome:latest | head -1)
               exit 1
             fi
             
@@ -281,7 +288,7 @@ jobs:
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://selenium-hub:4444" \
+              -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
@@ -300,7 +307,7 @@ jobs:
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://selenium-hub:4444" \
+              -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
@@ -321,7 +328,7 @@ jobs:
               -Denvironment.url="${ENVIRONMENT}" \
               -Dgroups="${MVN_GROUP}" \
               -Dheadless=${RUN_HEADLESS} \
-              -Dselenium.grid.url="http://selenium-hub:4444" \
+              -Dselenium.grid.url="http://localhost:4444" \
               -Dwebdriver.timeouts.implicitlywait=30 \
               -Dwebdriver.remote.quietExceptions=false \
               -DretryCount=${RETRY_COUNT} \
