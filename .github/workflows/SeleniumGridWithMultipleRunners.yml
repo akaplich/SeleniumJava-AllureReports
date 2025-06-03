@@ -188,6 +188,11 @@ jobs:
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               site
           fi
+      - name: Upload Allure HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin
 
       - name: Upload Maven Site Report
         uses: actions/upload-artifact@v4
