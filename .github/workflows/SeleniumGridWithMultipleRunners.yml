@@ -196,14 +196,16 @@ jobs:
           docker network create grid
       
           # Start Selenium Hub
-          docker run -d -p 4444:4444 --net grid --name selenium-hub \
-            -e SE_NODE_MAX_SESSIONS=$RUNNER_COUNT \
+          docker run -d -p 4442-4444:4442-4444 --net grid --name selenium-hub \
+            -e GRID_MAX_SESSION=$CONTAINER_COUNT \
             -e GRID_TIMEOUT=300 \
             -e SE_NODE_SESSION_TIMEOUT=600 \
             -e SE_SESSION_REQUEST_TIMEOUT=600 \
             -e SE_SESSION_RETRY_INTERVAL=5000 \
             -e SE_NODE_CLEANUP_CYCLE=5000 \
-            selenium/hub:latest
+            -e SE_NODE_MAX_SESSIONS=1 \
+            -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
+            selenium/hub:latest            
       
           # Start Chrome node with unique names
           for i in $(seq 1 $CONTAINER_COUNT); do
@@ -212,13 +214,18 @@ jobs:
               --shm-size="4g" \
               -e SE_NODE_MAX_SESSIONS=1 \
               -e SE_NODE_MAX_INSTANCES=1 \
-              -e SE_JAVA_OPTS="-Xmx2g" \
+              -e SE_JAVA_OPTS="-Xmx2g -XX:+UseG1GC -XX:MaxGCPauseMillis=1000" \
               -e SE_NODE_SESSION_TIMEOUT=600 \
               -e SE_SESSION_RETRY_INTERVAL=5000 \
               -e SE_SESSION_REQUEST_TIMEOUT=600 \
               -e SE_NODE_CLEANUP_CYCLE=5000 \
               -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
               -e SE_OFFLINE_TIMEOUT=60000 \
+              -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
+              -e SE_VNC_NO_PASSWORD=1 \
+              -e SE_SCREEN_WIDTH=1920 \
+              -e SE_SCREEN_HEIGHT=1080 \
+              -e SE_SCREEN_DEPTH=24 \
               selenium/node-chrome:latest
           done
 
