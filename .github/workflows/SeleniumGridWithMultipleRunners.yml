@@ -30,7 +30,7 @@ on:
       Runners:
         description: 'Number of Runners'
         required: true
-        default: '2'
+        default: '5'
         type: choice
         options:
           - '1'
@@ -39,10 +39,14 @@ on:
           - '4'
           - '5'
           - '6'
+          - '7'
+          - '8'
+          - '9'
+          - '10'
       ContainersPerRunner:
         description: 'Number of Containers Per Runner'
         required: true
-        default: '4'
+        default: '1'
         type: choice
         options:
           - '1'
@@ -51,9 +55,9 @@ on:
           - '4'
           - '5'
       ContainerRestartStrategy:
-        description: 'Container Restart Strategy'
+        description: 'Container Restart Strategy - after-test only supports 1 container'
         required: true
-        default: 'after-session'
+        default: 'after-test'
         type: choice
         options:
           - 'after-session'   # Use SE_DRAIN_AFTER_SESSION_COUNT=1 only
