@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-
 class C63_VerifyIdeaExistsInPipeline extends TestBase {
 //C63 - Verify idea exists in Pipeline
     private static def variables = [:]
@@ -30,8 +29,10 @@ class C63_VerifyIdeaExistsInPipeline extends TestBase {
         variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
 
     }
+
     @Test
     @Tag("Smoke")
+    @Tag("ShardRun")
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])

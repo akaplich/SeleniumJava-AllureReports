@@ -82,7 +82,7 @@ class Browser{
             WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions()
-            options.addArguments(
+                options.addArguments(
                     "--ignore-ssl-errors=true",
                     "ignore-certificate-errors=false",
                     "--no-sandbox",
@@ -94,9 +94,11 @@ class Browser{
                     "--noxfixes",
                     "--noxdamage",
                     "--use-gl=swiftshader",
+                    "--enable-unsafe-webgl",
+                    "--enable-unsafe-swiftshader",
                     "--window-size=2560,1440",
                     "--enable-automation"
-            )
+                )
 
             // See if we should run headless
             boolean isHeadless = Boolean.parseBoolean(System.getProperty("environment.headless", Settings.getProperty("environment.headless")))
