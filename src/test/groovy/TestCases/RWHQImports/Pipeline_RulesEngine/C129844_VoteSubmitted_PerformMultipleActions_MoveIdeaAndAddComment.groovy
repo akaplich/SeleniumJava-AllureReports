@@ -32,7 +32,7 @@ class C129844_VoteSubmitted_PerformMultipleActions_MoveIdeaAndAddComment extends
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     public void testcase(){     
         logger.debug("TestCase");
         //Basestate

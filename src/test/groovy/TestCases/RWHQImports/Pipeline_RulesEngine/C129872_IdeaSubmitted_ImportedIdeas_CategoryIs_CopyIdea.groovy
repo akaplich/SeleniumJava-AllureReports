@@ -32,7 +32,7 @@ class C129872_IdeaSubmitted_ImportedIdeas_CategoryIs_CopyIdea extends TestBase {
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //Disabling this for now as we need to figure out where to store the import file used in the test case
     @Disabled
     public void testcase(){     

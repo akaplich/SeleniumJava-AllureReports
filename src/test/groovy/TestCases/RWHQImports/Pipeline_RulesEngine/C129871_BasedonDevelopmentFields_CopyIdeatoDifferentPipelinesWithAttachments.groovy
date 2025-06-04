@@ -33,7 +33,7 @@ class C129871_BasedonDevelopmentFields_CopyIdeatoDifferentPipelinesWithAttachmen
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")      
+    @Test @Tag("NewRulesModalRegression")      
     //Disabling this for now as we need to figure out where to store the attachment file used in the test case
     @Disabled
     public void testcase(){     

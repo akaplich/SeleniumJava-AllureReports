@@ -33,7 +33,7 @@ class C129971_IdeaSubmitted_EmailSubmission_CategoryIs_CopyIdea extends TestBase
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //Disabling this for now as we need to figure out how to get affiliateURL for the test case to use later
     @Disabled
     public void testcase(){     

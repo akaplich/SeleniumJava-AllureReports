@@ -33,7 +33,7 @@ class C129988_MoveIdeatoPipeline_SubmissionForm_IdeaImg_AttachmentIntactinSource
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //Disabling this for now as we need to figure out where to store the attchment file used in the test case
     @Disabled
     public void testcase(){     

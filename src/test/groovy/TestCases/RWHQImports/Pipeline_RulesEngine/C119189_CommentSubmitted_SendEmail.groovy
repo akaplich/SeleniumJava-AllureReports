@@ -33,7 +33,7 @@ class C119189_CommentSubmitted_SendEmail extends TestBase {
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     public void testcase(){
         logger.debug("TestCase");
         //Basestate
