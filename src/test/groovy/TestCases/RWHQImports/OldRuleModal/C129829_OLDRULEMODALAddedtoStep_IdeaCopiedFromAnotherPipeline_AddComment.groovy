@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test
 import BaseClasses.TestBase
 
 //C129829 - OLD RULE MODAL Added to Step - Idea Copied From Another Pipeline - Add Comment 
-class C129829_OLDRULEMODALAddedtoStep_IdeaCopiedFromAnotherPipeline_AddComment
-extends TestBase {
+class C129829_OLDRULEMODALAddedtoStep_IdeaCopiedFromAnotherPipeline_AddComment extends TestBase {
     private static def variables = [:]
 
     @BeforeAll
@@ -19,7 +18,8 @@ extends TestBase {
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test @Tag("OldRulesModalRegression")  public void testcase(){
+    @Test @Tag("OldRulesModalRegression")
+    public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
@@ -43,7 +43,7 @@ extends TestBase {
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Pipeline A/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test/.toString())
         //Set New Copy Ideas in Pipeline Steps page
