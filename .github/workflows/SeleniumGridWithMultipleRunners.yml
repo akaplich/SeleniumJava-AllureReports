@@ -20,6 +20,7 @@ on:
           - Smoke
           - DockerSet
           - NewRulesModalRegression
+          - OldRulesModalRegression
           - TestGroup
           - ShardRun
       Run_Headless:
