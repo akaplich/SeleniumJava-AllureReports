@@ -3,7 +3,6 @@ package TestCases.RWHQImports.OldRuleModal
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
 
 //C129873 - OLD RULE MODAL Copy Idea Rule - ' Copy Idea to Pipeline' Triggers New Action Items
 class C129873_OLDRULEMODALCopyIdeaRule_CopyIdeatoPipeline_TriggersNewActionItems

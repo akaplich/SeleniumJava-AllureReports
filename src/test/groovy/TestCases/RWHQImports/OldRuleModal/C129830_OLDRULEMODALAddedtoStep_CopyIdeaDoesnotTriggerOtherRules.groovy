@@ -3,7 +3,6 @@ package TestCases.RWHQImports.OldRuleModal
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
 
 //C129830 - OLD RULE MODAL Added to Step - Copy Idea Doesn't Trigger Other Rules
 class C129830_OLDRULEMODALAddedtoStep_CopyIdeaDoesnotTriggerOtherRules

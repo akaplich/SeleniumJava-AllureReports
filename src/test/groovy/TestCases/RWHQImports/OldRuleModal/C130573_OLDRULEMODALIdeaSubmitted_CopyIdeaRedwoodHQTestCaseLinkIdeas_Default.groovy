@@ -3,7 +3,6 @@ package TestCases.RWHQImports.OldRuleModal
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
 
 //C130573 - OLD RULE MODAL Idea Submitted - Copy Idea & Link Ideas (Default)
 class C130573_OLDRULEMODALIdeaSubmitted_CopyIdeaRedwoodHQTestCaseLinkIdeas_Default

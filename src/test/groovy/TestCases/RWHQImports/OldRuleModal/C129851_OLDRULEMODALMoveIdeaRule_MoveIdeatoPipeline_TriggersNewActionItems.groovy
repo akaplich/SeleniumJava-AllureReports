@@ -3,7 +3,6 @@ package TestCases.RWHQImports.OldRuleModal
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
 
 //C129851 - OLD RULE MODAL Move Idea Rule - 'Move Idea to Pipeline' Triggers New Action Items
 class C129851_OLDRULEMODALMoveIdeaRule_MoveIdeatoPipeline_TriggersNewActionItems

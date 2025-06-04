@@ -3,7 +3,6 @@ package TestCases.RWHQImports.OldRuleModal
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import BaseClasses.TestBase
 
 //C129680 - OLD RULE MODAL Added to Step - Add Private Comment (with comment toggle disabled)
 class C129680_OLDRULEMODALAddedtoStep_AddPrivateComment_withcommenttoggledisabled
