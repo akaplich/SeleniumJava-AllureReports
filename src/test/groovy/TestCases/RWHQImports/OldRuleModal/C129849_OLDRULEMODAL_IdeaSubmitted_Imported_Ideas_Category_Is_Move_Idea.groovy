@@ -1,6 +1,7 @@
 package TestCases.RWHQImports.OldRuleModal
 
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
@@ -18,6 +19,8 @@ class C129849_OLDRULEMODAL_IdeaSubmitted_Imported_Ideas_Category_Is_Move_Idea{
         variables."Database" = null
     }
     @Test @Tag("OldRulesModalRegression")
+    //This test case is disabled since it used import ideas from excel file
+    @Disabled
     public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
