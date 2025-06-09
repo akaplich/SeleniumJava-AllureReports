@@ -43,7 +43,7 @@ extends TestBase {
         //Configure Review Step in Pipeline Steps page
         new actions.PipelineStepsConfigure.ConfigureReviewStepinNewModalinPipelineStepspage().run("Step Name to Configure (optional)":/Review/.toString(),"Individual Assignment User":/System Admin/.toString(),"Individual Assignment User Add or Remove":/Add/.toString(),"Action":/Update/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/review idea/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/review idea/.toString(),"Action":/Submit/.toString())
         //Access Action Item in Actions Items React Global Navigation
         new actions.ActionItems.AccessActionIteminActionsItemsReactGlobalNavigation().run("Action Item":/review idea/.toString())
         //Set Review for Idea in Action Items page

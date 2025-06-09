@@ -49,7 +49,7 @@ extends TestBase {
         //Navigate Webstorm via Admin Dropdown Only
         new actions.general.NavigateWebstormviaAdminBarOnly().run("Area to Navigate to":/Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/test idea1 - move/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/test idea1 - move/.toString(),"Action":/Submit/.toString())
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Pipeline A/.toString(),"Area to Navigate to":/Idea Board/.toString())
         //Verify Idea in Idea Board page

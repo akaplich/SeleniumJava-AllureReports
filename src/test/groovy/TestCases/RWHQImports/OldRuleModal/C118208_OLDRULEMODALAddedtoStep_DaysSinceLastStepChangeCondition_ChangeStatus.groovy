@@ -19,7 +19,8 @@ extends TestBase {
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test @Tag("OldRulesModalRegression")  public void testcase(){
+    @Test @Tag("OldRulesModalRegression")
+    public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate WebStorm or MTS
@@ -58,7 +59,7 @@ extends TestBase {
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Quick Add for Rule/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Quick Add for Rule/.toString(),"Action":/Submit/.toString())
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Idea Board/.toString())
         //Access Idea in Idea Board page

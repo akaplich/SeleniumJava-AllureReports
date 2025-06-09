@@ -39,7 +39,7 @@ extends TestBase {
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Quick Add for Rule/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Quick Add for Rule/.toString(),"Action":/Submit/.toString())
         //Log Out
         new actions.general.LogOut().run([:])
         //Login

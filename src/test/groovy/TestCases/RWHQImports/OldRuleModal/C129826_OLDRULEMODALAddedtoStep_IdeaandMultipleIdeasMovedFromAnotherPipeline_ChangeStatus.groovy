@@ -45,31 +45,31 @@ extends TestBase {
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Pipeline A/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test1/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test1/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test1/.toString())
         //Change Idea Status in Pipeline Steps page
         new actions.PipelineStepsView.ChangeIdeaStatusinPipelineStepspage().run("Status":/Under Review/.toString(),"Action":/Change Status/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test2/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test2/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test2/.toString())
         //Change Idea Status in Pipeline Steps page
         new actions.PipelineStepsView.ChangeIdeaStatusinPipelineStepspage().run("Status":/Submitted/.toString(),"Action":/Change Status/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test3/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test3/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test3/.toString())
         //Change Idea Status in Pipeline Steps page
         new actions.PipelineStepsView.ChangeIdeaStatusinPipelineStepspage().run("Status":/Under Review/.toString(),"Action":/Change Status/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test4/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test4/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test4/.toString())
         //Change Idea Status in Pipeline Steps page
         new actions.PipelineStepsView.ChangeIdeaStatusinPipelineStepspage().run("Status":/Under Review/.toString(),"Action":/Change Status/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test5/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test5/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test5/.toString())
         //Change Idea Status in Pipeline Steps page

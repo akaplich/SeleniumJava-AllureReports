@@ -54,7 +54,7 @@ class C129830_OLDRULEMODALAddedtoStep_CopyIdeaDoesnotTriggerOtherRules
         //Navigate WebStorm or MTS
         new actions.general.NavigateWebStormAdminBar().run("WebStorm Name":/Pipeline A/.toString(),"Area to Navigate to":/Pipeline Steps/.toString())
         //Quick Add an Idea in Pipeline Steps page
-        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Idea Name":/Rules Test/.toString(),"Action":/Submit/.toString())
+        new actions.PipelineStepsView.SetQuickAddMemoorIdea().run("Title":/Rules Test/.toString(),"Action":/Submit/.toString())
         //Select Idea in Pipeline Steps page
         new actions.PipelineStepsView.SelectIdeainPipelineStepsViewpage().run("Idea Name":/Rules Test/.toString())
         //Set New Copy Ideas in Pipeline Steps page

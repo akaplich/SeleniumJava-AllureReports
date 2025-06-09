@@ -19,7 +19,8 @@ extends TestBase {
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test @Tag("OldRulesModalRegression")  public void testcase(){
+    @Test @Tag("OldRulesModalRegression")
+    public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate WebStorm or MTS
