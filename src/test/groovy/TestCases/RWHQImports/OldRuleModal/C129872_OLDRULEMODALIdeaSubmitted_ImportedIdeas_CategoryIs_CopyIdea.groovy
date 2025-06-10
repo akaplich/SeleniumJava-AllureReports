@@ -1,6 +1,7 @@
 package TestCases.RWHQImports.OldRuleModal
 
 import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import BaseClasses.TestBase
@@ -19,7 +20,10 @@ extends TestBase {
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test @Tag("OldRulesModalRegression")  public void testcase(){
+    @Test @Tag("OldRulesModalRegression")
+    //Disabling this for now as we need to figure out where to store the import file used in the test case
+    @Disabled
+    public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate
