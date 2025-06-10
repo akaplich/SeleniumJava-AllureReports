@@ -1,12 +1,12 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C129827 - OLD RULE MODAL Added to Step - Move Idea Doesn't Trigger Other Rules
-class C129827_OLDRULEMODALAddedtoStep_MoveIdeaDoesnotTriggerOtherRules
-{
+class C129827_OLDRULEMODALAddedtoStep_MoveIdeaDoesnotTriggerOtherRules extends TestBase {
     private static def variables = [:]
 
     @BeforeAll
@@ -18,7 +18,8 @@ class C129827_OLDRULEMODALAddedtoStep_MoveIdeaDoesnotTriggerOtherRules
         variables."CodeEnvironment" = /Default/
         variables."Database" = null
     }
-    @Test @Tag("OldRulesModalRegression")  public void testcase(){
+    @Test @Tag("OldRulesModalRegression")
+    public void testcase(){
         //Basestate
         Action58123c20fa4ee77809f468f6([:])
         //Navigate

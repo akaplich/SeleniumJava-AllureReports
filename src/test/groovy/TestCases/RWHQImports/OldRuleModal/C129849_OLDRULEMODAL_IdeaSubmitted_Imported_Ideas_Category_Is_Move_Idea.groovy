@@ -1,12 +1,13 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C129849 - OLD RULE MODAL Idea Submitted - Imported Ideas - Category Is - Move Idea
-class C129849_OLDRULEMODAL_IdeaSubmitted_Imported_Ideas_Category_Is_Move_Idea{
+class C129849_OLDRULEMODAL_IdeaSubmitted_Imported_Ideas_Category_Is_Move_Idea extends TestBase {
     private static def variables = [:]
 
     @BeforeAll

@@ -1,11 +1,12 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C129680 - OLD RULE MODAL Added to Step - Add Private Comment (with comment toggle disabled)
-class C129680_OLDRULEMODALAddedtoStep_AddPrivateComment_withcommenttoggledisabled
+class C129680_OLDRULEMODALAddedtoStep_AddPrivateComment_withcommenttoggledisabled extends TestBase
 {
     private static def variables = [:]
 

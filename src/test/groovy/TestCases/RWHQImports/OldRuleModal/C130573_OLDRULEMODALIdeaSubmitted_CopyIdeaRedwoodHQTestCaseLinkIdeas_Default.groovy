@@ -1,11 +1,12 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C130573 - OLD RULE MODAL Idea Submitted - Copy Idea & Link Ideas (Default)
-class C130573_OLDRULEMODALIdeaSubmitted_CopyIdeaRedwoodHQTestCaseLinkIdeas_Default
+class C130573_OLDRULEMODALIdeaSubmitted_CopyIdeaRedwoodHQTestCaseLinkIdeas_Default extends TestBase
 {
     private static def variables = [:]
 

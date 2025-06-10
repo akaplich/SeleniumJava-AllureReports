@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test
 import BaseClasses.TestBase
 
 //C119206 - OLD RULE MODAL Idea Status Changed - Change Visibility
-class C119206_OLDRULEMODALIdeaStatusChanged_ChangeVisibility
-extends TestBase {
+class C119206_OLDRULEMODALIdeaStatusChanged_ChangeVisibility extends TestBase {
     private static def variables = [:]
 
     @BeforeAll

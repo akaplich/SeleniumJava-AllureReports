@@ -1,11 +1,12 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C129830 - OLD RULE MODAL Added to Step - Copy Idea Doesn't Trigger Other Rules
-class C129830_OLDRULEMODALAddedtoStep_CopyIdeaDoesnotTriggerOtherRules
+class C129830_OLDRULEMODALAddedtoStep_CopyIdeaDoesnotTriggerOtherRules extends TestBase
 {
     private static def variables = [:]
 

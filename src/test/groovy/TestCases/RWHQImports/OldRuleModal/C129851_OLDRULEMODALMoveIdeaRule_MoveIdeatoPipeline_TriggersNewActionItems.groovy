@@ -1,11 +1,12 @@
 package TestCases.RWHQImports.OldRuleModal
 
+import BaseClasses.TestBase
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
 //C129851 - OLD RULE MODAL Move Idea Rule - 'Move Idea to Pipeline' Triggers New Action Items
-class C129851_OLDRULEMODALMoveIdeaRule_MoveIdeatoPipeline_TriggersNewActionItems
+class C129851_OLDRULEMODALMoveIdeaRule_MoveIdeatoPipeline_TriggersNewActionItems extends TestBase
 {
     private static def variables = [:]
 

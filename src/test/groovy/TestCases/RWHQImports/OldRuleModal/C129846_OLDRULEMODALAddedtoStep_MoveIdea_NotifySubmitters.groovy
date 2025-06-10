@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 import BaseClasses.TestBase
 
 //C129846 - OLD RULE MODAL Added to Step - Move Idea - Notify Submitter(s)
-class C129846_OLDRULEMODALAddedtoStep_MoveIdea_NotifySubmitters
+class C129846_OLDRULEMODALAddedtoStep_MoveIdea_NotifySubmitters extends TestBase
 {
     private static def variables = [:]
 
