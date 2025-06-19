@@ -386,12 +386,13 @@ jobs:
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
               -Dsurefire.useFile=false
-          fi
-      - name: Upload Allure HTML report
+            fi
+      - name: Upload raw Allure results
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: target/site/allure-maven-plugin
+          name: allure-results-${{ matrix.Runners.index }}
+          path: target/allure-results
+          if-no-files-found: warn
 
       - name: Upload Screenshots and Logs
         uses: actions/upload-artifact@v4
@@ -437,6 +438,29 @@ jobs:
           path: 'all-test-results'
           if-no-files-found: warn
           retention-days: 2
+      - name: Download all raw Allure results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: allure-results-*
+          path: merged-allure-results
+          merge-multiple: true
+
+      - name: Install Allure CLI
+        run: |
+          curl -o allure-2.27.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
+          tar -xvzf allure-2.27.0.tgz
+          sudo mv allure-2.27.0/bin/allure /usr/local/bin/allure
+          allure --version
+
+      - name: Generate merged Allure HTML report
+        run: |
+          allure generate merged-allure-results -o merged-allure-report --clean  
+
+      - name: Upload merged Allure HTML report
+        uses: actions/upload-artifact@v4
+        with:
+          name: merged-allure-report
+          path: merged-allure-report
 
       - name: Create Run Summary
         run: |
