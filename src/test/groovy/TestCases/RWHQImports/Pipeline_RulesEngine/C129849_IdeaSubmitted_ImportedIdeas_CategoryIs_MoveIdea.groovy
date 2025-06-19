@@ -33,7 +33,7 @@ class C129849_IdeaSubmitted_ImportedIdeas_CategoryIs_MoveIdea extends TestBase {
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //This test case is disabled since it used import ideas from excel file
     @Disabled
     public void testcase(){     

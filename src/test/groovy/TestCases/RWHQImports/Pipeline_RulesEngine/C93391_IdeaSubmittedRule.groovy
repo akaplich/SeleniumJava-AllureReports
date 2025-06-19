@@ -32,7 +32,7 @@ class C93391_IdeaSubmittedRule extends TestBase {
         variables."Idea Box Manager License Type Purchased Count" = null
         variables."New Affiliate Name" = "auto" + System.currentTimeMillis().toString() + (100000 + new Random().nextInt(900000)).toString()
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     public void testcase(){
         logger.debug("TestCase");
         //Basestate

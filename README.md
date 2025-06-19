@@ -28,6 +28,21 @@ Steps to import RWHQ Testcase
 5. (Optional) Add 'private static final Logger logger = LoggerFactory.getLogger([classname].class);'
 6. (Optional) Replace qualified names with imports
 
+Steps to import RWHQ Testcase in bulk
+1. Postman browser extension to sync cookies and captures network traffic
+2. In postman perform find the executiontestcases query and execute, save the resulting json
+   Example: https://rwhq2.brightidea.cloud/executiontestcases/6746eda3783ea7ed43eac041?_dc=1749057390067
+3. Use RWHQGetTCGroovyById.sh to download testcases referenced in json
+   4. Update json in script
+   5. update cookie information including sessionid and AWSELBAuthSessionCookie
+   6. Run script
+7. Move all cases into a folder, correct any issues in the titles manually
+8. Import into SeleniumJava
+9. Replace in files for the following
+   10. testng imports should be replaced with junit imports
+   11. @BeforeAll replaces the testng before tag
+   12. @AfterAll needs to be removed, we are covering that in testbase
+
 Testing GitHub Actions locally using Docker
 - Reference: https://youtu.be/YORvmxQBPeM?si=HI-QKO9pZWw7x1lF
 - Install Act: https://github.com/nektos/act

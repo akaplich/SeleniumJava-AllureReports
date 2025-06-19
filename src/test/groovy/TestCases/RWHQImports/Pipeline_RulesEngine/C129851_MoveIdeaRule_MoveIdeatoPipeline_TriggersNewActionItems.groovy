@@ -32,7 +32,7 @@ class C129851_MoveIdeaRule_MoveIdeatoPipeline_TriggersNewActionItems extends Tes
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")@Tag("TestGroup")
+    @Test @Tag("NewRulesModalRegression")@Tag("TestGroup")
     public void testcase(){     
         logger.debug("TestCase");
         //Basestate

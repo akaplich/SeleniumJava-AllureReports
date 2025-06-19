@@ -19,6 +19,7 @@ on:
         options:
           - Smoke
           - DockerSet
+          - NewRulesModalRegression
           - OldRulesModalRegression
           - TestGroup
           - ShardRun

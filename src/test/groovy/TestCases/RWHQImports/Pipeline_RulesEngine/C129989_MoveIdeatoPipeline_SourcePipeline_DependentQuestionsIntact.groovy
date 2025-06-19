@@ -33,7 +33,7 @@ class C129989_MoveIdeatoPipeline_SourcePipeline_DependentQuestionsIntact extends
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //Disabling this for now as we need to figure out how to get attachment file for the test case to use later
     @Disabled
     public void testcase(){     
