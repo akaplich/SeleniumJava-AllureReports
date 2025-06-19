@@ -447,11 +447,9 @@ jobs:
           merge-multiple: true
 
       - name: Install Allure CLI
-        run: |
-          curl -o allure-2.27.0.tgz -L https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.tgz
-          tar -xvzf allure-2.27.0.tgz
-          sudo mv allure-2.27.0/bin/allure /usr/local/bin/allure
-          allure --version
+        uses: simple-elf/allure-installation-action@v1
+        with:
+          allure-version: '2.27.0'
 
       - name: Generate merged Allure HTML report
         run: |
