@@ -20,6 +20,7 @@ on:
           - Smoke
           - DockerSet
           - NewRulesModalRegression
+          - OldRulesModalRegression
           - TestGroup
       Run_Headless:
         description: 'Run Headless'
