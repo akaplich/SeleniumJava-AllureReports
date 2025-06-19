@@ -338,6 +338,7 @@ jobs:
             -Dwebdriver.remote.connection.timeout=90000
             -Dwebdriver.remote.socket.timeout=90000
             -Dwebdriver.remote.handshake.timeout=90000
+            -Dallure.results.directory=target/allure-results
           )
       
           # Run with specific test if provided
