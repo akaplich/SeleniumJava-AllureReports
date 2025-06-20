@@ -446,16 +446,24 @@ jobs:
           path: merged-allure-results
           merge-multiple: true
 
+      - name: Set up Homebrew
+        run: |
+          sudo apt-get install -y build-essential procps curl file git
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.profile
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew --version
+
       - name: Install Allure CLI
-        uses: fescobar/allure-docker-service@v2.27.0
-        with:
-          allure_project_results_directory: merged-allure-results
-          allure_project_report_directory: merged-allure-report
-          allure_report_clean: true
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install allure
+          allure --version
 
       - name: Generate merged Allure HTML report
         run: |
-          allure generate merged-allure-results -o merged-allure-report --clean  
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          allure generate merged-allure-results -o merged-allure-report --clean
 
       - name: Upload merged Allure HTML report
         uses: actions/upload-artifact@v4
