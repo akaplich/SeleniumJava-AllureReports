@@ -447,7 +447,7 @@ jobs:
           merge-multiple: true
 
       - name: Install Allure CLI
-        uses: fescobar/allure-docker-service@2.14.0
+        uses: fescobar/allure-docker-service@v2.27.0
         with:
           allure_project_results_directory: merged-allure-results
           allure_project_report_directory: merged-allure-report
