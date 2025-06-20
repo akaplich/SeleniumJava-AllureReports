@@ -447,9 +447,11 @@ jobs:
           merge-multiple: true
 
       - name: Install Allure CLI
-        uses: simple-elf/allure-installation-action@v1.4
+        uses: fescobar/allure-docker-service@2.14.0
         with:
-          allure-version: '2.27.0'
+          allure_project_results_directory: merged-allure-results
+          allure_project_report_directory: merged-allure-report
+          allure_report_clean: true
 
       - name: Generate merged Allure HTML report
         run: |
