@@ -447,7 +447,7 @@ jobs:
           merge-multiple: true
 
       - name: Install Allure CLI
-        uses: simple-elf/allure-installation-action@v1
+        uses: simple-elf/allure-installation-action@v1.4
         with:
           allure-version: '2.27.0'
 
