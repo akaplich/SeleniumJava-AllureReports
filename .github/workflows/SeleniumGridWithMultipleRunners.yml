@@ -395,7 +395,7 @@ jobs:
               restart_containers
             fi
       
-            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
+            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST} -fae
       
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
@@ -429,7 +429,7 @@ jobs:
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
-              -Dsurefire.useFile=false
+              -Dsurefire.useFile=false -fae
           fi
 
       - name: Upload Screenshots and Logs
