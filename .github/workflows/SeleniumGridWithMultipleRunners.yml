@@ -78,7 +78,11 @@ on:
         options:
           - '136.0'
           - 'latest'
-
+      SendSlackMessage:
+        description: 'Send Slack Message?'
+        type: boolean
+        required: true
+        default: false
   repository_dispatch:
     types: [run-mr-selenium-tests]
 
@@ -470,4 +474,18 @@ jobs:
           path: 'all-test-results'
           if-no-files-found: warn
           retention-days: 2
+
+      - name: Post a message Slack Channel 'Tests'
+        if: ${{ github.event.inputs.SendSlackMessage == 'true' || github.event.client_payload.SendSlackMessage == 'true' }}
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"          
 
