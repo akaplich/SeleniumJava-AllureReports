@@ -104,7 +104,7 @@ jobs:
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
-          BRANCH="${{ github.event.client_payload.source_branch || 'None' }}"
+          BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
           COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'None' }}"
           WORKFLOW_SOURCE="${{ github.event.client_payload.workflow_source || 'None' }}"
           
@@ -483,9 +483,10 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"          
+            "SHA": "Example text",
+            "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
+            "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
+            "Status": "Example text",
+            "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        
 
