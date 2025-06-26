@@ -97,7 +97,8 @@ jobs:
         run: |
           # Get parameters
           RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
-          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner }}"
+          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy }}"         
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
           CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
@@ -479,8 +480,8 @@ jobs:
       - name: Extract Surefire Summary
         id: summary
         run: |
-          TOTAL=$(grep -h '<testsuite' all-test-results/**/*.xml | awk -F'"' '{sum+=$4} END {print sum}')
-          FAILURES=$(grep -h '<testsuite' all-test-results/**/*.xml | awk -F'"' '{sum+=$8} END {print sum}')
+          TOTAL=$(grep -h '<testsuite' all-test-results/**/**/*.xml | awk -F'"' '{sum+=$4} END {print sum}')
+          FAILURES=$(grep -h '<testsuite' all-test-results/**/**/*.xml | awk -F'"' '{sum+=$8} END {print sum}')
           echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
           echo "failures=$FAILURES" >> $GITHUB_OUTPUT
 
@@ -495,7 +496,7 @@ jobs:
               "SHA": "Example text",
               "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
               "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
-              "Status": "*GitHub Action build result*: ${{ job.status }}\n*Total Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}",
+              "Status": "*GitHub Action build result*: ${{ job.status }} *Total Tests:* ${{ steps.summary.outputs.total_tests }} *Failures:* ${{ steps.summary.outputs.failures }}",
               "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         
