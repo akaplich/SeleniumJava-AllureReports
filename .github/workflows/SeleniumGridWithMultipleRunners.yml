@@ -110,6 +110,7 @@ jobs:
           
           # Create a markdown summary
           echo "## Test Trigger Parameters" >> $GITHUB_STEP_SUMMARY  
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Branch | ${BRANCH} |" >> $GITHUB_STEP_SUMMARY
           echo "| Commit SHA | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
@@ -475,6 +476,14 @@ jobs:
           if-no-files-found: warn
           retention-days: 2
 
+      - name: Extract Surefire Summary
+        id: summary
+        run: |
+          TOTAL=$(grep -h '<testsuite' all-test-results/**/*.xml | awk -F'"' '{sum+=$4} END {print sum}')
+          FAILURES=$(grep -h '<testsuite' all-test-results/**/*.xml | awk -F'"' '{sum+=$8} END {print sum}')
+          echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
+          echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+
       - name: Post a message Slack Channel 'Tests'
         if: ${{ github.event.inputs.SendSlackMessage == 'true' || github.event.client_payload.SendSlackMessage == 'true' }}
         uses: slackapi/slack-github-action@v2.1.0
@@ -483,11 +492,10 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
               "SHA": "Example text",
               "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
               "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
-              "Status": "Example text",
+              "Status": "*GitHub Action build result*: ${{ job.status }}\n*Total Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}",
               "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         
