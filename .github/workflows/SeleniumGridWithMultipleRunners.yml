@@ -482,11 +482,13 @@ jobs:
           webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
-            text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-            "SHA": "Example text",
-            "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
-            "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
-            "Status": "Example text",
-            "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            {
+              text: "*GitHub Action build result*: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+              "SHA": "Example text",
+              "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
+              "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
+              "Status": "Example text",
+              "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
         
 
