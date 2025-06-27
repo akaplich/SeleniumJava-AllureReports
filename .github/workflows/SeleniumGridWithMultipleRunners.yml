@@ -97,12 +97,12 @@ jobs:
         run: |
           # Get parameters
           RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
-          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner }}"
-          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy }}"         
+          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || "1" }}"
+          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || "after-test"}}"         
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
-          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || "136.0" }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
-          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
+          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless || "false"}}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
           BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
