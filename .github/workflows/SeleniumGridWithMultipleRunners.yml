@@ -79,7 +79,11 @@ on:
         options:
           - '136.0'
           - 'latest'
-
+      SendSlackMessage:
+        description: 'Send Slack Message?'
+        type: boolean
+        required: true
+        default: false
   repository_dispatch:
     types: [run-mr-selenium-tests]
 
@@ -94,19 +98,21 @@ jobs:
         run: |
           # Get parameters
           RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
-          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner }}"
+          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy }}"         
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
           CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
-          BRANCH="${{ github.event.client_payload.source_branch || 'None' }}"
+          BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
           COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'None' }}"
           WORKFLOW_SOURCE="${{ github.event.client_payload.workflow_source || 'None' }}"
           
           # Create a markdown summary
           echo "## Test Trigger Parameters" >> $GITHUB_STEP_SUMMARY  
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Branch | ${BRANCH} |" >> $GITHUB_STEP_SUMMARY
           echo "| Commit SHA | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
@@ -379,7 +385,7 @@ jobs:
             -Dwebdriver.remote.handshake.timeout=90000
           )
       
-          # Run with specific test if provided
+          # Run with specific test if provided        
           if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
             TEST="${{ matrix.Runners.test }}"
@@ -390,12 +396,12 @@ jobs:
               restart_containers
             fi
       
-            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
+            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST} -fae 
       
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
             IFS=',' read -ra TEST_ARRAY <<< "${{ matrix.Runners.tests }}"
-      
+                    
             for TEST in "${TEST_ARRAY[@]}"; do
               echo "Running test: $TEST"
       
@@ -403,10 +409,10 @@ jobs:
               if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
                 restart_containers
               fi
-      
+              
               mvn test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
             done
-      
+
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
@@ -424,7 +430,7 @@ jobs:
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
-              -Dsurefire.useFile=false
+              -Dsurefire.useFile=false -fae
           fi
 
       - name: Upload Screenshots and Logs
@@ -459,11 +465,11 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: 'all-test-results/**/**/*.xml'
-          check_name: "Aggregated Test Results"
+          check_name: "Aggregated Test Results Report"
           comment_mode: off
           fail_on: nothing
 
-      - name: Aggregated Surefire Reports
+      - name: Upload Aggregated Surefire Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -471,4 +477,35 @@ jobs:
           path: 'all-test-results'
           if-no-files-found: warn
           retention-days: 2
+
+      - name: Extract Surefire Summary
+        id: summary
+        run: |
+          TOTAL=$(grep -ho 'tests="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
+          FAILURES=$(grep -ho 'failures="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')          
+          if [ "$FAILURES" -ge 1 ]; then
+            echo "customStatus=Fail" >> $GITHUB_OUTPUT
+          else
+            echo "customStatus=Pass" >> $GITHUB_OUTPUT
+          fi
+          echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
+          echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+
+      - name: Post a message Slack Channel 'Tests'
+        if: ${{ github.event.inputs.SendSlackMessage == 'true' || github.event.client_payload.SendSlackMessage == 'true' }}
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "Tests": "${{ steps.summary.outputs.total_tests }}",
+              "Failures": "${{ steps.summary.outputs.failures }}",
+              "SHA": "Example text",
+              "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
+              "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
+              "Status": "${{ steps.summary.outputs.customStatus }}",
+              "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
+        
 
