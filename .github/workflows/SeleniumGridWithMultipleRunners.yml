@@ -101,12 +101,14 @@ jobs:
           CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
           CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || 'after-test'}}"         
           ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          SEND_SLACK_MESSAGE="${{ github.event.inputs.SendSlackMessage || github.event.client_payload.SendSlackMessage }}"
           CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless || 'false'}}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
           TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
           BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
+          MERGED_BRANCH="${{ github.event.client_payload.merged_branch || 'None' }}"
           COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'None' }}"
           WORKFLOW_SOURCE="${{ github.event.client_payload.workflow_source || 'None' }}"
           
@@ -115,6 +117,7 @@ jobs:
           echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Branch | ${BRANCH} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Merged Branch | ${MERGED_BRANCH} |" >> $GITHUB_STEP_SUMMARY          
           echo "| Commit SHA | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
           echo "| Workflow Source | ${WORKFLOW_SOURCE} |" >> $GITHUB_STEP_SUMMARY          
           echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
@@ -128,6 +131,7 @@ jobs:
           echo "| Containers Per Runner | ${CONTAINERS_PER_RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY         
           echo "| Container Restart Strategy | ${CONTAINER_RESTART} |" >> $GITHUB_STEP_SUMMARY    
           echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Send Slack Message | ${SEND_SLACK_MESSAGE} |" >> $GITHUB_STEP_SUMMARY
           # Add TestList to summary if specified
           if [[ "$TEST_LIST" != "None" ]]; then
             echo "| Specific Tests | ${TEST_LIST} |" >> $GITHUB_STEP_SUMMARY
@@ -504,7 +508,7 @@ jobs:
               "attachments": [
                 {
                   "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}",
-                  "text": "*Tests:* ${{ steps.summary.outputs.total_tests }} *Failures:* ${{ steps.summary.outputs.failures }} *Status:* ${{ steps.summary.outputs.customStatus }}\n*Environment:* ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                  "text": "Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}\nEnvironment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\nBranch: ${{ github.event.client_payload.source_branch || github.ref_name }} Merged Branch: ${{ github.event.client_payload.merged_branch || 'None' }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
                 }
               ]
             }
