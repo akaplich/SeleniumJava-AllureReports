@@ -498,12 +498,12 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             {
-              "Tests": ${{ steps.summary.outputs.total_tests }},
-              "Failures": ${{ steps.summary.outputs.failures }},
+              "Tests": "${{ steps.summary.outputs.total_tests }}",
+              "Failures": "${{ steps.summary.outputs.failures }}",
               "SHA": "Example text",
               "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
               "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
-              "Status": "${{ steps.summary.outputs.customStatus }},
+              "Status": "${{ steps.summary.outputs.customStatus }}",
               "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             }
         
