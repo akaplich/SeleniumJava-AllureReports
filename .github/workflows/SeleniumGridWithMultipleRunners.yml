@@ -464,11 +464,11 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: 'all-test-results/**/**/*.xml'
-          check_name: "Aggregated Test Results"
+          check_name: "Aggregated Test Results Report"
           comment_mode: off
           fail_on: nothing
 
-      - name: Aggregated Surefire Reports
+      - name: Upload Aggregated Surefire Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -480,7 +480,7 @@ jobs:
       - name: Extract Surefire Summary
         id: summary
         run: |
-          TOTAL=$(grep -ho 'tests="[0-9]*"' **/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
+          TOTAL=$(grep -ho 'tests="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
           FAILURES=$(grep -ho 'failures="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')          
           echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
           echo "failures=$FAILURES" >> $GITHUB_OUTPUT
