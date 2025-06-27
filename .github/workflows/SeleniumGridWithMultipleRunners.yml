@@ -253,8 +253,9 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-      
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
+          
           # Create Docker network
           docker network create grid
       
@@ -285,7 +286,7 @@ jobs:
               -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
               -e SE_OFFLINE_TIMEOUT=60000 \
               -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-              selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
+              selenium/node-chrome:${CHROMEVERSION}
           done
           
           # Wait for containers to initialize
@@ -296,8 +297,8 @@ jobs:
 
       - name: Check Grid Status
         run: |
-          # Get container count, default to 5 if not set
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '5' }}"
+          # Get container count, default to 1 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
           
           curl -s http://localhost:4444/status | jq .
           echo "Ensuring Grid is ready..."
@@ -321,8 +322,9 @@ jobs:
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
           CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || 'after-session' }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
       
           # Define container restart function
           restart_containers() {
@@ -344,7 +346,7 @@ jobs:
                 -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
                 -e SE_OFFLINE_TIMEOUT=60000 \
                 -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-                selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
+                selenium/node-chrome:${CHROMEVERSION}
             done
       
             # Wait for containers to initialize
