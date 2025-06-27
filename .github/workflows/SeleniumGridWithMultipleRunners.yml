@@ -483,9 +483,9 @@ jobs:
           TOTAL=$(grep -ho 'tests="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
           FAILURES=$(grep -ho 'failures="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')          
           if [ "$FAILURES" -ge 1 ]; then
-            echo "customStatus=Fail" >> $GITHUB_OUTPUT
+            echo "customStatus=FAILED" >> $GITHUB_OUTPUT
           else
-            echo "customStatus=Pass" >> $GITHUB_OUTPUT
+            echo "customStatus=PASSED" >> $GITHUB_OUTPUT
           fi
           echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
           echo "failures=$FAILURES" >> $GITHUB_OUTPUT
@@ -501,7 +501,7 @@ jobs:
               "attachments": [
                 {
                   "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}",
-                  "text": "*Test Results*\n*Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}\n*Status:* ${{ steps.summary.outputs.customStatus }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                  "text": "*Tests:* ${{ steps.summary.outputs.total_tests }} *Failures:* ${{ steps.summary.outputs.failures }} *Status:* ${{ steps.summary.outputs.customStatus }}\n*Environment:* ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
                 }
               ]
             }
