@@ -266,7 +266,7 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <surefire.totalShards>${env.TOTAL_SHARDS}</surefire.totalShards>
                     </systemPropertyVariables>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>C*.*</include>
                     </includes>

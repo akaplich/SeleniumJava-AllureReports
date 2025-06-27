@@ -400,11 +400,7 @@ jobs:
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
             IFS=',' read -ra TEST_ARRAY <<< "${{ matrix.Runners.tests }}"
-            
-            // disables the shell’s "exit immediately on error" behavior
-            set +e
-            FAIL=0
-          
+                    
             for TEST in "${TEST_ARRAY[@]}"; do
               echo "Running test: $TEST"
       
@@ -415,7 +411,7 @@ jobs:
               
               mvn test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
             done
-            exit $FAIL
+
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
