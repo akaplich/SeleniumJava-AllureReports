@@ -480,8 +480,8 @@ jobs:
       - name: Extract Surefire Summary
         id: summary
         run: |
-          TOTAL=$(grep -h '<testsuite' all-test-results/**/target/surefire-reports/*.xml | awk -F'"' '{sum+=$4} END {print sum}')
-          FAILURES=$(grep -h '<testsuite' all-test-results/**/target/surefire-reports/*.xml | awk -F'"' '{sum+=$8} END {print sum}')          
+          TOTAL=$(grep -ho 'tests="[0-9]*"' **/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
+          FAILURES=$(grep -ho 'failures="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')          
           echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
           echo "failures=$FAILURES" >> $GITHUB_OUTPUT
 
