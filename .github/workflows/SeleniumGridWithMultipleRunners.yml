@@ -503,13 +503,13 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*Test Results*\n*Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}\n*Status:* ${{ steps.summary.outputs.customStatus }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
                   }
                 }
               ],
               "attachments": [
                 {
                   "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}"
+                  "text": "*Test Results*\n*Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}\n*Status:* ${{ steps.summary.outputs.customStatus }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
                 }
               ]
             }
