@@ -384,7 +384,7 @@ jobs:
             -Dwebdriver.remote.handshake.timeout=90000
           )
       
-          # Run with specific test if provided
+          # Run with specific test if provided        
           if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
             TEST="${{ matrix.Runners.test }}"
@@ -395,12 +395,16 @@ jobs:
               restart_containers
             fi
       
-            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST} -fae
+            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST} -fae 
       
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
             IFS=',' read -ra TEST_ARRAY <<< "${{ matrix.Runners.tests }}"
-      
+            
+            // disables the shell’s "exit immediately on error" behavior
+            set +e
+            FAIL=0
+          
             for TEST in "${TEST_ARRAY[@]}"; do
               echo "Running test: $TEST"
       
@@ -408,10 +412,10 @@ jobs:
               if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
                 restart_containers
               fi
-      
+              
               mvn test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
             done
-      
+            exit $FAIL
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
