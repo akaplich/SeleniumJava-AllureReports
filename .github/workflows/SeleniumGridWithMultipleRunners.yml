@@ -494,17 +494,24 @@ jobs:
         if: ${{ github.event.inputs.SendSlackMessage == 'true' || github.event.client_payload.SendSlackMessage == 'true' }}
         uses: slackapi/slack-github-action@v2.1.0
         with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook: ${{ secrets.SLACK_APP_WEBHOOK_URL }}
           webhook-type: incoming-webhook
           payload: |
             {
-              "Tests": "${{ steps.summary.outputs.total_tests }}",
-              "Failures": "${{ steps.summary.outputs.failures }}",
-              "SHA": "Example text",
-              "TestSet": "${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}",
-              "Branch": "${{ github.event.client_payload.source_branch || github.ref_name }}",
-              "Status": "${{ steps.summary.outputs.customStatus }}",
-              "RunURL": "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Test Results*\n*Tests:* ${{ steps.summary.outputs.total_tests }}\n*Failures:* ${{ steps.summary.outputs.failures }}\n*Status:* ${{ steps.summary.outputs.customStatus }}\n*Branch:* ${{ github.event.client_payload.source_branch || github.ref_name }}\n*Run:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                  }
+                }
+              ],
+              "attachments": [
+                {
+                  "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}"
+                }
+              ]
             }
         
 
