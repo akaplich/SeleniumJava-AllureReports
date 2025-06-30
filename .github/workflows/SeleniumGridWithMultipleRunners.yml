@@ -109,7 +109,7 @@ jobs:
           TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
           BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
           MERGED_BRANCH="${{ github.event.client_payload.merged_branch || 'None' }}"
-          COMMIT_SHA="${{ github.event.client_payload.commit_sha || 'None' }}"
+          COMMIT_SHA="${{ github.event.client_payload.commit || 'None' }}"
           WORKFLOW_SOURCE="${{ github.event.client_payload.workflow_source || 'None' }}"
           
           # Create a markdown summary
@@ -118,7 +118,7 @@ jobs:
           echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
           echo "| Branch | ${BRANCH} |" >> $GITHUB_STEP_SUMMARY
           echo "| Merged Branch | ${MERGED_BRANCH} |" >> $GITHUB_STEP_SUMMARY          
-          echo "| Commit SHA | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
           echo "| Workflow Source | ${WORKFLOW_SOURCE} |" >> $GITHUB_STEP_SUMMARY          
           echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
           echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
@@ -508,7 +508,7 @@ jobs:
               "attachments": [
                 {
                   "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}",
-                  "text": "Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}\nEnvironment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>\nBranch: ${{ github.event.client_payload.source_branch || github.ref_name }}\nMerged Branch: ${{ github.event.client_payload.merged_branch || 'None' }}"
+                  "text": "Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}\nEnvironment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>\nBranch: ${{ github.event.client_payload.source_branch || github.ref_name }}\nCommit: ${{ github.event.client_payload.commit || 'None' }}"
                 }
               ]
             }
