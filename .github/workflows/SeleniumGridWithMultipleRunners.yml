@@ -508,7 +508,12 @@ jobs:
               "attachments": [
                 {
                   "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}",
-                  "text": "Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}\nEnvironment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\nRun: <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>\nBranch: ${{ github.event.client_payload.source_branch || github.ref_name }}\nCommit: ${{ github.event.client_payload.commit || 'None' }}"
+                  "text": >-
+                    Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}
+                    Environment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}
+                    Run: ${{ format('<https://github.com/{0}/actions/runs/{1}|View Run>', github.repository, github.run_id) }}
+                    Branch: ${{ github.event.client_payload.source_branch || github.ref_name }}
+                    Commit: ${{ github.event.client_payload.commit && format('<https://github.com/brightideainc/main/commit/{0}|View Commit>', github.event.client_payload.commit) || 'None' }}                
                 }
               ]
             }
