@@ -81,7 +81,11 @@ on:
 
   repository_dispatch:
     types: [run-selenium-tests]
-
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  checks: write
 jobs:
   setup:
     runs-on: ubuntu-latest
