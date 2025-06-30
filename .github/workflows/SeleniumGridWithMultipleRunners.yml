@@ -471,6 +471,18 @@ jobs:
           name: merged-allure-report
           path: merged-allure-report
 
+      - name: Deploy merged Allure HTML report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: merged-allure-report
+            publish_branch: gh-pages
+            destination_dir: allure-report
+            keep_files: false
+            force_orphan: true
+            commit_message: "Deploy Allure Report - ${{ github.sha }}"
+            allow_empty_commit: true
+
       - name: Create Run Summary
         run: |
           # Get parameters
