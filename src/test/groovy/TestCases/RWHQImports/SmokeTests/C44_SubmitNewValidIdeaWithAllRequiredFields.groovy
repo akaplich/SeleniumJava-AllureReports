@@ -74,7 +74,7 @@ class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         //Login
         logger.debug("Browser");
         new Wait().run("Seconds":/5/.toString())
-        new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1/.toString())
+        new Login().run("Email":/${params."Username Email"}/.toString(),"Password":/brightidea1delete/.toString())
         //Set to Lab Environment
         logger.debug("SettoLabEnvironment");
         new SettoLabEnvironment().run("Email":/${params."Username Email"}/.toString())
