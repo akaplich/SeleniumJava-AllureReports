@@ -33,7 +33,7 @@ class C5089_ActionsMenu_ExportHistory extends TestBase {
         variables."Unlimited Idea Box Manager License Type" = null
         variables."Idea Box Manager License Type Purchased Count" = null
     }
-    @Test @Tag("OldRulesModalRegression")
+    @Test @Tag("NewRulesModalRegression")
     //Need to figure out how to run this test case
     @Disabled
     public void testcase(){     

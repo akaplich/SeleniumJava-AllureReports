@@ -13,7 +13,7 @@ class CreateCustomWebstorm{
          if(Exists.run(ID:"//SPAN[@class='app-card-name' and text()='Custom']")>0){ 
              Click.run(ID:"//SPAN[@class='app-card-name' and text()='Custom']")
         }  
-        
+        sleep(2000)
         SetText.run(Text:params."Webstorm Title",ID:"//*[@id='name']")
         SetText.run(Text:params."Description",ID:"//*[@id='description']")
         SetText.run(Text:params."Submission Name",ID:"//*[@id='submission_name']","Type of Clear":"Cut")

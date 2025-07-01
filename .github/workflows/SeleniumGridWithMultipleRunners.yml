@@ -19,6 +19,7 @@ on:
         options:
           - Smoke
           - DockerSet
+          - NewRulesModalRegression
           - OldRulesModalRegression
           - TestGroup
           - ShardRun
@@ -78,9 +79,13 @@ on:
         options:
           - '136.0'
           - 'latest'
-
+      SendSlackMessage:
+        description: 'Send Slack Message?'
+        type: boolean
+        required: true
+        default: false
   repository_dispatch:
-    types: [run-selenium-tests]
+    types: [run-mr-selenium-tests]
 permissions:
   contents: write
   pages: write
@@ -93,6 +98,50 @@ jobs:
       test-matrix: ${{ steps.create-matrix.outputs.matrix }}
       test-count: ${{ steps.create-matrix.outputs.test-count }}
     steps:
+      - name: Create Run Summary
+        run: |
+          # Get parameters
+          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
+          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
+          CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || 'after-test'}}"         
+          ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
+          SEND_SLACK_MESSAGE="${{ github.event.inputs.SendSlackMessage || github.event.client_payload.SendSlackMessage }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
+          MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
+          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless || 'false'}}"
+          RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
+          TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
+          BRANCH="${{ github.event.client_payload.source_branch || github.ref_name }}"
+          MERGED_BRANCH="${{ github.event.client_payload.merged_branch || 'None' }}"
+          COMMIT_SHA="${{ github.event.client_payload.commit || 'None' }}"
+          WORKFLOW_SOURCE="${{ github.event.client_payload.workflow_source || 'None' }}"
+          
+          # Create a markdown summary
+          echo "## Test Trigger Parameters" >> $GITHUB_STEP_SUMMARY  
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | ${BRANCH} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Merged Branch | ${MERGED_BRANCH} |" >> $GITHUB_STEP_SUMMARY          
+          echo "| Commit | ${COMMIT_SHA} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Workflow Source | ${WORKFLOW_SOURCE} |" >> $GITHUB_STEP_SUMMARY          
+          echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
+          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Chrome Version | ${CHROMEVERSION} |" >> $GITHUB_STEP_SUMMARY         
+          echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Containers Per Runner | ${CONTAINERS_PER_RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY         
+          echo "| Container Restart Strategy | ${CONTAINER_RESTART} |" >> $GITHUB_STEP_SUMMARY    
+          echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Send Slack Message | ${SEND_SLACK_MESSAGE} |" >> $GITHUB_STEP_SUMMARY
+          # Add TestList to summary if specified
+          if [[ "$TEST_LIST" != "None" ]]; then
+            echo "| Specific Tests | ${TEST_LIST} |" >> $GITHUB_STEP_SUMMARY
+          fi        
+        
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -213,8 +262,9 @@ jobs:
 
       - name: Start Selenium Grid
         run: |
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-      
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
+          
           # Create Docker network
           docker network create grid
       
@@ -245,7 +295,7 @@ jobs:
               -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
               -e SE_OFFLINE_TIMEOUT=60000 \
               -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-              selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
+              selenium/node-chrome:${CHROMEVERSION}
           done
           
           # Wait for containers to initialize
@@ -256,8 +306,8 @@ jobs:
 
       - name: Check Grid Status
         run: |
-          # Get container count, default to 5 if not set
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '5' }}"
+          # Get container count, default to 1 if not set
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
           
           curl -s http://localhost:4444/status | jq .
           echo "Ensuring Grid is ready..."
@@ -281,8 +331,9 @@ jobs:
           MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
           RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
           RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
-          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
+          CONTAINER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '1' }}"
           CONTAINER_RESTART="${{ github.event.inputs.ContainerRestartStrategy || github.event.client_payload.ContainerRestartStrategy || 'after-session' }}"
+          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion || '136.0' }}"
       
           # Define container restart function
           restart_containers() {
@@ -304,7 +355,7 @@ jobs:
                 -e SE_DRAIN_AFTER_SESSION_COUNT=1 \
                 -e SE_OFFLINE_TIMEOUT=60000 \
                 -e SE_NODE_OVERRIDE_MAX_SESSIONS=true \
-                selenium/node-chrome:${{github.event.inputs.ChromeVersion}}
+                selenium/node-chrome:${CHROMEVERSION}
             done
       
             # Wait for containers to initialize
@@ -345,7 +396,7 @@ jobs:
             -Dallure.results.directory=target/allure-results
           )
       
-          # Run with specific test if provided
+          # Run with specific test if provided        
           if [[ -n "${{ matrix.Runners.test }}" ]]; then
             # Individual test from input list
             TEST="${{ matrix.Runners.test }}"
@@ -356,12 +407,12 @@ jobs:
               restart_containers
             fi
       
-            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
+            mvn clean test "${MAVEN_PARAMS[@]}" -Dtest=${TEST} -fae 
       
           elif [[ -n "${{ matrix.Runners.tests }}" ]]; then
             # Multiple tests from discovered tag
             IFS=',' read -ra TEST_ARRAY <<< "${{ matrix.Runners.tests }}"
-      
+                    
             for TEST in "${TEST_ARRAY[@]}"; do
               echo "Running test: $TEST"
       
@@ -369,10 +420,10 @@ jobs:
               if [[ "$CONTAINER_RESTART" == "after-test" ]]; then
                 restart_containers
               fi
-      
+              
               mvn test "${MAVEN_PARAMS[@]}" -Dtest=${TEST}
             done
-      
+
           else
             # Sharding-based approach (fallback)
             TOTAL_SHARDS="${{ needs.setup.outputs.test-count }}"
@@ -390,7 +441,7 @@ jobs:
               -Dsurefire.shardIndex=${SHARD_INDEX} \
               -Dsurefire.totalShards=${TOTAL_SHARDS} \
               -Dsurefire.printSummary=true \
-              -Dsurefire.useFile=false
+              -Dsurefire.useFile=false -fae
             fi
       - name: Upload raw Allure results
         uses: actions/upload-artifact@v4
@@ -431,11 +482,11 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: 'all-test-results/**/**/*.xml'
-          check_name: "Aggregated Test Results"
+          check_name: "Aggregated Test Results Report"
           comment_mode: off
           fail_on: nothing
 
-      - name: Aggregated Surefire Reports
+      - name: Upload Aggregated Surefire Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -486,31 +537,31 @@ jobs:
             commit_message: "Deploy Allure Report - ${{ github.sha }}"
             allow_empty_commit: true
 
-      - name: Create Run Summary
+      - name: Extract Surefire Summary
+        id: summary
         run: |
-          # Get parameters
-          RUNNER_COUNT="${{ github.event.inputs.Runners || github.event.client_payload.Runners || '2' }}"
-          CONTAINERS_PER_RUNNER_COUNT="${{ github.event.inputs.ContainersPerRunner || github.event.client_payload.ContainersPerRunner || '4' }}"
-          ENVIRONMENT="${{ github.event.inputs.Environment || github.event.client_payload.Environment }}"
-          CHROMEVERSION="${{ github.event.inputs.ChromeVersion || github.event.client_payload.ChromeVersion }}"
-          MVN_GROUP="${{ github.event.inputs.Mvn_Group || github.event.client_payload.Mvn_Group }}"
-          RUN_HEADLESS="${{ github.event.inputs.Run_Headless || github.event.client_payload.Run_Headless }}"
-          RETRY_COUNT="${{ github.event.inputs.RetryCount || github.event.client_payload.RetryCount || '0' }}"
-          TEST_LIST="${{ github.event.inputs.TestList || github.event.client_payload.TestList || 'None' }}"
-
-          # Create a markdown summary
-          echo "## Test Run Parameters" >> $GITHUB_STEP_SUMMARY
-          echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "| :--- | :--- |" >> $GITHUB_STEP_SUMMARY
-          echo "| Environment | ${ENVIRONMENT} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Chrome Version | ${CHROMEVERSION} |" >> $GITHUB_STEP_SUMMARY         
-          echo "| Test Group | ${MVN_GROUP} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Headless Mode | ${RUN_HEADLESS} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Parallel Runners | ${RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Containers Per Runner | ${CONTAINERS_PER_RUNNER_COUNT} |" >> $GITHUB_STEP_SUMMARY         
-          echo "| Container Restart Strategy | ${CONTAINER_RESTART} |" >> $GITHUB_STEP_SUMMARY    
-          echo "| Retry Count | ${RETRY_COUNT} |" >> $GITHUB_STEP_SUMMARY
-          # Add TestList to summary if specified
-          if [[ "$TEST_LIST" != "None" ]]; then
-            echo "| Specific Tests | ${TEST_LIST} |" >> $GITHUB_STEP_SUMMARY
+          TOTAL=$(grep -ho 'tests="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')
+          FAILURES=$(grep -ho 'failures="[0-9]*"' all-test-results/**/target/surefire-reports/*.xml | sed -E 's/[^0-9]*([0-9]+).*/\1/' | awk '{sum+=$1} END {print sum}')          
+          if [ "$FAILURES" -ge 1 ]; then
+            echo "customStatus=FAILED" >> $GITHUB_OUTPUT
+          else
+            echo "customStatus=PASSED" >> $GITHUB_OUTPUT
           fi
+          echo "total_tests=$TOTAL" >> $GITHUB_OUTPUT
+          echo "failures=$FAILURES" >> $GITHUB_OUTPUT
+
+      - name: Post a message Slack Channel 'Tests'
+        if: ${{ github.event.inputs.SendSlackMessage == 'true' || github.event.client_payload.SendSlackMessage == 'true' }}
+        uses: slackapi/slack-github-action@v2.1.0
+        with:
+          webhook: ${{ secrets.SLACK_APP_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "${{ steps.summary.outputs.failures != '0' && '#ff0000' || '#36a64f' }}",
+                  "text": "Tests: ${{ steps.summary.outputs.total_tests }} Failures: ${{ steps.summary.outputs.failures }} Status: ${{ steps.summary.outputs.customStatus }}\nEnvironment: ${{ github.event.inputs.Environment || github.event.client_payload.Environment }}\nRun: ${{ format('<https://github.com/{0}/actions/runs/{1}|View Run>', github.repository, github.run_id) }}\nBranch: ${{ github.event.client_payload.source_branch || github.ref_name }}\nCommit: ${{ github.event.client_payload.commit && format('<https://github.com/brightideainc/main/commit/{0}|View Commit>', github.event.client_payload.commit) || 'None' }}"
+                }
+              ]
+            }

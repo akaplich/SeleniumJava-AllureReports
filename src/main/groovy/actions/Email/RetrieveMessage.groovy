@@ -45,10 +45,14 @@ class RetrieveMessage{
                     	}else{
                             return messages[i]
                         }
-                 	} 
+                 	} else{
+                        println("Subject Did Not Match")
+                    }
                }
             //if no Email Subject specified, return the latest message in inbox
-            }else{return messages[messages.length-1]} 
+            }else{
+                return messages[messages.length-1]
+            }
         }catch(Exception e){
             e.printStackTrace()
             return null
