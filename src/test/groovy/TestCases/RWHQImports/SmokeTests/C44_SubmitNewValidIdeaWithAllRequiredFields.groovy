@@ -52,7 +52,7 @@ class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
         Action58123c20fa4ee77809f468f6(variables)
         //Navigate WebStorm or MTS
         logger.debug("NavigateWebStormAdminBar");
-        new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
+        // REMOVE COMMENT new NavigateWebStormAdminBar().run("WebStorm Name":/Custom App/.toString(),"Area to Navigate to":/Post Idea/.toString())
         //Set Custom and Other App Post Idea
         logger.debug("SetCustomAppPostIdea");
         new SetCustomAppPostIdea().run("Title":/Idea Title/.toString(),"Description":/Idea Description/.toString(),"Category":/New Product/.toString(),"Required Short Question":/required short/.toString(),"Action":/Submit Idea/.toString())
