@@ -48,6 +48,7 @@ class OnFailureExtension implements AfterTestExecutionCallback {
                     "png",
                     new ByteArrayInputStream(bytes)
             )
+
         } catch (Exception e) {
             logger.error("Failed to capture screenshot: ", e)
         }
