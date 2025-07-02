@@ -7,7 +7,6 @@ import actions.selenium.Browser
 import ru.yandex.qatools.ashot.AShot
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
 import javax.imageio.ImageIO
-
 import java.awt.image.BufferedImage
 
 

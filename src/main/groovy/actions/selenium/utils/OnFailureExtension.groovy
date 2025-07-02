@@ -9,7 +9,7 @@ import org.openqa.selenium.logging.LogEntries
 import org.openqa.selenium.logging.LogType
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-
+import io.qameta.allure.Allure
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
@@ -39,6 +39,15 @@ class OnFailureExtension implements AfterTestExecutionCallback {
             Files.createDirectories(Paths.get("target/surefire-reports/screenshots"))
             Files.copy(screenshot.toPath(), Paths.get(screenshotPath))
             logger.info("Screenshot saved at: " + screenshotPath)
+            //added to Allure report
+            byte[] bytes = Files.readAllBytes(Paths.get(screenshotPath));
+            System.out.println(">>> Attaching screenshot to Allure for test: " + testcaseName);
+            Allure.getLifecycle().addAttachment(
+                    "Failure screenshot of ${testcaseName}",
+                    "image/png",
+                    "png",
+                    new ByteArrayInputStream(bytes)
+            )
         } catch (Exception e) {
             logger.error("Failed to capture screenshot: ", e)
         }
