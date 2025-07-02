@@ -49,7 +49,7 @@ class Browser{
     private static final Logger logger = LoggerFactory.getLogger(Browser.class);
 
     private static final ThreadLocal<WebDriver> driverThreadLocal = ThreadLocal.withInitial(() -> {
-        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
         return new ChromeDriver();
     });
 
