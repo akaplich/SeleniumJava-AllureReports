@@ -1,6 +1,7 @@
 package TestCases.RWHQImports.SmokeTests
 
 import BaseClasses.TestBase
+import BaseClasses.FailureCaptureExtension
 import actions.API.Utils.CopyAffiliate
 import actions.IdeaBoard.AccessIdeainIdeaBoardpage30
 import actions.IdeaBoard.VerifyIdeainIdeaBoardpage30
@@ -15,10 +16,12 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 //C44 - Submit new valid Idea with all Required fields
+//@ExtendWith(FailureCaptureExtension.class)
 class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
     private static def variables = [:]
     private static final Logger logger = LoggerFactory.getLogger(C44_SubmitNewValidIdeaWithAllRequiredFields.class);

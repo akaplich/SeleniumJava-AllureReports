@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory
 import io.qameta.allure.Step
 
 @ExtendWith(OnFailureExtension.class)
-@ExtendWith(FailureCaptureExtension)
+@ExtendWith(FailureCaptureExtension.class)
 @ExtendWith(AllureJunit5.class)
 public class TestBase {
     private static final Logger logger = LoggerFactory.getLogger(TestBase.class);
