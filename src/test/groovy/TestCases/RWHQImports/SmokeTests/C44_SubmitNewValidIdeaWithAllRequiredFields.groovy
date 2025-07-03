@@ -1,7 +1,7 @@
 package TestCases.RWHQImports.SmokeTests
 
 import BaseClasses.TestBase
-import BaseClasses.FailureCaptureExtension
+
 import actions.API.Utils.CopyAffiliate
 import actions.IdeaBoard.AccessIdeainIdeaBoardpage30
 import actions.IdeaBoard.VerifyIdeainIdeaBoardpage30
@@ -9,14 +9,12 @@ import actions.PostIdea.SetCustomAppPostIdea
 import actions.Utils.SettoLabEnvironment
 import actions.ViewIdea.VerifyIdeainViewIdeapage
 import actions.general.Login
-import actions.general.NavigateWebStormAdminBar
 import actions.general.Wait
 import actions.selenium.Browser
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 

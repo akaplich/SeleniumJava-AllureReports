@@ -16,22 +16,44 @@ import java.nio.file.StandardOpenOption
 
 class OnFailureExtension implements AfterTestExecutionCallback {
     private static final Logger logger = LoggerFactory.getLogger(OnFailureExtension.class)
+    private static final String RERUN_FILE_PATH = "target/surefire-reports/rerunFailingTests.txt"
+    private static Set<String> recordedFailures = Collections.synchronizedSet(new HashSet<>())
+
+    private static void recordFailure(ExtensionContext context) {
+        try {
+            def outputFile = new File(RERUN_FILE_PATH)
+            def testClass = context.getRequiredTestClass().name
+            def testMethod = context.getRequiredTestMethod().name
+            def fullName = "$testClass#$testMethod"
+
+            if (recordedFailures.add(fullName)) {
+                println(">>> Saving test name to rerun file: $fullName")
+                outputFile.withWriterAppend { writer ->
+                    writer.writeLine(fullName)
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Failed to record failure: ", e)
+        }
+    }
 
     @Override
     void afterTestExecution(ExtensionContext context) {
+
         if (context.getExecutionException().isPresent()) {
             String testClassName = context.getRequiredTestClass().getSimpleName()
             String testMethodName = context.getRequiredTestMethod().getName()
             String testIdentifier = "${testClassName}_${testMethodName}"
+            recordFailure(context)
             captureScreenshot(testClassName)
             captureBrowserLogs(testIdentifier)
             captureDom(testIdentifier)
         }
     }
 
-    private void captureScreenshot(String testClassName) {
+    private void captureScreenshot(String testcaseName) {
         try {
-            logger.info("Saving screenshot using the testcase name: ${testClassName}")
+            logger.info("Saving screenshot using the testcase name: ${testcaseName}")
             // Capture screenshot
             File screenshot = ((TakesScreenshot) Browser.Driver).getScreenshotAs(OutputType.FILE)
             String screenshotPath = "target/surefire-reports/screenshots/${testcaseName}-end-screenshot.png"
@@ -40,7 +62,7 @@ class OnFailureExtension implements AfterTestExecutionCallback {
             logger.info("Screenshot saved at: " + screenshotPath)
             //added to Allure report
             byte[] bytes = Files.readAllBytes(Paths.get(screenshotPath));
-            System.out.println(">>> Attaching screenshot to Allure for test: " + testcaseName);
+            logger.info("Attaching screenshot to Allure for test: ${testcaseName}")
             Allure.getLifecycle().addAttachment(
                     "Failure screenshot of ${testcaseName}",
                     "image/png",
@@ -103,7 +125,6 @@ class OnFailureExtension implements AfterTestExecutionCallback {
                     StandardOpenOption.CREATE,
                     StandardOpenOption.TRUNCATE_EXISTING
                 )
-
                 logger.info("DOM saved at: ${domPath}")
             } else {
                 logger.info("Could not retrieve DOM")
