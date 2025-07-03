@@ -133,9 +133,4 @@ class OnFailureExtension implements AfterTestExecutionCallback {
             logger.error("Failed to capture DOM: ", e)
         }
     }
-    private void attachRerunHistoryToAllure(){
-        try{
-
-        }
-    }
 }
