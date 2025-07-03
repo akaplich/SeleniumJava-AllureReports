@@ -23,16 +23,15 @@ class OnFailureExtension implements AfterTestExecutionCallback {
             String testClassName = context.getRequiredTestClass().getSimpleName()
             String testMethodName = context.getRequiredTestMethod().getName()
             String testIdentifier = "${testClassName}_${testMethodName}"
-
             captureScreenshot(testClassName)
             captureBrowserLogs(testIdentifier)
             captureDom(testIdentifier)
         }
     }
 
-    private void captureScreenshot(String testcaseName) {
+    private void captureScreenshot(String testClassName) {
         try {
-            logger.info("Saving screenshot using the testcase name: ${testcaseName}")
+            logger.info("Saving screenshot using the testcase name: ${testClassName}")
             // Capture screenshot
             File screenshot = ((TakesScreenshot) Browser.Driver).getScreenshotAs(OutputType.FILE)
             String screenshotPath = "target/surefire-reports/screenshots/${testcaseName}-end-screenshot.png"

@@ -86,10 +86,7 @@ class C44_SubmitNewValidIdeaWithAllRequiredFields extends TestBase {
 
     @AfterEach
     public void afterState(){
-        if (Browser.Driver != null) {
-            System.out.println(">>> Test passed. Quitting browser.")
-            Browser.quitDriver()
-        }
+        System.out.println(">>> [Child] afterEach executing");
     }
 }
 

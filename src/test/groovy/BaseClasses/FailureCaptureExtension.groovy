@@ -61,18 +61,18 @@ class FailureCaptureExtension implements TestWatcher, TestExecutionExceptionHand
             // don’t let screenshot errors hide the original test failure
             e.printStackTrace()
         }
-        finally{
+        /*finally{
             if (Browser.Driver != null) {
                 System.out.println(">>> Quitting browser after failure screenshot.")
                 Browser.quitDriver()
             }
-        }
+        }*/
     }
-    void testSuccessful(ExtensionContext context) {
+    /*void testSuccessful(ExtensionContext context) {
         // Quit driver normally if it wasn't already
         if (Browser.Driver != null) {
             System.out.println(">>> Test passed. Quitting browser.")
             Browser.quitDriver()
         }
-    }
+    }*/
 }

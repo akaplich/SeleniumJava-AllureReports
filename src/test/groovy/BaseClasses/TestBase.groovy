@@ -34,6 +34,7 @@ public class TestBase {
 
     @AfterEach
     public void tb_afterEach() {
+        System.out.println(">>> [TestBase] afterEach executing");
         logger.debug("TestBase AfterEach");
         new CloseWindow().run([:])
         new DeleteAffiliate().run([:])
