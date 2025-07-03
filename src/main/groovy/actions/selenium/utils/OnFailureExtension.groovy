@@ -16,7 +16,7 @@ import java.nio.file.StandardOpenOption
 
 class OnFailureExtension implements AfterTestExecutionCallback {
     private static final Logger logger = LoggerFactory.getLogger(OnFailureExtension.class)
-    //private static final String RERUN_FILE_PATH = "target/surefire-reports/rerunFailingTests.txt"
+    private static final String RERUN_FILE_PATH = "target/surefire-reports/rerunFailingTests.txt"
     private static Set<String> recordedFailures = Collections.synchronizedSet(new HashSet<>())
 
     private static void recordFailure(ExtensionContext context) {
