@@ -15,15 +15,19 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import io.qameta.allure.Step
 
+import java.nio.file.Files
+
 @ExtendWith(OnFailureExtension.class)
 //@ExtendWith(FailureCaptureExtension.class)
 @ExtendWith(AllureJunit5.class)
 public class TestBase {
     private static final Logger logger = LoggerFactory.getLogger(TestBase.class);
+    private static final String RERUN_FILE_PATH = "target/surefire-reports/rerunFailingTests.txt";
 
     @BeforeAll
     public static void tb_beforeAll(){
         logger.debug("TestBase BeforeAll");
+        clearRerunFile();
 
     }
     @BeforeEach
@@ -36,12 +40,13 @@ public class TestBase {
     public void tb_afterEach() {
         System.out.println(">>> [TestBase] afterEach executing");
         logger.debug("TestBase AfterEach");
-        new CloseWindow().run([:])
+        new CloseWindow().run([:]) // this quits the browser
         new DeleteAffiliate().run([:])
     }
     @AfterAll
     public static void tb_afterAll(){
         logger.debug("TestBase AfterAll");
+        attachRerunFileToAllure();
     }
     //wrap each action in a step
     //this will call the Allure wrapper that adds the Step annotation
@@ -54,6 +59,36 @@ public class TestBase {
     @Step("{stepName}")
     protected def stepWrapper(String stepName, Closure closure) {
         return closure.call()
+    }
+    private static void clearRerunFile() {
+        try {
+            File rerunFile = new File(RERUN_FILE_PATH);
+            if (rerunFile.exists()) {
+                if (rerunFile.delete()) {
+                    logger.info("Cleared previous rerun failing tests file: " + RERUN_FILE_PATH);
+                } else {
+                    logger.warn("Failed to delete rerun failing tests file: " + RERUN_FILE_PATH);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Error while clearing rerun failing tests file: ", e);
+        }
+    }
+    @Attachment(value = "Rerun Failing Tests", type = "text/plain")
+    private static byte[] attachRerunFileToAllure() {
+        try {
+            File rerunFile = new File(RERUN_FILE_PATH);
+            if (rerunFile.exists()) {
+                logger.info("Attaching rerun failing tests file to Allure report.");
+                return Files.readAllBytes(rerunFile.toPath());
+            } else {
+                logger.info("No rerun failing tests file found to attach.");
+                return "No rerun failing tests recorded.".getBytes();
+            }
+        } catch (Exception e) {
+            logger.error("Failed to attach rerun failing tests file to Allure: ", e);
+            return ("Failed to attach rerun failing tests file: " + e.getMessage()).getBytes();
+        }
     }
 
 }
