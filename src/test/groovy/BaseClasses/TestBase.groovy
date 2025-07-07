@@ -81,9 +81,9 @@ public class TestBase {
         File rerunFile = new File(RERUN_FILE_PATH);
         byte[] bytes = Files.readAllBytes(Paths.get(rerunFile.toPath()));
         Allure.getLifecycle().addAttachment(
-                "Failure screenshot of ${testcaseName}",
-                "image/png",
-                "png",
+                "Rerun Failing Tests",
+                "text/plain",
+                "txt",
                 new ByteArrayInputStream(bytes)
         )
         /*try {
