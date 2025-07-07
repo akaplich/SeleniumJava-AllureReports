@@ -4,6 +4,7 @@ import actions.API.Utils.DeleteAffiliate
 import actions.selenium.CloseWindow
 import actions.selenium.utils.OnFailureExtension
 import actions.selenium.Browser
+import io.qameta.allure.Allure
 import io.qameta.allure.Attachment
 import io.qameta.allure.junit5.AllureJunit5
 import org.junit.jupiter.api.AfterAll
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory
 import io.qameta.allure.Step
 
 import java.nio.file.Files
+import java.nio.file.Paths
 
 @ExtendWith(OnFailureExtension.class)
 //@ExtendWith(FailureCaptureExtension.class)
@@ -76,7 +78,15 @@ public class TestBase {
     }
     @Attachment(value = "Rerun Failing Tests", type = "text/plain")
     private static byte[] attachRerunFileToAllure() {
-        try {
+        File rerunFile = new File(RERUN_FILE_PATH);
+        byte[] bytes = Files.readAllBytes(Paths.get(rerunFile.toPath()));
+        Allure.getLifecycle().addAttachment(
+                "Failure screenshot of ${testcaseName}",
+                "image/png",
+                "png",
+                new ByteArrayInputStream(bytes)
+        )
+        /*try {
             File rerunFile = new File(RERUN_FILE_PATH);
             if (rerunFile.exists()) {
                 logger.info("Attaching rerun failing tests file to Allure report.");
@@ -88,7 +98,7 @@ public class TestBase {
         } catch (Exception e) {
             logger.error("Failed to attach rerun failing tests file to Allure: ", e);
             return ("Failed to attach rerun failing tests file: " + e.getMessage()).getBytes();
-        }
+        }*/
     }
 
 }
