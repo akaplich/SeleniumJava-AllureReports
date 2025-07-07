@@ -79,7 +79,7 @@ public class TestBase {
     @Attachment(value = "Rerun Failing Tests", type = "text/plain")
     private static byte[] attachRerunFileToAllure() {
         File rerunFile = new File(RERUN_FILE_PATH);
-        byte[] bytes = Files.readAllBytes(Paths.get(rerunFile.toPath()));
+        byte[] bytes = Files.readAllBytes(rerunFile.toPath());
         Allure.getLifecycle().addAttachment(
                 "Rerun Failing Tests",
                 "text/plain",
