@@ -79,13 +79,19 @@ public class TestBase {
     @Attachment(value = "Rerun Failing Tests", type = "text/plain")
     private static byte[] attachRerunFileToAllure() {
         File rerunFile = new File(RERUN_FILE_PATH);
-        byte[] bytes = Files.readAllBytes(rerunFile.toPath());
-        Allure.getLifecycle().addAttachment(
-                "Rerun Failing Tests",
-                "text/plain",
-                "txt",
-                new ByteArrayInputStream(bytes)
-        )
+        if (!rerunFile.exists()) {
+            logger.info("No rerun failing tests file found to attach.");
+            return "No rerun failing tests recorded.".getBytes();
+        } else {
+            logger.info("Attaching rerun failing tests file to Allure report.");
+            byte[] bytes = Files.readAllBytes(rerunFile.toPath());
+            Allure.getLifecycle().addAttachment(
+                    "Rerun Failing Tests",
+                    "text/plain",
+                    "txt",
+                    new ByteArrayInputStream(bytes)
+            )
+        }
         /*try {
             File rerunFile = new File(RERUN_FILE_PATH);
             if (rerunFile.exists()) {
