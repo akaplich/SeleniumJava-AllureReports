@@ -459,15 +459,6 @@ jobs:
           if-no-files-found: warn
           retention-days: 2
 
-      - name: Upload list of failed tests
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: rerunFailingTests.txt
-          path: target/surefire-reports/rerunFailingTests.txt
-          if-no-files-found: ignore
-          retention-days: 14
-
       - name: Clean up Docker resources
         if: always()
         run: |
@@ -486,6 +477,15 @@ jobs:
           pattern: test-logs-screenshots-*
           path: all-test-results
           merge-multiple: false
+
+      - name: Upload list of failed tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rerunFailingTests.txt
+          path: all-test-results/**/rerunFailingTests.txt
+          if-no-files-found: ignore
+          retention-days: 14
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
