@@ -477,17 +477,16 @@ jobs:
           pattern: test-logs-screenshots-*
           path: all-test-results
           merge-multiple: false
+
       - name: Combine rerunFailingTests.txt files
         run: |
           find . -name 'rerunFailingTests.txt' -exec cat {} + | sort | uniq > combinedRerunList.txt
-
-
 
       - name: Upload list of failed tests combined from all runners
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: rerunFailingTests.txt
+          name: combinedRerunList # This is the artifact name shown in GitHub
           # path: all-test-results/**/rerunFailingTests.txt
           path: combinedRerunList.txt
           if-no-files-found: ignore

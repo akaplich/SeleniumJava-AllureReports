@@ -11,17 +11,17 @@ jobs:
   rerun-failed-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Download rerunFailingTests.txt from artifacts
+      - name: Download combined rerun list artifact
         uses: actions/download-artifact@v4
         with:
-          name: rerunFailingTests
+          name: combinedRerunList   # <--- This matches the artifact name
           path: ./rerun-tests
 
-      - name: Read rerunFailingTests.txt
+      - name: Read combinedRerunList.txt
         id: read_file
         run: |
-          if [ -f ./rerun-tests/rerunFailingTests.txt ]; then
-            FAILED_TESTS=$(cat ./rerun-tests/rerunFailingTests.txt | paste -sd "," -)
+          if [ -f ./rerun-tests/combinedRerunList/combinedRerunList.txt ]; then
+            FAILED_TESTS=$(cat ./rerun-tests/combinedRerunList/combinedRerunList.txt | paste -sd "," -)
             echo "Failed tests found: $FAILED_TESTS"
             echo "failed_tests=$FAILED_TESTS" >> $GITHUB_OUTPUT
           else
