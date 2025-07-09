@@ -46,7 +46,7 @@ class C79_PipelineCreation_CreateDiscussApp extends TestBase {
         //Navigate
         new Navigate().run("Area to Navigate to":/Apps/.toString())
         //Select Product in Apps Pillar Page
-        new SelectProductinAppsPillarPage().run("Product":/Programs/.toString())
+        //REMOVE new SelectProductinAppsPillarPage().run("Product":/Programs/.toString())
         //Create App Webstorm
         new CreateAppWebstorm().run("App Name":/Discuss/.toString(),"Sponsor Name":/NonBI System Admin/.toString(),"Sponsor Add or Remove":/Add/.toString(),"Webstorm Title":/Discuss forum title/.toString(),"Description":/Discuss forum description/.toString(),"Action":/Create/.toString())
         //Verify Initiative Home
