@@ -1,0 +1,53 @@
+name: Rerun Failed Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      original_run_id:
+        description: 'The run ID of the original workflow'
+        required: true
+
+jobs:
+  rerun-failed-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download rerunFailingTests.txt from artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: rerunFailingTests
+          path: ./rerun-tests
+
+      - name: Read rerunFailingTests.txt
+        id: read_file
+        run: |
+          if [ -f ./rerun-tests/rerunFailingTests.txt ]; then
+            FAILED_TESTS=$(cat ./rerun-tests/rerunFailingTests.txt | paste -sd "," -)
+            echo "Failed tests found: $FAILED_TESTS"
+            echo "failed_tests=$FAILED_TESTS" >> $GITHUB_OUTPUT
+          else
+            echo "No rerun file found"
+            echo "failed_tests=" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Trigger main workflow for rerun
+        if: ${{ steps.read_file.outputs.failed_tests != '' }}
+        uses: bench-uk/workflow-dispatch@v1
+        with:
+          workflow: main-workflow.yml  # Replace with your actual main workflow file name
+          inputs: |
+            TestList: ${{ steps.read_file.outputs.failed_tests }}
+            Mvn_Group: ShardRun  # Adjust if needed to control group/shard behaviour
+            RetryCount: 0        # Set to 0 for reruns to avoid nested retries
+            Run_Headless: true   # or false based on your preference
+
+      - name: Log completion
+        run: echo "Rerun failed tests workflow completed."
+
+
+
+
+
+
+
+
+
