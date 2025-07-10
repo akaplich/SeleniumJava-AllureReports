@@ -14,7 +14,7 @@ jobs:
       - name: Download combined rerun list artifact
         uses: actions/download-artifact@v4
         with:
-          name: combinedRerunList   # <--- This matches the artifact name
+          name: combinedRerunList/combinedRerunList.txt   # <--- This matches the artifact name
           path: ./rerun-tests
 
       - name: Read combinedRerunList.txt
