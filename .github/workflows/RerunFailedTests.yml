@@ -11,6 +11,9 @@ jobs:
   rerun-failed-tests:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download combined rerun list artifact from original run
         run: |
           gh run download ${{ inputs.original_run_id }} -n combinedRerunList -D ./rerun-tests
