@@ -38,10 +38,12 @@ jobs:
         with:
           workflow: main-workflow.yml  # Replace with your actual main workflow file name
           inputs: |
-            "TestList": "${{ steps.read_file.outputs.failed_tests }}"
-            "Mvn_Group": "ShardRun"  # Adjust if needed to control group/shard behaviour
-            "RetryCount": "0"        # Set to 0 for reruns to avoid nested retries
-            "Run_Headless": "true"   # or false based on your preference
+            {
+              "TestList": "${{ steps.read_file.outputs.failed_tests }}",
+              "Mvn_Group": "ShardRun",
+              "RetryCount": "0",
+              "Run_Headless": "true"
+            }
 
       - name: Log completion
         run: echo "Rerun failed tests workflow completed."
