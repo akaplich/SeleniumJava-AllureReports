@@ -31,7 +31,7 @@ jobs:
 
       - name: Trigger main workflow for rerun
         if: ${{ steps.read_file.outputs.failed_tests != '' }}
-        uses: bench-uk/workflow-dispatch@v1
+        uses: benc-uk/workflow-dispatch@v1
         with:
           workflow: main-workflow.yml  # Replace with your actual main workflow file name
           inputs: |
