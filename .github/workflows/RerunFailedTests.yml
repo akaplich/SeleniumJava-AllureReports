@@ -72,6 +72,7 @@ jobs:
 
       - name: Download original run allure-results
         run: |
+          gh run view ${{ inputs.original_run_id }} --log --json artifacts --jq '.artifacts[].name'
           gh run download ${{ inputs.original_run_id }} -n allure-results-* -D ./original-allure-results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
