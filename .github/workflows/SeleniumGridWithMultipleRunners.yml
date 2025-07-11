@@ -6,11 +6,11 @@ on:
       Is_Rerun:
         description: 'Is this a rerun?'
         required: true
-        default: false
+        default: 'no'
         type: choice
         options:
-          - 'true'
-          - 'false'
+          - yes
+          - no
       Environment:
         description: 'Test Environment URL'
         required: true
