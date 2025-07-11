@@ -36,7 +36,7 @@ jobs:
         if: ${{ steps.read_file.outputs.failed_tests != '' }}
         uses: benc-uk/workflow-dispatch@v1
         with:
-          workflow: main-workflow.yml  # Replace with your actual main workflow file name
+          workflow: SeleniumGridWithMultipleRunners.yml
           inputs: |
             {
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
