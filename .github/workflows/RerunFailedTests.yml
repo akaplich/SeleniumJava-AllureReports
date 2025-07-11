@@ -78,6 +78,13 @@ jobs:
         run: |
           gh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
 
+      - name: Merge original and rerun allure results
+        run: |
+          mkdir merged-allure-results
+          cp -r ./original-allure-results/* merged-allure-results/
+          cp -r ./rerun-allure-results/* merged-allure-results/
+          allure generate merged-allure-results -o combined-allure-report --clean
+
       - name: Log completion
         run: echo "Rerun failed tests workflow completed."
 
