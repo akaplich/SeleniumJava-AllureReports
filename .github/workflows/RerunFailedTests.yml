@@ -43,7 +43,7 @@ jobs:
               "Mvn_Group": "ShardRun",
               "RetryCount": "0",
               "Run_Headless": "true",
-              "IsRerun": "true"
+              "Is_Rerun": "true"
             }
 
       - name: Log completion
