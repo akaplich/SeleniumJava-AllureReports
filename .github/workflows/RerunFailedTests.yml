@@ -85,6 +85,26 @@ jobs:
           cp -r ./rerun-allure-results/* merged-allure-results/
           allure generate merged-allure-results -o combined-allure-report --clean
 
+      - name: Upload merged Allure report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-allure-report
+          path: combined-allure-report
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Deploy combined Allure report to GitHub Pages (/combined-report)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: combined-allure-report
+          publish_branch: gh-pages
+          destination_dir: combined-report
+          keep_files: true
+          force_orphan: false
+          commit_message: "Deploy Combined Allure Report - ${{ github.sha }}"
+          allow_empty_commit: true
+
       - name: Log completion
         run: echo "Rerun failed tests workflow completed."
 
