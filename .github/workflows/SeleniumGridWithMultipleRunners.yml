@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       Is_Rerun:
-        description: 'Is this a rerun?'
-        required: false
-        default: false
-        type: boolean
+                description: 'Is this a rerun?'
+                required: false
+                default: false
+                type: boolean
       Environment:
         description: 'Test Environment URL'
         required: true
