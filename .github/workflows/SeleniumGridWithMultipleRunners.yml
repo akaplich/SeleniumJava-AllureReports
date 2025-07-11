@@ -3,14 +3,14 @@ name: Multi Runner and Container
 on:
   workflow_dispatch:
     inputs:
-      Is_Rerun:
-        description: 'Is this a rerun?'
-        required: true
-        default: 'no'
-        type: choice
-        options:
-          - yes
-          - no
+      #Is_Rerun:
+        #description: 'Is this a rerun?'
+        #required: true
+        #default: 'no'
+        #type: choice
+        #options:
+          #- yes
+          #- no
       Environment:
         description: 'Test Environment URL'
         required: true
