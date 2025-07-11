@@ -67,14 +67,6 @@ on:
         description: 'Retry Count for Failed Tests'
         required: true
         default: '0'
-      IsRerun:
-        description: 'Is this run a rerun?'
-        required: false
-        default: 'false'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
       TestList:
         description: 'List of tests to run (comma-separated)'
         required: false
@@ -554,7 +546,6 @@ jobs:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             publish_dir: merged-allure-report
             publish_branch: gh-pages
-            destination_dir: ${{ github.event.inputs.IsRerun == 'true' && format('rerun-report/{0}', github.run_number) || 'main-report' }}
             keep_files: false
             force_orphan: true
             commit_message: "Deploy Allure Report - ${{ github.sha }}"

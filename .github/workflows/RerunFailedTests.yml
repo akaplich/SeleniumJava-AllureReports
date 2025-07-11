@@ -42,9 +42,9 @@ jobs:
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
               "Mvn_Group": "ShardRun",
               "RetryCount": "0",
-              "Run_Headless": "true",
-              "IsRerun": "true"
+              "Run_Headless": "true"
             }
+
       - name: Log completion
         run: echo "Rerun failed tests workflow completed."
 
