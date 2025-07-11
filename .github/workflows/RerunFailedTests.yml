@@ -67,6 +67,8 @@ jobs:
         run: |
           RERUN_RUN_ID=$(gh run list --workflow SeleniumGridWithMultipleRunners.yml --json databaseId --jq '.[0].databaseId')
           echo "RERUN_RUN_ID=$RERUN_RUN_ID" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download original run allure-results
         run: |
