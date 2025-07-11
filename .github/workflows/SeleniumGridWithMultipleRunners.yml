@@ -5,12 +5,9 @@ on:
     inputs:
       Is_Rerun:
         description: 'Is this a rerun?'
-        #required: true
-        #default: 'no'
-        #type: choice
-        #options:
-          #- yes
-          #- no
+        required: false
+        default: false
+        type: boolean
       Environment:
         description: 'Test Environment URL'
         required: true
