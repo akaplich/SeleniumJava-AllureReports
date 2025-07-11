@@ -551,8 +551,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: merged-allure-report
           publish_branch: gh-pages
-          keep_files: false
-          force_orphan: true
+          destination_dir: ${{ github.event.inputs.Is_Rerun == 'true' && format('rerun-report/{0}', github.run_number) || 'main-report' }}
+          keep_files: true
+          force_orphan: false
           commit_message: "Deploy Allure Report - ${{ github.sha }}"
           allow_empty_commit: true
 
