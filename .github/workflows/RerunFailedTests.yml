@@ -41,7 +41,6 @@ jobs:
             {
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
               "Mvn_Group": "ShardRun",
-              "RetryCount": "0",
               "Run_Headless": "true",
               "Is_Rerun": "yes"
             }
