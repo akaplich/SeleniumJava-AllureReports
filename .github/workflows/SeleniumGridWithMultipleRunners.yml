@@ -4,13 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       Is_Rerun:
-        description: 'Is this a rerun?'
+        description: 'This is a rerun of failed tests'
         required: false
-        default: 'no'
-        type: choice
-        options:
-          - yes
-          - no
+        default: false
+        type: boolean
       Environment:
         description: 'Test Environment URL'
         required: true
