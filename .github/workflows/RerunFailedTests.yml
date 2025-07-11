@@ -42,7 +42,8 @@ jobs:
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
               "Mvn_Group": "ShardRun",
               "RetryCount": "0",
-              "Run_Headless": "true"
+              "Run_Headless": "true",
+              "IsRerun": "true"
             }
 
       - name: Log completion

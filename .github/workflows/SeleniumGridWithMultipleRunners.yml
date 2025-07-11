@@ -3,6 +3,11 @@ name: Multi Runner and Container
 on:
   workflow_dispatch:
     inputs:
+      Is_Rerun:
+        description: 'Is this a rerun?'
+        required: true
+        default: false
+        type: boolean
       Environment:
         description: 'Test Environment URL'
         required: true
