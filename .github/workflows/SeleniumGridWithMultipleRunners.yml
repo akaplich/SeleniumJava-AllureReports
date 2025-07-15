@@ -553,8 +553,8 @@ jobs:
           publish_branch: gh-pages
           #destination_dir: ${{ github.event.inputs.Is_Rerun == 'true' && format('rerun-report/{0}', github.run_number) || 'main-report' }}
           #destination_dir: ${{ github.event.inputs.Is_Rerun == 'true' && format('rerun-report/{0}', github.run_number) || format('{0}original-report/{1}', github.run_id, github.run_number) }}
-          #destination_dir: ${{ format('{0}_report/{1}', github.run_id, github.run_number) }}
-          destination_dir: ${{ format('{0}_report', github.run_id) }}
+          destination_dir: ${{ format('{0}_report/{1}', github.run_id, github.run_number) }}
+          #destination_dir: ${{ format('{0}_report', github.run_id) }}
           keep_files: true
           force_orphan: false
           commit_message: "Deploy Allure Report - ${{ github.sha }}"
