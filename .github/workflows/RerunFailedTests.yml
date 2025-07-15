@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       original_run_id:
-        description: 'The run ID of the original workflow'
+        description: 'Original Run ID'
+        required: true
+      original_mvn_group:
+        description: 'Original Run Mvn_Group'
+        default: 'Smoke'
         required: true
 
 jobs:
@@ -40,7 +44,7 @@ jobs:
           inputs: |
             {
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
-              "Mvn_Group": "ShardRun",
+              "Mvn_Group": "${{ inputs.original_mvn_group }}",
               "Run_Headless": "true"
             }
       - name: Get rerun run ID
