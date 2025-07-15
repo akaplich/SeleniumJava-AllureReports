@@ -41,8 +41,7 @@ jobs:
             {
               "TestList": "${{ steps.read_file.outputs.failed_tests }}",
               "Mvn_Group": "ShardRun",
-              "Run_Headless": "true",
-              "Is_Rerun": "true"
+              "Run_Headless": "true"
             }
       - name: Get rerun run ID
         id: get_rerun_run_id
