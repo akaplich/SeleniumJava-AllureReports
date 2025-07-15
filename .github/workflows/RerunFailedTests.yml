@@ -83,8 +83,10 @@ jobs:
       - name: Download rerun allure results
         run: |
           gh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Merge original and rerun allure results
+      - name: Merge original and rerun allure resultsgh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
         run: |
           mkdir merged-allure-results
           cp -r ./original-allure-results/* merged-allure-results/
