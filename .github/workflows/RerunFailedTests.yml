@@ -72,7 +72,11 @@ jobs:
 
       - name: Download original run allure-results
         run: |
-          gh run download ${{ inputs.original_run_id }} -n allure-results-* -D ./original-allure-results
+          gh run download ${{ inputs.original_run_id }} -n allure-results-0 -D ./original-allure-results
+          gh run download ${{ inputs.original_run_id }} -n allure-results-1 -D ./original-allure-results
+          gh run download ${{ inputs.original_run_id }} -n allure-results-2 -D ./original-allure-results
+          gh run download ${{ inputs.original_run_id }} -n allure-results-3 -D ./original-allure-results
+          gh run download ${{ inputs.original_run_id }} -n allure-results-4 -D ./original-allure-results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
