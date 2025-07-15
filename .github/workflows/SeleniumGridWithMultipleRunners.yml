@@ -542,7 +542,7 @@ jobs:
       - name: Customize Allure Report Title
         run: |
           CUSTOM_TITLE="MyProject Allure Report — ${{ inputs.Environment }}"
-          sed -i "s|<title>Allure Report.*</title>|<title>${CUSTOM_TITLE}</title>|g" combined-allure-report/index.html
+          sed -i "s|<title>Allure Report.*</title>|<title>${CUSTOM_TITLE}</title>|g" merged-allure-report/index.html
 
       - name: Upload merged Allure HTML report
         uses: actions/upload-artifact@v4
