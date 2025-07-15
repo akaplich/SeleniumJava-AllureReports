@@ -1,0 +1,65 @@
+name: Combine Original With Rerun Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      original_run_id:
+        description: 'The run ID of the original workflow'
+        required: true
+      rerun_run_id:
+        description: 'The run ID of the rerun workflow'
+        required: true
+jobs:
+  rerun-failed-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download original run allure-results
+        run: |
+          gh run download ${{ inputs.original_run_id }} -p allure-results-* -D ./original-allure-results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download rerun allure results
+        run: |
+          gh run download ${{ inputs.rerun_run_id }} -p allure-results-* -D ./rerun-allure-results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge original and rerun allure results
+        run: |
+          mkdir merged-allure-results
+          cp -r ./original-allure-results/* merged-allure-results/
+          cp -r ./rerun-allure-results/* merged-allure-results/
+          allure generate merged-allure-results -o combined-allure-report --clean
+
+      - name: Upload merged Allure report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: combined-allure-report
+          path: combined-allure-report
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Deploy combined Allure report to GitHub Pages (/combined-report)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: combined-allure-report
+          publish_branch: gh-pages
+          destination_dir: combined-report
+          keep_files: true
+          force_orphan: false
+          commit_message: "Deploy Combined Allure Report - ${{ github.sha }}"
+          allow_empty_commit: true
+
+      - name: Log completion
+        run: echo "Combine original and rerun reports workflow completed."
+
+
+
+
+
+

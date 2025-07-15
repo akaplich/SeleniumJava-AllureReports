@@ -38,17 +38,6 @@ jobs:
             echo "No rerun file found"
             echo "failed_tests=" >> $GITHUB_OUTPUT
           fi
-      #- name: Trigger main workflow via gh api
-        #id: trigger_main
-          #env:
-        #GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #run: |
-          #gh api repos/${{ github.repository }}/actions/workflows/SeleniumGridWithMultipleRunners.yml/dispatches \
-          #-f ref=main \
-          #-f inputs.TestList="${{ steps.read_file.outputs.failed_tests }}" \
-          #-f inputs.Mvn_Group="ShardRun" \
-          #-f inputs.Is_Rerun="true" \
-          #-f inputs.Run_Headless="true"
 
       - name: Trigger main workflow for rerun
         if: ${{ steps.read_file.outputs.failed_tests != '' }}
