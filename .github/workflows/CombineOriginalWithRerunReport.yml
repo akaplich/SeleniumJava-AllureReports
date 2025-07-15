@@ -28,14 +28,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Allure CLI
+      - name: Merge original and rerun allure results
         run: |
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
           brew install allure
           allure --version
-
-      - name: Merge original and rerun allure results
-        run: |
           mkdir merged-allure-results
           cp -r ./original-allure-results/* merged-allure-results/
           cp -r ./rerun-allure-results/* merged-allure-results/
