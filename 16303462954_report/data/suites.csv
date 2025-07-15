@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","92651","testcase()","","Tue Jul 15 20:22:07 UTC 2025","broken","Tue Jul 15 20:23:40 UTC 2025","","TestCases.RWHQImports.SmokeTests.C44_SubmitNewValidIdeaWithAllRequiredFields","TestCases.RWHQImports.SmokeTests.C44_SubmitNewValidIdeaWithAllRequiredFields","testcase"
+"","113245","testcase()","","Tue Jul 15 20:22:03 UTC 2025","broken","Tue Jul 15 20:23:57 UTC 2025","","TestCases.RWHQImports.SmokeTests.C79_PipelineCreation_CreateDiscussApp","TestCases.RWHQImports.SmokeTests.C79_PipelineCreation_CreateDiscussApp","testcase"
+"","84224","testcase()","","Tue Jul 15 20:22:04 UTC 2025","passed","Tue Jul 15 20:23:28 UTC 2025","","TestCases.RWHQImports.SmokeTests.C130972_WB_Text_AddAndRemoveText","TestCases.RWHQImports.SmokeTests.C130972_WB_Text_AddAndRemoveText","testcase"
