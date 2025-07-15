@@ -28,9 +28,14 @@ class OnFailureExtension implements AfterTestExecutionCallback {
 
             if (recordedFailures.add(fullName)) {
                 println(">>> Saving test name to rerun file: $fullName")
-                outputFile.withWriterAppend { writer ->
-                    writer.writeLine(fullName)
+                if (outputFile.exists() && outputFile.length() > 0) {
+                    outputFile.append(",${fullName}")
+                } else {
+                    outputFile.write(fullName)
                 }
+                /*outputFile.withWriterAppend { writer ->
+                    writer.writeLine(fullName)
+                }*/
             }
         } catch (Exception e) {
             logger.error("Failed to record failure: ", e)

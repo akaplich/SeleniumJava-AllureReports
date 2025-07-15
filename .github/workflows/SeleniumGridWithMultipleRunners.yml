@@ -550,7 +550,6 @@ jobs:
           name: merged-allure-report
           path: merged-allure-report
 
-
       - name: Deploy merged Allure HTML report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
