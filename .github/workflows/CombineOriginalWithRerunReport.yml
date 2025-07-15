@@ -10,7 +10,7 @@ on:
         description: 'The run ID of the rerun workflow'
         required: true
 jobs:
-  rerun-failed-tests:
+  combine-reports:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
