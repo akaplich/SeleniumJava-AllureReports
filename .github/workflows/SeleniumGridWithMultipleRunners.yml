@@ -3,11 +3,11 @@ name: Multi Runner and Container
 on:
   workflow_dispatch:
     inputs:
-      Is_Rerun:
-        description: 'This is a rerun of failed tests'
-        required: false
-        default: false
-        type: boolean
+      #Is_Rerun:
+        #description: 'This is a rerun of failed tests'
+        #required: false
+        #default: false
+        #type: boolean
       Environment:
         description: 'Test Environment URL'
         required: true
@@ -68,10 +68,10 @@ on:
         options:
           - 'after-session'   # Use SE_DRAIN_AFTER_SESSION_COUNT=1 only
           - 'after-test'      # Restart container after each test
-      #RetryCount:
-        #description: 'Retry Count for Failed Tests'
-        #required: true
-        #default: '0'
+      RetryCount:
+        description: 'Retry Count for Failed Tests'
+        required: true
+        default: '0'
       TestList:
         description: 'List of tests to run (comma-separated)'
         required: false
