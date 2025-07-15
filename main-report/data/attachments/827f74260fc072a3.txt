@@ -1,0 +1,1 @@
+TestCases.RWHQImports.SmokeTests.C44_SubmitNewValidIdeaWithAllRequiredFields#testcase
