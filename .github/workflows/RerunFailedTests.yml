@@ -72,9 +72,7 @@ jobs:
 
       - name: Download original run allure-results
         run: |
-          for i in $(gh run artifacts ${{ inputs.original_run_id }} --json name --jq '.[] | select(.name | starts with("allure-results-")) | .name'); do
-          gh run download $RERUN_RUN_ID -n "$i" -D ./rerun-allure-results
-          done
+          gh run download ${{ inputs.original_run_id }} -p allure-results-* -D ./rerun-allure-results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
