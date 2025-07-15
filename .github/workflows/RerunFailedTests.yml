@@ -72,21 +72,25 @@ jobs:
 
       - name: Download original run allure-results
         run: |
-          gh run download ${{ inputs.original_run_id }} -n allure-results-0 -D ./original-allure-results
-          gh run download ${{ inputs.original_run_id }} -n allure-results-1 -D ./original-allure-results
-          gh run download ${{ inputs.original_run_id }} -n allure-results-2 -D ./original-allure-results
-          gh run download ${{ inputs.original_run_id }} -n allure-results-3 -D ./original-allure-results
-          gh run download ${{ inputs.original_run_id }} -n allure-results-4 -D ./original-allure-results
+#          gh run download ${{ inputs.original_run_id }} -n allure-results-0 -D ./original-allure-results
+#          gh run download ${{ inputs.original_run_id }} -n allure-results-1 -D ./original-allure-results
+#          gh run download ${{ inputs.original_run_id }} -n allure-results-2 -D ./original-allure-results
+#          gh run download ${{ inputs.original_run_id }} -n allure-results-3 -D ./original-allure-results
+#          gh run download ${{ inputs.original_run_id }} -n allure-results-4 -D ./original-allure-results
+          for i in $(gh run artifacts ${{ inputs.original_run_id }} --json name --jq '.[] | select(.name | starts with("allure-results-")) | .name'); do
+          gh run download $RERUN_RUN_ID -n "$i" -D ./rerun-allure-results
+          done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download rerun allure results
         run: |
-          gh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
+#          gh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Merge original and rerun allure resultsgh run download $RERUN_RUN_ID -n allure-results-* -D ./rerun-allure-results
+      - name: Merge original and rerun allure results
         run: |
           mkdir merged-allure-results
           cp -r ./original-allure-results/* merged-allure-results/
