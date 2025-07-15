@@ -46,6 +46,9 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Debug Report Files
+        run: find combined-allure-report
+
       - name: Deploy combined Allure report to GitHub Pages (/combined-report)
         uses: peaceiris/actions-gh-pages@v4
         with:
@@ -53,8 +56,8 @@ jobs:
           publish_dir: combined-allure-report
           publish_branch: gh-pages
           destination_dir: combined-report
-          keep_files: true
-          force_orphan: false
+          keep_files: false
+          force_orphan: true
           commit_message: "Deploy Combined Allure Report - ${{ github.sha }}"
           allow_empty_commit: true
 
