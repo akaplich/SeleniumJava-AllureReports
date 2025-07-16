@@ -543,7 +543,7 @@ jobs:
         run: |
           CUSTOM_TITLE="${{inputs.Mvn_Group}} — ${{ inputs.Environment }}"
           sed -i "s|<title>Allure Report.*</title>|<title>${CUSTOM_TITLE}</title>|g" merged-allure-report/index.html
-          sed -i "s|<div class=\"widget__subtitle\">\".*\"</div>|<div class=\"widget__subtitle\">\"${CUSTOM_TITLE}\"</div>|g" merged-allure-report/index.html
+          sed -i "s|<div class=\"widget__subtitle\">.*</div>|<div class=\"widget__subtitle\">${CUSTOM_TITLE}</div>|g" merged-allure-report/index.html
       - name: Upload merged Allure HTML report
         uses: actions/upload-artifact@v4
         with:
