@@ -28,7 +28,7 @@ jobs:
         id: read_file
         run: |
           if [ -f ./rerun-tests/combinedRerunList.txt ]; then
-            FAILED_TESTS=$(cat ./rerun-tests/combinedRerunList.txt | paste -sd "," -)
+            FAILED_TESTS=$(cat ./rerun-tests/combinedRerunList.txt)
             echo "Failed tests found: $FAILED_TESTS"
             echo "failed_tests=$FAILED_TESTS" >> $GITHUB_OUTPUT
           else
