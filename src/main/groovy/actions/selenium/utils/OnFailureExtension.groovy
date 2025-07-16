@@ -29,7 +29,7 @@ class OnFailureExtension implements AfterTestExecutionCallback {
             if (recordedFailures.add(fullName)) {
                 println(">>> Saving test name to rerun file: $fullName")
                 if (outputFile.exists() && outputFile.length() > 0) {
-                    outputFile.append(",${fullName}")
+                    outputFile.append("," + fullName)
                 } else {
                     outputFile.write(fullName)
                 }
